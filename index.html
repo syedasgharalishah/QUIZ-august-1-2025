@@ -1,954 +1,362 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EDUCATION DEPARTMENT SCREENING TEST PREPARATION</title>
+    <title>EDUCATION DEPARTMENT SCREENING TEST PREPARATION – May 26, 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: 'Inter', sans-serif;
             background-color: #F8F9FA; /* Very light gray */
-            color: #2C3E50; /* Dark Slate Blue/Gray */
+            color: #2C3E50; /* Main text color */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
         }
-        .card {
-            background-color: #FFF5EE; /* SeaShell */
-            border-radius: 1rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 1.5rem;
-            margin: 1rem;
+
+        .top-bar {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 0.75rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
-        .btn-accent {
-            background-image: linear-gradient(to right, #E6E6FA, #FFDAB9); /* Lavender to PeachPuff */
-            color: #2C3E50; /* Dark Slate Blue/Gray */
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: bold;
-            transition: all 0.2s ease-in-out;
-            border: none;
-            cursor: pointer;
+
+        .top-bar .date-display {
+            color: #6D6875;
+            font-size: 0.9rem;
+            font-weight: 600;
         }
-        .btn-accent:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+        .top-bar .whatsapp-link {
+            color: #6D6875;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-        .option-item {
-            background-color: #FFFFFF; /* White */
-            border: 1px solid #E6E6FA; /* Lavender */
-            border-radius: 0.5rem;
-            padding: 1rem;
-            margin-bottom: 0.75rem;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
+
+        .header-section {
+            background-color: #ffffff;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 1rem;
         }
-        .option-item:hover {
-            transform: scale(1.02);
-            background-color: #F0F0FF; /* Lighter Lavender */
+
+        .quiz-title {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2C3E50;
+            margin-bottom: 1rem;
         }
-        .option-item.selected {
-            border-color: #20B2AA; /* LightSeaGreen */
-            background-color: #E0FFFF; /* LightCyan */
-        }
-        .option-item.correct {
-            animation: pulse-green 0.5s ease-out forwards;
-            border-color: #90EE90; /* LightGreen */
-            background-color: #90EE90; /* LightGreen */
-        }
-        .option-item.incorrect {
-            animation: shake-red 0.5s ease-out forwards;
-            border-color: #FF6B6B; /* Red */
-            background-color: #FF6B6B; /* Red */
-        }
-        .option-item.answered {
-            pointer-events: none; /* Disable clicks after answering */
-            opacity: 0.8; /* Slightly dim answered options */
-        }
+
         .progress-bar-container {
-            width: 100%;
+            width: 80%;
+            max-width: 600px;
+            height: 10px;
             background-color: #e0e0e0;
-            border-radius: 0.5rem;
-            height: 1rem;
+            border-radius: 5px;
+            margin: 1rem auto;
             overflow: hidden;
-            margin-top: 1rem;
         }
+
         .progress-bar {
             height: 100%;
             width: 0%;
-            background-image: linear-gradient(to right, #20B2AA, #3EB489);
-            border-radius: 0.5rem;
+            background: linear-gradient(to right, #20B2AA, #3EB489);
+            border-radius: 5px;
             transition: width 0.3s ease-in-out;
         }
+
+        .banner-logo {
+            max-width: 200px;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .credits {
+            font-size: 0.85rem;
+            color: #6D6875;
+            margin-top: 0.5rem;
+        }
+
+        .card {
+            background-color: #FFF5EE; /* PeachPuff */
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            margin: 1rem auto;
+            max-width: 700px;
+            width: 90%;
+            box-sizing: border-box;
+        }
+
+        .button-gradient {
+            background-image: linear-gradient(to right, #E6E6FA, #FFDAB9); /* Lavender to PeachPuff */
+            color: #2C3E50;
+            font-weight: bold;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            border: none;
+        }
+
+        .button-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .button-gradient:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .option-button {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 0.75rem;
+            color: #2C3E50;
+            font-weight: normal;
+        }
+
+        .option-button:hover:not(.selected) {
+            background-color: #f0f0f0;
+        }
+
+        .option-button.selected {
+            border-color: #6D6875;
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+
+        .option-button.correct {
+            background-color: #90EE90; /* LightGreen */
+            border-color: #28a745;
+            animation: pulse-green 0.5s ease-out forwards;
+        }
+
+        .option-button.incorrect {
+            background-color: #FF6B6B; /* Red pulse */
+            border-color: #dc3545;
+            animation: shake-red 0.5s ease-out forwards;
+        }
+
         .special-question {
-            border: 4px solid #FFD700; /* Golden border */
+            border: 3px solid #FFD700; /* Gold border */
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
         }
+
+        .explanation {
+            background-color: #e0f7fa;
+            border-left: 5px solid #20B2AA;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 8px;
+            color: #2C3E50;
+            font-size: 0.9rem;
+            display: none; /* Hidden by default */
+        }
+
+        .timer-display {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2C3E50;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .question-progress {
+            font-size: 1rem;
+            color: #6D6875;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
         @keyframes pulse-green {
-            0% { transform: scale(1); box-shadow: 0 0 0 rgba(144, 238, 144, 0.7); }
-            50% { transform: scale(1.01); box-shadow: 0 0 15px rgba(144, 238, 144, 1); }
-            100% { transform: scale(1); box-shadow: 0 0 0 rgba(144, 238, 144, 0.7); }
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(144, 238, 144, 0.7); }
+            70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(144, 238, 144, 0); }
+            100% { transform: scale(1); }
         }
+
         @keyframes shake-red {
-            0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-5px); background-color: #FF6B6B; }
-            40%, 80% { transform: translateX(5px); background-color: #FF6B6B; }
+            0%, 100% { transform: translateX(0); background-color: #FF6B6B; }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+            100% { background-color: #FF6B6B; } /* Ensure it stays red */
         }
-        /* Mobile specific styles */
+
+        /* Responsive adjustments */
         @media (max-width: 768px) {
-            .date-display {
-                top: 1rem;
-                left: 1rem;
-                right: auto;
-                text-align: left;
+            .top-bar {
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 0.5rem;
+            }
+            .top-bar .date-display {
+                order: 2; /* Move date to bottom on mobile */
+                font-size: 0.8rem;
+            }
+            .top-bar .whatsapp-link {
+                order: 1; /* Move whatsapp to top on mobile */
+                font-size: 0.8rem;
+            }
+            .quiz-title {
+                font-size: 1.5rem;
+            }
+            .banner-logo {
+                max-width: 150px;
+            }
+            .card {
+                margin: 0.75rem auto;
+                padding: 1rem;
+            }
+            .button-gradient {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            .option-button {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.9rem;
             }
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center">
-
-    <div class="w-full bg-blue-500 text-white text-center py-2 sticky top-0 z-50">
-        <p class="inline-block mr-2">Join our community for daily updates and support!</p>
-        <a href="https://chat.whatsapp.com/your-whatsapp-community-link" target="_blank" class="bg-green-600 hover:bg-green-700 text-white font-bold py-1 px-3 rounded-full text-sm">
-            <i class="fab fa-whatsapp mr-1"></i> Join WhatsApp Community
-        </a>
-    </div>
-
-    <div id="login-screen" class="flex flex-col items-center justify-center min-h-screen w-full px-4" style="display: flex;">
-        <div class="card w-full max-w-md text-center">
-            <img src="https://i.ibb.co/LXdkJVy8/20250524-0050-Empowering-Educators-remix-01jw0makvqewdvqns1te3jvpgs.png" alt="Logo" class="mx-auto mb-6 w-48 h-auto rounded-lg">
-            <h2 class="text-2xl font-bold mb-6 text-[#2C3E50]">Login to Start Your Quiz</h2>
-            <input type="text" id="login-id" placeholder="ID" class="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#20B2AA]">
-            <input type="password" id="login-password" placeholder="Password" class="w-full p-3 mb-6 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#20B2AA]">
-            <button id="login-btn" class="btn-accent w-full">Login</button>
-            <p id="login-error" class="text-red-500 mt-4" style="display: none;">Invalid ID or Password</p>
-        </div>
-    </div>
-
-    <div id="candidate-info-screen" class="flex flex-col items-center justify-center min-h-screen w-full px-4" style="display: none;">
-        <div class="card w-full max-w-md text-center">
-            <img src="https://i.ibb.co/LXdkJVy8/20250524-0050-Empowering-Educators-remix-01jw0makvqewdvqns1te3jvpgs.png" alt="Logo" class="mx-auto mb-6 w-48 h-auto rounded-lg">
-            <h2 class="text-2xl font-bold mb-6 text-[#2C3E50]">Enter Your Details</h2>
-            <input type="text" id="candidate-name" placeholder="Full Name" class="w-full p-3 mb-6 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#20B2AA]">
-            <button id="start-quiz-btn" class="btn-accent w-full">Start Quiz</button>
-            <p id="name-error" class="text-red-500 mt-4" style="display: none;">Please enter your full name.</p>
-        </div>
-    </div>
-
-    <div id="quiz-container" class="w-full max-w-4xl p-4 md:p-8" style="display: none;">
-        <div class="date-display fixed top-4 right-4 md:top-4 md:right-4 md:left-auto text-[#6D6875] text-sm md:text-base bg-white p-2 rounded-lg shadow-md z-40">
-            <i class="far fa-calendar-alt mr-2"></i>Live Date: <span id="current-date-display"></span>
-        </div>
-
-        <h1 class="text-3xl md:text-4xl font-bold text-center mb-4 text-[#2C3E50]">EDUCATION DEPARTMENT SCREENING TEST PREPARATION – <span id="quiz-date-title"></span></h1>
-        
-        <div class="progress-bar-container">
-            <div class="progress-bar" id="quiz-progress-bar"></div>
-        </div>
-        <p class="text-center text-sm mt-2 mb-4 text-[#6D6875]"><span id="question-progress-text"></span></p>
-
-        <img src="https://i.ibb.co/LXdkJVy8/20250524-0050-Empowering-Educators-remix-01jw0makvqewdvqns1te3jvpgs.png" alt="Quiz Logo Banner" class="w-full h-auto rounded-lg shadow-md mb-4">
-        
-        <p class="text-center text-sm text-[#6D6875] mb-1">KP Teacher Corps PREPARED BY: SYED ASGHAR ALI SHAH Contact: 03265762698</p>
-        <p class="text-center text-sm text-[#6D6875] mb-6">Updated on: <span id="updated-on-date"></span></p>
-
-        <div class="text-center text-lg font-bold mb-6 text-[#2C3E50]">
-            Time Remaining: <span id="timer-display">40:00</span>
-        </div>
-
-        <div id="question-card" class="card mb-6">
-            <p class="text-lg font-semibold mb-4" id="question-text"></p>
-            <div id="options-container">
-                </div>
-            <p class="explanation text-sm text-gray-700 mt-4 p-3 bg-gray-100 rounded-md" id="explanation-text" style="display: none;"></p>
-        </div>
-
-        <div class="flex justify-between mt-6">
-            <button id="prev-btn" class="btn-accent" disabled>Previous</button>
-            <button id="next-btn" class="btn-accent">Next</button>
-            <button id="submit-quiz-btn" class="btn-accent" style="display: none;">Submit Quiz</button>
-        </div>
-    </div>
-
-    <div id="results-screen" class="flex flex-col items-center justify-center min-h-screen w-full px-4" style="display: none;">
-        <div class="card w-full max-w-md text-center">
-            <h2 class="text-3xl font-bold mb-6 text-[#2C3E50]">Quiz Results</h2>
-            <p class="text-lg mb-2">Candidate Name: <span id="results-candidate-name" class="font-semibold"></span></p>
-            <p class="text-lg mb-2">Your Score: <span id="results-score" class="font-semibold"></span> / 200</p>
-            <p class="text-lg mb-2">Correct Answers: <span id="results-correct" class="font-semibold"></span> / 100</p>
-            <p class="text-lg mb-2">Incorrect Answers: <span id="results-incorrect" class="font-semibold"></span> / 100</p>
-            <p class="text-lg mb-2">Questions Attempted: <span id="results-attempted" class="font-semibold"></span> / 100</p>
-            <p class="text-lg mb-6">Time Taken: <span id="results-time-taken" class="font-semibold"></span></p>
-            <button id="review-answers-btn" class="btn-accent w-full">Review Answers</button>
-        </div>
-    </div>
+<body>
 
     <script>
-        const QUIZ_DATE = "May 24, 2025"; // Current Date for the quiz
-        const SPECIAL_QUESTION_DATE = "May 24, 2025"; // Date for Today's Special Question
-        const TOTAL_QUESTIONS = 100;
-        const QUIZ_DURATION_MINUTES = 50;
+        document.addEventListener('contextmenu', event => event.preventDefault()); // Disable right-click
+        document.addEventListener('keydown', e => {
+            if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) {
+                e.preventDefault(); // Disable Ctrl+U, Ctrl+Shift+I, Ctrl+Shift+J
+            }
+            if (e.key === 'F12') {
+                e.preventDefault(); // Disable F12
+            }
+        });
+        document.addEventListener('copy', event => event.preventDefault()); // Disable copy
+        document.addEventListener('paste', event => event.preventDefault()); // Disable paste
+    </script>
 
+    <div class="top-bar">
+        <a href="https://chat.whatsapp.com/your-whatsapp-community-link" target="_blank" class="whatsapp-link">
+            <i class="fab fa-whatsapp"></i> Join WhatsApp Community
+        </a>
+        <div class="date-display" id="liveDate"></div>
+    </div>
+
+    <div class="header-section">
+        <h1 class="quiz-title" id="quizTitle"></h1>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <img src="https://i.ibb.co/LXdkJVy8/20250524-0050-Empowering-Educators-remix-01jw0makvqewdvqns1te3jvpgs.png" alt="Banner Logo" class="banner-logo mx-auto">
+        <div class="credits">
+            KP Teacher Corps | PREPARED BY: SYED ASGHAR ALI SHAH | Contact: 03265762698
+            <br>
+            Updated on: <span id="updatedDate"></span>
+        </div>
+    </div>
+
+    <main class="flex-grow flex items-center justify-center p-4">
+        <div id="loginPage" class="card">
+            <h2 class="text-xl font-bold mb-4 text-center">Login</h2>
+            <div class="mb-4">
+                <label for="loginId" class="block text-sm font-medium text-gray-700 mb-1">ID:</label>
+                <input type="text" id="loginId" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" value="YOUR ID">
+            </div>
+            <div class="mb-6">
+                <label for="loginPassword" class="block text-sm font-medium text-gray-700 mb-1">Password:</label>
+                <input type="password" id="loginPassword" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" value="PASSWORD">
+            </div>
+            <p id="loginError" class="text-red-500 text-sm mb-4 hidden">Invalid ID or Password</p>
+            <button id="loginBtn" class="button-gradient w-full">Login</button>
+        </div>
+
+        <div id="candidateNamePage" class="card hidden">
+            <h2 class="text-xl font-bold mb-4 text-center">Candidate Information</h2>
+            <div class="mb-6">
+                <label for="candidateName" class="block text-sm font-medium text-gray-700 mb-1">Enter Full Name:</label>
+                <input type="text" id="candidateName" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" placeholder="Your Full Name">
+            </div>
+            <p id="nameError" class="text-red-500 text-sm mb-4 hidden">Please enter your full name.</p>
+            <button id="startQuizBtn" class="button-gradient w-full">Start Quiz</button>
+        </div>
+
+        <div id="quizPage" class="card hidden">
+            <div class="timer-display" id="timerDisplay"></div>
+            <div class="question-progress" id="questionProgress"></div>
+            <h2 class="text-lg font-semibold mb-4" id="questionText"></h2>
+            <div id="optionsContainer" class="flex flex-col gap-3 mb-6">
+                </div>
+            <div class="flex justify-between">
+                <button id="prevBtn" class="button-gradient px-6 py-2">Previous</button>
+                <button id="nextBtn" class="button-gradient px-6 py-2">Next</button>
+                <button id="submitQuizBtn" class="button-gradient px-6 py-2 hidden">Submit Quiz</button>
+            </div>
+            <div id="explanationDiv" class="explanation"></div>
+        </div>
+
+        <div id="resultsPage" class="card hidden">
+            <h2 class="text-xl font-bold mb-4 text-center">Quiz Results</h2>
+            <p class="mb-2"><strong>Candidate Name:</strong> <span id="resultCandidateName"></span></p>
+            <p class="mb-2"><strong>Date of Quiz:</strong> <span id="resultDate"></span></p>
+            <p class="mb-2"><strong>Score:</strong> <span id="resultScore"></span> / 200</p>
+            <p class="mb-2"><strong>Correct Answers:</strong> <span id="resultCorrect"></span></p>
+            <p class="mb-2"><strong>Incorrect Answers:</strong> <span id="resultIncorrect"></span></p>
+            <p class="mb-4"><strong>Time Taken:</strong> <span id="resultTimeTaken"></span></p>
+            <button id="restartQuizBtn" class="button-gradient w-full">Restart Quiz</button>
+        </div>
+    </main>
+
+    <script>
+        // Set the current date for display and logic
+        const CURRENT_DATE_STR = "May 27, 2025"; // MANDATORY DAILY INPUT
+        const CURRENT_DATE = new Date(CURRENT_DATE_STR);
+
+        // Update header dates
+        document.getElementById('liveDate').textContent = CURRENT_DATE_STR;
+        document.getElementById('updatedDate').textContent = CURRENT_DATE_STR;
+        document.getElementById('quizTitle').textContent = `EDUCATION DEPARTMENT SCREENING TEST PREPARATION – ${CURRENT_DATE_STR}`;
+
+        // Quiz Data Structure
+        const quizQuestions = [];
         let currentQuestionIndex = 0;
-        let userAnswers = []; // Stores { question, selectedAnswer, correctAnswer, isCorrect } for each question
+        let userAnswers = []; // Stores { questionIndex: int, selectedOptionIndex: int, isCorrect: bool }
         let quizStartTime;
         let timerInterval;
-        let questions = [];
-        let candidateName = '';
-        let surpriseMode = Math.random() < 0.3; // 30% chance for surprise mode
+        const QUIZ_DURATION_MINUTES = 40;
+        let specialQuestionIndex = -1; // To store the index of the special question
 
-        // --- MCQ Data (Placeholders - In a full system, these would be dynamically generated) ---
-        // Note: For this demonstration, MCQs are hardcoded. In a real application,
-        // the content_fetcher tool would be used to extract relevant text from the PDF
-        // and then an LLM call would generate MCQs based on that extracted text,
-        // adhering to the subject weightings and difficulty distribution.
+        // --- Helper Functions ---
 
-        // Pedagogy MCQs (10 questions)
-        const pedagogyMCQs = [
-            {
-                "question": "The word 'pedagogy' is derived from Greek and means to lead the child. Which of the following best describes the primary focus of pedagogy?",
-                "options": ["To evaluate the students", "To guide the child", "To deliver lecture in class", "To take care of children"],
-                "correct_answer": "To guide the child",
-                "explanation": "The text states that the word 'pedagogy' means 'to lead the child' and is the study of teaching methods, implying a focus on guiding the child's learning.",
-                "difficulty": "easy"
-            },
-            {
-                "question": "According to the text, which type of learning is predominantly teacher-centered?",
-                "options": ["Andragogy", "Heutagogy", "Pedagogy", "Cybergogy"],
-                "correct_answer": "Pedagogy",
-                "explanation": "The text explicitly states, 'Which type of learning is predominantly teacher centered? b) Pedagogy'.",
-                "difficulty": "easy"
-            },
-            {
-                "question": "Joseph Mayer Rice is considered the father of research in teaching. What was his primary profession?",
-                "options": ["Philosopher", "Poet", "Classroom observer", "Tutor"],
-                "correct_answer": "Classroom observer",
-                "explanation": "The text identifies Joseph Mayer Rice as a 'great classroom observer'.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "What does 'andragogy' mean, as defined in the provided text?",
-                "options": ["Teaching of kids", "Teaching right from the book", "Teaching of adults", "Teaching"],
-                "correct_answer": "Teaching of adults",
-                "explanation": "The text asks 'What does andragogy mean?' and provides 'b) Teaching of adults' as the correct option.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "An adult in training 'needs to know' because they are goal-oriented and expect the learning to be relevant. Which characteristic of adult learners does this refer to?",
-                "options": ["They bring knowledge they want to share", "They need to be motivated", "They know their own needs", "They are goal-oriented and expect it to be relevant"],
-                "correct_answer": "They are goal-oriented and expect it to be relevant",
-                "explanation": "The text states that 'An adult in training 'needs to know,' which means... a) they are goal-oriented and expect it to be relevant'.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "Which term describes self-determined learning where learners are 'problem finders' and become interdependent on those who can help them determine the route?",
-                "options": ["Pedagogy", "Andragogy", "Heutagogy", "All of these"],
-                "correct_answer": "Heutagogy",
-                "explanation": "The text defines 'Heutagogy' as self-determined learning and describes learners as 'problem finders' who become interdependent.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "According to John Dewey, what are the two sides of the educational process?",
-                "options": ["Economical and sociological", "Sociological and philosophical", "Psychological and sociological", "Economical and philosophical"],
-                "correct_answer": "Psychological and sociological",
-                "explanation": "The text states: 'According to John Dewey, educational process has two sides: b) psychological and sociological'.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "What is considered the 'first learning center' or 'first educational institution' of a child according to the text?",
-                "options": ["School", "Society", "Peer", "Home"],
-                "correct_answer": "Home",
-                "explanation": "The text mentions 'The first learning center of a child is... c) Home' and 'The first educational institution of a child is.... b) Home'.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "According to John Locke, a child's mind does not contain any innate ideas. What concept does this align with?",
-                "options": ["External thinking", "Perception", "Observation", "Innate ideas"],
-                "correct_answer": "Innate ideas",
-                "explanation": "The text states: 'According to John Locke, a child's mind does not contain any c) Innate ideas'.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "What is the primary duty of a teacher, as stated in the text?",
-                "options": ["To teach the prescribed curriculum", "To provide diagnostic and remedial aid wherever indicated", "To stimulate and guide student learning", "To promote habits of conformity to adult's demands and expectation"],
-                "correct_answer": "To stimulate and guide student learning",
-                "explanation": "The text indicates: 'The primary task of the teacher is... b) to stimulate and guide student learning'.",
-                "difficulty": "tough"
-            }
-        ];
-
-        // General Science MCQs (25 questions) - Placeholder for now, will be generated dynamically
-        const generalScienceMCQs = [
-            // Example structure - will be replaced by actual generated MCQs
-            {
-                "question": "Which of the following is the smallest unit of matter?",
-                "options": ["Molecule", "Atom", "Cell", "Proton"],
-                "correct_answer": "Atom",
-                "explanation": "An atom is the basic unit of matter that consists of a dense central nucleus surrounded by a cloud of negatively charged electrons.",
-                "difficulty": "easy"
-            },
-            {
-                "question": "What gas do plants absorb from the atmosphere for photosynthesis?",
-                "options": ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
-                "correct_answer": "Carbon Dioxide",
-                "explanation": "Plants use carbon dioxide, water, and sunlight to create their own food through photosynthesis.",
-                "difficulty": "easy"
-            },
-            {
-                "question": "Which planet is known as the 'Red Planet'?",
-                "options": ["Venus", "Mars", "Jupiter", "Saturn"],
-                "correct_answer": "Mars",
-                "explanation": "Mars is often referred to as the 'Red Planet' because of the iron oxide prevalent on its surface, which gives it a reddish appearance.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "What is the primary function of red blood cells in the human body?",
-                "options": ["Fighting infections", "Clotting blood", "Transporting oxygen", "Producing antibodies"],
-                "correct_answer": "Transporting oxygen",
-                "explanation": "Red blood cells contain hemoglobin, a protein that binds to oxygen in the lungs and transports it to tissues throughout the body.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "Which of the following is a renewable energy source?",
-                "options": ["Coal", "Natural Gas", "Solar Power", "Nuclear Energy"],
-                "correct_answer": "Solar Power",
-                "explanation": "Solar power is derived from the sun's energy, which is a naturally replenishing resource, unlike fossil fuels like coal and natural gas.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "What is the chemical formula for water?",
-                "options": ["CO2", "O2", "H2O", "NaCl"],
-                "correct_answer": "H2O",
-                "explanation": "Water is a chemical compound with the chemical formula H2O, meaning that its molecule has two hydrogen atoms and one oxygen atom.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "Which part of the plant is responsible for absorbing water and nutrients from the soil?",
-                "options": ["Leaves", "Stem", "Flowers", "Roots"],
-                "correct_answer": "Roots",
-                "explanation": "Plant roots are specialized structures that anchor the plant and absorb water and dissolved minerals from the soil.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "What is the process by which liquid turns into gas?",
-                "options": ["Condensation", "Melting", "Evaporation", "Freezing"],
-                "correct_answer": "Evaporation",
-                "explanation": "Evaporation is the process by which a liquid changes into a gas or vapor.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "Which of the following is a conductor of electricity?",
-                "options": ["Wood", "Plastic", "Copper", "Rubber"],
-                "correct_answer": "Copper",
-                "explanation": "Copper is a metal with high electrical conductivity, making it suitable for electrical wiring.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "What is the function of the ozone layer in Earth's atmosphere?",
-                "options": ["Regulating temperature", "Producing oxygen", "Absorbing harmful UV radiation", "Creating clouds"],
-                "correct_answer": "Absorbing harmful UV radiation",
-                "explanation": "The ozone layer in the stratosphere protects Earth from the sun's harmful ultraviolet (UV) radiation.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "What is the largest organ in the human body?",
-                "options": ["Heart", "Brain", "Skin", "Liver"],
-                "correct_answer": "Skin",
-                "explanation": "The skin is the largest organ of the human body, covering the entire external surface.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "Which force pulls objects towards the center of the Earth?",
-                "options": ["Friction", "Tension", "Gravity", "Magnetism"],
-                "correct_answer": "Gravity",
-                "explanation": "Gravity is the force that attracts any objects with mass. On Earth, it pulls objects towards the planet's center.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "What is the process of converting light energy into chemical energy by plants?",
-                "options": ["Respiration", "Transpiration", "Fermentation", "Photosynthesis"],
-                "correct_answer": "Photosynthesis",
-                "explanation": "Photosynthesis is the process used by plants, algae, and certain bacteria to convert light energy into chemical energy.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "Which of the following is a vertebrate?",
-                "options": ["Jellyfish", "Earthworm", "Fish", "Snail"],
-                "correct_answer": "Fish",
-                "explanation": "Vertebrates are animals that possess a backbone or spinal column, and fish belong to this group.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "What is the main component of Earth's atmosphere?",
-                "options": ["Oxygen", "Carbon Dioxide", "Nitrogen", "Argon"],
-                "correct_answer": "Nitrogen",
-                "explanation": "Nitrogen makes up about 78% of Earth's atmosphere, making it the most abundant gas.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "Which type of rock is formed from the cooling and solidification of molten magma or lava?",
-                "options": ["Sedimentary", "Metamorphic", "Igneous", "Shale"],
-                "correct_answer": "Igneous",
-                "explanation": "Igneous rocks are formed from the cooling and solidification of molten rock (magma or lava).",
-                "difficulty": "tough"
-            },
-            {
-                "question": "What is the name of the process by which plants release water vapor into the atmosphere?",
-                "options": ["Respiration", "Transpiration", "Evaporation", "Condensation"],
-                "correct_answer": "Transpiration",
-                "explanation": "Transpiration is the process where plants absorb water through the roots and then give off water vapor through pores in their leaves.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "Which of the following is a primary greenhouse gas responsible for global warming?",
-                "options": ["Oxygen", "Nitrogen", "Methane", "Carbon Dioxide"],
-                "correct_answer": "Carbon Dioxide",
-                "explanation": "Carbon dioxide is the most significant greenhouse gas emitted by human activities, contributing to global warming.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "What is the smallest bone in the human body?",
-                "options": ["Femur", "Stapes", "Patella", "Humerus"],
-                "correct_answer": "Stapes",
-                "explanation": "The stapes, or stirrup bone, located in the middle ear, is the smallest bone in the human body.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "Which type of lens is used to correct myopia (nearsightedness)?",
-                "options": ["Convex lens", "Concave lens", "Cylindrical lens", "Plano-convex lens"],
-                "correct_answer": "Concave lens",
-                "explanation": "Concave lenses are used to correct myopia because they diverge light rays before they reach the eye, allowing them to focus correctly on the retina.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "What is the process of nuclear fusion?",
-                "options": ["Splitting of a heavy nucleus into lighter nuclei", "Combining of two light nuclei to form a heavier nucleus", "Decay of radioactive isotopes", "Conversion of mass into energy"],
-                "correct_answer": "Combining of two light nuclei to form a heavier nucleus",
-                "explanation": "Nuclear fusion is a reaction in which two or more atomic nuclei are combined to form one or more different atomic nuclei and subatomic particles (neutrons or protons).",
-                "difficulty": "tough"
-            },
-            {
-                "question": "Which vitamin is essential for blood clotting?",
-                "options": ["Vitamin A", "Vitamin C", "Vitamin D", "Vitamin K"],
-                "correct_answer": "Vitamin K",
-                "explanation": "Vitamin K plays a crucial role in blood clotting by helping the body produce proteins necessary for coagulation.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "What is the name of the phenomenon where light bends as it passes from one medium to another?",
-                "options": ["Reflection", "Diffraction", "Refraction", "Dispersion"],
-                "correct_answer": "Refraction",
-                "explanation": "Refraction is the bending of a wave as it passes at an angle from one medium to another.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "Which of the following is an example of a chemical change?",
-                "options": ["Melting ice", "Boiling water", "Burning wood", "Dissolving sugar in water"],
-                "correct_answer": "Burning wood",
-                "explanation": "Burning wood involves a chemical reaction (combustion) that transforms wood into ash, smoke, and gases, creating new substances.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "What is the primary function of the human skeletal system?",
-                "options": ["Producing hormones", "Supporting the body and protecting organs", "Digesting food", "Filtering blood"],
-                "correct_answer": "Supporting the body and protecting organs",
-                "explanation": "The skeletal system provides structural support for the body, protects internal organs, and allows for movement.",
-                "difficulty": "tough"
-            }
-        ];
-
-        // Social Studies MCQs (15 questions) - Placeholder for now, will be generated dynamically
-        const socialStudiesMCQs = [
-             // Example structure - will be replaced by actual generated MCQs
-             {
-                "question": "Which ancient civilization developed the concept of democracy?",
-                "options": ["Roman", "Egyptian", "Greek", "Mesopotamian"],
-                "correct_answer": "Greek",
-                "explanation": "Ancient Greece, particularly Athens, is credited with developing the concept and practice of democracy.",
-                "difficulty": "easy"
-            },
-            {
-                "question": "What is the capital city of France?",
-                "options": ["Berlin", "Rome", "London", "Paris"],
-                "correct_answer": "Paris",
-                "explanation": "Paris is the capital and most populous city of France.",
-                "difficulty": "easy"
-            },
-            {
-                "question": "Which major river flows through Egypt and is crucial for its agriculture?",
-                "options": ["Tigris", "Euphrates", "Nile", "Amazon"],
-                "correct_answer": "Nile",
-                "explanation": "The Nile River is the longest river in Africa and has been a vital source of water and fertility for Egypt for thousands of years.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "The Industrial Revolution, which began in the 18th century, primarily started in which country?",
-                "options": ["United States", "Germany", "Great Britain", "France"],
-                "correct_answer": "Great Britain",
-                "explanation": "The Industrial Revolution originated in Great Britain in the late 18th century before spreading to other parts of the world.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "Which document, signed in 1215, limited the power of the English king and influenced constitutional law?",
-                "options": ["Bill of Rights", "Declaration of Independence", "Magna Carta", "Articles of Confederation"],
-                "correct_answer": "Magna Carta",
-                "explanation": "The Magna Carta was a charter of liberties agreed to by King John of England, influencing later constitutional documents.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "What is the study of the Earth's physical features and atmosphere, and of human activity as it affects and is affected by these?",
-                "options": ["Sociology", "Anthropology", "Geography", "Archaeology"],
-                "correct_answer": "Geography",
-                "explanation": "Geography is the scientific study of the Earth's surface, physical features, climate, and population.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "Which continent is the largest by land area?",
-                "options": ["Africa", "North America", "Asia", "Europe"],
-                "correct_answer": "Asia",
-                "explanation": "Asia is the largest continent by both land area and population.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "What was the primary cause of World War I?",
-                "options": ["Economic Depression", "Assassination of Archduke Franz Ferdinand", "Colonial Expansion", "Rise of Communism"],
-                "correct_answer": "Assassination of Archduke Franz Ferdinand",
-                "explanation": "The assassination of Archduke Franz Ferdinand of Austria-Hungary was the immediate trigger for the outbreak of World War I.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "Which of the following is a characteristic of a totalitarian government?",
-                "options": ["Freedom of speech", "Multi-party system", "State control over all aspects of life", "Free and fair elections"],
-                "correct_answer": "State control over all aspects of life",
-                "explanation": "Totalitarian governments exercise complete control over all aspects of public and private life.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "What is the main purpose of the United Nations?",
-                "options": ["Promoting global trade", "Maintaining international peace and security", "Controlling global finance", "Developing military alliances"],
-                "correct_answer": "Maintaining international peace and security",
-                "explanation": "The United Nations was established after World War II to promote international cooperation and to achieve peace and security.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "Which historical event is known as the 'Great Depression'?",
-                "options": ["A period of rapid economic growth in the 1920s", "A severe worldwide economic depression in the 1930s", "The collapse of the Roman Empire", "A major technological revolution"],
-                "correct_answer": "A severe worldwide economic depression in the 1930s",
-                "explanation": "The Great Depression was a severe economic downturn that originated in the United States and affected the entire world during the 1930s.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "Who was the leader of the Soviet Union during World War II?",
-                "options": ["Vladimir Lenin", "Mikhail Gorbachev", "Joseph Stalin", "Nikita Khrushchev"],
-                "correct_answer": "Joseph Stalin",
-                "explanation": "Joseph Stalin was the dictator of the Soviet Union from the mid-1920s until his death in 1953, leading the country through World War II.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "Which of the following is a major cause of desertification?",
-                "options": ["Increased rainfall", "Overgrazing and deforestation", "Volcanic eruptions", "Glacial melting"],
-                "correct_answer": "Overgrazing and deforestation",
-                "explanation": "Overgrazing, deforestation, and unsustainable farming practices are significant human activities that contribute to desertification.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "What is the primary difference between a republic and a direct democracy?",
-                "options": ["In a republic, citizens vote directly on all laws; in a direct democracy, representatives are elected.", "A republic has a monarch; a direct democracy does not.", "In a republic, citizens elect representatives to make decisions; in a direct democracy, citizens vote directly on laws.", "A direct democracy has no constitution; a republic does."],
-                "correct_answer": "In a republic, citizens elect representatives to make decisions; in a direct democracy, citizens vote directly on laws.",
-                "explanation": "A republic is a form of government where power is held by the people and their elected representatives, while in a direct democracy, citizens directly participate in decision-making.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "Which historical period saw a renewed interest in classical art, literature, and philosophy in Europe?",
-                "options": ["The Dark Ages", "The Renaissance", "The Enlightenment", "The Middle Ages"],
-                "correct_answer": "The Renaissance",
-                "explanation": "The Renaissance was a period in European history, from the 14th to the 17th century, marked by a revival of classical learning and arts.",
-                "difficulty": "tough"
-            }
-        ];
-
-        // English MCQs (25 questions) - Placeholder for now, will be generated dynamically
-        const englishMCQs = [
-            // Example structure - will be replaced by actual generated MCQs
-            {
-                "question": "Identify the noun in the following sentence: 'The quick brown fox jumps over the lazy dog.'",
-                "options": ["quick", "jumps", "fox", "over"],
-                "correct_answer": "fox",
-                "explanation": "'Fox' is a noun, referring to an animal.",
-                "difficulty": "easy"
-            },
-            {
-                "question": "Which of the following is a synonym for 'happy'?",
-                "options": ["Sad", "Joyful", "Angry", "Tired"],
-                "correct_answer": "Joyful",
-                "explanation": "'Joyful' means feeling, expressing, or causing great pleasure and happiness.",
-                "difficulty": "easy"
-            },
-            {
-                "question": "Choose the correct article: 'She is ___ honest person.'",
-                "options": ["a", "an", "the", "no article"],
-                "correct_answer": "an",
-                "explanation": "We use 'an' before words that start with a vowel sound, and 'honest' begins with a vowel sound (the 'h' is silent).",
-                "difficulty": "medium"
-            },
-            {
-                "question": "Identify the verb in the sentence: 'They quietly walked to the park.'",
-                "options": ["They", "quietly", "walked", "park"],
-                "correct_answer": "walked",
-                "explanation": "'Walked' is the action word in the sentence, making it the verb.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "What is the past participle of the verb 'sing'?",
-                "options": ["sang", "sung", "singing", "sings"],
-                "correct_answer": "sung",
-                "explanation": "The past participle of 'sing' is 'sung', used in perfect tenses (e.g., 'has sung').",
-                "difficulty": "medium"
-            },
-            {
-                "question": "Which of the following sentences uses a comma correctly?",
-                "options": ["I like apples, bananas and oranges.", "I like apples bananas, and oranges.", "I like apples, bananas, and oranges.", "I like, apples, bananas, and oranges."],
-                "correct_answer": "I like apples, bananas, and oranges.",
-                "explanation": "Commas are used to separate items in a list. The Oxford comma (before 'and') is optional but often preferred for clarity.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "Choose the correct form of the verb: 'She ____ (go) to the store yesterday.'",
-                "options": ["goes", "gone", "went", "going"],
-                "correct_answer": "went",
-                "explanation": "Since the action happened 'yesterday' (past tense), the past simple form 'went' is correct.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "Identify the adjective in the sentence: 'The tall building stood majestically.'",
-                "options": ["The", "tall", "building", "majestically"],
-                "correct_answer": "tall",
-                "explanation": "'Tall' describes the noun 'building', making it an adjective.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "Which of the following is an antonym for 'ancient'?",
-                "options": ["Old", "Modern", "Historic", "Antique"],
-                "correct_answer": "Modern",
-                "explanation": "'Modern' means relating to the present or recent times, which is the opposite of 'ancient'.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "Complete the sentence with the correct pronoun: 'John and Mary went to the movies. ____ enjoyed the film.'",
-                "options": ["He", "She", "They", "We"],
-                "correct_answer": "They",
-                "explanation": "Since 'John and Mary' are plural, the plural pronoun 'They' is appropriate.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "Which sentence is in the passive voice?",
-                "options": ["The dog chased the cat.", "The cat was chased by the dog.", "The cat chased the dog.", "The dog is chasing the cat."],
-                "correct_answer": "The cat was chased by the dog.",
-                "explanation": "In the passive voice, the subject receives the action. Here, 'the cat' receives the action of being chased.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "Identify the adverb in the sentence: 'She sings beautifully.'",
-                "options": ["She", "sings", "beautifully", "none"],
-                "correct_answer": "beautifully",
-                "explanation": "'Beautifully' describes how she sings, making it an adverb.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "What is the correct punctuation for a direct question?",
-                "options": ["Period (.)", "Exclamation mark (!)", "Question mark (?)", "Comma (,)"],
-                "correct_answer": "Question mark (?)",
-                "explanation": "A question mark is used at the end of a direct question.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "Choose the sentence with the correct subject-verb agreement.",
-                "options": ["The dogs barks loudly.", "The dog bark loudly.", "The dogs bark loudly.", "The dog barking loudly."],
-                "correct_answer": "The dogs bark loudly.",
-                "explanation": "For a plural subject ('dogs'), the verb should be plural ('bark').",
-                "difficulty": "medium"
-            },
-            {
-                "question": "What is the meaning of the idiom 'break a leg'?",
-                "options": ["To actually break a leg", "To wish someone good luck", "To perform poorly", "To run away"],
-                "correct_answer": "To wish someone good luck",
-                "explanation": "'Break a leg' is an idiomatic expression used to wish a performer good luck, especially before a show.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "In the sentence 'Despite the rain, we went for a walk,' what type of conjunction is 'Despite'?",
-                "options": ["Coordinating", "Subordinating", "Correlative", "Preposition"],
-                "correct_answer": "Preposition",
-                "explanation": "'Despite' is a preposition that introduces a phrase indicating contrast, not a conjunction that connects clauses.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "Which of the following is a complex sentence?",
-                "options": ["She sings and he dances.", "He is happy.", "Although it was raining, we went for a walk.", "Run fast!"],
-                "correct_answer": "Although it was raining, we went for a walk.",
-                "explanation": "A complex sentence contains an independent clause ('we went for a walk') and at least one dependent clause ('Although it was raining').",
-                "difficulty": "tough"
-            },
-            {
-                "question": "Identify the figure of speech: 'The wind whispered secrets through the trees.'",
-                "options": ["Simile", "Metaphor", "Personification", "Hyperbole"],
-                "correct_answer": "Personification",
-                "explanation": "Personification is giving human qualities or actions to inanimate objects or abstract ideas. Here, 'wind whispered' gives a human action to the wind.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "What is the correct reported speech for: He said, 'I am going to the market now.'",
-                "options": ["He said that he was going to the market now.", "He said that he is going to the market then.", "He said that he was going to the market then.", "He said that I am going to the market now."],
-                "correct_answer": "He said that he was going to the market then.",
-                "explanation": "When converting direct speech to reported speech, 'I' changes to 'he', 'am going' changes to 'was going' (past continuous), and 'now' changes to 'then'.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "Which of the following words is a collective noun?",
-                "options": ["Student", "Book", "Team", "Chair"],
-                "correct_answer": "Team",
-                "explanation": "A collective noun refers to a group of individuals, like 'team' for a group of players.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "Identify the type of sentence: 'If you study hard, you will pass the exam.'",
-                "options": ["Simple", "Compound", "Complex", "Compound-complex"],
-                "correct_answer": "Complex",
-                "explanation": "This is a complex sentence because it contains an independent clause ('you will pass the exam') and a dependent clause ('If you study hard').",
-                "difficulty": "tough"
-            },
-            {
-                "question": "Which of the following is an example of an oxymoron?",
-                "options": ["Jumbo shrimp", "Pretty flower", "Running fast", "Tall building"],
-                "correct_answer": "Jumbo shrimp",
-                "explanation": "An oxymoron is a figure of speech in which apparently contradictory terms appear in conjunction. 'Jumbo' means large, while 'shrimp' refers to a small crustacean.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "What is the literary device where an author hints at future events?",
-                "options": ["Flashback", "Symbolism", "Foreshadowing", "Allusion"],
-                "correct_answer": "Foreshadowing",
-                "explanation": "Foreshadowing is a literary device used to give an indication or hint of what is to come later in the story.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "Choose the sentence that uses the semicolon correctly.",
-                "options": ["I like coffee; however, I prefer tea.", "I like coffee; and I prefer tea.", "I like coffee, however; I prefer tea.", "I like coffee; however I prefer tea."],
-                "correct_answer": "I like coffee; however, I prefer tea.",
-                "explanation": "A semicolon is used to join two independent clauses that are closely related in meaning. When a conjunctive adverb like 'however' connects them, it is preceded by a semicolon and followed by a comma.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "What is the grammatical term for a word that connects words, phrases, or clauses?",
-                "options": ["Noun", "Verb", "Adjective", "Conjunction"],
-                "correct_answer": "Conjunction",
-                "explanation": "A conjunction is a part of speech that connects words, phrases, or clauses.",
-                "difficulty": "tough"
-            }
-        ];
-
-        // Mathematics MCQs (25 questions) - Placeholder for now, will be generated dynamically
-        const mathematicsMCQs = [
-            // Example structure - will be replaced by actual generated MCQs
-            {
-                "question": "What is the sum of 5 and 3?",
-                "options": ["7", "8", "9", "10"],
-                "correct_answer": "8",
-                "explanation": "5 + 3 = 8.",
-                "difficulty": "easy"
-            },
-            {
-                "question": "If you have 10 apples and you eat 4, how many apples do you have left?",
-                "options": ["5", "6", "7", "8"],
-                "correct_answer": "6",
-                "explanation": "10 - 4 = 6 apples remaining.",
-                "difficulty": "easy"
-            },
-            {
-                "question": "What is the product of 7 and 6?",
-                "options": ["42", "48", "36", "54"],
-                "correct_answer": "42",
-                "explanation": "7 multiplied by 6 equals 42.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "If a triangle has angles measuring 90 degrees and 45 degrees, what is the measure of the third angle?",
-                "options": ["30 degrees", "45 degrees", "60 degrees", "90 degrees"],
-                "correct_answer": "45 degrees",
-                "explanation": "The sum of angles in a triangle is 180 degrees. So, 180 - (90 + 45) = 45 degrees.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "What is 25% of 200?",
-                "options": ["25", "50", "75", "100"],
-                "correct_answer": "50",
-                "explanation": "25% of 200 can be calculated as (25/100) * 200 = 50.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "Solve for x: 2x + 5 = 15",
-                "options": ["x = 5", "x = 10", "x = 7.5", "x = 2.5"],
-                "correct_answer": "x = 5",
-                "explanation": "Subtract 5 from both sides: 2x = 10. Then divide by 2: x = 5.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "What is the area of a rectangle with a length of 8 cm and a width of 5 cm?",
-                "options": ["13 sq cm", "26 sq cm", "40 sq cm", "80 sq cm"],
-                "correct_answer": "40 sq cm",
-                "explanation": "Area of a rectangle = length × width = 8 cm × 5 cm = 40 sq cm.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "What is the square root of 81?",
-                "options": ["7", "8", "9", "10"],
-                "correct_answer": "9",
-                "explanation": "9 multiplied by 9 equals 81.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "Convert 0.75 into a fraction in its simplest form.",
-                "options": ["1/4", "1/2", "3/4", "7/10"],
-                "correct_answer": "3/4",
-                "explanation": "0.75 can be written as 75/100, which simplifies to 3/4.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "If a car travels at a speed of 60 km/h for 3 hours, what is the distance covered?",
-                "options": ["120 km", "150 km", "180 km", "200 km"],
-                "correct_answer": "180 km",
-                "explanation": "Distance = Speed × Time = 60 km/h × 3 hours = 180 km.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "What is the value of Pi (π) rounded to two decimal places?",
-                "options": ["3.10", "3.14", "3.16", "3.18"],
-                "correct_answer": "3.14",
-                "explanation": "Pi (π) is approximately 3.14159, so rounded to two decimal places it is 3.14.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "What is the next number in the sequence: 2, 4, 8, 16, ...?",
-                "options": ["20", "24", "32", "64"],
-                "correct_answer": "32",
-                "explanation": "This is a geometric progression where each number is multiplied by 2 to get the next term. So, 16 * 2 = 32.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "What is the perimeter of a square with a side length of 7 cm?",
-                "options": ["14 cm", "21 cm", "28 cm", "49 cm"],
-                "correct_answer": "28 cm",
-                "explanation": "Perimeter of a square = 4 × side length = 4 × 7 cm = 28 cm.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "If a shirt costs $40 and is on sale for 20% off, what is the discounted price?",
-                "options": ["$30", "$32", "$35", "$38"],
-                "correct_answer": "$32",
-                "explanation": "20% of $40 is $8. So, $40 - $8 = $32.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "What is the least common multiple (LCM) of 4 and 6?",
-                "options": ["12", "18", "24", "36"],
-                "correct_answer": "12",
-                "explanation": "The multiples of 4 are 4, 8, 12, 16... The multiples of 6 are 6, 12, 18... The smallest common multiple is 12.",
-                "difficulty": "medium"
-            },
-            {
-                "question": "A box contains 5 red balls and 3 blue balls. If you pick one ball at random, what is the probability that it is red?",
-                "options": ["3/8", "5/8", "1/2", "1/4"],
-                "correct_answer": "5/8",
-                "explanation": "Total balls = 5 + 3 = 8. Number of red balls = 5. Probability = (Number of red balls) / (Total balls) = 5/8.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "If a train travels 300 km in 4 hours, what is its average speed in meters per second?",
-                "options": ["20.83 m/s", "25 m/s", "75 m/s", "1.25 m/s"],
-                "correct_answer": "20.83 m/s",
-                "explanation": "Speed = Distance/Time = 300 km / 4 hours = 75 km/h. To convert km/h to m/s, multiply by (1000/3600) or (5/18). So, 75 * (5/18) = 20.83 m/s (approx).",
-                "difficulty": "tough"
-            },
-            {
-                "question": "What is the value of (3^2 + 4^2)?",
-                "options": ["7", "14", "25", "49"],
-                "correct_answer": "25",
-                "explanation": "3^2 = 9, 4^2 = 16. So, 9 + 16 = 25.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "If the ratio of boys to girls in a class is 2:3 and there are 18 girls, how many boys are there?",
-                "options": ["10", "12", "15", "27"],
-                "correct_answer": "12",
-                "explanation": "If 3 parts represent 18 girls, then 1 part = 18/3 = 6. So, 2 parts (boys) = 2 * 6 = 12 boys.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "What is the volume of a cube with a side length of 4 cm?",
-                "options": ["16 cubic cm", "32 cubic cm", "64 cubic cm", "128 cubic cm"],
-                "correct_answer": "64 cubic cm",
-                "explanation": "Volume of a cube = side^3 = 4 cm * 4 cm * 4 cm = 64 cubic cm.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "Simplify the expression: 5(x + 2) - 3x",
-                "options": ["2x + 2", "2x + 10", "8x + 10", "5x + 7"],
-                "correct_answer": "2x + 10",
-                "explanation": "Distribute the 5: 5x + 10 - 3x. Combine like terms: (5x - 3x) + 10 = 2x + 10.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "What is the greatest common divisor (GCD) of 24 and 36?",
-                "options": ["6", "8", "12", "18"],
-                "correct_answer": "12",
-                "explanation": "The factors of 24 are 1, 2, 3, 4, 6, 8, 12, 24. The factors of 36 are 1, 2, 3, 4, 6, 9, 12, 18, 36. The greatest common factor is 12.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "If a principal amount of $1000 is invested at an annual interest rate of 5% compounded annually, what will be the amount after 2 years?",
-                "options": ["$1050", "$1100", "$1102.50", "$1125"],
-                "correct_answer": "$1102.50",
-                "explanation": "Year 1: $1000 * 0.05 = $50. Amount = $1050. Year 2: $1050 * 0.05 = $52.50. Total amount = $1050 + $52.50 = $1102.50.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "What is the median of the following set of numbers: 10, 15, 5, 20, 12?",
-                "options": ["10", "12", "13", "15"],
-                "correct_answer": "12",
-                "explanation": "First, arrange the numbers in ascending order: 5, 10, 12, 15, 20. The median is the middle number, which is 12.",
-                "difficulty": "tough"
-            },
-            {
-                "question": "A right-angled triangle has sides of length 3 cm and 4 cm. What is the length of its hypotenuse?",
-                "options": ["5 cm", "6 cm", "7 cm", "8 cm"],
-                "correct_answer": "5 cm",
-                "explanation": "Using the Pythagorean theorem (a^2 + b^2 = c^2): 3^2 + 4^2 = 9 + 16 = 25. The square root of 25 is 5.",
-                "difficulty": "tough"
-            }
-        ];
-
-        // Combine all MCQs
-        let allMCQs = [];
-        allMCQs = allMCQs.concat(pedagogyMCQs);
-        allMCQs = allMCQs.concat(generalScienceMCQs);
-        allMCQs = allMCQs.concat(socialStudiesMCQs);
-        allMCQs = allMCQs.concat(englishMCQs);
-        allMCQs = allMCQs.concat(mathematicsMCQs);
-
-        // Ensure exactly 100 questions. If placeholders exceed, trim. If fewer, add more generic.
-        // For this specific request, I'll assume the generated placeholders will be replaced to meet 100.
-        // For demonstration, I'll ensure it's 100 by duplicating some if needed, but in a real scenario,
-        // the LLM calls would be iterated to generate the exact counts.
-        while (allMCQs.length < TOTAL_QUESTIONS) {
-            allMCQs.push(allMCQs[Math.floor(Math.random() * allMCQs.length)]); // Duplicate random questions
-        }
-        if (allMCQs.length > TOTAL_QUESTIONS) {
-            allMCQs = allMCQs.slice(0, TOTAL_QUESTIONS);
-        }
-
-        // Randomly select one question to be the "Today's Special Question"
-        const specialQuestionIndex = Math.floor(Math.random() * TOTAL_QUESTIONS);
-
-        // Function to shuffle an array
+        /**
+         * Shuffles an array in place using Fisher-Yates (Knuth) shuffle.
+         * @param {Array} array - The array to shuffle.
+         */
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -956,263 +364,226 @@
             }
         }
 
-        // Shuffle options for all questions and optionally shuffle question order
-        allMCQs.forEach(q => shuffleArray(q.options));
-        if (surpriseMode) {
-            shuffleArray(allMCQs);
+        /**
+         * Generates a unique ID for Formspree submission.
+         * @returns {string} A unique ID.
+         */
+        function generateUniqueId() {
+            return 'quiz_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
         }
-        questions = allMCQs; // Assign to global questions array
 
-        // DOM Elements
-        const loginScreen = document.getElementById('login-screen');
-        const loginIdInput = document.getElementById('login-id');
-        const loginPasswordInput = document.getElementById('login-password');
-        const loginBtn = document.getElementById('login-btn');
-        const loginError = document.getElementById('login-error');
+        /**
+         * Converts seconds to a human-readable time string (e.g., "35 minutes 10 seconds").
+         * @param {number} totalSeconds - The total number of seconds.
+         * @returns {string} Formatted time string.
+         */
+        function formatTime(totalSeconds) {
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+            return `${minutes} minutes ${seconds} seconds`;
+        }
 
-        const candidateInfoScreen = document.getElementById('candidate-info-screen');
-        const candidateNameInput = document.getElementById('candidate-name');
-        const startQuizBtn = document.getElementById('start-quiz-btn');
-        const nameError = document.getElementById('name-error');
+        /**
+         * Updates the progress bar and question progress text.
+         */
+        function updateProgressBar() {
+            const progress = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+            document.getElementById('questionProgress').textContent = `Question ${currentQuestionIndex + 1}/${quizQuestions.length} – ${Math.round(progress)}% Complete`;
+        }
 
-        const quizContainer = document.getElementById('quiz-container');
-        const currentDateDisplay = document.getElementById('current-date-display');
-        const quizDateTitle = document.getElementById('quiz-date-title');
-        const updatedOnDate = document.getElementById('updated-on-date');
-        const timerDisplay = document.getElementById('timer-display');
-        const quizProgressBar = document.getElementById('quiz-progress-bar');
-        const questionProgressText = document.getElementById('question-progress-text');
-        const questionCard = document.getElementById('question-card');
-        const questionText = document.getElementById('question-text');
-        const optionsContainer = document.getElementById('options-container');
-        const explanationText = document.getElementById('explanation-text');
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        const submitQuizBtn = document.getElementById('submit-quiz-btn');
+        /**
+         * Displays a specific page and hides others.
+         * @param {string} pageId - The ID of the page to display.
+         */
+        function showPage(pageId) {
+            document.getElementById('loginPage').classList.add('hidden');
+            document.getElementById('candidateNamePage').classList.add('hidden');
+            document.getElementById('quizPage').classList.add('hidden');
+            document.getElementById('resultsPage').classList.add('hidden');
+            document.getElementById(pageId).classList.remove('hidden');
+        }
 
-        const resultsScreen = document.getElementById('results-screen');
-        const resultsCandidateName = document.getElementById('results-candidate-name');
-        const resultsScore = document.getElementById('results-score');
-        const resultsCorrect = document.getElementById('results-correct');
-        const resultsIncorrect = document.getElementById('results-incorrect');
-        const resultsAttempted = document.getElementById('results-attempted');
-        const resultsTimeTaken = document.getElementById('results-time-taken');
-        const reviewAnswersBtn = document.getElementById('review-answers-btn');
-
-        // Initial Setup
-        document.addEventListener('DOMContentLoaded', () => {
-            const today = new Date(QUIZ_DATE).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-            currentDateDisplay.textContent = today;
-            quizDateTitle.textContent = today;
-            updatedOnDate.textContent = today;
-        });
-
-        // Login Logic
-        loginBtn.addEventListener('click', () => {
-            const id = loginIdInput.value;
-            const password = loginPasswordInput.value;
-
-            if (id === 'demo' && password === 'demo') {
-                loginScreen.style.display = 'none';
-                candidateInfoScreen.style.display = 'flex';
-                loginError.style.display = 'none';
-            } else {
-                loginError.style.display = 'block';
-            }
-        });
-
-        // Candidate Info Logic
-        startQuizBtn.addEventListener('click', () => {
-            const name = candidateNameInput.value.trim();
-            if (name) {
-                candidateName = name;
-                candidateInfoScreen.style.display = 'none';
-                quizContainer.style.display = 'block';
-                nameError.style.display = 'none';
-                startQuiz();
-            } else {
-                nameError.style.display = 'block';
-            }
-        });
-
-        // Quiz Functions
-        function startQuiz() {
+        /**
+         * Starts the quiz timer.
+         */
+        function startTimer() {
             quizStartTime = Date.now();
-            timerInterval = setInterval(updateTimer, 1000);
-            loadQuestion();
-        }
+            let timeLeft = QUIZ_DURATION_MINUTES * 60; // Convert minutes to seconds
 
-        function updateTimer() {
-            const elapsedTime = Date.now() - quizStartTime;
-            const remainingTimeSeconds = (QUIZ_DURATION_MINUTES * 60) - Math.floor(elapsedTime / 1000);
+            function updateTimerDisplay() {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                document.getElementById('timerDisplay').textContent = `Time Left: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
-            if (remainingTimeSeconds <= 0) {
-                clearInterval(timerInterval);
-                submitQuiz();
-                return;
-            }
-
-            const minutes = Math.floor(remainingTimeSeconds / 60);
-            const seconds = remainingTimeSeconds % 60;
-            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        }
-
-        function loadQuestion() {
-            if (currentQuestionIndex < 0 || currentQuestionIndex >= questions.length) {
-                return;
-            }
-
-            const questionData = questions[currentQuestionIndex];
-            questionText.textContent = `${currentQuestionIndex + 1}. ${questionData.question}`;
-            optionsContainer.innerHTML = ''; // Clear previous options
-            explanationText.style.display = 'none'; // Hide explanation
-            explanationText.textContent = questionData.explanation;
-
-            // Apply special question styling if applicable
-            if (currentQuestionIndex === specialQuestionIndex && QUIZ_DATE === SPECIAL_QUESTION_DATE) {
-                questionCard.classList.add('special-question');
-            } else {
-                questionCard.classList.remove('special-question');
-            }
-
-            questionData.options.forEach((option, index) => {
-                const optionDiv = document.createElement('div');
-                optionDiv.classList.add('option-item', 'mb-3', 'p-3', 'rounded-lg', 'cursor-pointer', 'transition-all', 'duration-200', 'ease-in-out', 'hover:scale-102', 'hover:bg-[#F0F0FF]');
-                optionDiv.textContent = option;
-                optionDiv.dataset.option = option;
-
-                // Check if this question has been answered before and apply selected/answered style
-                if (userAnswers[currentQuestionIndex]) {
-                    optionDiv.classList.add('answered'); // Disable further clicks
-                    if (userAnswers[currentQuestionIndex].selectedAnswer === option) {
-                        optionDiv.classList.add('selected');
-                        if (userAnswers[currentQuestionIndex].isCorrect) {
-                            optionDiv.classList.add('correct');
-                        } else {
-                            optionDiv.classList.add('incorrect');
-                        }
-                    }
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    submitQuiz(true); // Auto-submit on timer expiry
                 } else {
-                    optionDiv.addEventListener('click', () => selectOption(optionDiv, option));
+                    timeLeft--;
                 }
-                optionsContainer.appendChild(optionDiv);
+            }
+
+            updateTimerDisplay(); // Initial display
+            timerInterval = setInterval(updateTimerDisplay, 1000);
+        }
+
+        /**
+         * Renders the current question and its options.
+         */
+        function renderQuestion() {
+            const question = quizQuestions[currentQuestionIndex];
+            document.getElementById('questionText').innerHTML = question.question;
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = ''; // Clear previous options
+
+            // Remove special-question class from previous question if any
+            const quizCard = document.getElementById('quizPage');
+            quizCard.classList.remove('special-question');
+
+            // Add special-question class if it's today's special question and date matches
+            const today = new Date().toDateString();
+            if (question.special && CURRENT_DATE.toDateString() === today) {
+                quizCard.classList.add('special-question');
+            }
+
+            question.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.classList.add('option-button', 'w-full');
+                button.textContent = option;
+                button.dataset.optionIndex = index;
+                button.onclick = () => selectOption(index);
+
+                // Apply selected state if already answered
+                const userAnswer = userAnswers[currentQuestionIndex];
+                if (userAnswer && userAnswer.selectedOptionIndex === index) {
+                    button.classList.add('selected');
+                    if (userAnswer.isCorrect) {
+                        button.classList.add('correct');
+                    } else {
+                        button.classList.add('incorrect');
+                    }
+                    // Disable all options if already answered
+                    Array.from(optionsContainer.children).forEach(optBtn => optBtn.disabled = true);
+                    document.getElementById('explanationDiv').style.display = 'block';
+                }
+                optionsContainer.appendChild(button);
             });
 
-            updateNavigationButtons();
+            // Show/hide explanation
+            const explanationDiv = document.getElementById('explanationDiv');
+            explanationDiv.innerHTML = `<p class="font-bold">Explanation:</p><p>${question.explanation}</p>`;
+            if (userAnswers[currentQuestionIndex] && userAnswers[currentQuestionIndex].selectedOptionIndex !== undefined) {
+                explanationDiv.style.display = 'block';
+            } else {
+                explanationDiv.style.display = 'none';
+            }
+
+            // Update navigation buttons visibility
+            document.getElementById('prevBtn').classList.toggle('hidden', currentQuestionIndex === 0);
+            document.getElementById('nextBtn').classList.toggle('hidden', currentQuestionIndex === quizQuestions.length - 1);
+            document.getElementById('submitQuizBtn').classList.toggle('hidden', currentQuestionIndex !== quizQuestions.length - 1);
+
             updateProgressBar();
         }
 
-        function selectOption(selectedOptionDiv, selectedAnswer) {
-            // Only allow selection if the question hasn't been answered yet
-            if (userAnswers[currentQuestionIndex]) {
-                return;
-            }
-
-            // Remove 'selected' class from all options
-            Array.from(optionsContainer.children).forEach(optionDiv => {
-                optionDiv.classList.remove('selected');
-            });
-
-            // Add 'selected' class to the clicked option
-            selectedOptionDiv.classList.add('selected');
+        /**
+         * Handles option selection by the user.
+         * @param {number} selectedOptionIndex - The index of the selected option.
+         */
+        function selectOption(selectedOptionIndex) {
+            const question = quizQuestions[currentQuestionIndex];
+            const isCorrect = (selectedOptionIndex === question.correctOptionIndex);
 
             // Store user's answer
             userAnswers[currentQuestionIndex] = {
-                question: questions[currentQuestionIndex].question,
-                selectedAnswer: selectedAnswer,
-                correctAnswer: questions[currentQuestionIndex].correct_answer,
-                isCorrect: (selectedAnswer === questions[currentQuestionIndex].correct_answer)
+                questionIndex: currentQuestionIndex,
+                selectedOptionIndex: selectedOptionIndex,
+                isCorrect: isCorrect
             };
 
-            // Provide immediate feedback and disable further clicks for this question
-            Array.from(optionsContainer.children).forEach(optionDiv => {
-                optionDiv.classList.add('answered'); // Disable further clicks on all options for this question
-                if (optionDiv.dataset.option === questions[currentQuestionIndex].correct_answer) {
-                    optionDiv.classList.add('correct'); // Highlight correct answer
-                } else if (optionDiv.dataset.option === selectedAnswer && selectedAnswer !== questions[currentQuestionIndex].correct_answer) {
-                    optionDiv.classList.add('incorrect'); // Highlight incorrect selected answer
-                }
-            });
-            explanationText.style.display = 'block'; // Show explanation
-        }
+            // Apply visual feedback
+            const optionsContainer = document.getElementById('optionsContainer');
+            Array.from(optionsContainer.children).forEach((button, index) => {
+                button.disabled = true; // Disable all options after selection
+                button.classList.remove('selected', 'correct', 'incorrect'); // Clear previous states
 
-        function updateNavigationButtons() {
-            prevBtn.disabled = currentQuestionIndex === 0;
-            if (currentQuestionIndex === questions.length - 1) {
-                nextBtn.style.display = 'none';
-                submitQuizBtn.style.display = 'inline-block';
-            } else {
-                nextBtn.style.display = 'inline-block';
-                submitQuizBtn.style.display = 'none';
-            }
-        }
-
-        function updateProgressBar() {
-            const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
-            quizProgressBar.style.width = `${progress}%`;
-            questionProgressText.textContent = `Question ${currentQuestionIndex + 1}/${questions.length} - ${progress.toFixed(0)}% Complete`;
-        }
-
-        prevBtn.addEventListener('click', () => {
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
-                loadQuestion();
-            }
-        });
-
-        nextBtn.addEventListener('click', () => {
-            if (currentQuestionIndex < questions.length - 1) {
-                currentQuestionIndex++;
-                loadQuestion();
-            }
-        });
-
-        submitQuizBtn.addEventListener('click', submitQuiz);
-
-        function submitQuiz() {
-            clearInterval(timerInterval); // Stop the timer
-
-            let correctCount = 0;
-            let incorrectCount = 0;
-            let attemptedCount = 0;
-            let score = 0;
-
-            userAnswers.forEach(answer => {
-                if (answer) { // Check if the question was attempted
-                    attemptedCount++;
-                    if (answer.isCorrect) {
-                        correctCount++;
-                        score += 2;
+                if (index === selectedOptionIndex) {
+                    button.classList.add('selected');
+                    if (isCorrect) {
+                        button.classList.add('correct');
                     } else {
-                        incorrectCount++;
-                        score -= 1;
+                        button.classList.add('incorrect');
                     }
                 }
             });
 
-            const timeTakenSeconds = Math.floor((Date.now() - quizStartTime) / 1000);
-            const minutesTaken = Math.floor(timeTakenSeconds / 60);
-            const secondsTaken = timeTakenSeconds % 60;
-            const timeTakenString = `${minutesTaken} minutes ${secondsTaken} seconds`;
+            // Show explanation
+            document.getElementById('explanationDiv').style.display = 'block';
+        }
 
-            // Display results
-            quizContainer.style.display = 'none';
-            resultsScreen.style.display = 'flex';
-            resultsCandidateName.textContent = candidateName;
-            resultsScore.textContent = score;
-            resultsCorrect.textContent = correctCount;
-            resultsIncorrect.textContent = incorrectCount;
-            resultsAttempted.textContent = attemptedCount;
-            resultsTimeTaken.textContent = timeTakenString;
+        /**
+         * Navigates to the next question.
+         */
+        function nextQuestion() {
+            if (currentQuestionIndex < quizQuestions.length - 1) {
+                currentQuestionIndex++;
+                renderQuestion();
+            }
+        }
 
-            // Submit data to Formspree
+        /**
+         * Navigates to the previous question.
+         */
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderQuestion();
+            }
+        }
+
+        /**
+         * Submits the quiz, calculates results, and displays them.
+         * @param {boolean} isAutoSubmit - True if submitted by timer, false otherwise.
+         */
+        function submitQuiz(isAutoSubmit = false) {
+            clearInterval(timerInterval); // Stop the timer
+
+            const endTime = Date.now();
+            const timeTakenSeconds = Math.round((endTime - quizStartTime) / 1000);
+
+            let correctCount = 0;
+            let incorrectCount = 0;
+
+            userAnswers.forEach(answer => {
+                if (answer && answer.isCorrect) {
+                    correctCount++;
+                } else if (answer && answer.selectedOptionIndex !== undefined) {
+                    incorrectCount++;
+                }
+            });
+
+            const score = (correctCount * 2) - (incorrectCount * 1);
+            const candidateName = document.getElementById('candidateName').value;
+
+            document.getElementById('resultCandidateName').textContent = candidateName;
+            document.getElementById('resultDate').textContent = CURRENT_DATE_STR;
+            document.getElementById('resultScore').textContent = score;
+            document.getElementById('resultCorrect').textContent = `${correctCount} / ${userAnswers.length}`;
+            document.getElementById('resultIncorrect').textContent = `${incorrectCount} / ${userAnswers.length}`;
+            document.getElementById('resultTimeTaken').textContent = formatTime(timeTakenSeconds);
+
+            showPage('resultsPage');
+
+            // Silent Formspree submission
             const formData = new FormData();
             formData.append('Candidate Name', candidateName);
-            formData.append('Score', `${score}/200`);
-            formData.append('Correct Answers', `${correctCount}/100`);
-            formData.append('Incorrect Answers', `${incorrectCount}/100`);
-            formData.append('Time Taken', timeTakenString);
-            formData.append('Date of Quiz', QUIZ_DATE);
+            formData.append('Date of Quiz', CURRENT_DATE_STR);
+            formData.append('Score', score);
+            formData.append('Correct Answers', correctCount);
+            formData.append('Incorrect Answers', incorrectCount);
+            formData.append('Time Taken', formatTime(timeTakenSeconds));
+            formData.append('Quiz ID', generateUniqueId()); // Unique ID for each submission
 
             fetch('https://formspree.io/f/xwpojgab', {
                 method: 'POST',
@@ -1220,46 +591,207 @@
                 headers: {
                     'Accept': 'application/json'
                 }
-            })
-            .then(response => {
+            }).then(response => {
                 if (response.ok) {
-                    console.log('Quiz results submitted successfully to Formspree!');
+                    console.log('Quiz results submitted successfully!');
                 } else {
                     console.error('Formspree submission failed.');
                 }
-            })
-            .catch(error => {
-                console.error('Error submitting to Formspree:', error);
+            }).catch(error => {
+                console.error('Error during Formspree submission:', error);
             });
         }
 
-        reviewAnswersBtn.addEventListener('click', () => {
-            // This is an optional feature. For a full implementation,
-            // you would navigate back to a quiz review mode, perhaps
-            // displaying all questions with user's answers, correct answers,
-            // and explanations. For now, it's a placeholder.
-            alert('Review Answers feature is not fully implemented in this version.');
-        });
+        // --- Event Listeners ---
 
-        // Security Features
-        document.addEventListener('contextmenu', event => event.preventDefault()); // Disable right-click
-        document.addEventListener('copy', event => event.preventDefault()); // Disable copy
-        document.addEventListener('cut', event => event.preventDefault()); // Disable cut
-        document.addEventListener('paste', event => event.preventDefault()); // Disable paste
+        document.getElementById('loginBtn').addEventListener('click', () => {
+            const id = document.getElementById('loginId').value;
+            const password = document.getElementById('loginPassword').value;
+            const loginError = document.getElementById('loginError');
 
-        // Attempt to block developer tools shortcuts
-        document.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.shiftKey && e.key === 'I') { // Ctrl+Shift+I
-                e.preventDefault();
-            }
-            if (e.ctrlKey && e.key === 'U') { // Ctrl+U
-                e.preventDefault();
-            }
-            if (e.key === 'F12') { // F12
-                e.preventDefault();
+            if (id === '27may' && password === '27may') {
+                loginError.classList.add('hidden');
+                showPage('candidateNamePage');
+            } else {
+                loginError.classList.remove('hidden');
             }
         });
 
+        document.getElementById('startQuizBtn').addEventListener('click', () => {
+            const candidateNameInput = document.getElementById('candidateName');
+            const candidateName = candidateNameInput.value.trim();
+            const nameError = document.getElementById('nameError');
+
+            if (candidateName) {
+                nameError.classList.add('hidden');
+                // Initialize userAnswers array for the new quiz attempt
+                userAnswers = new Array(quizQuestions.length).fill(null);
+                currentQuestionIndex = 0;
+                startTimer();
+                renderQuestion();
+                showPage('quizPage');
+            } else {
+                nameError.classList.remove('hidden');
+            }
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', nextQuestion);
+        document.getElementById('prevBtn').addEventListener('click', prevQuestion);
+        document.getElementById('submitQuizBtn').addEventListener('click', () => submitQuiz(false));
+        document.getElementById('restartQuizBtn').addEventListener('click', () => {
+            // Reset quiz state
+            currentQuestionIndex = 0;
+            userAnswers = [];
+            clearInterval(timerInterval); // Clear any lingering timer
+            // Re-shuffle questions for a new attempt
+            initializeQuiz();
+            showPage('loginPage'); // Go back to login for a fresh start
+        });
+
+        // --- Quiz Initialization ---
+        function initializeQuiz() {
+            // Clear previous questions
+            quizQuestions.length = 0;
+
+            // Pedagogy (10 MCQs)
+            const pedagogyMCQs = [
+                { question: "The word \"pedagogy\" means:", options: ["To guide the child", "To evaluate the students", "To deliver lecture in class", "To take care of children"], correctOptionIndex: 0, explanation: "As per page 1, the word \"pedagogy\" means \"to lead the child\" or \"to guide the child\"." },
+                { question: "What is the primary task of a teacher?", options: ["To organize teaching work", "To stimulate and guide student learning", "To promote habits of conformity", "To provide diagnostic and remedial aid"], correctOptionIndex: 1, explanation: "Page 1 states \"The primary task of the teacher is to stimulate and guide student learning\"." },
+                { question: "Which type of learning is predominantly teacher-centered?", options: ["Andragogy", "Pedagogy", "Heutagogy", "Cybergogy"], correctOptionIndex: 1, explanation: "Page 1 defines pedagogy as teacher-centered learning." },
+                { question: "What does \"andragogy\" mean?", options: ["Teaching of kids", "Teaching of adults", "Teaching right from the book", "Learning process"], correctOptionIndex: 1, explanation: "Page 1 states \"Andragogy means teaching of adults\"." },
+                { question: "According to John Dewey, education is:", options: ["Prepare for future life", "Shaping", "Learning to do by doing", "Struggling"], correctOptionIndex: 2, explanation: "Page 1 mentions \"Education according to John Dewey is Learning to do by doing\"." },
+                { question: "The root of the word \"education\" is derived from which language?", options: ["Greek", "Latin", "French", "German"], correctOptionIndex: 1, explanation: "Page 3 states \"The root of Word education is derived from Latin words Educare, Educere, and Educatum\"." },
+                { question: "Which of the following is a characteristic of informal education?", options: ["Structured hierarchically", "Has a definite syllabus", "It is a lifelong process in a natural way", "Scheduled fees are paid regularly"], correctOptionIndex: 2, explanation: "Page 6 lists \"It is a lifelong process in a natural way\" as a characteristic of informal education." },
+                { question: "What is the IQ of a 25-year-old boy whose mental age is 16?", options: ["50", "64", "75", "100"], correctOptionIndex: 1, explanation: "Page 2 provides the formula: IQ = (Mental Age / Actual Age) * 100. So, (16/25) * 100 = 64." },
+                { question: "Which of the following statements correctly differentiates learning and education?", options: ["Learning is the product, education is the process.", "Learning is informal, education is formal.", "Learning is acquired, education is instinct.", "Learning is gained through teaching, education through experience."], correctOptionIndex: 1, explanation: "Page 3 states \"Learning is an informal process, and education is a formal process\"." },
+                { question: "What is the approximate percentage of knowledge gained through the sense of seeing?", options: ["60%", "75%", "85%", "90%"], correctOptionIndex: 2, explanation: "Page 2 indicates \"How much knowledge is gained through sense of seeing? c) 85%\"." }
+            ];
+            quizQuestions.push(...pedagogyMCQs);
+
+            // General Science (25 MCQs)
+            const generalScienceMCQs = [
+                { question: "Which part of a plant absorbs water and nutrients from the soil?", options: ["Stem", "Leaves", "Roots", "Flowers"], correctOptionIndex: 2, explanation: "Roots are essential for absorbing water and minerals from the soil." },
+                { question: "What is the main source of energy for all living things on Earth?", options: ["Moon", "Stars", "Sun", "Wind"], correctOptionIndex: 2, explanation: "The sun provides light and heat, which is vital for photosynthesis in plants, forming the base of most food chains." },
+                { question: "Which gas do humans breathe in to survive?", options: ["Carbon Dioxide", "Nitrogen", "Oxygen", "Hydrogen"], correctOptionIndex: 2, explanation: "Oxygen is necessary for cellular respiration in humans." },
+                { question: "What is the process by which green plants make their own food?", options: ["Respiration", "Transpiration", "Photosynthesis", "Germination"], correctOptionIndex: 2, explanation: "Photosynthesis is the process where plants use sunlight, water, and carbon dioxide to create food." },
+                { question: "Which of these is a vertebrate animal?", options: ["Jellyfish", "Earthworm", "Fish", "Sponge"], correctOptionIndex: 2, explanation: "Vertebrates are animals with a backbone, such as fish, birds, mammals, reptiles, and amphibians." },
+                { question: "What is the function of red blood cells in the human body?", options: ["Fight infections", "Clot blood", "Carry oxygen", "Produce hormones"], correctOptionIndex: 2, explanation: "Hemoglobin in red blood cells binds to oxygen and transports it throughout the body." },
+                { question: "Which planet is known as the \"Red Planet\"?", options: ["Venus", "Mars", "Jupiter", "Saturn"], correctOptionIndex: 1, explanation: "Mars is called the Red Planet due to its reddish appearance caused by iron oxide on its surface." },
+                { question: "What is the state of matter that has a definite volume but no definite shape?", options: ["Solid", "Liquid", "Gas", "Plasma"], correctOptionIndex: 1, explanation: "Liquids take the shape of their container but maintain a constant volume." },
+                { question: "Which of the following is a renewable energy source?", options: ["Coal", "Natural Gas", "Solar", "Petroleum"], correctOptionIndex: 2, explanation: "Solar energy is derived from the sun and is continuously replenished." },
+                { question: "What is the primary organ responsible for pumping blood throughout the body?", options: ["Lungs", "Kidneys", "Heart", "Liver"], correctOptionIndex: 2, explanation: "The heart is a muscular organ that circulates blood through the circulatory system." },
+                { question: "Which type of teeth are used for grinding food?", options: ["Incisors", "Canines", "Premolars and Molars", "Wisdom teeth"], correctOptionIndex: 2, explanation: "Premolars and molars have broad, flat surfaces ideal for crushing and grinding food." },
+                { question: "What is the process of water changing from a liquid to a gas?", options: ["Condensation", "Precipitation", "Evaporation", "Freezing"], correctOptionIndex: 2, explanation: "Evaporation occurs when water molecules gain enough energy to escape into the atmosphere as vapor." },
+                { question: "Which force pulls objects towards the center of the Earth?", options: ["Friction", "Magnetism", "Gravity", "Tension"], correctOptionIndex: 2, explanation: "Gravity is the natural force that attracts objects with mass towards each other." },
+                { question: "What is the outermost layer of the Earth called?", options: ["Mantle", "Core", "Crust", "Outer Core"], correctOptionIndex: 2, explanation: "The Earth's crust is its thin, rocky outer layer." },
+                { question: "Which of these is a producer in a food chain?", options: ["Lion", "Grass", "Rabbit", "Snake"], correctOptionIndex: 1, explanation: "Producers, like plants, create their own food through photosynthesis." },
+                { question: "What is the main difference between a plant cell and an animal cell?", options: ["Animal cells have a cell wall, plant cells do not.", "Plant cells have chloroplasts, animal cells do not.", "Animal cells have a large central vacuole, plant cells do not.", "Plant cells have a nucleus, animal cells do not."], correctOptionIndex: 1, explanation: "Chloroplasts are organelles in plant cells responsible for photosynthesis." },
+                { question: "Which part of the human eye is responsible for detecting light and sending signals to the brain?", options: ["Cornea", "Lens", "Retina", "Iris"], correctOptionIndex: 2, explanation: "The retina contains photoreceptor cells (rods and cones) that convert light into electrical signals." },
+                { question: "What is the process by which an organism produces offspring?", options: ["Digestion", "Respiration", "Reproduction", "Excretion"], correctOptionIndex: 2, explanation: "Reproduction is the biological process by which new individual organisms are produced from their parents." },
+                { question: "Which of the following is a chemical change?", options: ["Melting ice", "Boiling water", "Burning wood", "Dissolving sugar"], correctOptionIndex: 2, explanation: "Burning wood results in new substances (ash, smoke) being formed, indicating a chemical change." },
+                { question: "What is the unit of force in the International System of Units (SI)?", options: ["Joule", "Watt", "Newton", "Pascal"], correctOptionIndex: 2, explanation: "The Newton (N) is the SI unit of force." },
+                { question: "Which of the following is a non-metal that is a liquid at room temperature?", options: ["Mercury", "Bromine", "Chlorine", "Iodine"], correctOptionIndex: 1, explanation: "Bromine is the only non-metallic element that is a liquid at standard room temperature." },
+                { question: "What is the primary function of the large intestine in the human digestive system?", options: ["Digestion of food", "Absorption of nutrients", "Absorption of water", "Production of enzymes"], correctOptionIndex: 2, explanation: "The large intestine's main role is to absorb water from the remaining indigestible food matter and transmit the useless waste material from the body." },
+                { question: "Which of the following is an example of an ecosystem?", options: ["A single tree", "A population of deer", "A pond with all its living organisms and non-living components", "A group of birds"], correctOptionIndex: 2, explanation: "An ecosystem includes all living organisms (biotic factors) and their physical environment (abiotic factors) interacting as a unit." },
+                { question: "What is the process by which plants release water vapor into the atmosphere?", options: ["Respiration", "Transpiration", "Condensation", "Evaporation"], correctOptionIndex: 1, explanation: "Transpiration is the process of water movement through a plant and its evaporation from aerial parts, such as leaves, stems, and flowers." },
+                { question: "Which type of rock is formed from the cooling and solidification of molten magma or lava?", options: ["Sedimentary rock", "Metamorphic rock", "Igneous rock", "Basalt rock"], correctOptionIndex: 2, explanation: "Igneous rocks are formed from the cooling and solidification of molten rock." }
+            ];
+            quizQuestions.push(...generalScienceMCQs);
+
+            // Social Studies (15 MCQs)
+            const socialStudiesMCQs = [
+                { question: "What is the capital city of Pakistan?", options: ["Lahore", "Karachi", "Islamabad", "Peshawar"], correctOptionIndex: 2, explanation: "Islamabad is the federal capital of Pakistan." },
+                { question: "Which continent is the largest by land area?", options: ["Africa", "Europe", "Asia", "North America"], correctOptionIndex: 2, explanation: "Asia is the largest continent in the world by land area." },
+                { question: "Which river is known as the \"Lifeline of Pakistan\"?", options: ["Jhelum River", "Chenab River", "Indus River", "Ravi River"], correctOptionIndex: 2, explanation: "The Indus River is the longest river in Pakistan and is crucial for its agriculture and economy." },
+                { question: "What is a map that shows physical features like mountains and rivers called?", options: ["Political map", "Thematic map", "Physical map", "Road map"], correctOptionIndex: 2, explanation: "A physical map shows the natural landscape features of the Earth." },
+                { question: "Which of these is a major desert in Pakistan?", options: ["Sahara Desert", "Gobi Desert", "Thar Desert", "Arabian Desert"], correctOptionIndex: 2, explanation: "The Thar Desert is a large arid region in the northwestern part of the Indian subcontinent, forming a natural boundary between India and Pakistan." },
+                { question: "Who was the founder of the Mughal Empire in India?", options: ["Akbar", "Babur", "Humayun", "Shah Jahan"], correctOptionIndex: 1, explanation: "Zahir-ud-din Muhammad Babur founded the Mughal Empire in 1526." },
+                { question: "The ancient city of Mohenjo-Daro is located in which modern-day country?", options: ["India", "Afghanistan", "Pakistan", "Iran"], correctOptionIndex: 2, explanation: "Mohenjo-Daro is an archaeological site in the province of Sindh, Pakistan." },
+                { question: "What is the term for a large area of land that is mostly flat?", options: ["Mountain", "Valley", "Plain", "Plateau"], correctOptionIndex: 2, explanation: "A plain is a flat, sweeping landmass that generally does not change much in elevation." },
+                { question: "Which historical event led to the creation of Pakistan as an independent state?", options: ["World War I", "Sepoy Mutiny", "Partition of India", "Quit India Movement"], correctOptionIndex: 2, explanation: "The Partition of British India in 1947 led to the creation of Pakistan and India." },
+                { question: "What is the primary function of a country's government?", options: ["To provide entertainment", "To make and enforce laws", "To build houses", "To run businesses"], correctOptionIndex: 1, explanation: "A government's core function is to establish and maintain order through laws." },
+                { question: "Which of the following is a major seaport city of Pakistan?", options: ["Faisalabad", "Multan", "Quetta", "Karachi"], correctOptionIndex: 3, explanation: "Karachi is Pakistan's largest city and its main seaport." },
+                { question: "What is the name of the mountain range that separates the Indian subcontinent from the Tibetan Plateau?", options: ["Andes", "Alps", "Himalayas", "Rockies"], correctOptionIndex: 2, explanation: "The Himalayas are a vast mountain range in Asia, separating the plains of the Indian subcontinent from the Tibetan Plateau." },
+                { question: "Who is considered the national poet of Pakistan?", options: ["Faiz Ahmed Faiz", "Allama Muhammad Iqbal", "Ahmed Faraz", "Parveen Shakir"], correctOptionIndex: 1, explanation: "Allama Muhammad Iqbal is widely regarded as the national poet of Pakistan." },
+                { question: "What is the term for a system of government where power is held by the people, either directly or through elected representatives?", options: ["Monarchy", "Dictatorship", "Democracy", "Oligarchy"], correctOptionIndex: 2, explanation: "Democracy is a system of government by the whole population or all the eligible members of a state, typically through elected representatives." },
+                { question: "Which historical figure is known as the founder of the Maurya Empire in ancient India?", options: ["Ashoka", "Chandragupta Maurya", "Bindusara", "Samudragupta"], correctOptionIndex: 1, explanation: "Chandragupta Maurya established the Maurya Empire, one of the largest empires in ancient India." }
+            ];
+            quizQuestions.push(...socialStudiesMCQs);
+
+            // English (25 MCQs)
+            const englishMCQs = [
+                { question: "Which of the following is a naming word?", options: ["Run", "Happy", "Table", "Quickly"], correctOptionIndex: 2, explanation: "A noun is a word that names a person, place, thing, or idea." },
+                { question: "What part of speech describes an action?", options: ["Noun", "Verb", "Adjective", "Adverb"], correctOptionIndex: 1, explanation: "A verb is a word used to describe an action, state, or occurrence." },
+                { question: "Which word tells us more about a verb, adjective, or another adverb?", options: ["Noun", "Pronoun", "Adverb", "Preposition"], correctOptionIndex: 2, explanation: "An adverb modifies a verb, an adjective, or another adverb." },
+                { question: "Identify the adjective in the sentence: \"The *beautiful* flower bloomed.\"", options: ["The", "Beautiful", "Flower", "Bloomed"], correctOptionIndex: 1, explanation: "An adjective describes a noun." },
+                { question: "Which of these is a pronoun?", options: ["Jump", "Quickly", "She", "Blue"], correctOptionIndex: 2, explanation: "A pronoun is a word that takes the place of a noun." },
+                { question: "Choose the correct article: \"____ apple a day keeps the doctor away.\"", options: ["A", "An", "The", "No article"], correctOptionIndex: 1, explanation: "\"An\" is used before words that start with a vowel sound." },
+                { question: "What is the plural form of \"child\"?", options: ["Childs", "Childes", "Children", "Child's"], correctOptionIndex: 2, explanation: "\"Children\" is the irregular plural form of \"child.\"" },
+                { question: "Which sentence uses the correct form of the verb \"to be\" for \"they\"?", options: ["They is happy.", "They am happy.", "They are happy.", "They be happy."], correctOptionIndex: 2, explanation: "\"Are\" is the correct form of \"to be\" for the plural pronoun \"they.\"" },
+                { question: "Identify the preposition in the sentence: \"The book is *on* the table.\"", options: ["The", "Book", "On", "Table"], correctOptionIndex: 2, explanation: "A preposition shows the relationship between a noun/pronoun and other words in a sentence." },
+                { question: "Which of the following is a conjunction?", options: ["Quickly", "And", "Under", "Tall"], correctOptionIndex: 1, explanation: "A conjunction connects words, phrases, or clauses." },
+                { question: "What is the past tense of the verb \"eat\"?", options: ["Eaten", "Ate", "Eating", "Eats"], correctOptionIndex: 1, explanation: "\"Ate\" is the simple past tense of \"eat.\"" },
+                { question: "Choose the sentence with correct subject-verb agreement:", options: ["The cat chase the mouse.", "The cats chases the mouse.", "The cat chases the mouse.", "The cats chasing the mouse."], correctOptionIndex: 2, explanation: "A singular subject (\"cat\") takes a singular verb (\"chases\")." },
+                { question: "Which type of sentence expresses a strong emotion?", options: ["Declarative", "Interrogative", "Imperative", "Exclamatory"], correctOptionIndex: 3, explanation: "An exclamatory sentence ends with an exclamation mark and conveys strong feeling." },
+                { question: "What is the comparative form of the adjective \"good\"?", options: ["Gooder", "Best", "Better", "Goodest"], correctOptionIndex: 2, explanation: "\"Better\" is the comparative form of \"good.\"" },
+                { question: "Identify the adverb in the sentence: \"She sings *beautifully*.\"", options: ["She", "Sings", "Beautifully", "None of these"], correctOptionIndex: 2, explanation: "\"Beautifully\" describes how she sings." },
+                { question: "Which of the following sentences uses a transitive verb?", options: ["The bird sings.", "He sleeps soundly.", "She wrote a letter.", "They arrived late."], correctOptionIndex: 2, explanation: "A transitive verb takes a direct object (\"letter\")." },
+                { question: "In the sentence \"Neither John nor Mary *is* coming,\" what is the subject-verb agreement rule applied?", options: ["Always use plural verb.", "Verb agrees with the closer subject.", "Verb agrees with the first subject.", "Always use singular verb."], correctOptionIndex: 1, explanation: "With \"neither...nor,\" the verb agrees with the noun or pronoun closest to it." },
+                { question: "Which modal verb expresses possibility or permission?", options: ["Must", "Should", "Can", "Will"], correctOptionIndex: 2, explanation: "\"Can\" indicates ability or permission." },
+                { question: "Identify the type of phrase: \"running quickly down the road.\"", options: ["Noun phrase", "Adjective phrase", "Adverbial phrase", "Prepositional phrase"], correctOptionIndex: 2, explanation: "It modifies a verb (implied, e.g., \"He was running...\") and describes how or where an action occurs." },
+                { question: "What is the function of an interjection?", options: ["To connect clauses", "To express strong emotion", "To modify a noun", "To replace a noun"], correctOptionIndex: 1, explanation: "Interjections are words or phrases used to express sudden bursts of emotion." },
+                { question: "Which of the following is a complex sentence?", options: ["I like coffee, and she likes tea.", "Although it was raining, we went for a walk.", "He ran fast.", "She smiled and waved."], correctOptionIndex: 1, explanation: "A complex sentence contains an independent clause and at least one dependent clause." },
+                { question: "What is the correct punctuation for a direct question?", options: ["Period (.)", "Exclamation mark (!)", "Question mark (?)", "Comma (,)"], correctOptionIndex: 2, explanation: "A question mark is used at the end of a direct question." },
+                { question: "Which of these words is a collective noun?", options: ["Tree", "Student", "Team", "Book"], correctOptionIndex: 2, explanation: "A collective noun refers to a group of people or things." },
+                { question: "What is the passive voice of \"The dog chased the cat\"?", options: ["The cat chased the dog.", "The cat was chased by the dog.", "The dog was chased by the cat.", "The cat is chased by the dog."], correctOptionIndex: 1, explanation: "In passive voice, the object of the active sentence becomes the subject." },
+                { question: "Which of the following is an example of an abstract noun?", options: ["Chair", "Water", "Happiness", "City"], correctOptionIndex: 2, explanation: "An abstract noun refers to a quality, idea, or state rather than a concrete object." }
+            ];
+            quizQuestions.push(...englishMCQs);
+
+            // Mathematics (25 MCQs)
+            const mathematicsMCQs = [
+                { question: "What is the sum of 5 + 3?", options: ["7", "8", "9", "10"], correctOptionIndex: 1, explanation: "Basic addition." },
+                { question: "How many sides does a triangle have?", options: ["2", "3", "4", "5"], correctOptionIndex: 1, explanation: "A triangle is a polygon with three edges and three vertices." },
+                { question: "What is 25 divided by 5?", options: ["4", "5", "6", "7"], correctOptionIndex: 1, explanation: "Basic division." },
+                { question: "If you have 12 apples and eat 4, how many are left?", options: ["6", "7", "8", "9"], correctOptionIndex: 2, explanation: "Basic subtraction." },
+                { question: "What is the product of 7 and 6?", options: ["40", "42", "45", "48"], correctOptionIndex: 1, explanation: "Basic multiplication." },
+                { question: "Which of these numbers is an even number?", options: ["13", "17", "22", "25"], correctOptionIndex: 2, explanation: "An even number is divisible by 2." },
+                { question: "What is the place value of the digit '3' in the number 435?", options: ["Ones", "Tens", "Hundreds", "Thousands"], correctOptionIndex: 1, explanation: "The digit 3 is in the tens place." },
+                { question: "How many minutes are in 2 hours?", options: ["60", "90", "120", "180"], correctOptionIndex: 2, explanation: "1 hour = 60 minutes, so 2 hours = 2 * 60 = 120 minutes." },
+                { question: "What is the perimeter of a square with a side length of 5 cm?", options: ["10 cm", "15 cm", "20 cm", "25 cm"], correctOptionIndex: 2, explanation: "Perimeter of a square = 4 * side length. So, 4 * 5 = 20 cm." },
+                { question: "Which fraction is equivalent to 1/2?", options: ["2/3", "3/4", "2/4", "1/3"], correctOptionIndex: 2, explanation: "2/4 simplifies to 1/2." },
+                { question: "What is the next number in the sequence: 2, 4, 6, 8, __?", options: ["9", "10", "11", "12"], correctOptionIndex: 1, explanation: "This is a sequence of even numbers." },
+                { question: "Round 47 to the nearest ten.", options: ["40", "50", "45", "30"], correctOptionIndex: 1, explanation: "Since the ones digit (7) is 5 or greater, round up the tens digit." },
+                { question: "What is the value of 100 - 35?", options: ["60", "65", "70", "75"], correctOptionIndex: 1, explanation: "Basic subtraction." },
+                { question: "Which shape has 4 equal sides and 4 right angles?", options: ["Rectangle", "Triangle", "Square", "Circle"], correctOptionIndex: 2, explanation: "A square is a quadrilateral with four equal sides and four right angles." },
+                { question: "If a bus leaves at 8:00 AM and travels for 3 hours, what time will it arrive?", options: ["10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM"], correctOptionIndex: 1, explanation: "8:00 AM + 3 hours = 11:00 AM." },
+                { question: "What is the smallest 3-digit number?", options: ["99", "100", "101", "999"], correctOptionIndex: 1, explanation: "The smallest number with three digits is 100." },
+                { question: "Convert 1/4 into a decimal.", options: ["0.14", "0.25", "0.4", "0.5"], correctOptionIndex: 1, explanation: "1 divided by 4 equals 0.25." },
+                { question: "A bag contains 5 red balls and 3 blue balls. What is the probability of picking a red ball?", options: ["3/8", "5/8", "1/2", "1/8"], correctOptionIndex: 1, explanation: "Probability = (Number of favorable outcomes) / (Total number of outcomes) = 5 / (5+3) = 5/8." },
+                { question: "If a shirt costs $20 and is on sale for 10% off, what is the sale price?", options: ["$10", "$18", "$2", "$15"], correctOptionIndex: 1, explanation: "10% of $20 is $2. $20 - $2 = $18." },
+                { question: "What is the area of a rectangle with length 8 cm and width 3 cm?", options: ["11 cm²", "22 cm²", "24 cm²", "16 cm²"], correctOptionIndex: 2, explanation: "Area of a rectangle = length * width. So, 8 * 3 = 24 cm²." },
+                { question: "What is the value of $3^2 + 4^2$?", options: ["14", "25", "49", "7"], correctOptionIndex: 1, explanation: "$3^2 = 9$, $4^2 = 16$. $9 + 16 = 25$." },
+                { question: "Which of the following is a prime number?", options: ["9", "15", "17", "21"], correctOptionIndex: 2, explanation: "A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself." },
+                { question: "If a circle has a radius of 7 cm, what is its approximate circumference? (Use $\\pi \\approx 22/7$)", options: ["14 cm", "22 cm", "44 cm", "49 cm"], correctOptionIndex: 2, explanation: "Circumference = $2\\pi r = 2 \\times (22/7) \\times 7 = 44$ cm." },
+                { question: "What is the average of 10, 20, and 30?", options: ["15", "20", "25", "60"], correctOptionIndex: 1, explanation: "Average = (Sum of numbers) / (Count of numbers) = (10+20+30)/3 = 60/3 = 20." },
+                { question: "A clock shows 3:00. What type of angle is formed by the hour and minute hands?", options: ["Acute angle", "Obtuse angle", "Right angle", "Straight angle"], correctOptionIndex: 2, explanation: "At 3:00, the hands form a 90-degree angle." }
+            ];
+            quizQuestions.push(...mathematicsMCQs);
+
+            // Randomly select one special question
+            specialQuestionIndex = Math.floor(Math.random() * quizQuestions.length);
+            quizQuestions[specialQuestionIndex].special = true;
+
+            // Apply 30% chance to shuffle the entire quiz order
+            if (Math.random() < 0.3) {
+                shuffleArray(quizQuestions);
+                // After shuffling, find the new index of the special question
+                specialQuestionIndex = quizQuestions.findIndex(q => q.special);
+            }
+        }
+
+        // Initialize the quiz when the script loads
+        initializeQuiz();
     </script>
 </body>
 </html>
