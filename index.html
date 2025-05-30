@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EDUCATION DEPARTMENT SCREENING TEST PREPARATION – May 26, 2025</title>
+    <title>EDUCATION DEPARTMENT SCREENING TEST PREPARATION – May 30, 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -272,11 +272,11 @@
             <h2 class="text-xl font-bold mb-4 text-center">Login</h2>
             <div class="mb-4">
                 <label for="loginId" class="block text-sm font-medium text-gray-700 mb-1">ID:</label>
-                <input type="text" id="loginId" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" value="">
+                <input type="text" id="loginId" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" value="demo">
             </div>
             <div class="mb-6">
                 <label for="loginPassword" class="block text-sm font-medium text-gray-700 mb-1">Password:</label>
-                <input type="password" id="loginPassword" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" value="">
+                <input type="password" id="loginPassword" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" value="1111">
             </div>
             <p id="loginError" class="text-red-500 text-sm mb-4 hidden">Invalid ID or Password</p>
             <button id="loginBtn" class="button-gradient w-full">Login</button>
@@ -595,7 +595,7 @@
             const password = document.getElementById('loginPassword').value;
             const loginError = document.getElementById('loginError');
 
-            if (id === 'etea' && password === '30may') {
+            if (id === '1111' && password === '1111') {
                 loginError.classList.add('hidden');
                 showPage('candidateNamePage');
             } else {
