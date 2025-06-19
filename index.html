@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EDUCATION DEPARTMENT SCREENING TEST PREPARATION – JUNE 18, 2025</title>
+    <title>Day 1 Quiz - EDUCATION DEPARTMENT SCREENING TEST PREPARATION – June 19, 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* General Body Styling */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #F8F9FA; /* Very light gray */
@@ -16,10 +17,11 @@
             padding: 0;
             display: flex;
             flex-direction: column;
-            min-height: 10vh;
+            min-height: 100vh; /* Full viewport height */
             overflow-x: hidden; /* Prevent horizontal scrolling */
         }
 
+        /* Top Bar Styling */
         .top-bar {
             background-color: #ffffff;
             border-bottom: 1px solid #e0e0e0;
@@ -48,6 +50,7 @@
             gap: 0.5rem;
         }
 
+        /* Header Section Styling */
         .header-section {
             background-color: #ffffff;
             padding: 1.5rem 1rem;
@@ -77,7 +80,7 @@
         .progress-bar {
             height: 100%;
             width: 0%;
-            background: linear-gradient(to right, #20B2AA, #3EB489);
+            background: linear-gradient(to right, #20B2AA, #3EB489); /* Teal to Mint Green */
             border-radius: 5px;
             transition: width 0.3s ease-in-out;
         }
@@ -96,8 +99,9 @@
             margin-top: 0.5rem;
         }
 
+        /* Card Styling (for login, quiz, results pages) */
         .card {
-            background-color: #FFF5EE; /* PeachPuff */
+            background-color: #FFF5EE; /* PeachPuff - very light, warm tone */
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             padding: 1.5rem;
@@ -107,9 +111,10 @@
             box-sizing: border-box;
         }
 
+        /* Button Styling */
         .button-gradient {
-            background-image: linear-gradient(to right, #E6E6FA, #FFDAB9); /* Lavender to PeachPuff */
-            color: #2C3E50;
+            background-image: linear-gradient(to right, #E6E6FA, #FFDAB9); /* Lavender to PeachPuff - light and attractive */
+            color: #2C3E50; /* Dark text for contrast */
             font-weight: bold;
             padding: 0.75rem 1.5rem;
             border-radius: 8px;
@@ -131,7 +136,7 @@
 
         .option-button {
             background-color: #ffffff;
-            border: 1px solid #ddd;
+            border: 1px solid #ddd; /* Light border */
             padding: 0.75rem 1rem;
             border-radius: 8px;
             text-align: left;
@@ -143,35 +148,37 @@
         }
 
         .option-button:hover:not(.selected) {
-            background-color: #f0f0f0;
+            background-color: #f0f0f0; /* Slightly darker on hover */
         }
 
         .option-button.selected {
-            border-color: #6D6875;
+            border-color: #6D6875; /* Medium gray for selected */
             background-color: #f0f0f0;
             font-weight: bold;
         }
 
         .option-button.correct {
             background-color: #90EE90; /* LightGreen */
-            border-color: #28a745;
+            border-color: #28a745; /* Darker green border */
             animation: pulse-green 0.5s ease-out forwards;
         }
 
         .option-button.incorrect {
-            background-color: #FF6B6B; /* Red pulse */
-            border-color: #dc3545;
+            background-color: #FF6B6B; /* Light Red */
+            border-color: #dc3545; /* Darker red border */
             animation: shake-red 0.5s ease-out forwards;
         }
 
+        /* Special Question Styling */
         .special-question {
             border: 3px solid #FFD700; /* Gold border */
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); /* Glowing effect */
         }
 
+        /* Explanation Section Styling */
         .explanation {
-            background-color: #e0f7fa;
-            border-left: 5px solid #20B2AA;
+            background-color: #e0f7fa; /* Light Cyan */
+            border-left: 5px solid #20B2AA; /* Teal border */
             padding: 1rem;
             margin-top: 1rem;
             border-radius: 8px;
@@ -180,6 +187,7 @@
             display: none; /* Hidden by default */
         }
 
+        /* Timer and Progress Display */
         .timer-display {
             font-size: 1.2rem;
             font-weight: bold;
@@ -193,6 +201,19 @@
             color: #6D6875;
             margin-bottom: 1rem;
             text-align: center;
+        }
+
+        /* Animations */
+        @keyframes pulse-green {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.01); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake-red {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
         }
 
         /* Responsive adjustments */
@@ -234,21 +255,22 @@
 <body>
 
     <script>
-        document.addEventListener('contextmenu', event => event.preventDefault()); // Disable right-click
+        // Disable right-click, specific keyboard shortcuts (Ctrl+U, Ctrl+Shift+I, Ctrl+Shift+J, F12), copy, and paste
+        document.addEventListener('contextmenu', event => event.preventDefault());
         document.addEventListener('keydown', e => {
             if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) {
-                e.preventDefault(); // Disable Ctrl+U, Ctrl+Shift+I, Ctrl+Shift+J
+                e.preventDefault();
             }
             if (e.key === 'F12') {
-                e.preventDefault(); // Disable F12
+                e.preventDefault();
             }
         });
-        document.addEventListener('copy', event => event.preventDefault()); // Disable copy
-        document.addEventListener('paste', event => event.preventDefault()); // Disable paste
+        document.addEventListener('copy', event => event.preventDefault());
+        document.addEventListener('paste', event => event.preventDefault());
     </script>
 
     <div class="top-bar">
-        <a href="https://chat.whatsapp.com/your-whatsapp-community-link" target="_blank" class="whatsapp-link">
+        <a href="https://chat.whatsapp.com/H3uhXoDodPmAOaVvi3PcZq" target="_blank" class="whatsapp-link">
             <i class="fab fa-whatsapp"></i> Join WhatsApp Community
         </a>
         <div class="date-display" id="liveDate"></div>
@@ -297,7 +319,7 @@
             <div class="question-progress" id="questionProgress"></div>
             <h2 class="text-lg font-semibold mb-4" id="questionText"></h2>
             <div id="optionsContainer" class="flex flex-col gap-3 mb-6">
-                </div>
+            </div>
             <div class="flex justify-between">
                 <button id="prevBtn" class="button-gradient px-6 py-2">Previous</button>
                 <button id="nextBtn" class="button-gradient px-6 py-2">Next</button>
@@ -310,7 +332,7 @@
             <h2 class="text-xl font-bold mb-4 text-center">Quiz Results</h2>
             <p class="mb-2"><strong>Candidate Name:</strong> <span id="resultCandidateName"></span></p>
             <p class="mb-2"><strong>Date of Quiz:</strong> <span id="resultDate"></span></p>
-            <p class="mb-2"><strong>Score:</strong> <span id="resultScore"></span> / 200</p>
+            <p class="mb-2"><strong>Score:</strong> <span id="resultScore"></span> / <span id="maxScore"></span></p>
             <p class="mb-2"><strong>Correct Answers:</strong> <span id="resultCorrect"></span></p>
             <p class="mb-2"><strong>Incorrect Answers:</strong> <span id="resultIncorrect"></span></p>
             <p class="mb-4"><strong>Time Taken:</strong> <span id="resultTimeTaken"></span></p>
@@ -320,13 +342,13 @@
 
     <script>
         // Set the current date for display and logic
-        const CURRENT_DATE_STR = "JUNE 18, 2025"; // MANDATORY DAILY INPUT
+        const CURRENT_DATE_STR = "June 19, 2025";
         const CURRENT_DATE = new Date(CURRENT_DATE_STR);
 
         // Update header dates
         document.getElementById('liveDate').textContent = CURRENT_DATE_STR;
         document.getElementById('updatedDate').textContent = CURRENT_DATE_STR;
-        document.getElementById('quizTitle').textContent = `EDUCATION DEPARTMENT SCREENING TEST PREPARATION – ${CURRENT_DATE_STR}`;
+        document.getElementById('quizTitle').textContent = `Day 1 Quiz - EDUCATION DEPARTMENT SCREENING TEST PREPARATION – ${CURRENT_DATE_STR}`;
 
         // Quiz Data Structure
         const quizQuestions = [];
@@ -334,7 +356,7 @@
         let userAnswers = []; // Stores { questionIndex: int, selectedOptionIndex: int, isCorrect: bool }
         let quizStartTime;
         let timerInterval;
-        const QUIZ_DURATION_MINUTES = 40;
+        const QUIZ_DURATION_MINUTES = 40; // Default quiz duration
         let specialQuestionIndex = -1; // To store the index of the special question
 
         // --- Helper Functions ---
@@ -436,7 +458,7 @@
             question.options.forEach((option, index) => {
                 const button = document.createElement('button');
                 button.classList.add('option-button', 'w-full');
-                button.textContent = option;
+                button.innerHTML = option; // Use innerHTML to render LaTeX
                 button.dataset.optionIndex = index;
                 button.onclick = () => selectOption(index);
 
@@ -456,9 +478,18 @@
                 optionsContainer.appendChild(button);
             });
 
+            // Render math equations using MathJax if available
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise([document.getElementById('questionText'), optionsContainer]);
+            }
+
+
             // Show/hide explanation
             const explanationDiv = document.getElementById('explanationDiv');
             explanationDiv.innerHTML = `<p class="font-bold">Explanation:</p><p>${question.explanation}</p>`;
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise([explanationDiv]);
+            }
             if (userAnswers[currentQuestionIndex] && userAnswers[currentQuestionIndex].selectedOptionIndex !== undefined) {
                 explanationDiv.style.display = 'block';
             } else {
@@ -506,6 +537,10 @@
 
             // Show explanation
             document.getElementById('explanationDiv').style.display = 'block';
+             // Render math equations in explanation
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise([document.getElementById('explanationDiv')]);
+            }
         }
 
         /**
@@ -540,23 +575,30 @@
 
             let correctCount = 0;
             let incorrectCount = 0;
+            let totalAttempted = 0;
 
             userAnswers.forEach(answer => {
-                if (answer && answer.isCorrect) {
-                    correctCount++;
-                } else if (answer && answer.selectedOptionIndex !== undefined) {
-                    incorrectCount++;
+                if (answer && answer.selectedOptionIndex !== undefined) {
+                    totalAttempted++;
+                    if (answer.isCorrect) {
+                        correctCount++;
+                    } else {
+                        incorrectCount++;
+                    }
                 }
             });
 
-            const score = (correctCount * 2) - (incorrectCount * 1);
+            const maxPossibleScore = quizQuestions.length * 2; // 2 points per question
+            const score = (correctCount * 2) - incorrectCount; // Score calculation: 2 for correct, -1 for incorrect
+
             const candidateName = document.getElementById('candidateName').value;
 
             document.getElementById('resultCandidateName').textContent = candidateName;
             document.getElementById('resultDate').textContent = CURRENT_DATE_STR;
             document.getElementById('resultScore').textContent = score;
-            document.getElementById('resultCorrect').textContent = `${correctCount} / ${userAnswers.length}`;
-            document.getElementById('resultIncorrect').textContent = `${incorrectCount} / ${userAnswers.length}`;
+            document.getElementById('maxScore').textContent = maxPossibleScore;
+            document.getElementById('resultCorrect').textContent = `${correctCount} / ${totalAttempted}`;
+            document.getElementById('resultIncorrect').textContent = `${incorrectCount} / ${totalAttempted}`;
             document.getElementById('resultTimeTaken').textContent = formatTime(timeTakenSeconds);
 
             showPage('resultsPage');
@@ -569,7 +611,7 @@
             formData.append('Correct Answers', correctCount);
             formData.append('Incorrect Answers', incorrectCount);
             formData.append('Time Taken', formatTime(timeTakenSeconds));
-            formData.append('Quiz ID', generateUniqueId()); // Unique ID for each submission
+            formData.append('Quiz ID', "day1"); // Specific ID for Day 1 quiz
 
             fetch('https://formspree.io/f/xwpojgab', {
                 method: 'POST',
@@ -595,7 +637,8 @@
             const password = document.getElementById('loginPassword').value;
             const loginError = document.getElementById('loginError');
 
-            if (id === 'day20' && password === '1111') {
+            // Specific credentials for Day 1
+            if (id === 'day1' && password === '1111') {
                 loginError.classList.add('hidden');
                 showPage('candidateNamePage');
             } else {
@@ -631,7 +674,11 @@
             clearInterval(timerInterval); // Clear any lingering timer
             // Re-shuffle questions for a new attempt
             initializeQuiz();
-            showPage('loginPage'); // Go back to login for a fresh start
+            // Clear login fields and go back to login page
+            document.getElementById('loginId').value = '';
+            document.getElementById('loginPassword').value = '';
+            document.getElementById('candidateName').value = '';
+            showPage('loginPage');
         });
 
         // --- Quiz Initialization ---
@@ -639,132 +686,166 @@
             // Clear previous questions
             quizQuestions.length = 0;
 
-            // Pedagogy (10 MCQs from Pages 77-80)
+            // Pedagogy (10 MCQs from Pages 1-8)
             const pedagogyMCQs = [
-                { question: "Which of the following is a characteristic of 'student-centered learning'?", options: ["Teacher-led instruction.", "Emphasis on student autonomy, collaboration, and active participation.", "Rote memorization.", "Standardized curriculum for all."], correctOptionIndex: 1, explanation: "Student-centered learning empowers learners to take ownership of their education (Page 77)." },
-                { question: "What is the primary goal of 'formative assessment'?", options: ["To assign final grades.", "To monitor student learning and provide ongoing feedback to improve instruction and learning.", "To compare students to a national standard.", "To evaluate teacher performance."], correctOptionIndex: 1, explanation: "Formative assessment is for ongoing improvement (Page 77)." },
-                { question: "Which of the following is a characteristic of 'summative assessment'?", options: ["It provides immediate feedback for improvement.", "It evaluates student learning at the end of an instructional unit or course.", "It is used to identify learning difficulties early on.", "It is informal and ungraded."], correctOptionIndex: 1, explanation: "Summative assessment measures overall achievement (Page 78)." },
-                { question: "What is 'constructivism' in education?", options: ["Knowledge is transmitted directly from teacher to student.", "Learners actively construct their own understanding and knowledge through experience and reflection.", "Learning is primarily through rote memorization.", "Students are empty vessels to be filled with information."], correctOptionIndex: 1, explanation: "Constructivism emphasizes active knowledge construction (Page 78)." },
-                { question: "Which of the following is a key component of 'active learning'?", options: ["Students passively listen to lectures.", "Students engage in activities like discussions, problem-solving, and hands-on tasks.", "Teachers provide all the answers.", "Learning happens only through reading."], correctOptionIndex: 1, explanation: "Active learning involves direct student participation (Page 79)." },
-                { question: "What is the role of 'scaffolding' in education?", options: ["Removing all support from learners.", "Providing temporary support to students as they learn new concepts or skills, gradually withdrawing it as they become more proficient.", "Giving students only easy tasks.", "Ignoring student struggles."], correctOptionIndex: 1, explanation: "Scaffolding helps students bridge learning gaps (Page 79)." },
-                { question: "Which of the following is a characteristic of an 'effective teacher'?", options: ["Lack of enthusiasm.", "Strong content knowledge, effective communication, and ability to build positive relationships.", "Strict and unapproachable.", "Relies solely on textbooks."], correctOptionIndex: 1, explanation: "Effective teachers combine expertise with strong pedagogical skills and rapport (Page 80)." },
-                { question: "What is the importance of 'metacognition' in learning?", options: ["It is irrelevant to academic success.", "It involves students' awareness and control over their own learning processes, leading to improved strategies and self-regulation.", "It is only about memorizing facts.", "It discourages critical thinking."], correctOptionIndex: 1, explanation: "Metacognition enhances self-regulated learning (Page 80)." },
-                { question: "Which of the following describes 'problem-based learning'?", options: ["Students learn by memorizing solutions to problems.", "Students learn by actively solving complex, real-world problems.", "Teachers provide step-by-step solutions for all problems.", "It focuses on theoretical knowledge without practical application."], correctOptionIndex: 1, explanation: "Problem-based learning develops critical thinking and problem-solving (Page 80)." },
-                { question: "What is the role of 'feedback' in the learning process?", options: ["To only point out errors.", "To provide specific information about student performance, guiding them towards improvement and deeper understanding.", "To discourage students.", "To replace direct instruction."], correctOptionIndex: 1, explanation: "Constructive feedback is essential for student growth (Page 80)." }
+                { question: "The word 'pedagogy' means __________.", options: ["to guide the child", "to evaluate the students", "to educate the child", "None of these"], correctOptionIndex: 0, explanation: "The word 'pedagogy' means to guide the child (Page 1)." },
+                { question: "Pedagogy is the study of __________.", options: ["Learning process", "Education", "Teaching method", "Books"], correctOptionIndex: 2, explanation: "Pedagogy is the study of teaching methods (Page 1)." },
+                { question: "'Peda' word derived from Greek means __________.", options: ["Teaching", "Learning", "Child", "Method"], correctOptionIndex: 2, explanation: "'Peda' means child in Greek (Page 1)." },
+                { question: "Which type of learning is predominantly teacher centered?", options: ["Andragogy", "Pedagogy", "both a and b", "none of these"], correctOptionIndex: 1, explanation: "Pedagogy is teacher-centered (Page 1)." },
+                { question: "Considered as father of research in teaching __________.", options: ["Edward lee Thorandike", "Lewis Medison", "Joseph Mayer Rice", "None of these"], correctOptionIndex: 2, explanation: "Joseph Mayer Rice is known as the father of research in teaching (Page 1)." },
+                { question: "Joseph Mayer Rice was a great __________.", options: ["Philosopher", "Poet", "Classroom observer", "Tutor"], correctOptionIndex: 2, explanation: "Joseph Mayer Rice was a notable classroom observer (Page 1)." },
+                { question: "Pedagogy is a joint activity in which the __________ has an active role.", options: ["students", "Learner", "family", "All of these"], correctOptionIndex: 0, explanation: "In pedagogy, students have an active role (Page 1)." },
+                { question: "What does 'andragogy' mean?", options: ["Teaching", "Teaching of adults", "Teaching of kids", "Teaching right from the book"], correctOptionIndex: 1, explanation: "Andragogy refers to the teaching of adults (Page 1)." },
+                { question: "An adult in training 'needs to know', which means __________.", options: ["they are goal-oriented and expect it to be relevant", "they bring knowledge they want to share", "they need to be motivated", "they know their own needs"], correctOptionIndex: 0, explanation: "Adult learners are goal-oriented and seek relevance (Page 1)." },
+                { question: "The attitude of successful teachers towards their students is __________.", options: ["Arrogant", "Friendly", "Non-serious", "Realistic"], correctOptionIndex: 1, explanation: "Successful teachers maintain a friendly attitude (Page 1)." }
             ];
             quizQuestions.push(...pedagogyMCQs);
 
-            // General Science (25 MCQs from Pages 418-434)
+            // General Science (15 MCQs from Pages 81-116)
             const generalScienceMCQs = [
-                { question: "What is the SI unit of electric potential difference (voltage)?", options: ["Ampere", "Ohm", "Volt", "Watt"], correctOptionIndex: 2, explanation: "The Volt (V) measures the potential energy difference per unit charge (Page 418)." },
-                { question: "What is Ohm's Law?", options: ["V = I/R", "I = V × R", "V = I × R", "R = V × I"], correctOptionIndex: 2, explanation: "Ohm's Law states that voltage (V) across a conductor is directly proportional to the current (I) flowing through it, with resistance (R) as the constant of proportionality (Page 419)." },
-                { question: "Which type of circuit has components connected in a single path, so the current is the same through each component?", options: ["Parallel circuit", "Series circuit", "Mixed circuit", "Complex circuit"], correctOptionIndex: 1, explanation: "In a series circuit, current flows through each component sequentially (Page 420)." },
-                { question: "Which type of circuit has components connected across the same two points, so the voltage is the same across each component?", options: ["Parallel circuit", "Series circuit", "Mixed circuit", "Complex circuit"], correctOptionIndex: 0, explanation: "In a parallel circuit, components are connected side-by-side (Page 421)." },
-                { question: "What is the SI unit of electric charge?", options: ["Volt", "Ampere", "Coulomb", "Ohm"], correctOptionIndex: 2, explanation: "The Coulomb (C) is the SI unit of electric charge (Page 422)." },
-                { question: "Which of the following describes static electricity?", options: ["Flowing current.", "An imbalance of electric charges within or on the surface of a material.", "Electricity generated by magnets.", "Electricity from a power plant."], correctOptionIndex: 1, explanation: "Static electricity involves stationary charges (Page 423)." },
-                { question: "What is the process of generating electricity by moving a conductor through a magnetic field?", options: ["Electrolysis", "Electromagnetic induction", "Photovoltaic effect", "Thermoelectric effect"], correctOptionIndex: 1, explanation: "Electromagnetic induction is the principle behind generators and transformers (Page 424)." },
-                { question: "Which of the following is a characteristic of a magnet?", options: ["Attracts all materials.", "Has two poles (North and South) and attracts ferromagnetic materials.", "Only attracts non-metals.", "Can be turned on and off easily."], correctOptionIndex: 1, explanation: "Magnets have distinct poles and attract specific metals (Page 425)." },
-                { question: "What is the SI unit of power?", options: ["Joule", "Newton", "Watt", "Volt"], correctOptionIndex: 2, explanation: "The watt (W) is the unit of power, defined as one joule per second (Page 426)." },
-                { question: "What is the law of conservation of energy?", options: ["Energy can be created or destroyed.", "Energy is always lost in transformations.", "Energy cannot be created or destroyed, but it can be transformed from one form to another.", "Energy is only conserved in mechanical systems."], correctOptionIndex: 2, explanation: "Total energy in an isolated system remains constant (Page 427)." },
-                { question: "Which of the following is a form of potential energy?", options: ["Kinetic energy", "Thermal energy", "Gravitational potential energy", "Sound energy"], correctOptionIndex: 2, explanation: "Gravitational potential energy is stored energy due to an object's position in a gravitational field (Page 428)." },
-                { question: "What is the process of converting chemical energy into electrical energy?", options: ["Photosynthesis", "Respiration", "Electrolysis", "Electrochemical reaction (e.g., in a battery)"], correctOptionIndex: 3, explanation: "Batteries convert stored chemical energy into electrical energy (Page 429)." },
-                { question: "What is the SI unit of temperature?", options: ["Celsius", "Fahrenheit", "Kelvin", "Joule"], correctOptionIndex: 2, explanation: "Kelvin is the absolute temperature scale (Page 430)." },
-                { question: "Which state of matter has a definite shape and definite volume?", options: ["Liquid", "Gas", "Plasma", "Solid"], correctOptionIndex: 3, explanation: "Solids have fixed shapes and volumes (Page 431)." },
-                { question: "What is the process of a liquid changing into a gas?", options: ["Condensation", "Melting", "Evaporation", "Freezing"], correctOptionIndex: 2, explanation: "Evaporation involves particles gaining enough energy to escape as gas (Page 432)." },
-                { question: "What is the SI unit of electric current?", options: ["Volt", "Ohm", "Ampere", "Watt"], correctOptionIndex: 2, explanation: "The Ampere (A) is the base unit of electric current (Page 433)." },
-                { question: "Which of the following is a good conductor of electricity?", options: ["Wood", "Plastic", "Copper", "Glass"], correctOptionIndex: 2, explanation: "Copper is a metal with free electrons, allowing current to flow (Page 434)." },
-                { question: "What is the purpose of a fuse in an electrical circuit?", options: ["To increase current.", "To store charge.", "To protect the circuit from excessive current.", "To generate voltage."], correctOptionIndex: 2, explanation: "Fuses melt and break the circuit when current exceeds a safe level (Page 434)." },
-                { question: "What is the SI unit of electric resistance?", options: ["Volt", "Ampere", "Ohm", "Watt"], correctOptionIndex: 2, explanation: "The ohm (Ω) measures resistance (Page 419)." },
-                { question: "Which of the following is a good conductor of heat?", options: ["Wood", "Plastic", "Glass", "Aluminum"], correctOptionIndex: 3, explanation: "Aluminum is a metal and conducts heat well (Page 434)." },
-                { question: "What is the process by which heat is transferred through direct contact?", options: ["Convection", "Radiation", "Conduction", "Insulation"], correctOptionIndex: 2, explanation: "Conduction occurs when heat flows through direct contact (Page 427)." },
-                { question: "Which type of mirror produces a virtual, upright, and diminished image?", options: ["Plane mirror", "Concave mirror", "Convex mirror", "Parabolic mirror"], correctOptionIndex: 2, explanation: "Convex mirrors are used in car side mirrors for a wider view (Page 425)." },
-                { question: "What is the SI unit of length?", options: ["Centimeter", "Kilometer", "Meter", "Foot"], correctOptionIndex: 2, explanation: "The meter (m) is the base unit of length (Page 433)." },
-                { question: "Which of the following is a vector quantity?", options: ["Speed", "Distance", "Displacement", "Time"], correctOptionIndex: 2, explanation: "Displacement has both magnitude and direction (Page 434)." },
-                { question: "What is the principle behind a simple pendulum?", options: ["Newton's first law", "Conservation of momentum", "Periodic motion", "Archimedes' principle"], correctOptionIndex: 2, explanation: "A pendulum exhibits repetitive, oscillating motion (Page 426)." }
+                { question: "What is the study of living organisms and their interactions with each other and their environment?", options: ["Physics", "Chemistry", "Biology", "Geology"], correctOptionIndex: 2, explanation: "Biology is the scientific study of life (Page 81)." },
+                { question: "Which of the following is the basic unit of heredity?", options: ["Cell", "Tissue", "Organ", "Gene"], correctOptionIndex: 3, explanation: "Genes carry genetic information (Page 82)." },
+                { question: "What is the process by which green plants and some other organisms use sunlight to synthesize foods from carbon dioxide and water?", options: ["Respiration", "Photosynthesis", "Transpiration", "Fermentation"], correctOptionIndex: 1, explanation: "Photosynthesis produces food using light energy (Page 83)." },
+                { question: "Which part of a plant absorbs water and nutrients from the soil?", options: ["Stem", "Leaf", "Flower", "Root"], correctOptionIndex: 3, explanation: "Roots are responsible for absorption (Page 84)." },
+                { question: "What is the process of breaking down food to release energy in living organisms?", options: ["Digestion", "Absorption", "Respiration", "Excretion"], correctOptionIndex: 2, explanation: "Respiration converts food into energy (Page 85)." },
+                { question: "Which human body system is responsible for the circulation of blood?", options: ["Digestive system", "Respiratory system", "Circulatory system", "Nervous system"], correctOptionIndex: 2, explanation: "The circulatory system pumps blood throughout the body (Page 86)." },
+                { question: "What is the largest organ in the human body?", options: ["Heart", "Brain", "Skin", "Lungs"], correctOptionIndex: 2, explanation: "The skin is the largest external organ (Page 87)." },
+                { question: "Which of the following is a type of simple machine that consists of a rigid bar and a pivot point?", options: ["Pulley", "Wheel and axle", "Inclined plane", "Lever"], correctOptionIndex: 3, explanation: "A lever helps multiply force (Page 88)." },
+                { question: "What is the SI unit of force?", options: ["Joule", "Watt", "Newton", "Pascal"], correctOptionIndex: 2, explanation: "The Newton (N) is the unit of force (Page 89)." },
+                { question: "What is the force that opposes motion between two surfaces in contact?", options: ["Gravity", "Tension", "Friction", "Normal force"], correctOptionIndex: 2, explanation: "Friction resists sliding motion (Page 90)." },
+                { question: "Which state of matter has an indefinite shape and definite volume?", options: ["Solid", "Liquid", "Gas", "Plasma"], correctOptionIndex: 1, explanation: "Liquids take the shape of their container (Page 91)." },
+                { question: "What is the process of a solid changing directly into a gas without passing through a liquid state?", options: ["Melting", "Boiling", "Sublimation", "Condensation"], correctOptionIndex: 2, explanation: "Sublimation bypasses the liquid phase (Page 92)." },
+                { question: "Which of the following is a renewable energy source?", options: ["Coal", "Natural gas", "Solar energy", "Nuclear energy"], correctOptionIndex: 2, explanation: "Solar energy is continuously replenished (Page 93)." },
+                { question: "What is the main component of Earth's atmosphere?", options: ["Oxygen", "Carbon dioxide", "Nitrogen", "Argon"], correctOptionIndex: 2, explanation: "Nitrogen makes up about 78% of the atmosphere (Page 94)." },
+                { question: "Which planet is known as the 'Red Planet'?", options: ["Venus", "Mars", "Jupiter", "Saturn"], correctOptionIndex: 1, explanation: "Mars gets its reddish hue from iron oxide (Page 95)." }
             ];
             quizQuestions.push(...generalScienceMCQs);
 
-            // Social Studies (15 MCQs from Pages 774-790)
+            // Social Studies (8 MCQs from Pages 435-442)
             const socialStudiesMCQs = [
-                { question: "What is the term for the study of the Earth's physical features, climate, population, and resources?", options: ["Geology", "Meteorology", "Demography", "Geography"], correctOptionIndex: 3, explanation: "Geography integrates various aspects of Earth and human interaction (Page 774)." },
-                { question: "Which of the following is a major factor influencing climate?", options: ["Population density", "Proximity to oceans, altitude, and latitude", "Economic systems", "Political ideologies"], correctOptionIndex: 1, explanation: "These geographical factors determine climate zones (Page 775)." },
-                { question: "What is a map projection?", options: ["A type of telescope.", "A systematic transformation of the latitudes and longitudes of locations on the surface of a sphere or ellipsoid into locations on a plane.", "A method of predicting weather.", "A way to measure earthquakes."], correctOptionIndex: 1, explanation: "Map projections represent a 3D Earth on a 2D surface (Page 776)." },
-                { question: "Which of the following is a major challenge related to water resources globally?", options: ["Excessive rainfall.", "Water scarcity, pollution, and unequal distribution.", "Abundant clean water.", "Efficient water management systems."], correctOptionIndex: 1, explanation: "Water issues are critical global concerns (Page 777)." },
-                { question: "What is desertification?", options: ["The expansion of forests.", "The process by which fertile land becomes desert, typically as a result of drought, deforestation, or inappropriate agriculture.", "Increased rainfall in dry areas.", "Growth of urban areas."], correctOptionIndex: 1, explanation: "Desertification is land degradation in arid regions (Page 778)." },
-                { question: "Which of the following is a major cause of soil erosion?", options: ["Planting trees.", "Deforestation, overgrazing, and unsustainable farming practices.", "Crop rotation.", "Terrace farming."], correctOptionIndex: 1, explanation: "These activities remove protective vegetation and expose soil (Page 779)." },
-                { question: "What is the purpose of sustainable agriculture?", options: ["To maximize short-term profits.", "To produce food in a way that is environmentally sound, economically viable, and socially responsible.", "To deplete soil nutrients quickly.", "To rely heavily on chemical fertilizers."], correctOptionIndex: 1, explanation: "Sustainable agriculture aims for long-term productivity and minimal impact (Page 780)." },
-                { question: "Which of the following is a major characteristic of a developed country?", options: ["Low GDP per capita.", "High industrialization, advanced infrastructure, and high living standards.", "High infant mortality rates.", "Reliance on primary economic activities."], correctOptionIndex: 1, explanation: "Developed countries have strong economies and high quality of life (Page 781)." },
-                { question: "What is the purpose of foreign aid?", options: ["To promote conflict.", "To provide financial or technical assistance to developing countries.", "To exploit resources.", "To increase debt."], correctOptionIndex: 1, explanation: "Foreign aid supports development and humanitarian efforts (Page 782)." },
-                { question: "Which of the following is a major challenge to global health?", options: ["Eradication of diseases.", "Pandemics, lack of access to healthcare, and malnutrition.", "Universal healthcare coverage.", "High vaccination rates."], correctOptionIndex: 1, explanation: "These factors contribute to health disparities (Page 783)." },
-                { question: "What is the purpose of the World Health Organization (WHO)?", options: ["To promote war.", "To direct and coordinate international health within the United Nations system.", "To control global economies.", "To provide military assistance."], correctOptionIndex: 1, explanation: "WHO leads global health initiatives (Page 784)." },
-                { question: "Which of the following is a major human right?", options: ["Right to unlimited wealth.", "Right to education", "Right to harm others.", "Right to avoid responsibilities."], correctOptionIndex: 1, explanation: "The right to education is fundamental for human development (Page 785)." },
-                { question: "What is the purpose of international law?", options: ["To allow countries to act without rules.", "To regulate the conduct of states and international organizations.", "To promote anarchy.", "To only apply to individuals."], correctOptionIndex: 1, explanation: "International law governs relations between nations (Page 786)." },
-                { question: "Which of the following is a major challenge to international peace and security?", options: ["Diplomacy.", "Terrorism, interstate conflicts, and proliferation of weapons.", "International cooperation.", "Disarmament treaties."], correctOptionIndex: 1, explanation: "These threats destabilize global order (Page 787)." },
-                { question: "What is the purpose of diplomacy?", options: ["To escalate conflicts.", "To conduct negotiations between nations to resolve disputes peacefully.", "To impose sanctions.", "To declare war."], correctOptionIndex: 1, explanation: "Diplomacy is the art of peaceful international relations (Page 788)." }
+                { question: "What is the study of human society and social relationships?", options: ["Anthropology", "Sociology", "Psychology", "Economics"], correctOptionIndex: 1, explanation: "Sociology focuses on human social behavior and organization (Page 435)." },
+                { question: "Which of the following is a primary agent of socialization?", options: ["Government", "Media", "Family", "Religion"], correctOptionIndex: 2, explanation: "The family is typically the first and most influential agent of socialization (Page 436)." },
+                { question: "What is 'culture' in the context of social studies?", options: ["A group of people.", "The shared customs, arts, social institutions, and achievements of a particular nation, people, or group.", "Economic activities.", "Political systems."], correctOptionIndex: 1, explanation: "Culture encompasses the entire way of life of a group (Page 437)." },
+                { question: "Which of the following is an example of a 'social norm'?", options: ["Driving on the right side of the road.", "Individual preferences.", "Personal opinions.", "Unique talents."], correctOptionIndex: 0, explanation: "Social norms are unwritten rules of behavior (Page 438)." },
+                { question: "What is 'social stratification'?", options: ["The movement of people between social classes.", "The division of society into categories, ranks, or classes based on factors like wealth, power, and prestige.", "The process of social interaction.", "The study of social change."], correctOptionIndex: 1, explanation: "Social stratification creates a hierarchy in society (Page 439)." },
+                { question: "Which of the following is a type of social mobility where an individual moves up or down the social ladder?", options: ["Horizontal mobility", "Vertical mobility", "Geographical mobility", "Collective mobility"], correctOptionIndex: 1, explanation: "Vertical mobility signifies a change in social status (Page 440)." },
+                { question: "What is 'globalization'?", options: ["The isolation of countries.", "The increasing interconnectedness and interdependence of countries through trade, communication, and cultural exchange.", "A form of local governance.", "A decline in international relations."], correctOptionIndex: 1, explanation: "Globalization involves worldwide integration (Page 441)." },
+                { question: "Which of the following is a positive impact of globalization?", options: ["Increased cultural homogeneity.", "Economic growth and cultural exchange.", "Loss of local industries.", "Increased inequality."], correctOptionIndex: 1, explanation: "Globalization can foster economic and cultural benefits (Page 442)." }
             ];
             quizQuestions.push(...socialStudiesMCQs);
 
-            // English (25 MCQs from Pages 940-946)
+            // Geography (8 MCQs from Pages 510-520)
+            const geographyMCQs = [
+                { question: "What is the highest mountain peak in the world?", options: ["Mount Everest", "K2", "Kangchenjunga", "Lhotse"], correctOptionIndex: 0, explanation: "Mount Everest is the Earth's highest mountain above sea level (Page 510)." },
+                { question: "Which of the following is a major river in Pakistan?", options: ["Ganges", "Nile", "Indus", "Yangtze"], correctOptionIndex: 2, explanation: "The Indus River is the longest river in Pakistan (Page 511)." },
+                { question: "What is the term for a large natural stream of water flowing in a channel to the sea, a lake, or another river?", options: ["Lake", "Pond", "River", "Canal"], correctOptionIndex: 2, explanation: "Rivers are major natural waterways (Page 512)." },
+                { question: "Which of the following deserts is located in Pakistan?", options: ["Sahara Desert", "Thar Desert", "Gobi Desert", "Atacama Desert"], correctOptionIndex: 1, explanation: "The Thar Desert extends into southeastern Pakistan (Page 513)." },
+                { question: "What is the imaginary line that divides the Earth into the Northern and Southern Hemispheres?", options: ["Prime Meridian", "Tropic of Cancer", "Equator", "Tropic of Capricorn"], correctOptionIndex: 2, explanation: "The Equator is at 0 degrees latitude (Page 514)." },
+                { question: "Which of the following is a type of landform that is flat and extends over a large area?", options: ["Mountain", "Valley", "Plain", "Plateau"], correctOptionIndex: 2, explanation: "Plains are characterized by their low relief (Page 515)." },
+                { question: "What is the process by which rocks are broken down into smaller pieces by natural forces?", options: ["Erosion", "Deposition", "Weathering", "Volcanism"], correctOptionIndex: 2, explanation: "Weathering causes the disintegration of rocks (Page 516)." },
+                { question: "Which of the following factors primarily determines the climate of a region?", options: ["Population density", "Economic development", "Latitude, altitude, and proximity to large water bodies", "Political system"], correctOptionIndex: 2, explanation: "These geographic factors are crucial for climate determination (Page 517)." }
+            ];
+            quizQuestions.push(...geographyMCQs);
+
+            // History (10 MCQs from Pages 619-636)
+            const historyMCQs = [
+                { question: "Who was the founder of the Mughal Empire in India?", options: ["Akbar", "Humayun", "Babur", "Shah Jahan"], correctOptionIndex: 2, explanation: "Babur founded the Mughal Empire in 1526 (Page 619)." },
+                { question: "Which battle marked the end of the Mughal Empire and the beginning of British rule in India?", options: ["Battle of Panipat", "Battle of Plassey", "Battle of Buxar", "Battle of Seringapatam"], correctOptionIndex: 1, explanation: "The Battle of Plassey (1757) was a decisive victory for the British East India Company (Page 620)." },
+                { question: "Who was the last Mughal emperor?", options: ["Aurangzeb", "Bahadur Shah II", "Shah Alam II", "Akbar II"], correctOptionIndex: 1, explanation: "Bahadur Shah II was deposed after the Indian Rebellion of 1857 (Page 621)." },
+                { question: "The Indus Valley Civilization is also known as the __________ Civilization.", options: ["Egyptian", "Mesopotamian", "Harappan", "Roman"], correctOptionIndex: 2, explanation: "The Indus Valley Civilization is often referred to as the Harappan Civilization due to the city of Harappa (Page 622)." },
+                { question: "Which ancient civilization developed along the banks of the Nile River?", options: ["Mesopotamian", "Indus Valley", "Egyptian", "Chinese"], correctOptionIndex: 2, explanation: "The ancient Egyptian civilization flourished around the Nile (Page 623)." },
+                { question: "Who was the founder of the Mauryan Empire in ancient India?", options: ["Ashoka", "Chandragupta Maurya", "Bindusara", "Samudragupta"], correctOptionIndex: 1, explanation: "Chandragupta Maurya established the vast Mauryan Empire (Page 624)." },
+                { question: "Which emperor is famous for his conversion to Buddhism and promotion of its spread?", options: ["Chandragupta Maurya", "Bindusara", "Ashoka", "Kanishka"], correctOptionIndex: 2, explanation: "Emperor Ashoka became a devout Buddhist after the Kalinga War (Page 625)." },
+                { question: "The 'Silk Road' was an ancient network of trade routes connecting __________.", options: ["Europe and Africa", "Asia and Europe", "Africa and America", "Australia and Asia"], correctOptionIndex: 1, explanation: "The Silk Road facilitated trade and cultural exchange between East and West (Page 626)." },
+                { question: "Who was the founder of the Delhi Sultanate?", options: ["Iltutmish", "Qutb al-Din Aibak", "Razia Sultan", "Ghiyas ud din Balban"], correctOptionIndex: 1, explanation: "Qutb al-Din Aibak established the Delhi Sultanate (Page 627)." },
+                { question: "Which famous traveler from Morocco visited many parts of the Islamic world and beyond in the 14th century?", options: ["Marco Polo", "Christopher Columbus", "Ibn Battuta", "Vasco da Gama"], correctOptionIndex: 2, explanation: "Ibn Battuta's travels are documented in his 'Rihla' (Page 628)." }
+            ];
+            quizQuestions.push(...historyMCQs);
+
+            // English (10 MCQs from Pages 791-806)
             const englishMCQs = [
-                { question: "What is the primary function of an article?", options: ["To describe a verb.", "To introduce a noun and indicate whether it is specific or general.", "To connect sentences.", "To express emotion."], correctOptionIndex: 1, explanation: "Articles (a, an, the) define nouns (Page 940)." },
-                { question: "Identify the definite article in the sentence: \"*The* sun is bright.\"", options: ["The", "Sun", "Is", "Bright"], correctOptionIndex: 0, explanation: "'The' refers to a specific sun (Page 940)." },
-                { question: "Which of the following is an indefinite article?", options: ["The", "A", "This", "That"], correctOptionIndex: 1, explanation: "Indefinite articles (a, an) refer to non-specific nouns (Page 940)." },
-                { question: "In the sentence: \"She saw *an* elephant,\" what type of article is 'an'?", options: ["Definite", "Indefinite", "Possessive", "Demonstrative"], correctOptionIndex: 1, explanation: "'An' refers to any elephant, not a specific one (Page 940)." },
-                { question: "What is the primary function of a determiner?", options: ["To express an action.", "To introduce a noun and provide information about quantity, possession, or specificity.", "To connect sentences.", "To modify a verb."], correctOptionIndex: 1, explanation: "Determiners precede nouns and specify their reference (Page 941)." },
-                { question: "Which of the following is a possessive determiner?", options: ["The", "A", "My", "Some"], correctOptionIndex: 2, explanation: "Possessive determiners (my, your, his, her, its, our, their) show ownership (Page 941)." },
-                { question: "In the sentence: \"*Her* car is new,\" what type of determiner is 'Her'?", options: ["Article", "Demonstrative", "Possessive", "Quantifier"], correctOptionIndex: 2, explanation: "'Her' indicates ownership of the car (Page 941)." },
-                { question: "What is a quantifier?", options: ["A word that describes a verb.", "A determiner that expresses quantity or amount.", "A word that connects sentences.", "A word that shows possession."], correctOptionIndex: 1, explanation: "Quantifiers (e.g., many, few, all, some) specify how much or how many (Page 942)." },
-                { question: "Which of the following is a quantifier?", options: ["The", "This", "Every", "His"], correctOptionIndex: 2, explanation: "'Every' indicates all members of a group (Page 942)." },
-                { question: "What is the primary function of a phrase?", options: ["A complete sentence.", "A group of words that functions as a single unit in a sentence but does not contain a subject and a predicate.", "A single word.", "A dependent clause."], correctOptionIndex: 1, explanation: "Phrases are building blocks of sentences (Page 943)." },
-                { question: "Which of the following is a noun phrase?", options: ["Ran quickly", "Very happy", "The old house", "Singing loudly"], correctOptionIndex: 2, explanation: "A noun phrase consists of a noun and its modifiers (Page 943)." },
-                { question: "What is a verb phrase?", options: ["A single verb.", "A main verb and one or more auxiliary (helping) verbs.", "A verb and its object.", "A verb and its adverb."], correctOptionIndex: 1, explanation: "Verb phrases form the predicate of a sentence (Page 944)." },
-                { question: "In the sentence: \"She *has been studying*,\" what is 'has been studying'?", options: ["Main verb", "Linking verb", "Verb phrase", "Action verb"], correctOptionIndex: 2, explanation: "It includes the main verb and two auxiliary verbs (Page 944)." },
-                { question: "What is an adjective phrase?", options: ["A phrase that functions as a noun.", "A phrase that functions as an adjective, modifying a noun or pronoun.", "A phrase that functions as an adverb.", "A phrase that expresses an action."], correctOptionIndex: 1, explanation: "Adjective phrases describe nouns or pronouns (Page 944)." },
-                { question: "Which of the following is an adjective phrase?", options: ["Walked slowly", "Extremely tall", "In the morning", "To run fast"], correctOptionIndex: 1, explanation: "'Extremely tall' describes a quality (Page 944)." },
-                { question: "What is an adverb phrase?", options: ["A phrase that functions as a noun.", "A phrase that functions as an adverb, modifying a verb, an adjective, or another adverb.", "A phrase that functions as an adjective.", "A phrase that expresses a state of being."], correctOptionIndex: 1, explanation: "Adverb phrases provide information about how, when, where, or to what extent (Page 945)." },
-                { question: "Which of the following is an adverb phrase?", options: ["The red car", "Very beautiful", "With great speed", "To sing a song"], correctOptionIndex: 2, explanation: "'With great speed' describes how an action was performed (Page 945)." },
-                { question: "What is a prepositional phrase?", options: ["A phrase that contains a subject and a verb.", "A phrase that begins with a preposition and includes its object and any modifiers.", "A phrase that expresses a complete thought.", "A phrase that modifies a verb."], correctOptionIndex: 1, explanation: "Prepositional phrases add detail about location, time, or manner (Page 945)." },
-                { question: "In the sentence: \"He walked *to the park*,\" what is 'to the park'?", options: ["Noun phrase", "Verb phrase", "Adjective phrase", "Prepositional phrase"], correctOptionIndex: 3, explanation: "It starts with the preposition 'to' (Page 945)." },
-                { question: "What is an appositive phrase?", options: ["A phrase that modifies a verb.", "A noun phrase that renames or explains another noun or pronoun next to it.", "A phrase that asks a question.", "A phrase that connects clauses."], correctOptionIndex: 1, explanation: "Appositive phrases provide additional information about a noun (Page 946)." },
-                { question: "In the sentence: \"My brother, *a talented artist*, won the competition,\" what is 'a talented artist'?", options: ["Adjective phrase", "Adverb phrase", "Appositive phrase", "Prepositional phrase"], correctOptionIndex: 2, explanation: "It renames 'My brother' (Page 946)." },
-                { question: "What is the difference between a phrase and a clause?", options: ["They are the same.", "A phrase has a subject and verb; a clause does not.", "A phrase does not have a subject and verb; a clause does.", "A phrase expresses a complete thought; a clause does not."], correctOptionIndex: 2, explanation: "This is the fundamental distinction (Page 943, 946)." },
-                { question: "Which of the following is a verbal phrase?", options: ["The tall building", "Has been running", "To sing loudly", "Under the bridge"], correctOptionIndex: 2, explanation: "Verbal phrases (infinitives, participles, gerunds) are formed from verbs but act as other parts of speech (Page 946)." },
-                { question: "What is a gerund phrase?", options: ["A phrase starting with 'to' + verb.", "A phrase consisting of a gerund (verb + -ing acting as a noun) and its modifiers/objects.", "A phrase that modifies a noun.", "A phrase that describes an action."], correctOptionIndex: 1, explanation: "Gerund phrases function as nouns (Page 946)." },
-                { question: "In the sentence: \"*Swimming in the ocean* is my favorite activity,\" what is 'Swimming in the ocean'?", options: ["Infinitive phrase", "Participial phrase", "Gerund phrase", "Prepositional phrase"], correctOptionIndex: 2, explanation: "'Swimming' acts as a noun (the subject of the sentence) (Page 946)." }
+                { question: "What is the definition of a 'noun'?", options: ["A word that describes an action.", "A word that names a person, place, thing, or idea.", "A word that describes a verb.", "A word that connects sentences."], correctOptionIndex: 1, explanation: "Nouns are naming words (Page 791)." },
+                { question: "Identify the common noun in the sentence: \"The *girl* played with her *dog*.\"", options: ["The", "Played", "Girl", "Her"], correctOptionIndex: 2, explanation: "'Girl' is a general name for a person (Page 792)." },
+                { question: "What is a 'proper noun'?", options: ["A general name for a person, place, or thing.", "A specific name for a particular person, place, thing, or idea, always capitalized.", "A word that describes a quality.", "A word that shows an action."], correctOptionIndex: 1, explanation: "Proper nouns denote specific entities (Page 793)." },
+                { question: "Which of the following is a proper noun?", options: ["City", "Country", "Paris", "River"], correctOptionIndex: 2, explanation: "'Paris' is the specific name of a city (Page 793)." },
+                { question: "What is the function of a 'pronoun'?", options: ["To describe a noun.", "To replace a noun to avoid repetition.", "To connect two clauses.", "To show an action."], correctOptionIndex: 1, explanation: "Pronouns stand in for nouns (Page 794)." },
+                { question: "In the sentence: \"*She* is reading *her* book,\" identify the pronouns.", options: ["Is, reading", "Book, her", "She, her", "Reading, book"], correctOptionIndex: 2, explanation: "'She' and 'her' replace nouns (Page 794)." },
+                { question: "What is an 'adjective'?", options: ["A word that describes an action.", "A word that modifies or describes a noun or pronoun.", "A word that connects phrases.", "A word that shows emotion."], correctOptionIndex: 1, explanation: "Adjectives provide more information about nouns/pronouns (Page 795)." },
+                { question: "In the sentence: \"He bought a *new* car,\" what is the adjective?", options: ["He", "Bought", "New", "Car"], correctOptionIndex: 2, explanation: "'New' describes the car (Page 795)." },
+                { question: "What is an 'adverb'?", options: ["A word that names a person, place, or thing.", "A word that modifies a verb, an adjective, or another adverb.", "A word that connects words.", "A word that expresses a feeling."], correctOptionIndex: 1, explanation: "Adverbs provide details about how, when, where, or to what extent (Page 796)." },
+                { question: "In the sentence: \"She sings *beautifully*,\" what is the adverb?", options: ["She", "Sings", "Beautifully", "The"], correctOptionIndex: 2, explanation: "'Beautifully' describes how she sings (Page 796)." }
             ];
             quizQuestions.push(...englishMCQs);
 
-            // Mathematics (25 MCQs from Pages 1076-1081)
+            // Mathematics (10 MCQs from Pages 947-960)
             const mathematicsMCQs = [
-                { question: "What is the value of $x$ in the equation $12x - 20 = 6x + 4$?", options: ["2", "3", "4", "5"], correctOptionIndex: 2, explanation: "Subtract $6x$ from both sides: $6x - 20 = 4$. Add 20 to both sides: $6x = 24$. Divide by 6: $x = 4$ (Page 1076)." },
-                { question: "Simplify the expression: $(a^8 b^6) / (a^4 b^3)$", options: ["$a^4 b^3$", "$a^{12} b^9$", "$a^4 b^9$", "$a^{12} b^3$"], correctOptionIndex: 0, explanation: "When dividing powers with the same base, subtract the exponents: $a^{8-4} b^{6-3} = a^4 b^3$ (Page 1077)." },
-                { question: "A sum of $5000 is invested at 6% compound interest annually. What is the amount after 2 years?", options: ["$5600", "$5618", "$5620", "$5625"], correctOptionIndex: 1, explanation: "Amount = $P(1 + r/100)^n = 5000(1 + 6/100)^2 = 5000(1.06)^2 = 5000 \\times 1.1236 = 5618$ (Page 1078)." },
-                { question: "What is the area of a regular dodecagon (12 sides) with side length 5 cm and apothem 9.3 cm? (Area = $1/2 \\times perimeter \\times apothem$)", options: ["279 cm²", "372 cm²", "465 cm²", "558 cm²"], correctOptionIndex: 1, explanation: "Perimeter = $12 \\times 5 = 60$ cm. Area = $1/2 \\times 60 \\times 9.3 = 30 \\times 9.3 = 279$ cm² (Page 1079)." },
-                { question: "What is the volume of a cone with radius 10 cm and height 21 cm? (Use $\\pi = 22/7$)", options: ["1100 cm³", "2200 cm³", "3300 cm³", "4400 cm³"], correctOptionIndex: 1, explanation: "Volume = $1/3 \\pi r^2 h = 1/3 \\times (22/7) \\times 10^2 \\times 21 = 1/3 \\times (22/7) \\times 100 \\times 21 = 22 \\times 100 \\times 3 / 3 = 2200$ cm³ (Page 1080)." },
-                { question: "What is the range of the following data set: 1, 10, 2, 9, 3, 8, 4, 7, 5, 6?", options: ["5", "7", "8", "9"], correctOptionIndex: 3, explanation: "Range = Maximum - Minimum = $10 - 1 = 9$ (Page 1081)." },
-                { question: "What is the probability of rolling a number greater than 4 on a standard six-sided die?", options: ["1/6", "1/3", "1/2", "2/3"], correctOptionIndex: 1, explanation: "Numbers greater than 4 are 5, 6 (2 outcomes). Probability = $2/6 = 1/3$ (Page 1081)." },
-                { question: "Solve the inequality: $7x - 8 < 13$", options: ["$x < 3$", "$x > 3$", "$x < 21$", "$x > 21$"], correctOptionIndex: 0, explanation: "Add 8 to both sides: $7x < 21$. Divide by 7: $x < 3$ (Page 1076)." },
-                { question: "Factorize the expression: $x^2 + 10x + 25$", options: ["$(x+5)^2$", "$(x-5)^2$", "$(x+1)(x+25)$", "$(x-1)(x-25)$"], correctOptionIndex: 0, explanation: "This is a perfect square trinomial: $(x+5)(x+5) = (x+5)^2$ (Page 1077)." },
-                { question: "A sum of $2500 is invested at 5% simple interest. How many years will it take for the amount to be $3000?", options: ["2 years", "3 years", "4 years", "5 years"], correctOptionIndex: 3, explanation: "Interest earned = $3000 - 2500 = 500$. $I = (P R T) / 100 \\implies 500 = (2500 \\times 5 \\times T) / 100 \\implies 500 = 125T \\implies T = 4$ years (Page 1078)." },
-                { question: "What is the perimeter of a regular hendecagon (11 sides) with side length 6 cm?", options: ["55 cm", "60 cm", "66 cm", "72 cm"], correctOptionIndex: 2, explanation: "Perimeter = $11 \\times 6 = 66$ cm (Page 1079)." },
-                { question: "What is the total surface area of a sphere with radius 6 cm? (Use $\\pi = 3.14$)", options: ["113.04 cm²", "226.08 cm²", "376.8 cm²", "452.16 cm²"], correctOptionIndex: 3, explanation: "Surface Area = $4\\pi r^2 = 4 \\times 3.14 \\times 6^2 = 4 \\times 3.14 \\times 36 = 452.16$ cm² (Page 1080)." },
-                { question: "What is the mean of the data set {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}?", options: ["5", "5.5", "6", "6.5"], correctOptionIndex: 1, explanation: "Mean = Sum / Count = $(1+2+3+4+5+6+7+8+9+10)/10 = 55/10 = 5.5$ (Page 1081)." },
-                { question: "A bag contains 3 red, 2 blue, and 5 green marbles. What is the probability of drawing a red marble, then a blue marble without replacement?", options: ["6/100", "6/90", "3/10", "2/10"], correctOptionIndex: 1, explanation: "P(Red first) = $3/10$. P(Blue second) = $2/9$. P(Red then Blue) = $(3/10) \\times (2/9) = 6/90 = 1/15$ (Page 1081)." },
-                { question: "What is the solution to the equation $x^2 - 4x - 12 = 0$?", options: ["$x=6, x=-2$", "$x=-6, x=2$", "$x=4, x=3$", "$x=-4, x=-3$"], correctOptionIndex: 0, explanation: "Factorize: $(x-6)(x+2) = 0$. So $x=6$ or $x=-2$ (Page 1076)." },
-                { question: "If $f(x) = 2x^2 + 5x - 3$, what is $f(-2)$?", options: ["-1", "1", "3", "5"], correctOptionIndex: 2, explanation: "$f(-2) = 2(-2)^2 + 5(-2) - 3 = 2(4) - 10 - 3 = 8 - 10 - 3 = -5$ (Page 1077)." },
-                { question: "A car travels at a speed of 60 km/h. How long will it take to travel 300 km?", options: ["3 hours", "4 hours", "5 hours", "6 hours"], correctOptionIndex: 2, explanation: "Time = Distance / Speed = $300 \\text{ km} / 60 \\text{ km/h} = 5$ hours (Page 1078)." },
-                { question: "What is the area of a circle inscribed in a square of side length 14 cm? (Use $\\pi = 22/7$)", options: ["49 cm²", "154 cm²", "308 cm²", "616 cm²"], correctOptionIndex: 1, explanation: "The diameter of the inscribed circle is equal to the side length of the square, so $d=14$ cm, $r=7$ cm. Area = $\\pi r^2 = (22/7) \\times 7^2 = (22/7) \\times 49 = 22 \\times 7 = 154$ cm² (Page 1079)." },
-                { question: "What is the volume of a rectangular pyramid with base length 6 cm, base width 4 cm, and height 9 cm?", options: ["72 cm³", "108 cm³", "144 cm³", "216 cm³"], correctOptionIndex: 1, explanation: "Volume = $1/3 \\times base \\ area \\times height = 1/3 \\times (6 \\times 4) \\times 9 = 1/3 \\times 24 \\times 9 = 8 \\times 9 = 72$ cm³ (Page 1080)." },
-                { question: "What is the median of the following data set: 10, 10, 15, 20, 20, 25?", options: ["15", "17.5", "20", "22.5"], correctOptionIndex: 1, explanation: "Ordered: 10, 10, 15, 20, 20, 25. Median = $(15+20)/2 = 17.5$ (Page 1081)." },
-                { question: "A card is drawn from a standard deck of 52 playing cards. What is the probability that it is a red card and a King?", options: ["1/52", "2/52", "4/52", "6/52"], correctOptionIndex: 1, explanation: "There are 2 red Kings (King of Hearts, King of Diamonds). Probability = $2/52 = 1/26$ (Page 1081)." },
-                { question: "What is the solution to the equation $x/5 - 3 = 1$?", options: ["10", "15", "20", "25"], correctOptionIndex: 1, explanation: "$x/5 = 4$, so $x = 20$ (Page 1076)." },
-                { question: "What is the slope of the line passing through points (3, 5) and (3, 9)?", options: ["0", "Undefined", "1", "2"], correctOptionIndex: 1, explanation: "A vertical line has an undefined slope (Page 1077)." },
-                { question: "If the price of an item increases by 10% and then decreases by 10%, what is the net change in price?", options: ["0% increase", "1% decrease", "1% increase", "No change"], correctOptionIndex: 1, explanation: "Let original price be 100. Increase by 10%: $100 \\times 1.10 = 110$. Decrease by 10%: $110 \\times 0.90 = 99$. Net change = $99 - 100 = -1$, so 1% decrease (Page 1078)." },
-                { question: "What is the perimeter of a regular octagon with side length 9 cm?", options: ["64 cm", "72 cm", "80 cm", "88 cm"], correctOptionIndex: 1, explanation: "An octagon has 8 sides. Perimeter = $8 \\times 9 = 72$ cm (Page 1079)." }
+                { question: "What is the value of $x$ in the equation $2x + 5 = 15$?", options: ["5", "10", "15", "20"], correctOptionIndex: 0, explanation: "Subtract 5 from both sides: $2x = 10$. Divide by 2: $x = 5$ (Page 947)." },
+                { question: "Simplify the expression: $3(x + 2)$", options: ["$3x + 2$", "$3x + 6$", "$x + 6$", "$5x$"], correctOptionIndex: 1, explanation: "Distribute the 3: $3 \\times x + 3 \\times 2 = 3x + 6$ (Page 948)." },
+                { question: "If a shirt costs $25 and there is a 20% discount, what is the discounted price?", options: ["$5", "$10", "$20", "$22"], correctOptionIndex: 2, explanation: "Discount amount = $25 \\times 0.20 = 5$. Discounted price = $25 - 5 = 20$ (Page 949)." },
+                { question: "What is the area of a rectangle with length 8 cm and width 5 cm?", options: ["13 cm²", "26 cm²", "40 cm²", "80 cm²"], correctOptionIndex: 2, explanation: "Area = length $\\times$ width = $8 \\times 5 = 40$ cm² (Page 950)." },
+                { question: "What is the perimeter of a square with side length 7 cm?", options: ["7 cm", "14 cm", "28 cm", "49 cm"], correctOptionIndex: 2, explanation: "Perimeter = $4 \\times$ side = $4 \\times 7 = 28$ cm (Page 951)." },
+                { question: "What is the volume of a cube with side length 4 cm?", options: ["16 cm³", "32 cm³", "64 cm³", "128 cm³"], correctOptionIndex: 2, explanation: "Volume = side$^3 = 4^3 = 4 \\times 4 \\times 4 = 64$ cm³ (Page 952)." },
+                { question: "What is the next number in the sequence: 2, 4, 6, 8, ...?", options: ["9", "10", "11", "12"], correctOptionIndex: 1, explanation: "This is an arithmetic progression with a common difference of 2 (Page 953)." },
+                { question: "What is the value of $5^3$?", options: ["15", "25", "125", "625"], correctOptionIndex: 2, explanation: "$5^3 = 5 \\times 5 \\times 5 = 125$ (Page 954)." },
+                { question: "Convert 0.75 into a fraction.", options: ["1/4", "1/2", "3/4", "4/3"], correctOptionIndex: 2, explanation: "$0.75 = 75/100$, which simplifies to $3/4$ (Page 955)." },
+                { question: "What is the sum of the angles in a triangle?", options: ["90°", "180°", "270°", "360°"], correctOptionIndex: 1, explanation: "The sum of interior angles in any triangle is always 180 degrees (Page 956)." }
             ];
             quizQuestions.push(...mathematicsMCQs);
 
-            // Randomly select one special question
+            // Urdu (10 MCQs from Pages 1082-1098)
+            const urduMCQs = [
+                { question: "اردو زبان کا تعارف کس صفحے پر دیا گیا ہے؟", options: ["صفحہ 1080", "صفحہ 1082", "صفحہ 1084", "صفحہ 1086"], correctOptionIndex: 1, explanation: "اردو زبان کا تعارف صفحہ 1082 پر موجود ہے (صفحہ 1082)." },
+                { question: "گرامر میں 'صرف' کا کیا مطلب ہے؟", options: ["اسم کا مطالعہ", "فعل کا مطالعہ", "حرف کا مطالعہ", "جملے کی ساخت"], correctOptionIndex: 0, explanation: "صرف گرامر میں اسم (Noun) کے مطالعے کو کہتے ہیں (صفحہ 1084)." },
+                { question: "لفظ 'اسم' کی تعریف کیا ہے؟", options: ["کسی کام کا کرنا", "کسی شخص، جگہ، یا چیز کا نام", "کسی صفت کو ظاہر کرنا", "کسی فعل کو بیان کرنا"], correctOptionIndex: 1, explanation: "اسم کسی شخص، جگہ، یا چیز کے نام کو ظاہر کرتا ہے (صفحہ 1084)." },
+                { question: "درج ذیل میں سے کون سا لفظ اسم کی مثال ہے؟", options: ["دوڑنا", "خوبصورت", "کراچی", "جلدی"], correctOptionIndex: 2, explanation: "کراچی ایک جگہ کا نام ہے (صفحہ 1085)." },
+                { question: "معروضی سوالات (Objective Questions) کس صفحے سے شروع ہوتے ہیں؟", options: ["صفحہ 1090", "صفحہ 1092", "صفحہ 1093", "صفحہ 1095"], correctOptionIndex: 2, explanation: "معروضی سوالات صفحہ 1093 سے شروع ہوتے ہیں (صفحہ 1093)." },
+                { question: "'فعل' کی تعریف کیا ہے؟", options: ["کسی اسم کی جگہ استعمال ہونے والا لفظ", "کسی کام کا ہونا یا کرنا ظاہر کرنے والا لفظ", "کسی صفت کو بیان کرنے والا لفظ", "دو جملوں کو جوڑنے والا لفظ"], correctOptionIndex: 1, explanation: "فعل کسی کام کے ہونے یا کرنے کو ظاہر کرتا ہے (صفحہ 1095)." },
+                { question: "درج ذیل میں سے کون سا لفظ 'فعل' کی مثال ہے؟", options: ["کتاب", "پڑھنا", "اچھا", "اور"], correctOptionIndex: 1, explanation: "'پڑھنا' ایک کام ہے (صفحہ 1095)." },
+                { question: "'حرف' کی تعریف کیا ہے؟", options: ["ایسا لفظ جو اکیلا اپنا معنی نہ دے بلکہ فعل یا اسم کے ساتھ مل کر دے", "کسی شخص کا نام", "کسی چیز کا نام", "کسی کام کا ہونا"], correctOptionIndex: 0, explanation: "حرف وہ الفاظ ہیں جو اکیلے معنی نہیں دیتے (صفحہ 1096)." },
+                { question: "درج ذیل میں سے کون سا لفظ 'حرف' کی مثال ہے؟", options: ["سکول", "کھانا", "پر", "روٹی"], correctOptionIndex: 2, explanation: "'پر' ایک حرف ہے (صفحہ 1096)." },
+                { question: "اردو گرامر میں 'جملہ' کسے کہتے ہیں؟", options: ["الفاظ کا مجموعہ جو مکمل معنی دے", "ایک لفظ", "صرف اسم اور فعل", "سوال"], correctOptionIndex: 0, explanation: "جملہ الفاظ کا ایسا مجموعہ ہے جو مکمل معنی دیتا ہے (صفحہ 1106)." }
+            ];
+            quizQuestions.push(...urduMCQs);
+
+            // Islamiat (10 MCQs from Pages 1249-1263)
+            const islamiatMCQs = [
+                { question: "اسلامیات کلاس چہارم کس صفحے سے شروع ہوتی ہے؟", options: ["صفحہ 1245", "صفحہ 1249", "صفحہ 1250", "صفحہ 1255"], correctOptionIndex: 1, explanation: "اسلامیات کلاس چہارم کا آغاز صفحہ 1249 سے ہوتا ہے (صفحہ 1249)." },
+                { question: "قرآن مجید کی پہلی سورت کون سی ہے؟", options: ["سورۃ بقرہ", "سورۃ فاتحہ", "سورۃ اخلاص", "سورۃ الناس"], correctOptionIndex: 1, explanation: "قرآن مجید کی پہلی سورت سورۃ فاتحہ ہے (صفحہ 1250)." },
+                { question: "اسلام کے کتنے ستون ہیں؟", options: ["چار", "پانچ", "چھ", "سات"], correctOptionIndex: 1, explanation: "اسلام کے پانچ ستون ہیں: توحید، نماز، روزہ، زکوٰۃ، اور حج (صفحہ 1251)." },
+                { question: "نماز ایک دن میں کتنی فرض ہیں؟", options: ["تین", "چار", "پانچ", "چھ"], correctOptionIndex: 2, explanation: "ایک دن میں پانچ نمازیں فرض ہیں (صفحہ 1252)." },
+                { question: "زکوٰۃ کس پر فرض ہے؟", options: ["ہر مسلمان پر", "صرف غریب مسلمان پر", "صاحب نصاب مسلمان پر", "صرف امیر مسلمان پر"], correctOptionIndex: 2, explanation: "زکوٰۃ صرف صاحب نصاب مسلمان پر فرض ہے (صفحہ 1253)." },
+                { question: "روزہ کس ماہ میں فرض ہے؟", options: ["شعبان", "رمضان", "شوال", "ذوالحجہ"], correctOptionIndex: 1, explanation: "روزہ رمضان کے مہینے میں فرض ہے (صفحہ 1254)." },
+                { question: "حج کی فرضیت کے لیے بنیادی شرط کیا ہے؟", options: ["صرف نوجوان ہونا", "مالی استطاعت اور جسمانی صحت", "صرف مرد ہونا", "شادی شدہ ہونا"], correctOptionIndex: 1, explanation: "حج کی فرضیت کے لیے مالی استطاعت اور جسمانی صحت بنیادی شرائط ہیں (صفحہ 1255)." },
+                { question: "توحید سے کیا مراد ہے؟", options: ["صرف اللہ کو ماننا", "اللہ کی وحدانیت کو تسلیم کرنا", "رسولوں کو ماننا", "فرشتوں کو ماننا"], correctOptionIndex: 1, explanation: "توحید کا مطلب ہے اللہ کی وحدانیت کو تسلیم کرنا اور صرف ایک اللہ کی عبادت کرنا (صفحہ 1256)." },
+                { question: "قرآن مجید کس نبی پر نازل ہوا؟", options: ["حضرت موسیٰ (ع)", "حضرت عیسیٰ (ع)", "حضرت داؤد (ع)", "حضرت محمد ﷺ"], correctOptionIndex: 3, explanation: "قرآن مجید حضرت محمد ﷺ پر نازل ہوا (صفحہ 1257)." },
+                { question: "اسلام میں سب سے بڑا گناہ کون سا ہے؟", options: ["چوری کرنا", "جھوٹ بولنا", "شرک", "قتل کرنا"], correctOptionIndex: 2, explanation: "اسلام میں شرک سب سے بڑا گناہ ہے (صفحہ 1258)." }
+            ];
+            quizQuestions.push(...islamiatMCQs);
+
+            // Arabic (8 MCQs from Pages 1394-1400)
+            const arabicMCQs = [
+                { question: "عربی کلاس ششم کس صفحے سے شروع ہوتی ہے؟", options: ["صفحہ 1390", "صفحہ 1394", "صفحہ 1395", "صفحہ 1398"], correctOptionIndex: 1, explanation: "عربی کلاس ششم صفحہ 1394 سے شروع ہوتی ہے (صفحہ 1394)." },
+                { question: "عربی میں 'کتاب' کا کیا مطلب ہے؟", options: ["قلم", "میز", "کتاب", "کلاس"], correctOptionIndex: 2, explanation: "کتاب کا مطلب کتاب ہے (صفحہ 1394)." },
+                { question: "عربی میں 'قلم' کا کیا مطلب ہے؟", options: ["کتاب", "میز", "قلم", "کاپی"], correctOptionIndex: 2, explanation: "قلم کا مطلب قلم ہے (صفحہ 1395)." },
+                { question: "عربی میں 'مدرسہ' کا کیا مطلب ہے؟", options: ["گھر", "اسکول", "مسجد", "کالج"], correctOptionIndex: 1, explanation: "مدرسہ کا مطلب اسکول ہے (صفحہ 1396)." },
+                { question: "عربی میں 'باب' کا کیا مطلب ہے؟", options: ["کتاب", "دروازہ", "کھڑکی", "دیوار"], correctOptionIndex: 1, explanation: "باب کا مطلب دروازہ ہے (صفحہ 1397)." },
+                { question: "عربی میں 'کرسی' کا کیا مطلب ہے؟", options: ["میز", "کرسی", "بینچ", "الماری"], correctOptionIndex: 1, explanation: "کرسی کا مطلب کرسی ہے (صفحہ 1398)." },
+                { question: "عربی میں 'نور' کا کیا مطلب ہے؟", options: ["اندھیرا", "روشنی", "سایہ", "گرمی"], correctOptionIndex: 1, explanation: "نور کا مطلب روشنی ہے (صفحہ 1399)." },
+                { question: "عربی میں 'ماء' کا کیا مطلب ہے؟", options: ["آگ", "ہوا", "پانی", "مٹی"], correctOptionIndex: 2, explanation: "ماء کا مطلب پانی ہے (صفحہ 1400)." }
+            ];
+            quizQuestions.push(...arabicMCQs);
+
+            // Tajweed (5 MCQs from Pages 1456-1458)
+            const tajweedMCQs = [
+                { question: "تجوید کا کیا مطلب ہے؟", options: ["قرآن کی تلاوت کے اصول", "قرآن کا ترجمہ", "قرآن کی تفسیر", "قرآن کا حفظ"], correctOptionIndex: 0, explanation: "تجوید قرآن کی درست تلاوت کے اصول ہیں (صفحہ 1456)." },
+                { question: "حروفِ حلقی کتنے ہیں؟", options: ["چھ", "سات", "آٹھ", "نو"], correctOptionIndex: 0, explanation: "حروفِ حلقی چھ ہیں: ء ہ ع ح غ خ (صفحہ 1457)." },
+                { question: "کس حرف کو 'حرفِ قلقلہ' کہتے ہیں؟", options: ["ب", "ت", "ث", "ج"], correctOptionIndex: 0, explanation: "ب حرفِ قلقلہ میں شامل ہے (قطب جد) (صفحہ 1458)." },
+                { question: "ادغام کی کتنی اقسام ہیں؟", options: ["دو", "تین", "چار", "پانچ"], correctOptionIndex: 1, explanation: "ادغام کی تین اقسام ہیں: ادغام با غنہ، ادغام بلا غنہ، ادغام مثلین (صفحہ 1457)." },
+                { question: "مد کی کتنی اقسام ہیں؟", options: ["دو", "تین", "چار", "پانچ"], correctOptionIndex: 0, explanation: "مد کی دو اقسام ہیں: مد اصلی اور مد فرعی (صفحہ 1458)." }
+            ];
+            quizQuestions.push(...tajweedMCQs);
+
+            // Randomly select one special question from the entire set
             specialQuestionIndex = Math.floor(Math.random() * quizQuestions.length);
             quizQuestions[specialQuestionIndex].special = true;
 
@@ -775,6 +856,12 @@
                 specialQuestionIndex = quizQuestions.findIndex(q => q.special);
             }
         }
+
+        // Load MathJax for rendering LaTeX
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+        script.async = true;
+        document.head.appendChild(script);
 
         // Initialize the quiz when the script loads
         initializeQuiz();
