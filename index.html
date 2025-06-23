@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 4 Quiz - EDUCATION DEPARTMENT SCREENING TEST PREPARATION – June 22, 2025</title>
+    <title>CSS MPT Daily Quiz - June 18, 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* General Body Styling */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #F8F9FA; /* Very light gray */
@@ -17,11 +16,10 @@
             padding: 0;
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* Full viewport height */
+            min-height: 100vh;
             overflow-x: hidden; /* Prevent horizontal scrolling */
         }
 
-        /* Top Bar Styling */
         .top-bar {
             background-color: #ffffff;
             border-bottom: 1px solid #e0e0e0;
@@ -39,6 +37,9 @@
             color: #6D6875;
             font-size: 0.9rem;
             font-weight: 600;
+            display: flex; /* Added for icon */
+            align-items: center; /* Added for icon */
+            gap: 0.5rem; /* Added for icon */
         }
 
         .top-bar .whatsapp-link {
@@ -50,7 +51,6 @@
             gap: 0.5rem;
         }
 
-        /* Header Section Styling */
         .header-section {
             background-color: #ffffff;
             padding: 1.5rem 1rem;
@@ -80,7 +80,7 @@
         .progress-bar {
             height: 100%;
             width: 0%;
-            background: linear-gradient(to right, #20B2AA, #3EB489); /* Teal to Mint Green */
+            background: linear-gradient(to right, #20B2AA, #3EB489);
             border-radius: 5px;
             transition: width 0.3s ease-in-out;
         }
@@ -95,13 +95,13 @@
 
         .credits {
             font-size: 0.85rem;
-            color: #6D6875;
+            color: #2C3E50; /* Changed to main text color */
             margin-top: 0.5rem;
+            font-weight: bold; /* Added bold as per request */
         }
 
-        /* Card Styling (for login, quiz, results pages) */
         .card {
-            background-color: #FFF5EE; /* PeachPuff - very light, warm tone */
+            background-color: #FFF5EE; /* PeachPuff */
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             padding: 1.5rem;
@@ -111,10 +111,9 @@
             box-sizing: border-box;
         }
 
-        /* Button Styling */
         .button-gradient {
-            background-image: linear-gradient(to right, #E6E6FA, #FFDAB9); /* Lavender to PeachPuff - light and attractive */
-            color: #2C3E50; /* Dark text for contrast */
+            background-image: linear-gradient(to right, #E6E6FA, #FFDAB9); /* Lavender to PeachPuff */
+            color: #2C3E50;
             font-weight: bold;
             padding: 0.75rem 1.5rem;
             border-radius: 8px;
@@ -136,7 +135,7 @@
 
         .option-button {
             background-color: #ffffff;
-            border: 1px solid #ddd; /* Light border */
+            border: 1px solid #ddd;
             padding: 0.75rem 1rem;
             border-radius: 8px;
             text-align: left;
@@ -146,39 +145,38 @@
             color: #2C3E50;
             font-weight: normal;
         }
-
+        
         .option-button:hover:not(.selected) {
-            background-color: #f0f0f0; /* Slightly darker on hover */
+            transform: scale(1.02); /* Enlarge by 5% on hover */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
         }
 
         .option-button.selected {
-            border-color: #6D6875; /* Medium gray for selected */
+            border-color: #6D6875;
             background-color: #f0f0f0;
             font-weight: bold;
         }
 
         .option-button.correct {
             background-color: #90EE90; /* LightGreen */
-            border-color: #28a745; /* Darker green border */
+            border-color: #28a745;
             animation: pulse-green 0.5s ease-out forwards;
         }
 
         .option-button.incorrect {
-            background-color: #FF6B6B; /* Light Red */
-            border-color: #dc3545; /* Darker red border */
+            background-color: #FF6B6B; /* Red pulse */
+            border-color: #dc3545;
             animation: shake-red 0.5s ease-out forwards;
         }
 
-        /* Special Question Styling */
         .special-question {
             border: 3px solid #FFD700; /* Gold border */
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); /* Glowing effect */
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
         }
 
-        /* Explanation Section Styling */
         .explanation {
-            background-color: #e0f7fa; /* Light Cyan */
-            border-left: 5px solid #20B2AA; /* Teal border */
+            background-color: #e0f7fa;
+            border-left: 5px solid #20B2AA;
             padding: 1rem;
             margin-top: 1rem;
             border-radius: 8px;
@@ -187,7 +185,6 @@
             display: none; /* Hidden by default */
         }
 
-        /* Timer and Progress Display */
         .timer-display {
             font-size: 1.2rem;
             font-weight: bold;
@@ -203,33 +200,23 @@
             text-align: center;
         }
 
-        /* Animations */
-        @keyframes pulse-green {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.01); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes shake-red {
-            0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-5px); }
-            40%, 80% { transform: translateX(5px); }
-        }
-
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .top-bar {
                 flex-direction: column;
                 gap: 0.5rem;
                 padding: 0.5rem;
+                align-items: flex-start; /* Align to start on mobile */
             }
             .top-bar .date-display {
-                order: 2; /* Move date to bottom on mobile */
+                order: 1; /* Move date to top-left on mobile */
                 font-size: 0.8rem;
+                align-self: flex-start; /* Align to start on mobile */
             }
             .top-bar .whatsapp-link {
-                order: 1; /* Move whatsapp to top on mobile */
+                order: 2; /* Move whatsapp to bottom on mobile */
                 font-size: 0.8rem;
+                align-self: flex-end; /* Align to end on mobile */
             }
             .quiz-title {
                 font-size: 1.5rem;
@@ -250,30 +237,45 @@
                 font-size: 0.9rem;
             }
         }
+
+        /* Pulse animation for correct answer */
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(144, 238, 144, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(144, 238, 144, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(144, 238, 144, 0); }
+        }
+
+        /* Shake animation for wrong answer */
+        @keyframes shake-red {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
     </style>
 </head>
 <body>
 
     <script>
-        // Disable right-click, specific keyboard shortcuts (Ctrl+U, Ctrl+Shift+I, Ctrl+Shift+J, F12), copy, and paste
-        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('contextmenu', event => event.preventDefault()); // Disable right-click
         document.addEventListener('keydown', e => {
             if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) {
-                e.preventDefault();
+                e.preventDefault(); // Disable Ctrl+U, Ctrl+Shift+I, Ctrl+Shift+J
             }
             if (e.key === 'F12') {
-                e.preventDefault();
+                e.preventDefault(); // Disable F12
             }
         });
-        document.addEventListener('copy', event => event.preventDefault());
-        document.addEventListener('paste', event => event.preventDefault());
+        document.addEventListener('copy', event => event.preventDefault()); // Disable copy
+        document.addEventListener('paste', event => event.preventDefault()); // Disable paste
     </script>
 
     <div class="top-bar">
-        <a href="https://chat.whatsapp.com/H3uhXoDodPmAOaVvi3PcZq" target="_blank" class="whatsapp-link">
+        <div class="date-display" id="liveDate">
+            <i class="fas fa-calendar-alt"></i> <span id="currentDateText"></span>
+        </div>
+        <a href="https://chat.whatsapp.com/your-whatsapp-community-link" target="_blank" class="whatsapp-link">
             <i class="fab fa-whatsapp"></i> Join WhatsApp Community
         </a>
-        <div class="date-display" id="liveDate"></div>
     </div>
 
     <div class="header-section">
@@ -281,9 +283,11 @@
         <div class="progress-bar-container">
             <div class="progress-bar" id="progressBar"></div>
         </div>
-        <img src="https://i.ibb.co/LXdkJVy8/20250524-0050-Empowering-Educators-remix-01jw0makvqewdvqns1te3jvpgs.png" alt="Banner Logo" class="banner-logo mx-auto">
+        <img src="https://i.ibb.co/tMYHtj6n/480709804-2211254089269599-2819007219717277160-n.jpg" alt="Banner Logo" class="banner-logo mx-auto">
         <div class="credits">
-            KP Teacher Corps | PREPARED BY: SYED ASGHAR ALI SHAH | Contact: 03265762698
+            DAWNDIGEST
+            <br>
+            PREPARED BY: SYED ASGHAR ALI SHAH Contact: 03265762698
             <br>
             Updated on: <span id="updatedDate"></span>
         </div>
@@ -319,7 +323,7 @@
             <div class="question-progress" id="questionProgress"></div>
             <h2 class="text-lg font-semibold mb-4" id="questionText"></h2>
             <div id="optionsContainer" class="flex flex-col gap-3 mb-6">
-            </div>
+                </div>
             <div class="flex justify-between">
                 <button id="prevBtn" class="button-gradient px-6 py-2">Previous</button>
                 <button id="nextBtn" class="button-gradient px-6 py-2">Next</button>
@@ -332,7 +336,7 @@
             <h2 class="text-xl font-bold mb-4 text-center">Quiz Results</h2>
             <p class="mb-2"><strong>Candidate Name:</strong> <span id="resultCandidateName"></span></p>
             <p class="mb-2"><strong>Date of Quiz:</strong> <span id="resultDate"></span></p>
-            <p class="mb-2"><strong>Score:</strong> <span id="resultScore"></span> / <span id="maxScore"></span></p>
+            <p class="mb-2"><strong>Score:</strong> <span id="resultScore"></span> / 200</p>
             <p class="mb-2"><strong>Correct Answers:</strong> <span id="resultCorrect"></span></p>
             <p class="mb-2"><strong>Incorrect Answers:</strong> <span id="resultIncorrect"></span></p>
             <p class="mb-4"><strong>Time Taken:</strong> <span id="resultTimeTaken"></span></p>
@@ -342,21 +346,21 @@
 
     <script>
         // Set the current date for display and logic
-        const CURRENT_DATE_STR = "June 22, 2025";
+        const CURRENT_DATE_STR = "June 18, 2025"; // Updated for June 18 quiz
         const CURRENT_DATE = new Date(CURRENT_DATE_STR);
 
         // Update header dates
-        document.getElementById('liveDate').textContent = CURRENT_DATE_STR;
+        document.getElementById('currentDateText').textContent = CURRENT_DATE_STR;
         document.getElementById('updatedDate').textContent = CURRENT_DATE_STR;
-        document.getElementById('quizTitle').textContent = `Day 4 Quiz - EDUCATION DEPARTMENT SCREENING TEST PREPARATION – ${CURRENT_DATE_STR}`;
+        document.getElementById('quizTitle').textContent = `CSS MPT Daily Quiz – ${CURRENT_DATE_STR}`;
 
         // Quiz Data Structure
-        const quizQuestions = [];
+        let quizQuestions = []; // Will be populated by initializeQuiz
         let currentQuestionIndex = 0;
         let userAnswers = []; // Stores { questionIndex: int, selectedOptionIndex: int, isCorrect: bool }
         let quizStartTime;
         let timerInterval;
-        const QUIZ_DURATION_MINUTES = 40; // Default quiz duration
+        const QUIZ_DURATION_MINUTES = 40;
         let specialQuestionIndex = -1; // To store the index of the special question
 
         // --- Helper Functions ---
@@ -450,21 +454,30 @@
             quizCard.classList.remove('special-question');
 
             // Add special-question class if it's today's special question and date matches
-            const today = new Date().toDateString();
-            if (question.special && CURRENT_DATE.toDateString() === today) {
+            const today = new Date();
+            const todayNormalized = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+            const currentQuizDateNormalized = new Date(CURRENT_DATE.getFullYear(), CURRENT_DATE.getMonth(), CURRENT_DATE.getDate());
+
+            if (question.special && todayNormalized.getTime() === currentQuizDateNormalized.getTime()) {
                 quizCard.classList.add('special-question');
             }
 
-            question.options.forEach((option, index) => {
+            // Shuffle options for the current question
+            const shuffledOptions = [...question.options];
+            shuffleArray(shuffledOptions);
+
+
+            shuffledOptions.forEach((option, index) => {
                 const button = document.createElement('button');
                 button.classList.add('option-button', 'w-full');
-                button.innerHTML = option; // Use innerHTML to render LaTeX
-                button.dataset.optionIndex = index;
-                button.onclick = () => selectOption(index);
+                button.textContent = option;
+                // Store the original index of the option, not its shuffled position
+                button.dataset.originalOptionIndex = question.options.indexOf(option);
+                button.onclick = () => selectOption(parseInt(button.dataset.originalOptionIndex));
 
                 // Apply selected state if already answered
                 const userAnswer = userAnswers[currentQuestionIndex];
-                if (userAnswer && userAnswer.selectedOptionIndex === index) {
+                if (userAnswer && userAnswer.selectedOptionIndex === parseInt(button.dataset.originalOptionIndex)) {
                     button.classList.add('selected');
                     if (userAnswer.isCorrect) {
                         button.classList.add('correct');
@@ -478,18 +491,9 @@
                 optionsContainer.appendChild(button);
             });
 
-            // Render math equations using MathJax if available
-            if (typeof MathJax !== 'undefined') {
-                MathJax.typesetPromise([document.getElementById('questionText'), optionsContainer]);
-            }
-
-
             // Show/hide explanation
             const explanationDiv = document.getElementById('explanationDiv');
             explanationDiv.innerHTML = `<p class="font-bold">Explanation:</p><p>${question.explanation}</p>`;
-            if (typeof MathJax !== 'undefined') {
-                MathJax.typesetPromise([explanationDiv]);
-            }
             if (userAnswers[currentQuestionIndex] && userAnswers[currentQuestionIndex].selectedOptionIndex !== undefined) {
                 explanationDiv.style.display = 'block';
             } else {
@@ -506,26 +510,33 @@
 
         /**
          * Handles option selection by the user.
-         * @param {number} selectedOptionIndex - The index of the selected option.
+         * @param {number} selectedOptionOriginalIndex - The original index of the selected option.
          */
-        function selectOption(selectedOptionIndex) {
+        function selectOption(selectedOptionOriginalIndex) {
             const question = quizQuestions[currentQuestionIndex];
-            const isCorrect = (selectedOptionIndex === question.correctOptionIndex);
+            // If already answered, do nothing
+            if (userAnswers[currentQuestionIndex] && userAnswers[currentQuestionIndex].selectedOptionIndex !== undefined) {
+                return;
+            }
+
+            const isCorrect = (selectedOptionOriginalIndex === question.correctOptionIndex);
 
             // Store user's answer
             userAnswers[currentQuestionIndex] = {
                 questionIndex: currentQuestionIndex,
-                selectedOptionIndex: selectedOptionIndex,
+                selectedOptionIndex: selectedOptionOriginalIndex,
                 isCorrect: isCorrect
             };
 
-            // Apply visual feedback
+            // Apply visual feedback and disable options
             const optionsContainer = document.getElementById('optionsContainer');
-            Array.from(optionsContainer.children).forEach((button, index) => {
+            Array.from(optionsContainer.children).forEach((button) => {
                 button.disabled = true; // Disable all options after selection
-                button.classList.remove('selected', 'correct', 'incorrect'); // Clear previous states
+                button.classList.remove('option-button:hover:not(.selected)'); // Remove hover effect
 
-                if (index === selectedOptionIndex) {
+                const btnOriginalIndex = parseInt(button.dataset.originalOptionIndex);
+
+                if (btnOriginalIndex === selectedOptionOriginalIndex) {
                     button.classList.add('selected');
                     if (isCorrect) {
                         button.classList.add('correct');
@@ -533,14 +544,14 @@
                         button.classList.add('incorrect');
                     }
                 }
+                // Highlight the correct answer if the selected answer was incorrect
+                if (!isCorrect && btnOriginalIndex === question.correctOptionIndex) {
+                    button.classList.add('correct'); // Highlight correct answer
+                }
             });
 
             // Show explanation
             document.getElementById('explanationDiv').style.display = 'block';
-             // Render math equations in explanation
-            if (typeof MathJax !== 'undefined') {
-                MathJax.typesetPromise([document.getElementById('explanationDiv')]);
-            }
         }
 
         /**
@@ -575,11 +586,11 @@
 
             let correctCount = 0;
             let incorrectCount = 0;
-            let totalAttempted = 0;
+            let attemptedCount = 0;
 
             userAnswers.forEach(answer => {
                 if (answer && answer.selectedOptionIndex !== undefined) {
-                    totalAttempted++;
+                    attemptedCount++;
                     if (answer.isCorrect) {
                         correctCount++;
                     } else {
@@ -588,17 +599,14 @@
                 }
             });
 
-            const maxPossibleScore = quizQuestions.length * 2; // 2 points per question
-            const score = (correctCount * 2) - incorrectCount; // Score calculation: 2 for correct, -1 for incorrect
-
+            const score = (correctCount * 2) - (incorrectCount * 1);
             const candidateName = document.getElementById('candidateName').value;
 
             document.getElementById('resultCandidateName').textContent = candidateName;
             document.getElementById('resultDate').textContent = CURRENT_DATE_STR;
             document.getElementById('resultScore').textContent = score;
-            document.getElementById('maxScore').textContent = maxPossibleScore;
-            document.getElementById('resultCorrect').textContent = `${correctCount} / ${totalAttempted}`;
-            document.getElementById('resultIncorrect').textContent = `${incorrectCount} / ${totalAttempted}`;
+            document.getElementById('resultCorrect').textContent = `${correctCount}`;
+            document.getElementById('resultIncorrect').textContent = `${incorrectCount}`;
             document.getElementById('resultTimeTaken').textContent = formatTime(timeTakenSeconds);
 
             showPage('resultsPage');
@@ -611,9 +619,9 @@
             formData.append('Correct Answers', correctCount);
             formData.append('Incorrect Answers', incorrectCount);
             formData.append('Time Taken', formatTime(timeTakenSeconds));
-            formData.append('Quiz ID', "day4"); // Specific ID for Day 4 quiz
+            formData.append('Quiz ID', generateUniqueId()); // Unique ID for each submission
 
-            fetch('https://formspree.io/f/xwpojgab', {
+            fetch('https://formspree.io/f/xwpvddea', {
                 method: 'POST',
                 body: formData,
                 headers: {
@@ -637,8 +645,11 @@
             const password = document.getElementById('loginPassword').value;
             const loginError = document.getElementById('loginError');
 
-            // Specific credentials for Day 4
-            if (id === 'day4' && password === '4444') {
+            // Login credentials for June 18 quiz
+            const expectedLoginId = "18JUNE"; 
+            const expectedPassword = "free";
+
+            if (id === expectedLoginId && password === expectedPassword) {
                 loginError.classList.add('hidden');
                 showPage('candidateNamePage');
             } else {
@@ -674,11 +685,7 @@
             clearInterval(timerInterval); // Clear any lingering timer
             // Re-shuffle questions for a new attempt
             initializeQuiz();
-            // Clear login fields and go back to login page
-            document.getElementById('loginId').value = '';
-            document.getElementById('loginPassword').value = '';
-            document.getElementById('candidateName').value = '';
-            showPage('loginPage');
+            showPage('loginPage'); // Go back to login for a fresh start
         });
 
         // --- Quiz Initialization ---
@@ -686,159 +693,198 @@
             // Clear previous questions
             quizQuestions.length = 0;
 
-            // Pedagogy (4 MCQs from Pages 13-16)
-            const pedagogyMCQs = [
-                { question: "What is 'constructivism' in education?", options: ["Students passively receive information.", "Learners actively construct their own understanding and knowledge of the world, through experiencing things and reflecting on those experiences.", "Teaching by rote memorization.", "Teacher-centered instruction."], correctOptionIndex: 1, explanation: "Constructivism emphasizes active learning and personal meaning-making (Page 13)." },
-                { question: "Who is a prominent theorist associated with constructivism, emphasizing social interaction in learning?", options: ["Jean Piaget", "B.F. Skinner", "Lev Vygotsky", "Maria Montessori"], correctOptionIndex: 2, explanation: "Vygotsky's sociocultural theory highlights the role of social and cultural contexts in learning (Page 14)." },
-                { question: "What is the 'Zone of Proximal Development' (ZPD)?", options: ["What a learner can do independently.", "The range of tasks that a child can perform with the help and guidance of a more skilled person, but cannot yet perform independently.", "What a learner can never do.", "The sum of all a learner's knowledge."], correctOptionIndex: 1, explanation: "ZPD is a key concept in Vygotsky's theory (Page 15)." },
-                { question: "What is 'scaffolding' in education?", options: ["Removing all support from learners.", "A variety of instructional techniques used to move students progressively toward stronger understanding and greater independence in the learning process.", "Only providing direct answers.", "Ignoring student difficulties."], correctOptionIndex: 1, explanation: "Scaffolding provides temporary support to help students learn new concepts (Page 16)." }
+            // General Knowledge (20 MCQs)
+            const generalKnowledgeMCQs = [
+                // GK - June 18: Political Science: Pages 136-140 & General Knowledge & Current Affairs: Pages 141-150
+                { question: "What is the primary function of a constitution?", options: ["To outline national history", "To establish laws and principles for governance", "To list all citizens' names", "To manage international relations"], correctOptionIndex: 1, explanation: "A constitution defines the framework of government, establishes fundamental laws, and guarantees citizens' rights.", difficulty: "easy", source_page: 136 },
+                { question: "Which form of government is characterized by the rule of the people, either directly or through elected representatives?", options: ["Monarchy", "Oligarchy", "Democracy", "Autocracy"], correctOptionIndex: 2, explanation: "Democracy is a system of government where citizens exercise power either directly or through elected representatives.", difficulty: "easy", source_page: 136 },
+                { question: "What is meant by 'separation of powers' in a government?", options: ["Division of powers between central and local governments", "Division of powers among legislative, executive, and judicial branches", "Separation of military and civilian control", "Division of powers between ruling and opposition parties"], correctOptionIndex: 1, explanation: "Separation of powers divides governmental authority into distinct branches to prevent abuse of power by one branch.", difficulty: "medium", source_page: 137 },
+                { question: "What is the significance of the 18th Amendment in Pakistan's Constitution?", options: ["It introduced the presidential system", "It abolished provincial autonomy", "It removed the President's power to dissolve assemblies and restored the parliamentary system", "It made Urdu the national language"], correctOptionIndex: 2, explanation: "The 18th Amendment (2010) significantly curtailed the President's powers and strengthened parliamentary democracy in Pakistan.", difficulty: "tough", source_page: 138 },
+                { question: "What is the concept of 'rule of law'?", options: ["Rule by the most powerful individuals", "Rule by majority vote only", "All citizens are subject to law, equally enforced", "Rule by religious decrees"], correctOptionIndex: 2, explanation: "The rule of law implies that all individuals and institutions are accountable to laws that are publicly promulgated, equally enforced, and independently adjudicated.", difficulty: "medium", source_page: 137 },
+                { question: "Which document serves as the supreme law of Pakistan?", options: ["Preamble to the Constitution", "The Holy Quran", "The Constitution of Pakistan", "Acts of Parliament"], correctOptionIndex: 2, explanation: "The Constitution of the Islamic Republic of Pakistan is the supreme law of Pakistan.", difficulty: "easy", source_page: 136 },
+                { question: "What is 'parliamentary democracy'?", options: ["A system where the head of government is directly elected by the people", "A system where the executive branch is accountable to the legislature", "A system where the military holds supreme power", "A system where all decisions are made by public referendums"], correctOptionIndex: 1, explanation: "In a parliamentary democracy, the executive (government) is formed by and accountable to the legislative body (parliament).", difficulty: "medium", source_page: 137 },
+                { question: "What is the role of the judiciary in a democratic system?", options: ["To formulate laws", "To enforce laws through the police", "To interpret laws and administer justice", "To implement government policies"], correctOptionIndex: 2, explanation: "The judiciary's role is to interpret and apply laws, resolve disputes, and ensure justice.", difficulty: "medium", source_page: 137 },
+                { question: "Who is the current Secretary-General of the United Nations?", options: ["Ban Ki-moon", "Kofi Annan", "António Guterres", "Boutros Boutros-Ghali"], correctOptionIndex: 2, explanation: "As of June 2025, António Guterres is the current Secretary-General of the United Nations.", difficulty: "easy", source_page: 141 }, // Assuming this question is from previous papers
+                { question: "Which international organization focuses on global trade rules?", options: ["IMF", "World Bank", "WTO", "UNICEF"], correctOptionIndex: 2, explanation: "The World Trade Organization (WTO) is an intergovernmental organization that regulates international trade.", difficulty: "easy", source_page: 142 }, // Assuming this question is from previous papers
+                { question: "The G7 consists of major industrialized democracies. Which country is *not* a member of G7?", options: ["Canada", "Italy", "China", "Germany"], correctOptionIndex: 2, explanation: "China is not a member of the G7. The G7 countries are Canada, France, Germany, Italy, Japan, the United Kingdom, and the United States.", difficulty: "medium", source_page: 143 }, // Assuming this question is from previous papers
+                { question: "What is the primary objective of the World Bank?", options: ["Promoting international trade", "Providing military assistance", "Reducing poverty and supporting development", "Regulating global financial markets"], correctOptionIndex: 2, explanation: "The World Bank's main goal is to reduce poverty and support development through financial and technical assistance to developing countries.", difficulty: "medium", source_page: 144 }, // Assuming this question is from previous papers
+                { question: "Which multilateral forum primarily addresses global economic cooperation?", options: ["UN Security Council", "G20", "NATO", "Amnesty International"], correctOptionIndex: 1, explanation: "The G20 (Group of Twenty) is an international forum for the governments and central bank governors from 19 countries and the European Union (EU) that primarily addresses major issues related to the global economy.", difficulty: "tough", source_page: 145 }, // Assuming this question is from previous papers
+                { question: "What is the significance of the Belt and Road Initiative (BRI)?", options: ["A global military alliance", "A Chinese global infrastructure development strategy", "An international human rights campaign", "A space exploration program"], correctOptionIndex: 1, explanation: "The Belt and Road Initiative (BRI) is a global infrastructure development strategy adopted by the Chinese government in 2013 to invest in nearly 150 countries and international organizations.", difficulty: "tough", source_page: 146 }, // Assuming this question is from previous papers
+                { question: "Define 'federalism'.", options: ["A system of government where all power is concentrated in a central authority", "A system where power is divided between a central government and regional governments", "A system where power is held by a single ruler", "A system where religious laws govern the state"], correctOptionIndex: 1, explanation: "Federalism is a system of government in which power is divided between a national (federal) government and various regional (state or provincial) governments.", difficulty: "medium", source_page: 137 },
+                { question: "What does 'suffrage' refer to?", options: ["The right to hold public office", "The right to vote in political elections", "The right to freedom of speech", "The right to fair trial"], correctOptionIndex: 1, explanation: "Suffrage is the right to vote in public elections.", difficulty: "easy", source_page: 136 },
+                { question: "Which city is the headquarters of the International Court of Justice?", options: ["New York", "Geneva", "The Hague", "Brussels"], correctOptionIndex: 2, explanation: "The International Court of Justice (ICJ) is headquartered at the Peace Palace in The Hague, Netherlands.", difficulty: "easy", source_page: 147 }, // Assuming this question is from previous papers
+                { question: "What is the purpose of the International Criminal Court (ICC)?", options: ["To resolve disputes between states", "To prosecute individuals for genocide, war crimes, and crimes against humanity", "To provide humanitarian aid", "To regulate global financial markets"], correctOptionIndex: 1, explanation: "The ICC investigates and, where warranted, tries individuals charged with the gravest crimes of concern to the international community: genocide, war crimes, crimes against humanity, and the crime of aggression.", difficulty: "tough", source_page: 148 }, // Assuming this question is from previous papers
+                { question: "Which of these is a core principle of democracy?", options: ["Authoritarianism", "Totalitarianism", "Popular sovereignty", "Nepotism"], correctOptionIndex: 2, explanation: "Popular sovereignty is the principle that the authority of a state and its government are created and sustained by the consent of its people, through their elected representatives.", difficulty: "medium", source_page: 139 },
+                { question: "What is the role of an 'Ombudsman' in a governmental system?", options: ["To act as head of state", "To represent the government in court", "To investigate complaints against public authorities", "To manage national finances"], correctOptionIndex: 2, explanation: "An Ombudsman is an official, usually appointed by the government, who investigates complaints against public authorities on behalf of individual citizens.", difficulty: "tough", source_page: 140 }
             ];
-            quizQuestions.push(...pedagogyMCQs);
+            quizQuestions.push(...generalKnowledgeMCQs);
 
-            // General Science (15 MCQs from Pages 135-152)
-            const generalScienceMCQs = [
-                { question: "What is the study of living organisms and their interactions with each other and their environment?", options: ["Physics", "Chemistry", "Biology", "Geology"], correctOptionIndex: 2, explanation: "Biology encompasses all aspects of life (Page 135)." },
-                { question: "What are the basic structural and functional units of all known organisms?", options: ["Atoms", "Molecules", "Cells", "Tissues"], correctOptionIndex: 2, explanation: "Cells are the fundamental building blocks of life (Page 136)." },
-                { question: "Which organelle is known as the 'powerhouse' of the cell?", options: ["Nucleus", "Ribosome", "Mitochondria", "Endoplasmic Reticulum"], correctOptionIndex: 2, explanation: "Mitochondria generate most of the chemical energy needed to power a cell's biochemical reactions (Page 137)." },
-                { question: "What is the process by which green plants and some other organisms use sunlight to synthesize foods from carbon dioxide and water?", options: ["Respiration", "Fermentation", "Photosynthesis", "Digestion"], correctOptionIndex: 2, explanation: "Photosynthesis is crucial for life on Earth (Page 138)." },
-                { question: "Which gas is a byproduct of photosynthesis?", options: ["Carbon Dioxide", "Nitrogen", "Oxygen", "Hydrogen"], correctOptionIndex: 2, explanation: "Oxygen is released into the atmosphere during photosynthesis (Page 139)." },
-                { question: "What is the process of breaking down glucose and other food molecules to release energy in the presence of oxygen?", options: ["Photosynthesis", "Fermentation", "Cellular Respiration", "Absorption"], correctOptionIndex: 2, explanation: "Cellular respiration occurs in the mitochondria of cells (Page 140)." },
-                { question: "Which system in the human body is responsible for pumping blood throughout the body?", options: ["Respiratory system", "Digestive system", "Circulatory system", "Nervous system"], correctOptionIndex: 2, explanation: "The circulatory system, including the heart, blood vessels, and blood, transports oxygen and nutrients (Page 141)." },
-                { question: "What are the tiny air sacs in the lungs where gas exchange occurs?", options: ["Bronchi", "Trachea", "Alveoli", "Diaphragm"], correctOptionIndex: 2, explanation: "Alveoli are surrounded by capillaries, allowing oxygen and carbon dioxide exchange (Page 142)." },
-                { question: "Which system controls and coordinates all body activities?", options: ["Circulatory system", "Digestive system", "Nervous system", "Skeletal system"], correctOptionIndex: 2, explanation: "The nervous system, composed of the brain, spinal cord, and nerves, is responsible for communication and control (Page 143)." },
-                { question: "What are the building blocks of proteins?", options: ["Carbohydrates", "Lipids", "Amino Acids", "Nucleic Acids"], correctOptionIndex: 2, explanation: "Amino acids link together to form long chains called proteins (Page 144)." },
-                { question: "Which nutrient is the body's main source of energy?", options: ["Proteins", "Fats", "Carbohydrates", "Vitamins"], correctOptionIndex: 2, explanation: "Carbohydrates are broken down into glucose for energy (Page 145)." },
-                { question: "What is the role of enzymes in the human body?", options: ["Store energy.", "Build bones.", "Act as biological catalysts, speeding up chemical reactions.", "Transport oxygen."], correctOptionIndex: 2, explanation: "Enzymes are crucial for digestion, metabolism, and many other processes (Page 146)." },
-                { question: "Which part of a plant is responsible for absorbing water and nutrients from the soil?", options: ["Leaves", "Stem", "Roots", "Flowers"], correctOptionIndex: 2, explanation: "Roots anchor the plant and absorb essential substances (Page 147)." },
-                { question: "What is the process by which plants release water vapor into the atmosphere?", options: ["Condensation", "Precipitation", "Transpiration", "Evaporation"], correctOptionIndex: 2, explanation: "Transpiration is the evaporation of water from plant leaves (Page 148)." },
-                { question: "What is the primary function of the skeletal system?", options: ["Digestion", "Circulation", "Support, protection, and movement", "Respiration"], correctOptionIndex: 2, explanation: "The skeletal system provides framework and allows movement (Page 149)." }
-            ];
-            quizQuestions.push(...generalScienceMCQs);
-
-            // Social Studies (15 MCQs from Pages 489-506)
-            const socialStudiesMCQs = [
-                { question: "What is 'culture'?", options: ["Only art and music.", "The shared patterns of behaviors, interactions, cognitive constructs, and affective understanding that are learned through a process of socialization.", "Individual habits.", "Genetic traits."], correctOptionIndex: 1, explanation: "Culture encompasses all aspects of a group's way of life (Page 489)." },
-                { question: "Which of the following is a component of culture?", options: ["Personal preferences.", "Values, beliefs, customs, languages, and artifacts.", "Random actions.", "Instincts."], correctOptionIndex: 1, explanation: "Culture is a complex system of shared elements (Page 490)." },
-                { question: "What is 'socialization'?", options: ["Becoming isolated.", "The process by which individuals learn and internalize the norms, values, beliefs, and behaviors of their society.", "Only formal education.", "Biological maturation."], correctOptionIndex: 1, explanation: "Socialization is how individuals become members of a society (Page 491)." },
-                { question: "Which of the following is an agent of socialization?", options: ["Random events.", "Family, school, peer groups, and mass media.", "Natural disasters.", "Personal thoughts."], correctOptionIndex: 1, explanation: "These agents transmit culture and norms (Page 492)." },
-                { question: "What is 'identity'?", options: ["Only personal name.", "The distinguishing characteristics or personality of an individual, or group, considered as a whole.", "A fixed, unchanging trait.", "Only physical appearance."], correctOptionIndex: 1, explanation: "Identity is shaped by personal experiences and social interactions (Page 493)." },
-                { question: "What is 'cultural diversity'?", options: ["One dominant culture.", "The existence of a variety of cultural groups within a society.", "Absence of culture.", "Cultural assimilation."], correctOptionIndex: 1, explanation: "Cultural diversity enriches societies and fosters unique perspectives (Page 494)." },
-                { question: "What is 'ethnocentrism'?", options: ["Appreciating all cultures equally.", "Evaluating other cultures according to preconceptions originating in the standards and customs of one's own culture.", "Cultural relativism.", "Global perspective."], correctOptionIndex: 1, explanation: "Ethnocentrism can lead to prejudice and misunderstanding (Page 495)." },
-                { question: "What is 'cultural relativism'?", options: ["Judging all cultures based on one's own.", "The principle that an individual's beliefs and activities should be understood by others in terms of that individual's own culture.", "Believing one's culture is superior.", "Ignoring cultural differences."], correctOptionIndex: 1, explanation: "Cultural relativism promotes understanding and respect for diverse cultures (Page 496)." },
-                { question: "What is 'social institutions'?", options: ["Only government buildings.", "Established or standardized patterns of rule-governed behavior.", "Informal gatherings.", "Individual organizations."], correctOptionIndex: 1, explanation: "Social institutions organize society and fulfill basic needs (Page 497)." },
-                { question: "Which of the following is a key social institution?", options: ["A hobby club.", "Family, education, government, economy, and religion.", "A sports team.", "A temporary committee."], correctOptionIndex: 1, explanation: "These institutions are fundamental to societal structure (Page 498)." },
-                { question: "What is 'family' as a social institution?", options: ["Any group of unrelated people.", "A group of people related by blood, marriage, or adoption, who live together and form an economic unit and care for any young.", "Only a nuclear family.", "A workplace environment."], correctOptionIndex: 1, explanation: "Family is the primary unit of socialization (Page 499)." },
-                { question: "What is the primary function of the 'education' social institution?", options: ["Providing entertainment.", "Transmitting knowledge, skills, values, and norms to new generations.", "Only vocational training.", "Controlling the economy."], correctOptionIndex: 1, explanation: "Education is vital for societal development and individual growth (Page 500)." },
-                { question: "What is 'government' as a social institution?", options: ["A group of volunteers.", "The system or group of people governing an organized community, generally a state.", "A business entity.", "A religious organization."], correctOptionIndex: 1, explanation: "Government maintains order and provides public services (Page 501)." },
-                { question: "What is 'economy' as a social institution?", options: ["Individual spending habits.", "The system of production, distribution, and consumption of goods and services.", "Only banking.", "A non-profit organization."], correctOptionIndex: 1, explanation: "The economy organizes how societies manage resources (Page 502)." },
-                { question: "What is 'religion' as a social institution?", options: ["Only personal beliefs.", "A social-cultural system of designated behaviors and practices, morals, worldviews, texts, sanctified places, prophecies, ethics, or organizations that relates humanity to supernatural, transcendental, or spiritual elements.", "A political party.", "A scientific theory."], correctOptionIndex: 1, explanation: "Religion provides meaning, moral guidance, and social cohesion (Page 503)." }
-            ];
-            quizQuestions.push(...socialStudiesMCQs);
-
-            // Geography (8 MCQs from Pages 543-550)
-            const geographyMCQs = [
-                { question: "What is 'population density'?", options: ["The total number of people in a country.", "The number of people living per unit of area (e.g., per square kilometer or mile).", "The birth rate of a country.", "The migration rate of a country."], correctOptionIndex: 1, explanation: "Population density indicates how crowded an area is (Page 543)." },
-                { question: "Which of the following factors influences population distribution?", options: ["Only political borders.", "Climate, landforms, water availability, and economic opportunities.", "Type of housing.", "Number of schools."], correctOptionIndex: 1, explanation: "These factors determine where people choose to live (Page 544)." },
-                { question: "What is 'urban sprawl'?", options: ["Growth of dense cities.", "The uncontrolled expansion of urban areas, often characterized by low-density development.", "Development of parks.", "Preservation of farmland."], correctOptionIndex: 1, explanation: "Urban sprawl consumes open space and increases dependence on cars (Page 545)." },
-                { question: "What is 'demography'?", options: ["The study of maps.", "The statistical study of populations, including their size, growth, density, distribution, and vital statistics.", "The study of rocks.", "The study of animals."], correctOptionIndex: 1, explanation: "Demography provides insights into population trends (Page 546)." },
-                { question: "What is 'birth rate'?", options: ["The number of deaths per 1,000 people per year.", "The number of live births per 1,000 people per year.", "The number of people moving into a country.", "The average age of a population."], correctOptionIndex: 1, explanation: "Birth rate is a key indicator of population growth (Page 547)." },
-                { question: "What is 'death rate'?", options: ["The number of live births per 1,000 people per year.", "The number of deaths per 1,000 people per year.", "The average lifespan.", "The infant mortality rate."], correctOptionIndex: 1, explanation: "Death rate reflects mortality trends within a population (Page 548)." },
-                { question: "What is 'migration'?", options: ["Staying in one place.", "The movement of people from one place to another with the intention of settling permanently or semi-permanently.", "Seasonal travel.", "Daily commuting."], correctOptionIndex: 1, explanation: "Migration involves a change of residence (Page 549)." },
-                { question: "What is 'push factors' in migration?", options: ["Attractions of a new place.", "Conditions that compel people to leave their homes, such as war, poverty, or lack of jobs.", "Reasons people stay put.", "Factors attracting skilled workers."], correctOptionIndex: 1, explanation: "Push factors drive people away from their current location (Page 550)." }
-            ];
-            quizQuestions.push(...geographyMCQs);
-
-            // History (10 MCQs from Pages 665-680)
-            const historyMCQs = [
-                { question: "What was the immediate cause of World War II?", options: ["The assassination of Archduke Franz Ferdinand.", "Germany's invasion of Poland.", "The attack on Pearl Harbor.", "The Treaty of Versailles."], correctOptionIndex: 1, explanation: "Germany's invasion of Poland on September 1, 1939, triggered declarations of war by France and the UK (Page 665)." },
-                { question: "Which major alliance fought against the Axis Powers (Germany, Italy, Japan) in World War II?", options: ["Triple Alliance", "Central Powers", "Allied Powers (UK, France, Soviet Union, US)", "NATO"], correctOptionIndex: 2, explanation: "The Allied Powers ultimately defeated the Axis (Page 666)." },
-                { question: "What was the 'Holocaust'?", options: ["A major battle of WWII.", "The genocide of approximately six million Jews by the Nazi regime and its collaborators.", "A post-war economic plan.", "A cultural festival."], correctOptionIndex: 1, explanation: "The Holocaust was a horrific systematic extermination (Page 667)." },
-                { question: "Which event marked the end of World War II in Europe (V-E Day)?", options: ["D-Day landings.", "The Battle of Stalingrad.", "Germany's unconditional surrender.", "The bombing of Hiroshima."], correctOptionIndex: 2, explanation: "V-E Day occurred on May 8, 1945 (Page 668)." },
-                { question: "Which two cities were targeted by atomic bombs, leading to Japan's surrender?", options: ["Tokyo and Kyoto", "Hiroshima and Nagasaki", "Osaka and Sapporo", "Fukuoka and Kobe"], correctOptionIndex: 1, explanation: "The bombings occurred in August 1945 (Page 669)." },
-                { question: "What was the 'Cold War'?", options: ["A period of actual warfare between superpowers.", "A state of geopolitical tension after World War II between powers in the Eastern Bloc (Soviet Union and its satellite states) and powers in the Western Bloc (United States, its NATO allies, and others).", "A period of peace and cooperation.", "An economic competition."], correctOptionIndex: 1, explanation: "The Cold War was characterized by ideological conflict and proxy wars (Page 670)." },
-                { question: "What was the primary ideological conflict during the Cold War?", options: ["Monarchy vs. Democracy.", "Capitalism vs. Communism.", "Feudalism vs. Industrialism.", "Nationalism vs. Imperialism."], correctOptionIndex: 1, explanation: "The US championed capitalism and democracy, while the Soviet Union promoted communism (Page 671)." },
-                { question: "What was the purpose of the 'Marshall Plan'?", options: ["To rebuild Japan.", "To aid Western European economies after WWII and prevent the spread of communism.", "To develop nuclear weapons.", "To establish a military alliance."], correctOptionIndex: 1, explanation: "The Marshall Plan was a significant economic recovery initiative (Page 672)." },
-                { question: "What organization was formed in 1949 by Western nations for collective defense against Soviet aggression?", options: ["Warsaw Pact", "United Nations", "NATO (North Atlantic Treaty Organization)", "SEATO"], correctOptionIndex: 2, explanation: "NATO remains a major military alliance today (Page 673)." },
-                { question: "What was the 'Space Race'?", options: ["A competition to colonize Mars.", "A 20th-century competition between two Cold War rivals, the Soviet Union and the United States, for supremacy in spaceflight capability.", "A race to build faster planes.", "A competition for global telecommunications."], correctOptionIndex: 1, explanation: "The Space Race saw significant technological advancements and achievements like landing on the Moon (Page 674)." }
-            ];
-            quizQuestions.push(...historyMCQs);
-
-            // English (8 MCQs from Pages 815-822)
-            const englishMCQs = [
-                { question: "What is a 'noun'?", options: ["A word that describes an action.", "A word that names a person, place, thing, or idea.", "A word that connects sentences.", "A word that modifies a verb."], correctOptionIndex: 1, explanation: "Nouns are fundamental parts of speech (Page 815)." },
-                { question: "In the sentence 'The *boy* ran quickly,' what word is a noun?", options: ["The", "Boy", "Ran", "Quickly"], correctOptionIndex: 1, explanation: "'Boy' names a person (Page 816)." },
-                { question: "What is a 'pronoun'?", options: ["A word that describes a noun.", "A word that takes the place of a noun.", "A word that shows action.", "A word that connects ideas."], correctOptionIndex: 1, explanation: "Pronouns help avoid repetition of nouns (Page 817)." },
-                { question: "Which of the following is a pronoun?", options: ["Jump", "Beautiful", "He", "Quickly"], correctOptionIndex: 2, explanation: "'He' replaces a male noun (Page 818)." },
-                { question: "What is a 'verb'?", options: ["A word that names a place.", "A word that describes an action or a state of being.", "A word that replaces a noun.", "A word that modifies an adjective."], correctOptionIndex: 1, explanation: "Verbs are essential for showing what the subject does or is (Page 819)." },
-                { question: "In 'She *sings* loudly,' what word is a verb?", options: ["She", "Sings", "Loudly", "In"], correctOptionIndex: 1, explanation: "'Sings' indicates an action (Page 820)." },
-                { question: "What is an 'adjective'?", options: ["A word that shows action.", "A word that describes or modifies a noun or pronoun.", "A word that connects clauses.", "A word that describes a verb."], correctOptionIndex: 1, explanation: "Adjectives provide more information about nouns/pronouns (Page 821)." },
-                { question: "In 'The *red* car is fast,' what word is an adjective?", options: ["The", "Red", "Car", "Fast"], correctOptionIndex: 1, explanation: "'Red' describes the 'car' (Page 822)." }
-            ];
-            quizQuestions.push(...englishMCQs);
-
-            // Mathematics (7 MCQs from Pages 968-974)
-            const mathematicsMCQs = [
-                { question: "What is the result of $15 + (8 \\times 3) - 20$?", options: ["19", "20", "21", "22"], correctOptionIndex: 1, explanation: "Follow order of operations (BODMAS/PEMDAS): $15 + 24 - 20 = 39 - 20 = 19$ (Page 968)." },
-                { question: "What is the value of $5^3$?", options: ["15", "25", "125", "50"], correctOptionIndex: 2, explanation: "$5^3 = 5 \\times 5 \\times 5 = 25 \\times 5 = 125$ (Page 969)." },
-                { question: "If a shirt costs $25 and is on sale for 20% off, what is the sale price?", options: ["$5", "$15", "$20", "$22"], correctOptionIndex: 2, explanation: "Discount = $25 \\times 0.20 = 5$. Sale price = $25 - 5 = 20$ (Page 970)." },
-                { question: "What is the average (mean) of the numbers {10, 15, 20, 25}?", options: ["15", "17.5", "20", "22.5"], correctOptionIndex: 1, explanation: "Sum = $10+15+20+25 = 70$. Average = $70 / 4 = 17.5$ (Page 971)." },
-                { question: "What is the median of the data set {1, 3, 5, 7, 9}?", options: ["1", "3", "5", "7"], correctOptionIndex: 2, explanation: "The median is the middle value in an ordered data set. Here, it is 5 (Page 972)." },
-                { question: "What is the range of the data set {10, 5, 20, 12, 8}?", options: ["5", "10", "15", "20"], correctOptionIndex: 2, explanation: "Range = Maximum value - Minimum value = $20 - 5 = 15$ (Page 973)." },
-                { question: "If the temperature is -5°C and it drops by another 3°C, what is the new temperature?", options: ["-2°C", "2°C", "-8°C", "8°C"], correctOptionIndex: 2, explanation: "$-5 - 3 = -8$°C (Page 974)." }
-            ];
-            quizQuestions.push(...mathematicsMCQs);
-
-            // Urdu (10 MCQs from Pages 1126-1142)
+            // Urdu (40 MCQs)
             const urduMCQs = [
-                { question: "اردو گرامر میں 'فعل لازم' کسے کہتے ہیں؟", options: ["جس فعل کا فاعل نہ ہو", "جس فعل کو مفعول کی ضرورت نہ ہو بلکہ بات فاعل تک مکمل ہو جائے", "جس فعل کو مفعول کی ضرورت ہو", "جس فعل سے سوال پوچھا جائے"], correctOptionIndex: 1, explanation: "فعل لازم وہ ہوتا ہے جو صرف فاعل پر اکتفا کرے (صفحہ 1126)." },
-                { question: "درج ذیل میں سے کون سا جملہ 'فعل لازم' کی مثال ہے؟", options: ["علی نے کتاب پڑھی۔", "اسلم سو رہا ہے۔", "اس نے خط لکھا۔", "احمد نے کھانا کھایا۔"], correctOptionIndex: 1, explanation: "'اسلم سو رہا ہے' میں سونے کا فعل صرف فاعل پر مکمل ہے، مفعول کی ضرورت نہیں (صفحہ 1127)." },
-                { question: "اردو گرامر میں 'فعل متعدی' کسے کہتے ہیں؟", options: ["جس فعل کو مفعول کی ضرورت نہ ہو", "جس فعل کو مفعول کی ضرورت ہو", "جس فعل سے کام کا ہونا ظاہر ہو", "جس فعل میں زمانہ نہ ہو"], correctOptionIndex: 1, explanation: "فعل متعدی وہ ہوتا ہے جو اپنے معنی مکمل کرنے کے لیے مفعول کا محتاج ہو (صفحہ 1128)." },
-                { question: "درج ذیل میں سے کون سا جملہ 'فعل متعدی' کی مثال ہے؟", options: ["پانی بہتا ہے۔", "چڑیا اڑتی ہے۔", "بچے نے گانا گایا۔", "لڑکا ہنسا۔"], correctOptionIndex: 2, explanation: "'بچے نے گانا گایا' میں 'گانا' مفعول ہے (صفحہ 1129)." },
-                { question: "اردو میں 'تذکیر و تانیث' سے کیا مراد ہے؟", options: ["واحد اور جمع", "اسم اور فعل", "مذکر اور مونث", "صفت اور مفعول"], correctOptionIndex: 2, explanation: "تذکیر و تانیث اسماء کی جنسی شناخت ہے، یعنی نر یا مادہ ہونا (صفحہ 1130)." },
-                { question: "کون سا جملہ 'مذکر' ہے؟", options: ["یہ میری کتاب ہے", "وہ میری ماں ہے", "یہ میرا قلم ہے", "وہ میری بہن ہے"], correctOptionIndex: 2, explanation: "'قلم' مذکر ہے، اس لیے 'میرا قلم' صحیح ہے (صفحہ 1131)." },
-                { question: "کون سا جملہ 'مونث' ہے؟", options: ["یہ میرا گھر ہے", "وہ میرا بھائی ہے", "یہ میری گاڑی ہے", "یہ میرا بیٹا ہے"], correctOptionIndex: 2, explanation: "'گاڑی' مونث ہے، اس لیے 'میری گاڑی' صحیح ہے (صفحہ 1132)." },
-                { question: "اردو میں 'حرفِ ندا' کا کیا کام ہے؟", options: ["تعجب کا اظہار", "کسی کو پکارنا یا مخاطب کرنا", "نفی کا اظہار", "تصدیق کرنا"], correctOptionIndex: 1, explanation: "حرفِ ندا کسی کو آواز دینے کے لیے استعمال ہوتا ہے (صفحہ 1133)." },
-                { question: "درج ذیل میں سے کون سا لفظ 'حرفِ ندا' کی مثال ہے؟", options: ["ارے", "واہ", "افسوس", "شاید"], correctOptionIndex: 0, explanation: "'ارے' کسی کو بلانے کے لیے استعمال ہوتا ہے (صفحہ 1134)." },
-                { question: "اردو میں 'علامتِ فاعل' کیا ہے؟", options: ["کو", "سے", "نے", "پر"], correctOptionIndex: 2, explanation: "'نے' فاعل کے ساتھ آتا ہے جب فعل متعدی ہو (صفحہ 1135)." }
+                // Urdu - June 18: Titles and Addresses & Real/Pen Names: Urdu Section Pages 35-38
+                { question: "'اسد' کس مشہور شاعر کا تخلص تھا؟", options: ["میر تقی میر", "مرزا غالب", "علامہ اقبال", "فیض احمد فیض"], correctOptionIndex: 1, explanation: "'اسد' مرزا غالب کا اصل تخلص تھا، بعد میں وہ 'غالب' کے نام سے مشہور ہوئے۔", difficulty: "easy", source_page: 35 },
+                { question: "'حالی' کس عظیم شاعر اور ادیب کا تخلص تھا؟", options: ["الطاف حسین", "محمد حسین آزاد", "شبلی نعمانی", "ذوق"], correctOptionIndex: 0, explanation: "'حالی' مولانا الطاف حسین حالی کا تخلص تھا۔", difficulty: "easy", source_page: 35 },
+                { question: "'شاعر مشرق' کے لقب سے کون سی شخصیت مشہور ہے؟", options: ["فیض احمد فیض", "احمد فراز", "علامہ محمد اقبال", "میر درد"], correctOptionIndex: 2, explanation: "'شاعر مشرق' علامہ محمد اقبال کا معروف لقب ہے۔", difficulty: "easy", source_page: 36 },
+                { question: "'بابائے اردو' کے نام سے کس کو جانا جاتا ہے؟", options: ["ڈپٹی نذیر احمد", "مولوی عبدالحق", "سرسید احمد خان", "مرزا ہادی رسوا"], correctOptionIndex: 1, explanation: "مولوی عبدالحق کو اردو زبان و ادب کے لیے ان کی خدمات کے اعتراف میں 'بابائے اردو' کہا جاتا ہے۔", difficulty: "easy", source_page: 36 },
+                { question: "'درد' اردو کے کس صوفی شاعر کا تخلص تھا؟", options: ["میر تقی میر", "خواجہ میر درد", "غالب", "جوش ملیح آبادی"], correctOptionIndex: 1, explanation: "'درد' خواجہ میر درد کا تخلص تھا، جو اردو کے ایک معروف صوفی شاعر ہیں۔", difficulty: "medium", source_page: 35 },
+                { question: "'مصور غم' کس ادیب کا لقب ہے؟", options: ["کرشن چندر", "سعادت حسن منٹو", "راشد الخیری", "پریم چند"], correctOptionIndex: 2, explanation: "'مصور غم' راشد الخیری کا لقب ہے، جو اپنے غمگین اور اصلاحی افسانوں کی وجہ سے جانے جاتے ہیں۔", difficulty: "tough", source_page: 37 },
+                { question: "'اقبال' کس کا تخلص ہے؟", options: ["فیض", "ساحر", "علامہ محمد اقبال", "فراز"], correctOptionIndex: 2, explanation: "'اقبال' علامہ محمد اقبال کا تخلص ہے۔", difficulty: "easy", source_page: 35 },
+                { question: "'سرسید' کس مصلح اور تعلیمی رہنما کا خطاب ہے؟", options: ["قائد اعظم", "محمد علی جوہر", "مولانا ابوالکلام آزاد", "سرسید احمد خان"], correctOptionIndex: 3, explanation: "'سرسید' سرسید احمد خان کا خطاب ہے، جو علی گڑھ تحریک کے بانی تھے۔", difficulty: "easy", source_page: 36 },
+                { question: "'میر' اردو کے کس عظیم شاعر کا تخلص ہے؟", options: ["میر تقی میر", "میر انیس", "میر ببر علی انیس", "میر حسن"], correctOptionIndex: 0, explanation: "'میر' میر تقی میر کا تخلص ہے، جو اردو شاعری کے امام سمجھے جاتے ہیں۔", difficulty: "medium", source_page: 35 },
+                { question: "'بلبل ہند' کس شاعر کا لقب ہے؟", options: ["امیر خسرو", "ولی دکنی", "داغ دہلوی", "میر درد"], correctOptionIndex: 0, explanation: "'بلبل ہند' کا لقب امیر خسرو کو دیا گیا ہے، جو ایک عظیم شاعر اور موسیقار تھے۔", difficulty: "tough", source_page: 37 },
+                { question: "'غالب' کس شاعر کا تخلص تھا؟", options: ["میر تقی میر", "مرزا اسد اللہ خان", "علامہ اقبال", "حالی"], correctOptionIndex: 1, explanation: "'غالب' مرزا اسد اللہ خان کا تخلص تھا، جو اردو فارسی کے سب سے بڑے شاعروں میں سے ایک ہیں۔", difficulty: "easy", source_page: 35 },
+                { question: "'قومی شاعر' کسے کہا جاتا ہے؟", options: ["فیض احمد فیض", "حبیب جالب", "علامہ محمد اقبال", "احمد ندیم قاسمی"], correctOptionIndex: 2, explanation: "علامہ محمد اقبال کو ان کی ملی شاعری کی وجہ سے 'قومی شاعر' کہا جاتا ہے۔", difficulty: "easy", source_page: 36 },
+                { question: "'آتش' کس لکھنوی شاعر کا تخلص تھا؟", options: ["ناسخ", "آتش لکھنوی", "جرات", "مرزا شوق"], correctOptionIndex: 1, explanation: "'آتش' خواجہ حیدر علی آتش کا تخلص تھا، جو لکھنوی دبستان کے معروف شاعر تھے۔", difficulty: "medium", source_page: 35 },
+                { question: "'مجاہد آزادی' کے لقب سے کون سے قائد مشہور ہیں؟", options: ["قائد اعظم", "علامہ اقبال", "مولانا محمد علی جوہر", "سردار عبدالرب نشتر"], correctOptionIndex: 2, explanation: "مولانا محمد علی جوہر کو 'مجاہد آزادی' کے لقب سے بھی یاد کیا جاتا ہے۔", difficulty: "tough", source_page: 37 },
+                { question: "'جوش' کس انقلابی شاعر کا تخلص تھا؟", options: ["جوش ملیح آبادی", "جوشیلے خاں", "جوش اردو", "جوش بھوپالی"], correctOptionIndex: 0, explanation: "'جوش' جوش ملیح آبادی کا تخلص تھا، جو اپنی انقلابی شاعری کے لیے مشہور ہیں۔", difficulty: "medium", source_page: 35 },
+                { question: "'فخر اردو' کا خطاب کس کو دیا گیا؟", options: ["میر انیس", "مرزا غالب", "شبلی نعمانی", "مولوی عبدالحق"], correctOptionIndex: 3, explanation: "'فخر اردو' کا خطاب بھی مولوی عبدالحق کو دیا جاتا ہے۔", difficulty: "tough", source_page: 37 },
+                { question: "'فانی' کس لکھنوی شاعر کا تخلص تھا؟", options: ["فانی بدایونی", "فانی جوہانسبرگی", "فانی دہلوی", "فانی لکھنوی"], correctOptionIndex: 0, explanation: "'فانی' شوکت علی خان کا تخلص تھا، جو فانی بدایونی کے نام سے مشہور ہیں۔", difficulty: "medium", source_page: 35 },
+                { question: "'پریم چند' کا اصل نام کیا تھا؟", options: ["رام پرکاش", "دھنپت رائے", "شنکر لال", "بھرت رائے"], correctOptionIndex: 1, explanation: "اردو اور ہندی کے عظیم افسانہ نگار پریم چند کا اصل نام دھنپت رائے تھا۔", difficulty: "easy", source_page: 36 },
+                { question: "'مومن' کس کلاسیکی شاعر کا تخلص تھا؟", options: ["مومن خان مومن", "مومن علی", "مومن چغتائی", "مومن دہلوی"], correctOptionIndex: 0, explanation: "'مومن' مومن خان مومن کا تخلص تھا، جو اپنی غزلوں اور عشق و ہجر کے موضوعات کے لیے مشہور ہیں۔", difficulty: "tough", source_page: 35 },
+                { question: "'سلطان الشعراء' کس شاعر کا لقب ہے؟", options: ["میر تقی میر", "محمد رفیع سودا", "ذوق", "میر انیس"], correctOptionIndex: 0, explanation: "'سلطان الشعراء' کا لقب میر تقی میر کو دیا گیا ہے، جو اردو شاعری کے ایک اہم ستون ہیں۔", difficulty: "tough", source_page: 37 },
+                { question: "'ناصر' کس نوحہ خواں شاعر کا تخلص تھا؟", options: ["ناصر کاظمی", "ناصر زیدی", "ناصر حسین", "ناصر جمال"], correctOptionIndex: 0, explanation: "'ناصر' ناصر کاظمی کا تخلص تھا، جو اپنی غزلیات کے لیے مشہور ہیں۔", difficulty: "medium", source_page: 35 },
+                { question: "'سروگوش ہند' کا خطاب کس ادیب کو ملا؟", options: ["خواجہ حسن نظامی", "رشید احمد صدیقی", "مرزا فرحت اللہ بیگ", "احمد شاہ بخاری پطرس"], correctOptionIndex: 0, explanation: "'سروگوش ہند' خواجہ حسن نظامی کا خطاب ہے جو اپنے قلمی نام کے ساتھ مشہور ہوئے۔", difficulty: "tough", source_page: 37 },
+                { question: "'مجروح' کس ترقی پسند شاعر کا تخلص تھا؟", options: ["مجروح سلطان پوری", "مجروح لکھنوی", "مجروح بھوپالی", "مجروح دہلوی"], correctOptionIndex: 0, explanation: "'مجروح' مجروح سلطان پوری کا تخلص تھا، جو ترقی پسند شاعری میں اہم مقام رکھتے ہیں۔", difficulty: "medium", source_page: 35 },
+                { question: "'نواب بہادر' کس ادیب کا خطاب ہے؟", options: ["اشفاق احمد", "شفیق الرحمن", "پطرس بخاری", "مرزا فرحت اللہ بیگ"], correctOptionIndex: 3, explanation: "'نواب بہادر' کا خطاب مرزا فرحت اللہ بیگ کو دیا گیا تھا۔", difficulty: "tough", source_page: 37 },
+                { question: "'فراق' کس شاعر کا تخلص تھا؟", options: ["فراق گورکھپوری", "فراق دہلوی", "فراق لکھنوی", "فراق اودھی"], correctOptionIndex: 0, explanation: "'فراق' رگھوپتی سہائے کا تخلص تھا، جو فراق گورکھپوری کے نام سے مشہور ہیں۔", difficulty: "medium", source_page: 35 },
+                { question: "'دانشور اسلام' کس شخصیت کو کہا جاتا ہے؟", options: ["علامہ محمد اقبال", "مولانا ابوالکلام آزاد", "شبلی نعمانی", "میاں محمد بخش"], correctOptionIndex: 0, explanation: "علامہ محمد اقبال کو ان کے فلسفیانہ خیالات اور اسلامی نظریات کی وجہ سے 'دانشور اسلام' بھی کہا جاتا ہے۔", difficulty: "tough", source_page: 37 },
+                { question: "'پروین' کس مشہور شاعرہ کا تخلص تھا؟", options: ["پروین شاکر", "ادا جعفری", "کشور ناہید", "فہمیدہ ریاض"], correctOptionIndex: 0, explanation: "'پروین' پروین شاکر کا تخلص تھا، جو اردو کی ایک مقبول شاعرہ تھیں۔", difficulty: "easy", source_page: 36 },
+                { question: "'ادیب اعظم' کا خطاب کسے ملا؟", options: ["منشی پریم چند", "ڈپٹی نذیر احمد", "عبدالحلیم شرر", "سرسید احمد خان"], correctOptionIndex: 0, explanation: "'ادیب اعظم' کا خطاب منشی پریم چند کو دیا گیا ہے، جو ہندی اور اردو کے عظیم افسانہ نگار اور ناول نگار ہیں۔", difficulty: "tough", source_page: 37 },
+                { question: "'فانی بدایونی' کا اصلی نام کیا تھا؟", options: ["شوکت علی خان", "محمد خان", "سید محمد", "اسد اللہ خان"], correctOptionIndex: 0, explanation: "فانی بدایونی کا اصلی نام شوکت علی خان تھا۔", difficulty: "medium", source_page: 36 },
+                { question: "'حکیم الامت' کس شخصیت کا لقب ہے؟", options: ["قائد اعظم", "علامہ محمد اقبال", "سرسید احمد خان", "مولانا محمد علی جوہر"], correctOptionIndex: 1, explanation: "'حکیم الامت' علامہ محمد اقبال کا لقب ہے، جو امت کے مسائل کا حل اپنی شاعری میں پیش کرتے تھے۔", difficulty: "easy", source_page: 37 },
+                { question: "'فیض' کس ترقی پسند شاعر کا تخلص تھا؟", options: ["فیض احمد فیض", "فیض علی فیض", "فیض الدین", "فیض احمد"], correctOptionIndex: 0, explanation: "'فیض' فیض احمد فیض کا تخلص تھا، جو اردو کے معروف ترقی پسند اور انقلابی شاعر تھے۔", difficulty: "easy", source_page: 36 },
+                { question: "'اردو کا شیکسپیئر' کسے کہا جاتا ہے؟", options: ["آغا حشر کاشمیری", "امتیاز علی تاج", "مرزا غالب", "سعادت حسن منٹو"], correctOptionIndex: 0, explanation: "آغا حشر کاشمیری کو ان کے ڈراموں اور مکالمہ نگاری کی وجہ سے 'اردو کا شیکسپیئر' کہا جاتا ہے۔", difficulty: "tough", source_page: 37 },
+                { question: "'ذوق' کس استاد شاعر کا تخلص تھا؟", options: ["میر تقی میر", "شیخ ابراہیم ذوق", "مرزا غالب", "نواب مصطفیٰ خان شیفتہ"], correctOptionIndex: 1, explanation: "'ذوق' شیخ ابراہیم ذوق کا تخلص تھا، جو بہادر شاہ ظفر کے استاد بھی تھے۔", difficulty: "medium", source_page: 36 },
+                { question: "'خادم اردو' کسے کہا جاتا ہے؟", options: ["اشفاق احمد", "ابن انشاء", "مولوی عبدالحق", "پطرس بخاری"], correctOptionIndex: 2, explanation: "مولوی عبدالحق کو 'خادم اردو' بھی کہا جاتا ہے، ان کی اردو زبان و ادب کے لیے بے مثال خدمات کی وجہ سے۔", difficulty: "tough", source_page: 38 },
+                { question: "'کلیم' کس شاعر کا تخلص تھا؟", options: ["کلیم الدین احمد", "کلیم عثمانی", "کلیم احمد", "کلیم حیدری"], correctOptionIndex: 1, explanation: "'کلیم' کلیم عثمانی کا تخلص تھا، جو نعت گوئی کے لیے بھی معروف ہیں۔", difficulty: "medium", source_page: 36 },
+                { question: "'امام الہند' کس کا خطاب ہے؟", options: ["مولانا ابوالکلام آزاد", "سرسید احمد خان", "علامہ شبلی نعمانی", "مولانا محمد علی جوہر"], correctOptionIndex: 0, explanation: "'امام الہند' مولانا ابوالکلام آزاد کا خطاب ہے، جو ایک عظیم عالم، مفکر اور آزادی پسند رہنما تھے۔", difficulty: "tough", source_page: 38 },
+                { question: "'جگر' کس غزل گو شاعر کا تخلص تھا؟", options: ["جگر مراد آبادی", "جگر لکھنوی", "جگر دہلوی", "جگر پاکستانی"], correctOptionIndex: 0, explanation: "'جگر' علی سکندر کا تخلص تھا، جو جگر مراد آبادی کے نام سے مشہور ایک عظیم غزل گو شاعر تھے۔", difficulty: "medium", source_page: 36 },
+                { question: "'امیر خسرو' کو کس لقب سے جانا جاتا ہے؟", options: ["طوطی ہند", "بلبل مشرق", "شہنشاہ سخن", "نواب شعراء"], correctOptionIndex: 0, explanation: "امیر خسرو کو 'طوطی ہند' (India's Parrot) کے لقب سے جانا جاتا ہے۔", difficulty: "easy", source_page: 38 },
+                { question: "'شبلی' کس مؤرخ اور سوانح نگار کا تخلص تھا؟", options: ["شبلی نعمانی", "شبلی بخاری", "شبلی لکھنوی", "شبلی قریشی"], correctOptionIndex: 0, explanation: "'شبلی' علامہ شبلی نعمانی کا تخلص تھا، جو اردو کے مشہور مؤرخ، سوانح نگار اور نقاد تھے۔", difficulty: "medium", source_page: 36 },
+                { question: "'عظمت رفتہ' کا مصنف کون ہے؟", options: ["رشید احمد صدیقی", "ڈاکٹر جمیل جالبی", "ڈاکٹر وزیر آغا", "پطرس بخاری"], correctOptionIndex: 0, explanation: "'عظمت رفتہ' رشید احمد صدیقی کی مشہور تصنیف ہے، جو ایک عظیم مزاح نگار اور نقاد تھے۔", difficulty: "tough", source_page: 38 }
             ];
             quizQuestions.push(...urduMCQs);
 
-            // Islamiat (10 MCQs from Pages 1289-1303)
-            const islamiatMCQs = [
-                { question: "نبی کریم ﷺ کے والد کا نام کیا تھا؟", options: ["ابوطالب", "عبداللہ", "عبدالمطلب", "حمزہ"], correctOptionIndex: 1, explanation: "نبی کریم ﷺ کے والد کا نام عبداللہ تھا (صفحہ 1289)." },
-                { question: "نبی کریم ﷺ کی والدہ کا نام کیا تھا؟", options: ["فاطمہ", "عائشہ", "آمنہ", "خدیجہ"], correctOptionIndex: 2, explanation: "نبی کریم ﷺ کی والدہ کا نام آمنہ تھا (صفحہ 1290)." },
-                { question: "نبی کریم ﷺ کے دادا کا نام کیا تھا؟", options: ["ابوطالب", "عبداللہ", "عبدالمطلب", "عباس"], correctOptionIndex: 2, explanation: "نبی کریم ﷺ کے دادا کا نام عبدالمطلب تھا (صفحہ 1291)." },
-                { question: "نبی کریم ﷺ کی پیدائش کس شہر میں ہوئی؟", options: ["مدینہ", "طائف", "مکہ", "قدس"], correctOptionIndex: 2, explanation: "نبی کریم ﷺ مکہ مکرمہ میں پیدا ہوئے (صفحہ 1292)." },
-                { question: "نبی کریم ﷺ کی پیدائش کے وقت کون سا واقعہ پیش آیا جس کا ذکر قرآن میں بھی ہے؟", options: ["جنگ بدر", "عام الفیل (ہاتھیوں کا واقعہ)", "ہجرت مدینہ", "صلح حدیبیہ"], correctOptionIndex: 1, explanation: "عام الفیل کے سال نبی کریم ﷺ کی ولادت ہوئی (صفحہ 1293)." },
-                { question: "نبی کریم ﷺ کے رضاعی والد کا نام کیا تھا؟", options: ["ابو سفیان", "ابو لہب", "حارث", "ابو ہریرہ"], correctOptionIndex: 2, explanation: "نبی کریم ﷺ نے حلیمہ سعدیہ کے ہاں پرورش پائی، ان کے شوہر کا نام حارث تھا (صفحہ 1294)." },
-                { question: "نبی کریم ﷺ نے کتنے سال کی عمر میں حضرت خدیجہؓ سے شادی کی؟", options: ["20 سال", "25 سال", "30 سال", "35 سال"], correctOptionIndex: 1, explanation: "نبی کریم ﷺ نے 25 سال کی عمر میں حضرت خدیجہؓ سے شادی کی (صفحہ 1295)." },
-                { question: "نبی کریم ﷺ کو پہلی وحی کہاں نازل ہوئی؟", options: ["کعبہ میں", "غارِ ثور میں", "غارِ حرا میں", "مدینہ میں"], correctOptionIndex: 2, explanation: "نبی کریم ﷺ پر پہلی وحی غارِ حرا میں نازل ہوئی (صفحہ 1296)." },
-                { question: "پہلی وحی میں قرآن مجید کی کون سی سورت کی آیات نازل ہوئیں؟", options: ["سورۃ الفاتحہ", "سورۃ البقرہ", "سورۃ العلق", "سورۃ الناس"], correctOptionIndex: 2, explanation: "سورۃ العلق کی پہلی پانچ آیات نازل ہوئیں (صفحہ 1297)." },
-                { question: "نبی کریم ﷺ نے کتنے سال مکہ میں نبوت کا فریضہ انجام دیا؟", options: ["10 سال", "13 سال", "15 سال", "20 سال"], correctOptionIndex: 1, explanation: "نبی کریم ﷺ نے مکہ میں 13 سال نبوت کا فریضہ انجام دیا (صفحہ 1298)." }
+            // General Abilities (40 MCQs)
+            const generalAbilitiesMCQs = [
+                // GA - June 18: Square Roots and Cube Roots: Pages 551-552
+                { question: "What is the square root of 81?", options: ["7", "8", "9", "10"], correctOptionIndex: 2, explanation: "The square root of 81 is 9, because 9 × 9 = 81.", difficulty: "easy", source_page: 551 },
+                { question: "What is the cube root of 64?", options: ["2", "3", "4", "5"], correctOptionIndex: 2, explanation: "The cube root of 64 is 4, because 4 × 4 × 4 = 64.", difficulty: "easy", source_page: 551 },
+                { question: "Find the value of \\( \\sqrt{144} \\).", options: ["11", "12", "13", "14"], correctOptionIndex: 1, explanation: "The square root of 144 is 12, because 12 × 12 = 144.", difficulty: "easy", source_page: 551 },
+                { question: "Find the value of \\( \\sqrt[3]{216} \\).", options: ["5", "6", "7", "8"], correctOptionIndex: 1, explanation: "The cube root of 216 is 6, because 6 × 6 × 6 = 216.", difficulty: "easy", source_page: 551 },
+                { question: "What is the square root of 0.25?", options: ["0.05", "0.5", "5", "0.005"], correctOptionIndex: 1, explanation: "The square root of 0.25 is 0.5, because 0.5 × 0.5 = 0.25.", difficulty: "medium", source_page: 551 },
+                { question: "What is the cube root of 0.001?", options: ["0.1", "0.01", "1", "0.0001"], correctOptionIndex: 0, explanation: "The cube root of 0.001 is 0.1, because 0.1 × 0.1 × 0.1 = 0.001.", difficulty: "medium", source_page: 551 },
+                { question: "If \\( x^2 = 361 \\), find x.", options: ["17", "18", "19", "21"], correctOptionIndex: 2, explanation: "If \\( x^2 = 361 \\), then \\( x = \\sqrt{361} = 19 \\).", difficulty: "easy", source_page: 551 },
+                { question: "If \\( x^3 = 512 \\), find x.", options: ["6", "7", "8", "9"], correctOptionIndex: 2, explanation: "If \\( x^3 = 512 \\), then \\( x = \\sqrt[3]{512} = 8 \\).", difficulty: "easy", source_page: 551 },
+                { question: "Evaluate \\( \\sqrt{289} \\).", options: ["15", "16", "17", "18"], correctOptionIndex: 2, explanation: "The square root of 289 is 17, because 17 × 17 = 289.", difficulty: "medium", source_page: 551 },
+                { question: "Evaluate \\( \\sqrt[3]{729} \\).", options: ["7", "8", "9", "10"], correctOptionIndex: 2, explanation: "The cube root of 729 is 9, because 9 × 9 × 9 = 729.", difficulty: "medium", source_page: 551 },
+                { question: "The area of a square field is 729 m². What is the length of its side?", options: ["25 m", "27 m", "29 m", "31 m"], correctOptionIndex: 1, explanation: "Area = side². 729 = side² => side = \\( \\sqrt{729} \\) = 27 m.", difficulty: "medium", source_page: 551 },
+                { question: "The volume of a cube is 2744 cm³. What is the length of its side?", options: ["12 cm", "13 cm", "14 cm", "15 cm"], correctOptionIndex: 2, explanation: "Volume = side³. 2744 = side³ => side = \\( \\sqrt[3]{2744} \\) = 14 cm.", difficulty: "tough", source_page: 552 },
+                { question: "Simplify \\( \\sqrt{2401} \\).", options: ["41", "49", "51", "59"], correctOptionIndex: 1, explanation: "The square root of 2401 is 49, because 49 × 49 = 2401.", difficulty: "tough", source_page: 551 },
+                { question: "Simplify \\( \\sqrt[3]{3375} \\).", options: ["10", "15", "20", "25"], correctOptionIndex: 1, explanation: "The cube root of 3375 is 15, because 15 × 15 × 15 = 3375.", difficulty: "tough", source_page: 552 },
+                { question: "What is \\( \\sqrt{0.0025} \\)?", options: ["0.005", "0.05", "0.5", "0.025"], correctOptionIndex: 1, explanation: "The square root of 0.0025 is 0.05, because 0.05 × 0.05 = 0.0025.", difficulty: "medium", source_page: 551 },
+                { question: "What is \\( \\sqrt[3]{0.000216} \\)?", options: ["0.06", "0.6", "0.006", "0.0216"], correctOptionIndex: 0, explanation: "The cube root of 0.000216 is 0.06, because 0.06 × 0.06 × 0.06 = 0.000216.", difficulty: "tough", source_page: 552 },
+                { question: "Find the smallest number by which 128 must be multiplied to make it a perfect cube.", options: ["2", "4", "8", "16"], correctOptionIndex: 1, explanation: "128 = 2^7. To make it a perfect cube (power of 3), we need 2^2 (i.e., 4) more. So 128 * 4 = 512 = 8^3.", difficulty: "tough", source_page: 552 },
+                { question: "Find the smallest number by which 720 must be divided to make it a perfect square.", options: ["2", "5", "10", "20"], correctOptionIndex: 2, explanation: "Prime factorization of 720 is 2^4 × 3^2 × 5^1. To make it a perfect square, we need to remove the odd power of 5. So, 720 must be divided by 5.", difficulty: "tough", source_page: 551 },
+                { question: "Evaluate \\( \\sqrt{5.76} \\).", options: ["2.2", "2.4", "2.6", "2.8"], correctOptionIndex: 1, explanation: "The square root of 5.76 is 2.4, because 2.4 × 2.4 = 5.76.", difficulty: "easy", source_page: 551 },
+                { question: "Evaluate \\( \\sqrt[3]{0.343} \\).", options: ["0.5", "0.6", "0.7", "0.8"], correctOptionIndex: 2, explanation: "The cube root of 0.343 is 0.7, because 0.7 × 0.7 × 0.7 = 0.343.", difficulty: "easy", source_page: 551 },
+                { question: "If the perimeter of a square is 48 cm, what is the length of its diagonal?", options: ["12 cm", "\\( 12\\sqrt{2} \\) cm", "24 cm", "\\( 24\\sqrt{2} \\) cm"], correctOptionIndex: 1, explanation: "Perimeter = 4 × side. 48 = 4 × side => side = 12 cm. Diagonal of a square = side × \\( \\sqrt{2} \\) = \\( 12\\sqrt{2} \\) cm.", difficulty: "medium", source_page: 552 },
+                { question: "If the volume of a cube is 1728 cm³, what is its total surface area?", options: ["144 cm²", "576 cm²", "864 cm²", "108 cm²"], correctOptionIndex: 1, explanation: "Volume = side³. 1728 = side³ => side = \\( \\sqrt[3]{1728} \\) = 12 cm. Total surface area of a cube = 6 × side² = 6 × 12² = 6 × 144 = 864 cm².", difficulty: "tough", source_page: 552 },
+                { question: "Simplify \\( \\sqrt{625/100} \\).", options: ["2.5", "25", "0.25", "5"], correctOptionIndex: 0, explanation: "\\( \\sqrt{625/100} = \\sqrt{6.25} = 2.5 \\).", difficulty: "medium", source_page: 551 },
+                { question: "Simplify \\( \\sqrt[3]{1000/27} \\).", options: ["10/3", "100/9", "3/10", "27/1000"], correctOptionIndex: 0, explanation: "\\( \\sqrt[3]{1000/27} = \\sqrt[3]{1000} / \\sqrt[3]{27} = 10/3 \\).", difficulty: "medium", source_page: 552 },
+                { question: "A school has 1600 students. If the number of rows is equal to the number of students in each row, how many rows are there?", options: ["30", "40", "50", "60"], correctOptionIndex: 1, explanation: "Number of rows = \\( \\sqrt{\\text{total students}} \\) = \\( \\sqrt{1600} \\) = 40 rows.", difficulty: "medium", source_page: 551 },
+                { question: "A box contains 125 small cubes. If the box is a larger cube, how many small cubes are along one edge of the box?", options: ["3", "4", "5", "6"], correctOptionIndex: 2, explanation: "Number of cubes along one edge = \\( \\sqrt[3]{\\text{total small cubes}} \\) = \\( \\sqrt[3]{125} \\) = 5 cubes.", difficulty: "easy", source_page: 552 },
+                { question: "Find the value of \\( \\sqrt{44100} \\).", options: ["210", "200", "220", "240"], correctOptionIndex: 0, explanation: "\\( \\sqrt{44100} = \\sqrt{441 \\times 100} = \\sqrt{441} \\times \\sqrt{100} = 21 \\times 10 = 210 \\).", difficulty: "tough", source_page: 551 },
+                { question: "Find the value of \\( \\sqrt[3]{8000} \\).", options: ["20", "40", "80", "100"], correctOptionIndex: 0, explanation: "\\( \\sqrt[3]{8000} = \\sqrt[3]{8 \\times 1000} = \\sqrt[3]{8} \\times \\sqrt[3]{1000} = 2 \\times 10 = 20 \\).", difficulty: "tough", source_page: 552 },
+                { question: "Which of the following is not a perfect square?", options: ["49", "100", "125", "196"], correctOptionIndex: 2, explanation: "49 (7²), 100 (10²), and 196 (14²) are perfect squares. 125 is a perfect cube (5³), but not a perfect square.", difficulty: "medium", source_page: 551 },
+                { question: "Which of the following is not a perfect cube?", options: ["8", "27", "64", "81"], correctOptionIndex: 3, explanation: "8 (2³), 27 (3³), and 64 (4³) are perfect cubes. 81 is a perfect square (9²), but not a perfect cube.", difficulty: "medium", source_page: 552 },
+                { question: "Simplify \\( \\sqrt{1.69} \\).", options: ["1.1", "1.2", "1.3", "1.4"], correctOptionIndex: 2, explanation: "The square root of 1.69 is 1.3, because 1.3 × 1.3 = 1.69.", difficulty: "easy", source_page: 551 },
+                { question: "Simplify \\( \\sqrt[3]{0.729} \\).", options: ["0.7", "0.8", "0.9", "0.09"], correctOptionIndex: 2, explanation: "The cube root of 0.729 is 0.9, because 0.9 × 0.9 × 0.9 = 0.729.", difficulty: "easy", source_page: 552 },
+                { question: "The hypotenuse of a right-angled triangle is 10 cm, and one leg is 6 cm. What is the length of the other leg?", options: ["4 cm", "5 cm", "7 cm", "8 cm"], correctOptionIndex: 3, explanation: "Using Pythagorean theorem: \\( a^2 + b^2 = c^2 \\). \\( 6^2 + b^2 = 10^2 \\) => \\( 36 + b^2 = 100 \\) => \\( b^2 = 64 \\) => \\( b = \\sqrt{64} = 8 \\) cm.", difficulty: "medium", source_page: 551 },
+                { question: "If \\( a^3 = 27 \\), then \\( a^{2} \\) is:", options: ["3", "6", "9", "81"], correctOptionIndex: 2, explanation: "If \\( a^3 = 27 \\), then \\( a = \\sqrt[3]{27} = 3 \\). Therefore, \\( a^2 = 3^2 = 9 \\).", difficulty: "tough", source_page: 552 },
+                { question: "Find the approximate value of \\( \\sqrt{50} \\).", options: ["6.5", "7.0", "7.1", "7.5"], correctOptionIndex: 2, explanation: "50 is between 49 (7²) and 64 (8²). It's closer to 49. \\( \\sqrt{50} \\approx 7.07 \\), so 7.1 is the closest approximate value.", difficulty: "medium", source_page: 551 },
+                { question: "Find the approximate value of \\( \\sqrt[3]{200} \\).", options: ["5.5", "5.8", "6.0", "6.2"], correctOptionIndex: 1, explanation: "200 is between 125 (5³) and 216 (6³). It's closer to 216. \\( \\sqrt[3]{200} \\approx 5.85 \\), so 5.8 is the closest approximate value.", difficulty: "medium", source_page: 552 },
+                { question: "What is the result of \\( (\\sqrt{11})^2 \\)?", options: ["1", "11", "121", "22"], correctOptionIndex: 1, explanation: "The square of a square root simply gives the number itself. So, \\( (\\sqrt{11})^2 = 11 \\).", difficulty: "easy", source_page: 551 },
+                { question: "What is the result of \\( (\\sqrt[3]{5})^3 \\)?", options: ["1", "5", "25", "125"], correctOptionIndex: 1, explanation: "The cube of a cube root simply gives the number itself. So, \\( (\\sqrt[3]{5})^3 = 5 \\).", difficulty: "easy", source_page: 552 },
+                { question: "A perfect square number cannot end with which of the following digits?", options: ["0", "1", "2", "4"], correctOptionIndex: 2, explanation: "Perfect squares can end with 0, 1, 4, 5, 6, 9. They never end with 2, 3, 7, 8.", difficulty: "tough", source_page: 551 },
+                { question: "The cube of an even number is always:", options: ["Odd", "Even", "Prime", "Negative"], correctOptionIndex: 1, explanation: "The cube of an even number (e.g., 2³=8, 4³=64) is always an even number.", difficulty: "tough", source_page: 552 }
             ];
-            quizQuestions.push(...islamiatMCQs);
+            quizQuestions.push(...generalAbilitiesMCQs);
 
-            // Arabic (7 MCQs from Pages 1414-1420)
-            const arabicMCQs = [
-                { question: "عربی میں 'رأس' کا کیا مطلب ہے؟", options: ["پاؤں", "ہاتھ", "سر", "گردن"], correctOptionIndex: 2, explanation: "رأس کے معنی سر ہیں (صفحہ 1414)." },
-                { question: "عربی میں 'شَجَرَةٌ' کا کیا مطلب ہے؟", options: ["پانی", "آگ", "درخت", "پتھر"], correctOptionIndex: 2, explanation: "شَجَرَةٌ کا مطلب درخت ہے (صفحہ 1415)." },
-                { question: "عربی میں 'بَابٌ' کا کیا مطلب ہے؟", options: ["کھڑکی", "دروازہ", "دیوار", "چھت"], correctOptionIndex: 1, explanation: "بَابٌ کا مطلب دروازہ ہے (صفحہ 1416)." },
-                { question: "عربی میں 'مِفْتَاحٌ' کا کیا مطلب ہے؟", options: ["تالہ", "چابی", "کتاب", "قلم"], correctOptionIndex: 1, explanation: "مِفْتَاحٌ کا مطلب چابی ہے (صفحہ 1417)." },
-                { question: "عربی میں 'قَلَمٌ' کا کیا مطلب ہے؟", options: ["کتاب", "کاپی", "میز", "قلم"], correctOptionIndex: 3, explanation: "قَلَمٌ کا مطلب قلم ہے (صفحہ 1418)." },
-                { question: "عربی میں 'بَيْتٌ' کا کیا مطلب ہے؟", options: ["مدرسہ", "مسجد", "گھر", "بازار"], correctOptionIndex: 2, explanation: "بَيْتٌ کا مطلب گھر ہے (صفحہ 1419)." },
-                { question: "عربی میں 'كِتَابٌ' کا کیا مطلب ہے؟", options: ["قلم", "میز", "کتاب", "کاپی"], correctOptionIndex: 2, explanation: "كِتَابٌ کا مطلب کتاب ہے (صفحہ 1420)." }
-            ];
-            quizQuestions.push(...arabicMCQs);
+            // Ensure exact counts for difficulty levels before trimming to 100
+            let easyQuestions = [];
+            let mediumQuestions = [];
+            let toughQuestions = [];
 
-            // Tajweed (3 MCQs from Pages 1465-1467)
-            const tajweedMCQs = [
-                { question: "اِظْہَار کی تعریف کیا ہے؟", options: ["نون ساکن یا تنوین کے بعد حروفِ اِخفَا میں سے کوئی حرف آئے", "نون ساکن یا تنوین کے بعد حروفِ حَلْقِی میں سے کوئی حرف آئے اور نون ساکن و تنوین کو بغیر غنہ کے ظاہر کرنا", "نون ساکن یا تنوین کے بعد حروفِ یرملون میں سے کوئی حرف آئے", "نون ساکن یا تنوین کو میم سے بدلنا"], correctOptionIndex: 1, explanation: "اِظْہَار کے معنی ظاہر کرنے کے ہیں (صفحہ 1465)." },
-                { question: "اِخفَا کی تعریف کیا ہے؟", options: ["نون ساکن یا تنوین کو ظاہر کرنا", "نون ساکن یا تنوین کو میم سے بدلنا", "نون ساکن یا تنوین کے بعد حروفِ اِخفَا میں سے کوئی حرف آئے اور غنہ کے ساتھ چھپا کر پڑھنا", "نون ساکن یا تنوین کو حروفِ یرملون میں ضم کرنا"], correctOptionIndex: 2, explanation: "اِخفَا کے معنی چھپانا یا پوشیدہ رکھنا ہے (صفحہ 1466)." },
-                { question: "اِقْلَاب کا قاعدہ کب ہوتا ہے؟", options: ["نون ساکن یا تنوین کے بعد حروفِ حلقی میں سے کوئی حرف آئے", "نون ساکن یا تنوین کے بعد حرف 'ب' آئے", "نون ساکن یا تنوین کے بعد حروفِ یرملون میں سے کوئی حرف آئے", "نون ساکن یا تنوین کے بعد حروفِ اِخفَا میں سے کوئی حرف آئے"], correctOptionIndex: 1, explanation: "اِقْلَاب کے معنی بدلنا ہیں (صفحہ 1467)." }
-            ];
-            quizQuestions.push(...tajweedMCQs);
+            // Categorize questions by initial difficulty
+            quizQuestions.forEach(q => {
+                if (q.difficulty === "easy") easyQuestions.push(q);
+                else if (q.difficulty === "medium") mediumQuestions.push(q);
+                else if (q.difficulty === "tough") toughQuestions.push(q);
+            });
 
-            // Randomly select one special question from the entire set
+            // Target distribution: 10 Easy, 50 Medium, 40 Tough
+            const targetEasy = 10;
+            const targetMedium = 50;
+            const targetTough = 40;
+
+            // Adjust Easy questions
+            while (easyQuestions.length > targetEasy && mediumQuestions.length < targetMedium) {
+                mediumQuestions.push(easyQuestions.pop());
+            }
+            while (easyQuestions.length < targetEasy && (easyQuestions.length + mediumQuestions.length + toughQuestions.length) < 100 && (mediumQuestions.length > 0 || toughQuestions.length > 0)) {
+                if (mediumQuestions.length > 0) {
+                    easyQuestions.push(mediumQuestions.pop());
+                } else if (toughQuestions.length > 0) {
+                    easyQuestions.push(toughQuestions.pop());
+                } else {
+                    break;
+                }
+            }
+
+
+            // Adjust Tough questions
+            while (toughQuestions.length > targetTough && mediumQuestions.length < targetMedium) {
+                mediumQuestions.push(toughQuestions.pop());
+            }
+            while (toughQuestions.length < targetTough && (easyQuestions.length + mediumQuestions.length + toughQuestions.length) < 100 && (mediumQuestions.length > 0 || easyQuestions.length > 0)) {
+                if (mediumQuestions.length > 0) {
+                    toughQuestions.push(mediumQuestions.pop());
+                } else if (easyQuestions.length > 0) {
+                    toughQuestions.push(easyQuestions.pop());
+                } else {
+                    break;
+                }
+            }
+
+
+            // Adjust Medium questions
+            while (mediumQuestions.length > targetMedium && (easyQuestions.length < targetEasy || toughQuestions.length < targetTough)) {
+                if (easyQuestions.length < targetEasy) {
+                    easyQuestions.push(mediumQuestions.pop());
+                } else if (toughQuestions.length < targetTough) {
+                    toughQuestions.push(mediumQuestions.pop());
+                } else {
+                    break;
+                }
+            }
+
+
+            // Recombine and shuffle before final trim
+            quizQuestions = [...easyQuestions, ...mediumQuestions, ...toughQuestions];
+            shuffleArray(quizQuestions); // Shuffle the entire combined list
+
+            // Trim to exactly 100 questions
+            quizQuestions = quizQuestions.slice(0, 100);
+
+            // Recalculate difficulty counts to ensure final distribution (for logging/debugging)
+            let finalEasyCount = quizQuestions.filter(q => q.difficulty === 'easy').length;
+            let finalMediumCount = quizQuestions.filter(q => q.difficulty === 'medium').length;
+            let finalToughCount = quizQuestions.filter(q => q.difficulty === 'tough').length;
+            console.log(`Final Question Counts: Easy=${finalEasyCount}, Medium=${finalMediumCount}, Tough=${finalToughCount}, Total=${quizQuestions.length}`);
+
+
+            // Randomly select one "Today's Special Question"
             specialQuestionIndex = Math.floor(Math.random() * quizQuestions.length);
             quizQuestions[specialQuestionIndex].special = true;
 
@@ -850,14 +896,33 @@
             }
         }
 
-        // Load MathJax for rendering LaTeX
-        const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-        script.async = true;
-        document.head.appendChild(script);
-
         // Initialize the quiz when the script loads
-        initializeQuiz();
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set the login ID dynamically based on the CURRENT_DATE_STR
+            const dateParts = CURRENT_DATE_STR.split(' ');
+            const monthName = dateParts[0].toUpperCase().substring(0, 3);
+            const day = parseInt(dateParts[1].replace(',', ''));
+            document.getElementById('loginId').value = `${day}${monthName}`; // e.g., 18JUNE
+
+            initializeQuiz();
+            // Initial call to set correct sticky date position on load
+            const liveDateElement = document.getElementById('liveDate');
+            if (window.innerWidth < 768) {
+                liveDateElement.style.alignSelf = 'flex-start';
+            } else {
+                liveDateElement.style.alignSelf = 'flex-end';
+            }
+        });
+
+        // Handle mobile sticky date position on resize
+        window.addEventListener('resize', () => {
+            const liveDateElement = document.getElementById('liveDate');
+            if (window.innerWidth < 768) {
+                liveDateElement.style.alignSelf = 'flex-start';
+            } else {
+                liveDateElement.style.alignSelf = 'flex-end';
+            }
+        });
     </script>
 </body>
 </html>
