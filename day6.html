@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 6 Quiz - EDUCATION DEPARTMENT SCREENING TEST PREPARATION – June 24, 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA; /* Very light gray */
+            color: #2C3E50; /* Main text color */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Full viewport height */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        /* Top Bar Styling */
+        .top-bar {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 0.75rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .top-bar .date-display {
+            color: #6D6875;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .top-bar .whatsapp-link {
+            color: #6D6875;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Header Section Styling */
+        .header-section {
+            background-color: #ffffff;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 1rem;
+        }
+
+        .quiz-title {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2C3E50;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar-container {
+            width: 80%;
+            max-width: 600px;
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin: 1rem auto;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(to right, #20B2AA, #3EB489); /* Teal to Mint Green */
+            border-radius: 5px;
+            transition: width 0.3s ease-in-out;
+        }
+
+        .banner-logo {
+            max-width: 200px;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .credits {
+            font-size: 0.85rem;
+            color: #6D6875;
+            margin-top: 0.5rem;
+        }
+
+        /* Card Styling (for login, quiz, results pages) */
+        .card {
+            background-color: #FFF5EE; /* PeachPuff - very light, warm tone */
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            margin: 1rem auto;
+            max-width: 700px;
+            width: 90%;
+            box-sizing: border-box;
+        }
+
+        /* Button Styling */
+        .button-gradient {
+            background-image: linear-gradient(to right, #E6E6FA, #FFDAB9); /* Lavender to PeachPuff - light and attractive */
+            color: #2C3E50; /* Dark text for contrast */
+            font-weight: bold;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            border: none;
+        }
+
+        .button-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .button-gradient:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .option-button {
+            background-color: #ffffff;
+            border: 1px solid #ddd; /* Light border */
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 0.75rem;
+            color: #2C3E50;
+            font-weight: normal;
+        }
+
+        .option-button:hover:not(.selected) {
+            background-color: #f0f0f0; /* Slightly darker on hover */
+        }
+
+        .option-button.selected {
+            border-color: #6D6875; /* Medium gray for selected */
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+
+        .option-button.correct {
+            background-color: #90EE90; /* LightGreen */
+            border-color: #28a745; /* Darker green border */
+            animation: pulse-green 0.5s ease-out forwards;
+        }
+
+        .option-button.incorrect {
+            background-color: #FF6B6B; /* Light Red */
+            border-color: #dc3545; /* Darker red border */
+            animation: shake-red 0.5s ease-out forwards;
+        }
+
+        /* Special Question Styling */
+        .special-question {
+            border: 3px solid #FFD700; /* Gold border */
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); /* Glowing effect */
+        }
+
+        /* Explanation Section Styling */
+        .explanation {
+            background-color: #e0f7fa; /* Light Cyan */
+            border-left: 5px solid #20B2AA; /* Teal border */
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 8px;
+            color: #2C3E50;
+            font-size: 0.9rem;
+            display: none; /* Hidden by default */
+        }
+
+        /* Timer and Progress Display */
+        .timer-display {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2C3E50;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .question-progress {
+            font-size: 1rem;
+            color: #6D6875;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        /* Animations */
+        @keyframes pulse-green {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.01); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake-red {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .top-bar {
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 0.5rem;
+            }
+            .top-bar .date-display {
+                order: 2; /* Move date to bottom on mobile */
+                font-size: 0.8rem;
+            }
+            .top-bar .whatsapp-link {
+                order: 1; /* Move whatsapp to top on mobile */
+                font-size: 0.8rem;
+            }
+            .quiz-title {
+                font-size: 1.5rem;
+            }
+            .banner-logo {
+                max-width: 150px;
+            }
+            .card {
+                margin: 0.75rem auto;
+                padding: 1rem;
+            }
+            .button-gradient {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            .option-button {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <script>
+        // Disable right-click, specific keyboard shortcuts (Ctrl+U, Ctrl+Shift+I, Ctrl+Shift+J, F12), copy, and paste
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) {
+                e.preventDefault();
+            }
+            if (e.key === 'F12') {
+                e.preventDefault();
+            }
+        });
+        document.addEventListener('copy', event => event.preventDefault());
+        document.addEventListener('paste', event => event.preventDefault());
+    </script>
+
+    <div class="top-bar">
+        <a href="https://chat.whatsapp.com/H3uhXoDodPmAOaVvi3PcZq" target="_blank" class="whatsapp-link">
+            <i class="fab fa-whatsapp"></i> Join WhatsApp Community
+        </a>
+        <div class="date-display" id="liveDate"></div>
+    </div>
+
+    <div class="header-section">
+        <h1 class="quiz-title" id="quizTitle"></h1>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <img src="https://i.ibb.co/LXdkJVy8/20250524-0050-Empowering-Educators-remix-01jw0makvqewdvqns1te3jvpgs.png" alt="Banner Logo" class="banner-logo mx-auto">
+        <div class="credits">
+            KP Teacher Corps | PREPARED BY: SYED ASGHAR ALI SHAH | Contact: 03265762698
+            <br>
+            Updated on: <span id="updatedDate"></span>
+        </div>
+    </div>
+
+    <main class="flex-grow flex items-center justify-center p-4">
+        <!-- Added 'hidden' class to all sections initially -->
+        <div id="loginPage" class="card hidden">
+            <h2 class="text-xl font-bold mb-4 text-center">Login</h2>
+            <div class="mb-4">
+                <label for="loginId" class="block text-sm font-medium text-gray-700 mb-1">ID:</label>
+                <input type="text" id="loginId" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" value="">
+            </div>
+            <div class="mb-6">
+                <label for="loginPassword" class="block text-sm font-medium text-gray-700 mb-1">Password:</label>
+                <input type="password" id="loginPassword" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" value="">
+            </div>
+            <p id="loginError" class="text-red-500 text-sm mb-4 hidden">Invalid ID or Password</p>
+            <button id="loginBtn" class="button-gradient w-full">Login</button>
+        </div>
+
+        <div id="candidateNamePage" class="card hidden">
+            <h2 class="text-xl font-bold mb-4 text-center">Candidate Information</h2>
+            <div class="mb-6">
+                <label for="candidateName" class="block text-sm font-medium text-gray-700 mb-1">Enter Full Name:</label>
+                <input type="text" id="candidateName" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" placeholder="Your Full Name">
+            </div>
+            <p id="nameError" class="text-red-500 text-sm mb-4 hidden">Please enter your full name.</p>
+            <button id="startQuizBtn" class="button-gradient w-full">Start Quiz</button>
+        </div>
+
+        <div id="quizPage" class="card hidden">
+            <div class="timer-display" id="timerDisplay"></div>
+            <div class="question-progress" id="questionProgress"></div>
+            <h2 class="text-lg font-semibold mb-4" id="questionText"></h2>
+            <div id="optionsContainer" class="flex flex-col gap-3 mb-6">
+            </div>
+            <div class="flex justify-between">
+                <button id="prevBtn" class="button-gradient px-6 py-2">Previous</button>
+                <button id="nextBtn" class="button-gradient px-6 py-2">Next</button>
+                <button id="submitQuizBtn" class="button-gradient px-6 py-2 hidden">Submit Quiz</button>
+            </div>
+            <div id="explanationDiv" class="explanation"></div>
+        </div>
+
+        <div id="resultsPage" class="card hidden">
+            <h2 class="text-xl font-bold mb-4 text-center">Quiz Results</h2>
+            <p class="mb-2"><strong>Candidate Name:</strong> <span id="resultCandidateName"></span></p>
+            <p class="mb-2"><strong>Date of Quiz:</strong> <span id="resultDate"></span></p>
+            <p class="mb-2"><strong>Score:</strong> <span id="resultScore"></span> / <span id="maxScore"></span></p>
+            <p class="mb-2"><strong>Correct Answers:</strong> <span id="resultCorrect"></span></p>
+            <p class="mb-2"><strong>Incorrect Answers:</strong> <span id="resultIncorrect"></span></p>
+            <p class="mb-4"><strong>Time Taken:</strong> <span id="resultTimeTaken"></span></p>
+            <button id="restartQuizBtn" class="button-gradient w-full">Restart Quiz</button>
+        </div>
+    </main>
+
+    <script>
+        // Set the current date for display and logic
+        const CURRENT_DATE_STR = "June 24, 2025";
+        const CURRENT_DATE = new Date(CURRENT_DATE_STR);
+
+        // Update header dates
+        document.getElementById('liveDate').textContent = CURRENT_DATE_STR;
+        document.getElementById('updatedDate').textContent = CURRENT_DATE_STR;
+        document.getElementById('quizTitle').textContent = `Day 6 Quiz - EDUCATION DEPARTMENT SCREENING TEST PREPARATION – ${CURRENT_DATE_STR}`;
+
+        // Quiz Data Structure
+        const quizQuestions = [];
+        let currentQuestionIndex = 0;
+        let userAnswers = []; // Stores { questionIndex: int, selectedOptionIndex: int, isCorrect: bool }
+        let quizStartTime;
+        let timerInterval;
+        const QUIZ_DURATION_MINUTES = 40; // Default quiz duration
+        let specialQuestionIndex = -1; // To store the index of the special question
+
+        // --- Helper Functions ---
+
+        /**
+         * Shuffles an array in place using Fisher-Yates (Knuth) shuffle.
+         * @param {Array} array - The array to shuffle.
+         */
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        /**
+         * Generates a unique ID for Formspree submission.
+         * @returns {string} A unique ID.
+         */
+        function generateUniqueId() {
+            return 'quiz_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        }
+
+        /**
+         * Converts seconds to a human-readable time string (e.g., "35 minutes 10 seconds").
+         * @param {number} totalSeconds - The total number of seconds.
+         * @returns {string} Formatted time string.
+         */
+        function formatTime(totalSeconds) {
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+            return `${minutes} minutes ${seconds} seconds`;
+        }
+
+        /**
+         * Updates the progress bar and question progress text.
+         */
+        function updateProgressBar() {
+            const progress = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+            document.getElementById('questionProgress').textContent = `Question ${currentQuestionIndex + 1}/${quizQuestions.length} – ${Math.round(progress)}% Complete`;
+        }
+
+        /**
+         * Displays a specific page and hides others.
+         * @param {string} pageId - The ID of the page to display.
+         */
+        function showPage(pageId) {
+            document.getElementById('loginPage').classList.add('hidden');
+            document.getElementById('candidateNamePage').classList.add('hidden');
+            document.getElementById('quizPage').classList.add('hidden');
+            document.getElementById('resultsPage').classList.add('hidden');
+            document.getElementById(pageId).classList.remove('hidden');
+        }
+
+        /**
+         * Starts the quiz timer.
+         */
+        function startTimer() {
+            quizStartTime = Date.now();
+            let timeLeft = QUIZ_DURATION_MINUTES * 60; // Convert minutes to seconds
+
+            function updateTimerDisplay() {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                document.getElementById('timerDisplay').textContent = `Time Left: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    submitQuiz(true); // Auto-submit on timer expiry
+                } else {
+                    timeLeft--;
+                }
+            }
+
+            updateTimerDisplay(); // Initial display
+            timerInterval = setInterval(updateTimerDisplay, 1000);
+        }
+
+        /**
+         * Renders the current question and its options.
+         */
+        function renderQuestion() {
+            const question = quizQuestions[currentQuestionIndex];
+            document.getElementById('questionText').innerHTML = question.question;
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = ''; // Clear previous options
+
+            // Remove special-question class from previous question if any
+            const quizCard = document.getElementById('quizPage');
+            quizCard.classList.remove('special-question');
+
+            // Add special-question class if it's today's special question and date matches
+            const today = new Date().toDateString();
+            if (question.special && CURRENT_DATE.toDateString() === today) {
+                quizCard.classList.add('special-question');
+            }
+
+            question.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.classList.add('option-button', 'w-full');
+                button.innerHTML = option; // Use innerHTML to render LaTeX
+                button.dataset.optionIndex = index;
+                button.onclick = () => selectOption(index);
+
+                // Apply selected state if already answered
+                const userAnswer = userAnswers[currentQuestionIndex];
+                if (userAnswer && userAnswer.selectedOptionIndex === index) {
+                    button.classList.add('selected');
+                    if (userAnswer.isCorrect) {
+                        button.classList.add('correct');
+                    } else {
+                        button.classList.add('incorrect');
+                    }
+                    // Disable all options if already answered
+                    Array.from(optionsContainer.children).forEach(optBtn => optBtn.disabled = true);
+                    document.getElementById('explanationDiv').style.display = 'block';
+                }
+                optionsContainer.appendChild(button);
+            });
+
+            // Render math equations using MathJax if available
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise([document.getElementById('questionText'), optionsContainer]);
+            }
+
+
+            // Show/hide explanation
+            const explanationDiv = document.getElementById('explanationDiv');
+            explanationDiv.innerHTML = `<p class="font-bold">Explanation:</p><p>${question.explanation}</p>`;
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise([explanationDiv]);
+            }
+            if (userAnswers[currentQuestionIndex] && userAnswers[currentQuestionIndex].selectedOptionIndex !== undefined) {
+                explanationDiv.style.display = 'block';
+            } else {
+                explanationDiv.style.display = 'none';
+            }
+
+            // Update navigation buttons visibility
+            document.getElementById('prevBtn').classList.toggle('hidden', currentQuestionIndex === 0);
+            document.getElementById('nextBtn').classList.toggle('hidden', currentQuestionIndex === quizQuestions.length - 1);
+            document.getElementById('submitQuizBtn').classList.toggle('hidden', currentQuestionIndex !== quizQuestions.length - 1);
+
+            updateProgressBar();
+        }
+
+        /**
+         * Handles option selection by the user.
+         * @param {number} selectedOptionIndex - The index of the selected option.
+         */
+        function selectOption(selectedOptionIndex) {
+            const question = quizQuestions[currentQuestionIndex];
+            const isCorrect = (selectedOptionIndex === question.correctOptionIndex);
+
+            // Store user's answer
+            userAnswers[currentQuestionIndex] = {
+                questionIndex: currentQuestionIndex,
+                selectedOptionIndex: selectedOptionIndex,
+                isCorrect: isCorrect
+            };
+
+            // Apply visual feedback
+            const optionsContainer = document.getElementById('optionsContainer');
+            Array.from(optionsContainer.children).forEach((button, index) => {
+                button.disabled = true; // Disable all options after selection
+                button.classList.remove('selected', 'correct', 'incorrect'); // Clear previous states
+
+                if (index === selectedOptionIndex) {
+                    button.classList.add('selected');
+                    if (isCorrect) {
+                        button.classList.add('correct');
+                    } else {
+                        button.classList.add('incorrect');
+                    }
+                }
+            });
+
+            // Show explanation
+            document.getElementById('explanationDiv').style.display = 'block';
+             // Render math equations in explanation
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise([document.getElementById('explanationDiv')]);
+            }
+        }
+
+        /**
+         * Navigates to the next question.
+         */
+        function nextQuestion() {
+            if (currentQuestionIndex < quizQuestions.length - 1) {
+                currentQuestionIndex++;
+                renderQuestion();
+            }
+        }
+
+        /**
+         * Navigates to the previous question.
+         */
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderQuestion();
+            }
+        }
+
+        /**
+         * Submits the quiz, calculates results, and displays them.
+         * @param {boolean} isAutoSubmit - True if submitted by timer, false otherwise.
+         */
+        function submitQuiz(isAutoSubmit = false) {
+            clearInterval(timerInterval); // Stop the timer
+
+            const endTime = Date.now();
+            const timeTakenSeconds = Math.round((endTime - quizStartTime) / 1000);
+
+            let correctCount = 0;
+            let incorrectCount = 0;
+            let totalAttempted = 0;
+
+            userAnswers.forEach(answer => {
+                if (answer && answer.selectedOptionIndex !== undefined) {
+                    totalAttempted++;
+                    if (answer.isCorrect) {
+                        correctCount++;
+                    } else {
+                        incorrectCount++;
+                    }
+                }
+            });
+
+            const maxPossibleScore = quizQuestions.length * 2; // 2 points per question
+            const score = (correctCount * 2) - incorrectCount; // Score calculation: 2 for correct, -1 for incorrect
+
+            const candidateName = document.getElementById('candidateName').value;
+
+            document.getElementById('resultCandidateName').textContent = candidateName;
+            document.getElementById('resultDate').textContent = CURRENT_DATE_STR;
+            document.getElementById('resultScore').textContent = score;
+            document.getElementById('maxScore').textContent = maxPossibleScore;
+            document.getElementById('resultCorrect').textContent = `${correctCount} / ${totalAttempted}`;
+            document.getElementById('resultIncorrect').textContent = `${incorrectCount} / ${totalAttempted}`;
+            document.getElementById('resultTimeTaken').textContent = formatTime(timeTakenSeconds);
+
+            showPage('resultsPage');
+
+            // Silent Formspree submission
+            const formData = new FormData();
+            formData.append('Candidate Name', candidateName);
+            formData.append('Date of Quiz', CURRENT_DATE_STR);
+            formData.append('Score', score);
+            formData.append('Correct Answers', correctCount);
+            formData.append('Incorrect Answers', incorrectCount);
+            formData.append('Time Taken', formatTime(timeTakenSeconds));
+            formData.append('Quiz ID', "day6"); // Specific ID for Day 6 quiz
+
+            fetch('https://formspree.io/f/xwpojgab', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    console.log('Quiz results submitted successfully!');
+                } else {
+                    console.error('Formspree submission failed.');
+                }
+            }).catch(error => {
+                console.error('Error during Formspree submission:', error);
+            });
+        }
+
+        // --- Event Listeners ---
+
+        document.getElementById('loginBtn').addEventListener('click', () => {
+            const id = document.getElementById('loginId').value;
+            const password = document.getElementById('loginPassword').value;
+            const loginError = document.getElementById('loginError');
+
+            // Specific credentials for Day 6
+            if (id === 'day6' && password === '6666') {
+                loginError.classList.add('hidden');
+                showPage('candidateNamePage');
+            } else {
+                loginError.classList.remove('hidden');
+            }
+        });
+
+        document.getElementById('startQuizBtn').addEventListener('click', () => {
+            const candidateNameInput = document.getElementById('candidateName');
+            const candidateName = candidateNameInput.value.trim();
+            const nameError = document.getElementById('nameError');
+
+            if (candidateName) {
+                nameError.classList.add('hidden');
+                // Initialize userAnswers array for the new quiz attempt
+                userAnswers = new Array(quizQuestions.length).fill(null);
+                currentQuestionIndex = 0;
+                startTimer();
+                renderQuestion();
+                showPage('quizPage');
+            } else {
+                nameError.classList.remove('hidden');
+            }
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', nextQuestion);
+        document.getElementById('prevBtn').addEventListener('click', prevQuestion);
+        document.getElementById('submitQuizBtn').addEventListener('click', () => submitQuiz(false));
+        document.getElementById('restartQuizBtn').addEventListener('click', () => {
+            // Reset quiz state
+            currentQuestionIndex = 0;
+            userAnswers = [];
+            clearInterval(timerInterval); // Clear any lingering timer
+            // Re-shuffle questions for a new attempt
+            initializeQuiz();
+            // Clear login fields and go back to login page
+            document.getElementById('loginId').value = '';
+            document.getElementById('loginPassword').value = '';
+            document.getElementById('candidateName').value = '';
+            showPage('loginPage');
+        });
+
+        // --- Quiz Initialization ---
+        function initializeQuiz() {
+            // Clear previous questions
+            quizQuestions.length = 0;
+
+            // Pedagogy (10 MCQs from Pages 21-24)
+            const pedagogyMCQs = [
+                { question: "The word 'pedagogy' means:", options: ["To guide the child", "To lead the child", "To educate the child", "To evaluate the students"], correctOptionIndex: 1, explanation: "Pedagogy is derived from Greek words 'paidos' (child) and 'agogos' (leader), meaning 'to lead the child' (Page 21)." },
+                { question: "Pedagogy is the study of:", options: ["Learning process", "Education", "Teaching method", "Books"], correctOptionIndex: 2, explanation: "Pedagogy focuses on the theory and practice of teaching (Page 21)." },
+                { question: "Which type of learning is predominantly teacher centered?", options: ["Andragogy", "Pedagogy", "Heutagogy", "Cybergogy"], correctOptionIndex: 1, explanation: "Pedagogy implies a teacher-led approach, suitable for children (Page 21)." },
+                { question: "Who is considered as father of research in teaching?", options: ["Edward Lee Thorndike", "Lewis Medison", "Joseph Mayer Rice", "None of these"], correctOptionIndex: 2, explanation: "Joseph Mayer Rice was a pioneer in educational research (Page 21)." },
+                { question: "What does andragogy mean?", options: ["Teaching of kids", "Teaching of adults", "Teaching right from the book", "Teaching"], correctOptionIndex: 1, explanation: "Andragogy refers to the methods and principles used in adult education (Page 21)." },
+                { question: "An adult in training 'needs to know' which means:", options: ["they are goal-oriented and expect it to be relevant", "they bring knowledge they want to share", "they need to be motivated", "they know their own needs"], correctOptionIndex: 0, explanation: "Adult learners are typically purpose-driven and seek relevance in their learning (Page 21)." },
+                { question: "The primary task of the teacher is:", options: ["to teach the prescribed curriculum", "to stimulate and guide student learning", "to promote habits of conformity to adult's demands and expectation", "to provide diagnostic and remedial aid wherever indicated"], correctOptionIndex: 1, explanation: "A teacher's role is to facilitate and support student learning (Page 21)." },
+                { question: "The first learning center of a child is:", options: ["School", "Society", "Home", "All"], correctOptionIndex: 2, explanation: "The home environment is the primary and initial learning space for a child (Page 22)." },
+                { question: "A scoring guide used to evaluate the quality of students is called:", options: ["List card", "Rubrics", "Rating scale", "None of these"], correctOptionIndex: 1, explanation: "Rubrics provide clear criteria for evaluating student work (Page 22)." },
+                { question: "Education according to John Dewey is:", options: ["Prepare for future life", "Shaping", "Learning to do by doing", "Struggling"], correctOptionIndex: 2, explanation: "John Dewey advocated for experiential learning and active participation (Page 22)." }
+            ];
+            quizQuestions.push(...pedagogyMCQs);
+
+            // General Science (15 MCQs from Pages 171-188)
+            const generalScienceMCQs = [
+                { question: "What is the primary function of the 'skeletal system'?", options: ["Pumping blood", "Support and protection of internal organs", "Digesting food", "Producing hormones"], correctOptionIndex: 1, explanation: "The skeletal system provides the framework for the body and protects vital organs (Page 171)." },
+                { question: "Which of the following is a bone?", options: ["Muscle", "Tendon", "Femur", "Ligament"], correctOptionIndex: 2, explanation: "The femur is the thigh bone, the longest bone in the human body (Page 172)." },
+                { question: "What connects bone to bone?", options: ["Tendon", "Muscle", "Ligament", "Cartilage"], correctOptionIndex: 2, explanation: "Ligaments are strong, fibrous tissues that connect bones at joints (Page 173)." },
+                { question: "What connects muscle to bone?", options: ["Ligament", "Cartilage", "Tendon", "Joint"], correctOptionIndex: 2, explanation: "Tendons are tough bands of fibrous connective tissue that connect muscles to bones (Page 174)." },
+                { question: "What is the function of 'red blood cells'?", options: ["Fighting infection", "Clotting blood", "Carrying oxygen", "Producing antibodies"], correctOptionIndex: 2, explanation: "Red blood cells, containing hemoglobin, transport oxygen from the lungs to the body's tissues (Page 175)." },
+                { question: "Which organ is part of the 'circulatory system'?", options: ["Stomach", "Lungs", "Heart", "Kidney"], correctOptionIndex: 2, explanation: "The heart pumps blood throughout the body (Page 176)." },
+                { question: "What is the largest organ in the human body?", options: ["Brain", "Heart", "Liver", "Skin"], correctOptionIndex: 3, explanation: "The skin is the body's largest organ, forming a protective barrier (Page 177)." },
+                { question: "What is the main function of the 'nervous system'?", options: ["Digestion", "Circulation", "Control and coordination of bodily functions", "Respiration"], correctOptionIndex: 2, explanation: "The nervous system transmits signals between different parts of the body (Page 178)." },
+                { question: "Which part of the brain is responsible for thinking, memory, and language?", options: ["Cerebellum", "Brainstem", "Cerebrum", "Spinal cord"], correctOptionIndex: 2, explanation: "The cerebrum is the largest part of the brain and is involved in higher-level functions (Page 179)." },
+                { question: "What is the function of the 'digestive system'?", options: ["Breathing", "Pumping blood", "Breaking down food for nutrient absorption", "Filtering waste from blood"], correctOptionIndex: 2, explanation: "The digestive system converts food into energy and absorbs nutrients (Page 180)." },
+                { question: "Which organ is primarily responsible for filtering waste products from the blood to produce urine?", options: ["Liver", "Stomach", "Kidney", "Lungs"], correctOptionIndex: 2, explanation: "The kidneys play a vital role in maintaining fluid and electrolyte balance (Page 181)." },
+                { question: "What is the process by which plants convert light energy into chemical energy?", options: ["Respiration", "Transpiration", "Photosynthesis", "Germination"], correctOptionIndex: 2, explanation: "Photosynthesis uses sunlight, water, and carbon dioxide to create glucose and oxygen (Page 182)." },
+                { question: "Which gas do plants absorb from the atmosphere for photosynthesis?", options: ["Oxygen", "Nitrogen", "Carbon dioxide", "Hydrogen"], correctOptionIndex: 2, explanation: "Carbon dioxide is a key reactant in photosynthesis (Page 183)." },
+                { question: "What are the tiny pores on the surface of leaves that allow for gas exchange?", options: ["Chloroplasts", "Stomata", "Mitochondria", "Xylem"], correctOptionIndex: 1, explanation: "Stomata regulate the exchange of gases and water vapor (Page 184)." },
+                { question: "What is the male reproductive part of a flower?", options: ["Pistil", "Ovary", "Stamen", "Petal"], correctOptionIndex: 2, explanation: "The stamen consists of the anther and filament, producing pollen (Page 185)." }
+            ];
+            quizQuestions.push(...generalScienceMCQs);
+
+            // Social Studies (10 MCQs from Pages 525-542)
+            const socialStudiesMCQs = [
+                { question: "What is 'population distribution'?", options: ["The number of people in a country.", "The pattern of where people live.", "The growth rate of a population.", "The movement of people."], correctOptionIndex: 1, explanation: "Population distribution describes how people are spread across a geographical area (Page 525)." },
+                { question: "Which factor primarily influences population distribution?", options: ["Government type", "Availability of resources and climate", "Historical events", "Religious beliefs"], correctOptionIndex: 1, explanation: "Access to water, fertile land, and suitable climate are major determinants of where people settle (Page 526)." },
+                { question: "What is 'population density'?", options: ["Total population of a region.", "The number of people living per unit of area.", "The birth rate of a country.", "The average age of a population."], correctOptionIndex: 1, explanation: "Population density measures how crowded a place is (Page 527)." },
+                { question: "Which continent has the highest population density?", options: ["Africa", "North America", "Asia", "Europe"], correctOptionIndex: 2, explanation: "Asia, particularly South and East Asia, has very high population densities (Page 528)." },
+                { question: "What is 'birth rate'?", options: ["Number of deaths per 1000 people.", "Number of live births per 1000 people in a year.", "Total population increase.", "Average number of children per woman."], correctOptionIndex: 1, explanation: "Birth rate is a key demographic indicator (Page 529)." },
+                { question: "What is 'death rate'?", options: ["Number of live births per 1000 people.", "Number of deaths per 1000 people in a year.", "Total population decrease.", "Average lifespan of a population."], correctOptionIndex: 1, explanation: "Death rate indicates the number of deaths relative to the population (Page 530)." },
+                { question: "What is 'natural increase' in population?", options: ["Immigration minus emigration.", "Birth rate minus death rate.", "Total population growth.", "Economic growth."], correctOptionIndex: 1, explanation: "Natural increase refers to population change due to births and deaths (Page 531)." },
+                { question: "What is 'migration'?", options: ["Movement of goods.", "Movement of people from one place to another with the intention of settling permanently or temporarily in a new location.", "Seasonal travel.", "Daily commuting."], correctOptionIndex: 1, explanation: "Migration is a significant factor in population change (Page 532)." },
+                { question: "What are 'push factors' in migration?", options: ["Conditions that attract people to a new location.", "Reasons that force people to leave their current location.", "Positive aspects of a destination.", "Opportunities in a new country."], correctOptionIndex: 1, explanation: "Push factors include conflict, poverty, and lack of opportunities (Page 533)." },
+                { question: "What is a 'demographic transition model'?", options: ["A model showing economic development.", "A model that describes population change over time as a country develops economically.", "A model for predicting climate change.", "A model for urban growth."], correctOptionIndex: 1, explanation: "The demographic transition model explains how birth and death rates change over time, affecting population growth (Page 534)." }
+            ];
+            quizQuestions.push(...socialStudiesMCQs);
+
+            // English (10 MCQs from Pages 831-838 - Tenses & Voice)
+            const englishMCQs = [
+                { question: "Which tense describes an action completed in the past?", options: ["Present Simple", "Past Simple", "Future Simple", "Present Continuous"], correctOptionIndex: 1, explanation: "The Past Simple tense is used for actions that happened at a specific time in the past (Page 831)." },
+                { question: "Identify the tense: 'She is singing a song.'", options: ["Present Simple", "Present Continuous", "Past Simple", "Future Continuous"], correctOptionIndex: 1, explanation: "This sentence uses 'is' + verb-ing, which indicates the Present Continuous tense (Page 832)." },
+                { question: "Which tense is used to describe a habit or a general truth?", options: ["Past Continuous", "Present Perfect", "Present Simple", "Future Simple"], correctOptionIndex: 2, explanation: "The Present Simple tense is used for repeated actions, habits, and facts (Page 833)." },
+                { question: "Form the Past Perfect tense: 'They ______ (finish) their homework before the game.'", options: ["have finished", "had finished", "will finish", "were finishing"], correctOptionIndex: 1, explanation: "The Past Perfect tense ('had' + past participle) describes an action completed before another past action (Page 834)." },
+                { question: "What is the Passive Voice of 'The boy broke the window'?", options: ["The window broke the boy.", "The window was broken by the boy.", "The boy was broken by the window.", "The window breaks the boy."], correctOptionIndex: 1, explanation: "In Passive Voice, the object of the active sentence becomes the subject (Page 837)." },
+                { question: "Identify the voice: 'The letter was written by her.'", options: ["Active Voice", "Passive Voice", "Direct Speech", "Indirect Speech"], correctOptionIndex: 1, explanation: "The structure 'was' + past participle + 'by' indicates Passive Voice (Page 837)." },
+                { question: "Change to Active Voice: 'The cake was eaten by him.'", options: ["He ate the cake.", "The cake ate him.", "He was eating the cake.", "The cake is eaten by him."], correctOptionIndex: 0, explanation: "To change to Active Voice, the agent ('him') becomes the subject (Page 838)." },
+                { question: "Which voice focuses on the performer of the action?", options: ["Passive Voice", "Active Voice", "Indirect Voice", "Reported Voice"], correctOptionIndex: 1, explanation: "Active Voice emphasizes the subject doing the action (Page 837)." },
+                { question: "Which tense describes an action that started in the past and continues up to the present?", options: ["Past Simple", "Present Perfect", "Present Continuous", "Future Simple"], correctOptionIndex: 1, explanation: "The Present Perfect tense is used for actions that began in the past and have relevance to the present (Page 835)." },
+                { question: "Fill in the blank with the correct form of the verb: 'They ______ (play) football tomorrow.'", options: ["played", "are playing", "will played", "play"], correctOptionIndex: 1, explanation: "For a planned future action, Present Continuous is often used, or 'will play' could also be an option depending on context, but 'are playing' implies a definite arrangement. The page refers to future tenses, allowing for this (Page 836)." }
+            ];
+            quizQuestions.push(...englishMCQs);
+
+            // Mathematics (10 MCQs from Pages 982-988 - Fractions, Decimals, Percentages)
+            const mathematicsMCQs = [
+                { question: "Convert the fraction $3/4$ to a decimal.", options: ["0.3", "0.4", "0.75", "1.25"], correctOptionIndex: 2, explanation: "To convert a fraction to a decimal, divide the numerator by the denominator: $3 \\div 4 = 0.75$ (Page 982)." },
+                { question: "Convert the decimal $0.2$ to a fraction in simplest form.", options: ["1/2", "1/5", "2/10", "2/5"], correctOptionIndex: 1, explanation: "$0.2 = 2/10$, which simplifies to $1/5$ (Page 983)." },
+                { question: "What is $25\%$ as a fraction in simplest form?", options: ["1/4", "1/2", "1/3", "1/5"], correctOptionIndex: 0, explanation: "$25\% = 25/100$, which simplifies to $1/4$ (Page 984)." },
+                { question: "Convert $0.6$ to a percentage.", options: ["6%", "0.6%", "60%", "600%"], correctOptionIndex: 2, explanation: "To convert a decimal to a percentage, multiply by 100: $0.6 \\times 100 = 60\%$ (Page 985)." },
+                { question: "Calculate $10\%$ of $150$.", options: ["10", "15", "20", "25"], correctOptionIndex: 1, explanation: "$10\%$ of $150 = 0.10 \\times 150 = 15$ (Page 986)." },
+                { question: "If a shirt costs $400 and is on sale for $20\%$ off, what is the discount amount?", options: ["$20", "$40", "$80", "$100"], correctOptionIndex: 2, explanation: "Discount = $20\%$ of $400 = 0.20 \\times 400 = 80$ (Page 987)." },
+                { question: "What is the decimal equivalent of $1/8$?", options: ["0.125", "0.25", "0.5", "0.8"], correctOptionIndex: 0, explanation: "$1 \\div 8 = 0.125$ (Page 982)." },
+                { question: "If an item is priced at $50 and has a $6\%$ sales tax, what is the sales tax amount?", options: ["$3", "$6", "$12", "$30"], correctOptionIndex: 0, explanation: "Sales tax = $6\%$ of $50 = 0.06 \\times 50 = 3$ (Page 986)." },
+                { question: "Express $75/100$ as a percentage.", options: ["7.5%", "75%", "0.75%", "750%"], correctOptionIndex: 1, explanation: "$75/100$ is equivalent to $75\%$ (Page 984)." },
+                { question: "Arrange the following from smallest to largest: $0.5$, $1/4$, $70\%$.", options: ["$1/4, 0.5, 70\%$", "$0.5, 1/4, 70\%$", "$70\%, 0.5, 1/4$", "$1/4, 70\%, 0.5$"], correctOptionIndex: 0, explanation: "Convert all to decimals: $1/4 = 0.25$, $0.5 = 0.5$, $70\% = 0.7$. So, $0.25, 0.5, 0.7$ (Page 988)." }
+            ];
+            quizQuestions.push(...mathematicsMCQs);
+
+            // Randomly select one special question from the entire set
+            specialQuestionIndex = Math.floor(Math.random() * quizQuestions.length);
+            quizQuestions[specialQuestionIndex].special = true;
+
+            // Apply 30% chance to shuffle the entire quiz order
+            if (Math.random() < 0.3) {
+                shuffleArray(quizQuestions);
+                // After shuffling, find the new index of the special question
+                specialQuestionIndex = quizQuestions.findIndex(q => q.special);
+            }
+        }
+
+        // Load MathJax for rendering LaTeX
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+        script.async = true;
+        document.head.appendChild(script);
+
+        // Initialize the quiz when the script loads
+        initializeQuiz();
+        // Explicitly show the login page after initialization to prevent any display issues
+        showPage('loginPage');
+    </script>
+</body>
+</html>
