@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 5 Quiz - EDUCATION DEPARTMENT SCREENING TEST PREPARATION – June 23, 2025</title>
+    <title>Day 6 Quiz - EDUCATION DEPARTMENT SCREENING TEST PREPARATION – June 24, 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -290,7 +290,8 @@
     </div>
 
     <main class="flex-grow flex items-center justify-center p-4">
-        <div id="loginPage" class="card">
+        <!-- Added 'hidden' class to all sections initially -->
+        <div id="loginPage" class="card hidden">
             <h2 class="text-xl font-bold mb-4 text-center">Login</h2>
             <div class="mb-4">
                 <label for="loginId" class="block text-sm font-medium text-gray-700 mb-1">ID:</label>
@@ -342,13 +343,13 @@
 
     <script>
         // Set the current date for display and logic
-        const CURRENT_DATE_STR = "June 23, 2025";
+        const CURRENT_DATE_STR = "June 24, 2025";
         const CURRENT_DATE = new Date(CURRENT_DATE_STR);
 
         // Update header dates
         document.getElementById('liveDate').textContent = CURRENT_DATE_STR;
         document.getElementById('updatedDate').textContent = CURRENT_DATE_STR;
-        document.getElementById('quizTitle').textContent = `Day 5 Quiz - EDUCATION DEPARTMENT SCREENING TEST PREPARATION – ${CURRENT_DATE_STR}`;
+        document.getElementById('quizTitle').textContent = `Day 6 Quiz - EDUCATION DEPARTMENT SCREENING TEST PREPARATION – ${CURRENT_DATE_STR}`;
 
         // Quiz Data Structure
         const quizQuestions = [];
@@ -611,7 +612,7 @@
             formData.append('Correct Answers', correctCount);
             formData.append('Incorrect Answers', incorrectCount);
             formData.append('Time Taken', formatTime(timeTakenSeconds));
-            formData.append('Quiz ID', "day5"); // Specific ID for Day 5 quiz
+            formData.append('Quiz ID', "day6"); // Specific ID for Day 6 quiz
 
             fetch('https://formspree.io/f/xwpojgab', {
                 method: 'POST',
@@ -637,8 +638,8 @@
             const password = document.getElementById('loginPassword').value;
             const loginError = document.getElementById('loginError');
 
-            // Specific credentials for Day 5
-            if (id === 'day5' && password === '5555') {
+            // Specific credentials for Day 6
+            if (id === 'day6' && password === '6666') {
                 loginError.classList.add('hidden');
                 showPage('candidateNamePage');
             } else {
@@ -686,159 +687,85 @@
             // Clear previous questions
             quizQuestions.length = 0;
 
-            // Pedagogy (10 MCQs from Pages 33-40)
+            // Pedagogy (10 MCQs from Pages 21-24)
             const pedagogyMCQs = [
-                { question: "What is 'Inclusive Education'?", options: ["Educating students with disabilities in separate classrooms.", "A system where all students, regardless of their abilities or disabilities, learn together in general education classrooms.", "Excluding certain students from learning.", "Focusing only on gifted students."], correctOptionIndex: 1, explanation: "Inclusive education emphasizes accommodating diverse learners (Page 33)." },
-                { question: "Which of the following is a benefit of inclusive education?", options: ["Limited social interaction for special needs students.", "Improved academic outcomes for all students and enhanced social skills for students with disabilities.", "Increased segregation.", "Lower educational standards."], correctOptionIndex: 1, explanation: "Inclusive education promotes social and academic growth (Page 34)." },
-                { question: "What is 'Individualized Education Program' (IEP)?", options: ["A general curriculum plan for all students.", "A written statement for a student with a disability that is developed, reviewed, and revised in accordance with federal and state laws.", "A teacher's personal lesson plan.", "A standardized test for special education."], correctOptionIndex: 1, explanation: "An IEP is a legally mandated document tailored to a student's unique needs (Page 35)." },
-                { question: "What is 'Differentiated Instruction'?", options: ["Teaching all students the same content at the same pace.", "An instructional approach that tailors teaching and learning to the diverse needs of students in a classroom.", "Focusing only on high-achieving students.", "Providing extra homework for all students."], correctOptionIndex: 1, explanation: "Differentiated instruction recognizes and responds to individual student differences (Page 36)." },
-                { question: "Which of the following is an example of differentiating content?", options: ["Giving all students the same assignment.", "Providing materials at various reading levels or in different formats (e.g., audio, visual).", "Allowing students to choose their own topics.", "Requiring all students to complete the same project."], correctOptionIndex: 1, explanation: "Differentiating content involves varying what students learn (Page 37)." },
-                { question: "Which of the following is an example of differentiating process?", options: ["All students work individually.", "Allowing students to choose how they learn (e.g., small groups, independent study, hands-on activities).", "Giving all students the same test.", "Teacher-led lectures only."], correctOptionIndex: 1, explanation: "Differentiating process involves varying how students learn (Page 38)." },
-                { question: "Which of the following is an example of differentiating product?", options: ["All students create a poster.", "Allowing students to demonstrate their learning in various ways (e.g., presentation, essay, model, performance).", "Giving extra credit for good behavior.", "Only written exams."], correctOptionIndex: 1, explanation: "Differentiating product involves varying how students show what they've learned (Page 39)." },
-                { question: "What is 'formative assessment'?", options: ["Grading at the end of a unit.", "Ongoing assessment used to monitor student learning to provide ongoing feedback that can be used by instructors to improve their teaching and by students to improve their learning.", "Only high-stakes testing.", "Assessment for ranking students."], correctOptionIndex: 1, explanation: "Formative assessment is designed to support and enhance learning during the instructional process (Page 40)." },
-                { question: "What is 'summative assessment'?", options: ["Assessment for learning.", "Assessment used to evaluate student learning at the end of an instructional unit, course, or program.", "Daily quizzes.", "Peer feedback."], correctOptionIndex: 1, explanation: "Summative assessment evaluates overall achievement and provides a summary of learning (Page 40)." },
-                { question: "What is the purpose of 'feedback' in education?", options: ["To criticize students.", "To provide information to learners about their performance, helping them improve and achieve learning goals.", "To assign grades.", "To compare students to each other."], correctOptionIndex: 1, explanation: "Effective feedback is crucial for guiding student learning (Page 40)." }
+                { question: "The word 'pedagogy' means:", options: ["To guide the child", "To lead the child", "To educate the child", "To evaluate the students"], correctOptionIndex: 1, explanation: "Pedagogy is derived from Greek words 'paidos' (child) and 'agogos' (leader), meaning 'to lead the child' (Page 21)." },
+                { question: "Pedagogy is the study of:", options: ["Learning process", "Education", "Teaching method", "Books"], correctOptionIndex: 2, explanation: "Pedagogy focuses on the theory and practice of teaching (Page 21)." },
+                { question: "Which type of learning is predominantly teacher centered?", options: ["Andragogy", "Pedagogy", "Heutagogy", "Cybergogy"], correctOptionIndex: 1, explanation: "Pedagogy implies a teacher-led approach, suitable for children (Page 21)." },
+                { question: "Who is considered as father of research in teaching?", options: ["Edward Lee Thorndike", "Lewis Medison", "Joseph Mayer Rice", "None of these"], correctOptionIndex: 2, explanation: "Joseph Mayer Rice was a pioneer in educational research (Page 21)." },
+                { question: "What does andragogy mean?", options: ["Teaching of kids", "Teaching of adults", "Teaching right from the book", "Teaching"], correctOptionIndex: 1, explanation: "Andragogy refers to the methods and principles used in adult education (Page 21)." },
+                { question: "An adult in training 'needs to know' which means:", options: ["they are goal-oriented and expect it to be relevant", "they bring knowledge they want to share", "they need to be motivated", "they know their own needs"], correctOptionIndex: 0, explanation: "Adult learners are typically purpose-driven and seek relevance in their learning (Page 21)." },
+                { question: "The primary task of the teacher is:", options: ["to teach the prescribed curriculum", "to stimulate and guide student learning", "to promote habits of conformity to adult's demands and expectation", "to provide diagnostic and remedial aid wherever indicated"], correctOptionIndex: 1, explanation: "A teacher's role is to facilitate and support student learning (Page 21)." },
+                { question: "The first learning center of a child is:", options: ["School", "Society", "Home", "All"], correctOptionIndex: 2, explanation: "The home environment is the primary and initial learning space for a child (Page 22)." },
+                { question: "A scoring guide used to evaluate the quality of students is called:", options: ["List card", "Rubrics", "Rating scale", "None of these"], correctOptionIndex: 1, explanation: "Rubrics provide clear criteria for evaluating student work (Page 22)." },
+                { question: "Education according to John Dewey is:", options: ["Prepare for future life", "Shaping", "Learning to do by doing", "Struggling"], correctOptionIndex: 2, explanation: "John Dewey advocated for experiential learning and active participation (Page 22)." }
             ];
             quizQuestions.push(...pedagogyMCQs);
 
-            // General Science (15 MCQs from Pages 225-259)
+            // General Science (15 MCQs from Pages 171-188)
             const generalScienceMCQs = [
-                { question: "What is the study of matter and energy and their interactions?", options: ["Biology", "Chemistry", "Physics", "Geology"], correctOptionIndex: 2, explanation: "Physics explores fundamental laws governing the universe (Page 225)." },
-                { question: "What is the SI unit of energy?", options: ["Watt", "Newton", "Joule", "Volt"], correctOptionIndex: 2, explanation: "The Joule (J) is the standard unit of energy (Page 226)." },
-                { question: "Which type of energy is stored energy due to an object's position or state?", options: ["Kinetic energy", "Potential energy", "Thermal energy", "Chemical energy"], correctOptionIndex: 1, explanation: "Potential energy can be gravitational, elastic, or chemical (Page 227)." },
-                { question: "What type of energy is associated with motion?", options: ["Potential energy", "Kinetic energy", "Chemical energy", "Nuclear energy"], correctOptionIndex: 1, explanation: "Kinetic energy is directly related to an object's mass and speed (Page 228)." },
-                { question: "What is the Law of Conservation of Energy?", options: ["Energy can be created and destroyed.", "Energy can only be transformed from one form to another, but it cannot be created or destroyed.", "Energy is always lost as heat.", "Energy is always gained in a system."], correctOptionIndex: 1, explanation: "This fundamental law states that the total energy in an isolated system remains constant (Page 229)." },
-                { question: "What is the transfer of heat through direct contact?", options: ["Convection", "Radiation", "Conduction", "Evaporation"], correctOptionIndex: 2, explanation: "Conduction occurs primarily in solids (Page 230)." },
-                { question: "What is the transfer of heat through the movement of fluids (liquids or gases)?", options: ["Conduction", "Radiation", "Convection", "Sublimation"], correctOptionIndex: 2, explanation: "Convection is common in boiling water or atmospheric circulation (Page 231)." },
-                { question: "What is the transfer of heat through electromagnetic waves?", options: ["Conduction", "Convection", "Radiation", "Absorption"], correctOptionIndex: 2, explanation: "Radiation does not require a medium for heat transfer (Page 232)." },
-                { question: "Which type of wave requires a medium to travel?", options: ["Electromagnetic waves", "Light waves", "Sound waves", "Radio waves"], correctOptionIndex: 2, explanation: "Sound waves are mechanical waves that need a material to propagate (Page 233)." },
-                { question: "What is the SI unit of electric current?", options: ["Volt", "Ohm", "Ampere", "Watt"], correctOptionIndex: 2, explanation: "The Ampere (A) measures the flow of electric charge (Page 234)." },
-                { question: "What is the opposition to the flow of electric current?", options: ["Voltage", "Current", "Resistance", "Power"], correctOptionIndex: 2, explanation: "Resistance is measured in Ohms ($\\Omega$) (Page 235)." },
-                { question: "What is the 'Ohm's Law'?", options: ["V = IR", "P = VI", "E = mc²", "F = ma"], correctOptionIndex: 0, explanation: "Ohm's Law relates voltage, current, and resistance in an electrical circuit (Page 236)." },
-                { question: "Which of the following is a renewable energy source?", options: ["Coal", "Natural Gas", "Hydropower", "Nuclear Energy"], correctOptionIndex: 2, explanation: "Hydropower uses the energy of moving water, which is naturally replenished (Page 237)." },
-                { question: "What is the process of splitting an atom's nucleus into smaller parts?", options: ["Nuclear fusion", "Nuclear fission", "Radioactive decay", "Chemical reaction"], correctOptionIndex: 1, explanation: "Nuclear fission is used in nuclear power plants (Page 238)." },
-                { question: "What is the process of combining two light atomic nuclei to form a heavier nucleus?", options: ["Nuclear fission", "Nuclear fusion", "Radioactive decay", "Isotope formation"], correctOptionIndex: 1, explanation: "Nuclear fusion powers the Sun and other stars (Page 239)." }
+                { question: "What is the primary function of the 'skeletal system'?", options: ["Pumping blood", "Support and protection of internal organs", "Digesting food", "Producing hormones"], correctOptionIndex: 1, explanation: "The skeletal system provides the framework for the body and protects vital organs (Page 171)." },
+                { question: "Which of the following is a bone?", options: ["Muscle", "Tendon", "Femur", "Ligament"], correctOptionIndex: 2, explanation: "The femur is the thigh bone, the longest bone in the human body (Page 172)." },
+                { question: "What connects bone to bone?", options: ["Tendon", "Muscle", "Ligament", "Cartilage"], correctOptionIndex: 2, explanation: "Ligaments are strong, fibrous tissues that connect bones at joints (Page 173)." },
+                { question: "What connects muscle to bone?", options: ["Ligament", "Cartilage", "Tendon", "Joint"], correctOptionIndex: 2, explanation: "Tendons are tough bands of fibrous connective tissue that connect muscles to bones (Page 174)." },
+                { question: "What is the function of 'red blood cells'?", options: ["Fighting infection", "Clotting blood", "Carrying oxygen", "Producing antibodies"], correctOptionIndex: 2, explanation: "Red blood cells, containing hemoglobin, transport oxygen from the lungs to the body's tissues (Page 175)." },
+                { question: "Which organ is part of the 'circulatory system'?", options: ["Stomach", "Lungs", "Heart", "Kidney"], correctOptionIndex: 2, explanation: "The heart pumps blood throughout the body (Page 176)." },
+                { question: "What is the largest organ in the human body?", options: ["Brain", "Heart", "Liver", "Skin"], correctOptionIndex: 3, explanation: "The skin is the body's largest organ, forming a protective barrier (Page 177)." },
+                { question: "What is the main function of the 'nervous system'?", options: ["Digestion", "Circulation", "Control and coordination of bodily functions", "Respiration"], correctOptionIndex: 2, explanation: "The nervous system transmits signals between different parts of the body (Page 178)." },
+                { question: "Which part of the brain is responsible for thinking, memory, and language?", options: ["Cerebellum", "Brainstem", "Cerebrum", "Spinal cord"], correctOptionIndex: 2, explanation: "The cerebrum is the largest part of the brain and is involved in higher-level functions (Page 179)." },
+                { question: "What is the function of the 'digestive system'?", options: ["Breathing", "Pumping blood", "Breaking down food for nutrient absorption", "Filtering waste from blood"], correctOptionIndex: 2, explanation: "The digestive system converts food into energy and absorbs nutrients (Page 180)." },
+                { question: "Which organ is primarily responsible for filtering waste products from the blood to produce urine?", options: ["Liver", "Stomach", "Kidney", "Lungs"], correctOptionIndex: 2, explanation: "The kidneys play a vital role in maintaining fluid and electrolyte balance (Page 181)." },
+                { question: "What is the process by which plants convert light energy into chemical energy?", options: ["Respiration", "Transpiration", "Photosynthesis", "Germination"], correctOptionIndex: 2, explanation: "Photosynthesis uses sunlight, water, and carbon dioxide to create glucose and oxygen (Page 182)." },
+                { question: "Which gas do plants absorb from the atmosphere for photosynthesis?", options: ["Oxygen", "Nitrogen", "Carbon dioxide", "Hydrogen"], correctOptionIndex: 2, explanation: "Carbon dioxide is a key reactant in photosynthesis (Page 183)." },
+                { question: "What are the tiny pores on the surface of leaves that allow for gas exchange?", options: ["Chloroplasts", "Stomata", "Mitochondria", "Xylem"], correctOptionIndex: 1, explanation: "Stomata regulate the exchange of gases and water vapor (Page 184)." },
+                { question: "What is the male reproductive part of a flower?", options: ["Pistil", "Ovary", "Stamen", "Petal"], correctOptionIndex: 2, explanation: "The stamen consists of the anther and filament, producing pollen (Page 185)." }
             ];
             quizQuestions.push(...generalScienceMCQs);
 
-            // Social Studies (8 MCQs from Pages 467-474)
+            // Social Studies (10 MCQs from Pages 525-542)
             const socialStudiesMCQs = [
-                { question: "What is 'social justice'?", options: ["Punishing criminals.", "The concept of fair and just relations between the individual and society, often measured by the distribution of wealth, opportunities, and privileges within a society.", "Maintaining the status quo.", "Supporting only specific groups."], correctOptionIndex: 1, explanation: "Social justice aims for equity and fairness for all members of society (Page 467)." },
-                { question: "Which of the following is a dimension of social justice?", options: ["Economic efficiency.", "Distributive justice (fair allocation of resources), procedural justice (fair processes), and recognition (respect for diversity).", "Political power grabs.", "Military strength."], correctOptionIndex: 1, explanation: "These dimensions ensure fairness in outcomes, processes, and respect for identity (Page 468)." },
-                { question: "What is 'human rights'?", options: ["Rights given by the government.", "Universal, inalienable, and interdependent rights inherent to all human beings, regardless of race, sex, nationality, ethnicity, language, religion, or any other status.", "Privileges for some.", "Rights earned through hard work."], correctOptionIndex: 1, explanation: "Human rights are fundamental entitlements (Page 469)." },
-                { question: "Which international document is a foundational text for human rights?", options: ["Magna Carta", "Universal Declaration of Human Rights (UDHR)", "US Constitution", "Treaty of Versailles"], correctOptionIndex: 1, explanation: "The UDHR (1948) sets out fundamental human rights to be universally protected (Page 470)." },
-                { question: "What is 'gender equality'?", options: ["Men and women are the same.", "The state of equal ease of access to resources and opportunities regardless of gender, including economic participation and decision-making.", "Only focusing on women's rights.", "Discrimination based on gender."], correctOptionIndex: 1, explanation: "Gender equality aims for equal rights, responsibilities, and opportunities (Page 471)." },
-                { question: "What is 'environmental justice'?", options: ["Ignoring pollution.", "The fair treatment and meaningful involvement of all people regardless of race, color, national origin, or income, with respect to the development, implementation, and enforcement of environmental laws, regulations, and policies.", "Only protecting endangered species.", "Allowing pollution in poor communities."], correctOptionIndex: 1, explanation: "Environmental justice addresses disproportionate environmental burdens on marginalized communities (Page 472)." },
-                { question: "What is the role of 'advocacy' in social change?", options: ["Discouraging change.", "Public support for or recommendation of a particular cause or policy.", "Maintaining the status quo.", "Promoting conflict."], correctOptionIndex: 1, explanation: "Advocacy champions causes and influences decision-making (Page 473)." },
-                { question: "What is 'civil society'?", options: ["Only government organizations.", "The aggregate of non-governmental organizations and institutions that manifest the interests and will of citizens.", "Military forces.", "Private corporations."], correctOptionIndex: 1, explanation: "Civil society includes NGOs, community groups, charities, etc. (Page 474)." }
+                { question: "What is 'population distribution'?", options: ["The number of people in a country.", "The pattern of where people live.", "The growth rate of a population.", "The movement of people."], correctOptionIndex: 1, explanation: "Population distribution describes how people are spread across a geographical area (Page 525)." },
+                { question: "Which factor primarily influences population distribution?", options: ["Government type", "Availability of resources and climate", "Historical events", "Religious beliefs"], correctOptionIndex: 1, explanation: "Access to water, fertile land, and suitable climate are major determinants of where people settle (Page 526)." },
+                { question: "What is 'population density'?", options: ["Total population of a region.", "The number of people living per unit of area.", "The birth rate of a country.", "The average age of a population."], correctOptionIndex: 1, explanation: "Population density measures how crowded a place is (Page 527)." },
+                { question: "Which continent has the highest population density?", options: ["Africa", "North America", "Asia", "Europe"], correctOptionIndex: 2, explanation: "Asia, particularly South and East Asia, has very high population densities (Page 528)." },
+                { question: "What is 'birth rate'?", options: ["Number of deaths per 1000 people.", "Number of live births per 1000 people in a year.", "Total population increase.", "Average number of children per woman."], correctOptionIndex: 1, explanation: "Birth rate is a key demographic indicator (Page 529)." },
+                { question: "What is 'death rate'?", options: ["Number of live births per 1000 people.", "Number of deaths per 1000 people in a year.", "Total population decrease.", "Average lifespan of a population."], correctOptionIndex: 1, explanation: "Death rate indicates the number of deaths relative to the population (Page 530)." },
+                { question: "What is 'natural increase' in population?", options: ["Immigration minus emigration.", "Birth rate minus death rate.", "Total population growth.", "Economic growth."], correctOptionIndex: 1, explanation: "Natural increase refers to population change due to births and deaths (Page 531)." },
+                { question: "What is 'migration'?", options: ["Movement of goods.", "Movement of people from one place to another with the intention of settling permanently or temporarily in a new location.", "Seasonal travel.", "Daily commuting."], correctOptionIndex: 1, explanation: "Migration is a significant factor in population change (Page 532)." },
+                { question: "What are 'push factors' in migration?", options: ["Conditions that attract people to a new location.", "Reasons that force people to leave their current location.", "Positive aspects of a destination.", "Opportunities in a new country."], correctOptionIndex: 1, explanation: "Push factors include conflict, poverty, and lack of opportunities (Page 533)." },
+                { question: "What is a 'demographic transition model'?", options: ["A model showing economic development.", "A model that describes population change over time as a country develops economically.", "A model for predicting climate change.", "A model for urban growth."], correctOptionIndex: 1, explanation: "The demographic transition model explains how birth and death rates change over time, affecting population growth (Page 534)." }
             ];
             quizQuestions.push(...socialStudiesMCQs);
 
-            // Geography (8 MCQs from Pages 554-564)
-            const geographyMCQs = [
-                { question: "What is 'pull factors' in migration?", options: ["Reasons to leave a place.", "Conditions that attract people to a new location, such as economic opportunities, better quality of life, or political freedom.", "Obstacles to migration.", "Factors keeping people in their current location."], correctOptionIndex: 1, explanation: "Pull factors draw migrants to a destination (Page 554)." },
-                { question: "What is 'refugee'?", options: ["Someone visiting a country for tourism.", "A person who has been forced to leave their country in order to escape war, persecution, or natural disaster.", "An economic migrant seeking better jobs.", "A seasonal worker."], correctOptionIndex: 1, explanation: "Refugees flee their homes due to well-founded fears (Page 555)." },
-                { question: "What is 'urbanization'?", options: ["Decrease in city populations.", "The process of population shift from rural to urban areas, leading to the growth of cities and expansion of urban areas.", "Rural development.", "Conservation of natural areas."], correctOptionIndex: 1, explanation: "Urbanization is a global trend reflecting societal changes (Page 556)." },
-                { question: "Which of the following is a positive impact of urbanization?", options: ["Increased rural population.", "Economic growth, job opportunities, access to services (education, healthcare), and cultural diversity.", "Increased traffic congestion.", "Higher crime rates."], correctOptionIndex: 1, explanation: "Urban areas often serve as centers of innovation and opportunity (Page 557)." },
-                { question: "What is 'rural-urban migration'?", options: ["Movement within rural areas.", "The movement of people from rural areas into urban areas.", "Movement from urban to rural areas.", "International migration."], correctOptionIndex: 1, explanation: "This type of migration contributes significantly to urbanization (Page 558)." },
-                { question: "What is a 'megacity'?", options: ["A small town.", "A very large city, typically with a population of more than 10 million people.", "A city with less than 1 million people.", "A city with large rural areas."], correctOptionIndex: 1, explanation: "Megacities are massive urban centers facing unique challenges and opportunities (Page 559)." },
-                { question: "What is 'sustainable city planning'?", options: ["Planning cities without considering environmental impact.", "Designing and managing cities to minimize their environmental impact, promote social equity, and ensure economic viability for current and future generations.", "Rapid uncontrolled development.", "Only building tall skyscrapers."], correctOptionIndex: 1, explanation: "Sustainable city planning balances development with ecological and social well-being (Page 560)." },
-                { question: "What is 'gentrification'?", options: ["Rural revitalization.", "The process of renovating and improving a house or district so that it conforms to middle-class taste, often displacing poorer residents.", "Building new, affordable housing.", "Creating new urban parks."], correctOptionIndex: 1, explanation: "Gentrification can lead to displacement and changes in neighborhood character (Page 561)." }
-            ];
-            quizQuestions.push(...geographyMCQs);
-
-            // History (10 MCQs from Pages 689-705)
-            const historyMCQs = [
-                { question: "What major geopolitical division emerged after World War II, separating much of Europe into Soviet-influenced Eastern Bloc and Western-aligned Western Bloc?", options: ["The Iron Curtain", "The Berlin Wall (specific city)", "The Great Divide", "The Cold War Front"], correctOptionIndex: 0, explanation: "The Iron Curtain was a symbolic and physical barrier (Page 689)." },
-                { question: "What was the purpose of the 'Berlin Blockade' by the Soviet Union?", options: ["To promote trade.", "To starve West Berlin into submission and force the Western Allies out.", "To allow refugees to enter West Berlin.", "To build new infrastructure."], correctOptionIndex: 1, explanation: "The blockade led to the Berlin Airlift (Page 690)." },
-                { question: "What was the 'Domino Theory' during the Cold War?", options: ["A theory about falling bricks.", "The idea that if one country in a region came under the influence of communism, then the surrounding countries would follow in a domino effect.", "A theory about economic growth.", "A theory about natural disasters."], correctOptionIndex: 1, explanation: "This theory shaped US foreign policy, particularly in Southeast Asia (Page 691)." },
-                { question: "Which major war in the 1950s was a proxy war during the Cold War, involving the US and UN forces against communist North Korea and China?", options: ["Vietnam War", "Korean War", "Afghan-Soviet War", "Cuban Missile Crisis"], correctOptionIndex: 1, explanation: "The Korean War (1950-1953) ended in a stalemate (Page 692)." },
-                { question: "What event in 1962 brought the US and the Soviet Union to the brink of nuclear war?", options: ["Berlin Blockade", "Cuban Missile Crisis", "Vietnam War", "Space Race"], correctOptionIndex: 1, explanation: "The Cuban Missile Crisis involved Soviet missiles in Cuba (Page 693)." },
-                { question: "What was the 'Vietnam War' (approximate period)?", options: ["1945-1950", "1955-1975", "1980-1990", "1990-2000"], correctOptionIndex: 1, explanation: "The Vietnam War was a long, costly, and divisive conflict (Page 694)." },
-                { question: "What was 'Glasnost' and 'Perestroika'?", options: ["Soviet military operations.", "Reforms introduced by Mikhail Gorbachev in the Soviet Union—Glasnost (openness) for political freedom, and Perestroika (restructuring) for economic reform.", "New Soviet art movements.", "Policies of strict control."], correctOptionIndex: 1, explanation: "These reforms aimed to revitalize the Soviet system (Page 695)." },
-                { question: "What event in 1989 symbolized the beginning of the end of the Cold War and communist rule in Eastern Europe?", options: ["Cuban Missile Crisis", "Fall of the Berlin Wall", "Dismantling of NATO", "End of the Vietnam War"], correctOptionIndex: 1, explanation: "The fall of the Berlin Wall was a major turning point (Page 696)." },
-                { question: "When did the Soviet Union officially dissolve?", options: ["1989", "1990", "1991", "1992"], correctOptionIndex: 2, explanation: "The Soviet Union formally dissolved on December 26, 1991 (Page 697)." },
-                { question: "What was the main purpose of the 'United Nations' (UN) after WWII?", options: ["To promote communism.", "To maintain international peace and security, develop friendly relations among nations, and achieve international cooperation.", "To facilitate global trade only.", "To establish a world government."], correctOptionIndex: 1, explanation: "The UN was founded in 1945 to prevent future global conflicts (Page 698)." }
-            ];
-            quizQuestions.push(...historyMCQs);
-
-            // English (10 MCQs from Pages 855-870)
+            // English (10 MCQs from Pages 831-838 - Tenses & Voice)
             const englishMCQs = [
-                { question: "What is a 'phrase' in English grammar?", options: ["A complete sentence.", "A group of words that functions as a single unit in a sentence but does not contain a subject and a predicate.", "A dependent clause.", "A single word."], correctOptionIndex: 1, explanation: "A phrase is a building block of sentences (Page 855)." },
-                { question: "Which of the following is a noun phrase?", options: ["Runs quickly", "On the table", "Very beautiful", "The old brown dog"], correctOptionIndex: 3, explanation: "A noun phrase consists of a noun as its head and any modifiers (Page 856)." },
-                { question: "Which of the following is a verb phrase?", options: ["Happy and excited", "With great enthusiasm", "Has been studying", "In the garden"], correctOptionIndex: 2, explanation: "A verb phrase includes the main verb and any auxiliary verbs (Page 857)." },
-                { question: "What is a 'clause'?", options: ["A single word.", "A group of words that contains both a subject and a predicate.", "A group of words without a subject.", "A group of words without a verb."], correctOptionIndex: 1, explanation: "A clause is the fundamental unit of a sentence (Page 858)." },
-                { question: "What is an 'independent clause'?", options: ["A clause that cannot stand alone as a sentence.", "A clause that can stand alone as a complete sentence and express a complete thought.", "A clause that describes a noun.", "A clause that modifies a verb."], correctOptionIndex: 1, explanation: "An independent clause is also known as a main clause (Page 859)." },
-                { question: "Which of the following is an independent clause?", options: ["Because she arrived late", "After he finished his work", "The dog barked loudly", "If you go to the store"], correctOptionIndex: 2, explanation: "'The dog barked loudly' expresses a complete thought (Page 860)." },
-                { question: "What is a 'dependent clause' (or subordinate clause)?", options: ["A clause that can stand alone as a sentence.", "A clause that contains a subject and a predicate but cannot stand alone as a complete sentence; it must be attached to an independent clause.", "A clause that is always at the beginning of a sentence.", "A clause that describes an adverb."], correctOptionIndex: 1, explanation: "Dependent clauses rely on an independent clause for full meaning (Page 861)." },
-                { question: "Which of the following is a dependent clause?", options: ["He read a book.", "She ate dinner.", "Although it was raining.", "They played games."], correctOptionIndex: 2, explanation: "'Although it was raining' cannot stand alone as a complete thought (Page 862)." },
-                { question: "What is 'punctuation'?", options: ["The art of writing beautifully.", "The marks, such as periods and commas, used in writing to separate sentences and phrases and make meaning clear.", "The study of grammar rules.", "The spelling of words."], correctOptionIndex: 1, explanation: "Punctuation helps convey meaning and structure in written language (Page 863)." },
-                { question: "Which punctuation mark is used to end a declarative sentence?", options: ["Question mark (?)", "Exclamation mark (!)", "Period (.)", "Comma (,)"], correctOptionIndex: 2, explanation: "A period indicates the end of a statement (Page 864)." }
+                { question: "Which tense describes an action completed in the past?", options: ["Present Simple", "Past Simple", "Future Simple", "Present Continuous"], correctOptionIndex: 1, explanation: "The Past Simple tense is used for actions that happened at a specific time in the past (Page 831)." },
+                { question: "Identify the tense: 'She is singing a song.'", options: ["Present Simple", "Present Continuous", "Past Simple", "Future Continuous"], correctOptionIndex: 1, explanation: "This sentence uses 'is' + verb-ing, which indicates the Present Continuous tense (Page 832)." },
+                { question: "Which tense is used to describe a habit or a general truth?", options: ["Past Continuous", "Present Perfect", "Present Simple", "Future Simple"], correctOptionIndex: 2, explanation: "The Present Simple tense is used for repeated actions, habits, and facts (Page 833)." },
+                { question: "Form the Past Perfect tense: 'They ______ (finish) their homework before the game.'", options: ["have finished", "had finished", "will finish", "were finishing"], correctOptionIndex: 1, explanation: "The Past Perfect tense ('had' + past participle) describes an action completed before another past action (Page 834)." },
+                { question: "What is the Passive Voice of 'The boy broke the window'?", options: ["The window broke the boy.", "The window was broken by the boy.", "The boy was broken by the window.", "The window breaks the boy."], correctOptionIndex: 1, explanation: "In Passive Voice, the object of the active sentence becomes the subject (Page 837)." },
+                { question: "Identify the voice: 'The letter was written by her.'", options: ["Active Voice", "Passive Voice", "Direct Speech", "Indirect Speech"], correctOptionIndex: 1, explanation: "The structure 'was' + past participle + 'by' indicates Passive Voice (Page 837)." },
+                { question: "Change to Active Voice: 'The cake was eaten by him.'", options: ["He ate the cake.", "The cake ate him.", "He was eating the cake.", "The cake is eaten by him."], correctOptionIndex: 0, explanation: "To change to Active Voice, the agent ('him') becomes the subject (Page 838)." },
+                { question: "Which voice focuses on the performer of the action?", options: ["Passive Voice", "Active Voice", "Indirect Voice", "Reported Voice"], correctOptionIndex: 1, explanation: "Active Voice emphasizes the subject doing the action (Page 837)." },
+                { question: "Which tense describes an action that started in the past and continues up to the present?", options: ["Past Simple", "Present Perfect", "Present Continuous", "Future Simple"], correctOptionIndex: 1, explanation: "The Present Perfect tense is used for actions that began in the past and have relevance to the present (Page 835)." },
+                { question: "Fill in the blank with the correct form of the verb: 'They ______ (play) football tomorrow.'", options: ["played", "are playing", "will played", "play"], correctOptionIndex: 1, explanation: "For a planned future action, Present Continuous is often used, or 'will play' could also be an option depending on context, but 'are playing' implies a definite arrangement. The page refers to future tenses, allowing for this (Page 836)." }
             ];
             quizQuestions.push(...englishMCQs);
 
-            // Mathematics (10 MCQs from Pages 1003-1016)
+            // Mathematics (10 MCQs from Pages 982-988 - Fractions, Decimals, Percentages)
             const mathematicsMCQs = [
-                { question: "What is the value of $x$ in the equation $5x - 10 = 35$?", options: ["7", "8", "9", "10"], correctOptionIndex: 0, explanation: "Add 10 to both sides: $5x = 45$. Divide by 5: $x = 9$ (Page 1003)." },
-                { question: "Simplify the expression: $y^7 / y^3$", options: ["$y^{10}$", "$y^4$", "$y^{21}$", "$y^7$"], correctOptionIndex: 1, explanation: "When dividing powers with the same base, subtract the exponents: $y^{7-3} = y^4$ (Page 1004)." },
-                { question: "A laptop costs $1200. If it has a 5% sales tax, what is the total cost?", options: ["$60", "$1140", "$1260", "$1300"], correctOptionIndex: 2, explanation: "Sales tax = $1200 \\times 0.05 = 60$. Total cost = $1200 + 60 = 1260$ (Page 1005)." },
-                { question: "What is the area of a parallelogram with base 15 cm and height 8 cm?", options: ["23 cm²", "46 cm²", "60 cm²", "120 cm²"], correctOptionIndex: 3, explanation: "Area = base $\\times$ height = $15 \\times 8 = 120$ cm² (Page 1006)." },
-                { question: "What is the perimeter of an equilateral triangle with side length 9 cm?", options: ["9 cm", "18 cm", "27 cm", "36 cm"], correctOptionIndex: 2, explanation: "Perimeter = $3 \\times$ side = $3 \\times 9 = 27$ cm (Page 1007)." },
-                { question: "What is the volume of a sphere with radius 3 cm? (Use $\\pi = 3.14$, Volume = $4/3 \\pi r^3$)", options: ["28.26 cm³", "37.68 cm³", "113.04 cm³", "339.12 cm³"], correctOptionIndex: 2, explanation: "Volume = $4/3 \\times 3.14 \\times 3^3 = 4/3 \\times 3.14 \\times 27 = 4 \\times 3.14 \\times 9 = 113.04$ cm³ (Page 1008)." },
-                { question: "What is the mean of the numbers {2, 4, 6, 8, 10}?", options: ["4", "5", "6", "7"], correctOptionIndex: 2, explanation: "Sum = $2+4+6+8+10 = 30$. Mean = $30 / 5 = 6$ (Page 1009)." },
-                { question: "What is the probability of drawing a Queen from a standard deck of 52 playing cards?", options: ["1/52", "1/26", "1/13", "1/4"], correctOptionIndex: 2, explanation: "There are 4 Queens in a deck. Probability = $4/52 = 1/13$ (Page 1010)." },
-                { question: "Solve the equation: $2(x + 3) = 14$", options: ["4", "5", "6", "7"], correctOptionIndex: 0, explanation: "Divide by 2: $x + 3 = 7$. Subtract 3: $x = 4$ (Page 1011)." },
-                { question: "What is the value of $\\sqrt{225}$?", options: ["13", "14", "15", "16"], correctOptionIndex: 2, explanation: "The square root of 225 is 15, because $15 \\times 15 = 225$ (Page 1012)." }
+                { question: "Convert the fraction $3/4$ to a decimal.", options: ["0.3", "0.4", "0.75", "1.25"], correctOptionIndex: 2, explanation: "To convert a fraction to a decimal, divide the numerator by the denominator: $3 \\div 4 = 0.75$ (Page 982)." },
+                { question: "Convert the decimal $0.2$ to a fraction in simplest form.", options: ["1/2", "1/5", "2/10", "2/5"], correctOptionIndex: 1, explanation: "$0.2 = 2/10$, which simplifies to $1/5$ (Page 983)." },
+                { question: "What is $25\%$ as a fraction in simplest form?", options: ["1/4", "1/2", "1/3", "1/5"], correctOptionIndex: 0, explanation: "$25\% = 25/100$, which simplifies to $1/4$ (Page 984)." },
+                { question: "Convert $0.6$ to a percentage.", options: ["6%", "0.6%", "60%", "600%"], correctOptionIndex: 2, explanation: "To convert a decimal to a percentage, multiply by 100: $0.6 \\times 100 = 60\%$ (Page 985)." },
+                { question: "Calculate $10\%$ of $150$.", options: ["10", "15", "20", "25"], correctOptionIndex: 1, explanation: "$10\%$ of $150 = 0.10 \\times 150 = 15$ (Page 986)." },
+                { question: "If a shirt costs $400 and is on sale for $20\%$ off, what is the discount amount?", options: ["$20", "$40", "$80", "$100"], correctOptionIndex: 2, explanation: "Discount = $20\%$ of $400 = 0.20 \\times 400 = 80$ (Page 987)." },
+                { question: "What is the decimal equivalent of $1/8$?", options: ["0.125", "0.25", "0.5", "0.8"], correctOptionIndex: 0, explanation: "$1 \\div 8 = 0.125$ (Page 982)." },
+                { question: "If an item is priced at $50 and has a $6\%$ sales tax, what is the sales tax amount?", options: ["$3", "$6", "$12", "$30"], correctOptionIndex: 0, explanation: "Sales tax = $6\%$ of $50 = 0.06 \\times 50 = 3$ (Page 986)." },
+                { question: "Express $75/100$ as a percentage.", options: ["7.5%", "75%", "0.75%", "750%"], correctOptionIndex: 1, explanation: "$75/100$ is equivalent to $75\%$ (Page 984)." },
+                { question: "Arrange the following from smallest to largest: $0.5$, $1/4$, $70\%$.", options: ["$1/4, 0.5, 70\%$", "$0.5, 1/4, 70\%$", "$70\%, 0.5, 1/4$", "$1/4, 70\%, 0.5$"], correctOptionIndex: 0, explanation: "Convert all to decimals: $1/4 = 0.25$, $0.5 = 0.5$, $70\% = 0.7$. So, $0.25, 0.5, 0.7$ (Page 988)." }
             ];
             quizQuestions.push(...mathematicsMCQs);
-
-            // Urdu (10 MCQs from Pages 1150-1166)
-            const urduMCQs = [
-                { question: "اردو میں 'تشبیہ' سے کیا مراد ہے؟", options: ["کسی چیز کی تعریف کرنا", "کسی ایک چیز کو دوسری چیز سے کسی مشترک خوبی یا خامی کی وجہ سے ملانا", "مبالغہ آرائی کرنا", "کسی چیز کا متضاد بتانا"], correctOptionIndex: 1, explanation: "تشبیہ کا مطلب ہے کسی چیز کو کسی دوسری چیز جیسا قرار دینا (صفحہ 1150)." },
-                { question: "درج ذیل میں سے کون سا جملہ 'تشبیہ' کی مثال ہے؟", options: ["وہ شیر ہے۔", "بچہ چاند جیسا خوبصورت ہے۔", "میں نے پہاڑ اٹھا لیا۔", "سورج نکلا۔"], correctOptionIndex: 1, explanation: "'بچہ چاند جیسا خوبصورت ہے' میں بچے کو چاند سے تشبیہ دی گئی ہے (صفحہ 1151)." },
-                { question: "اردو میں 'استعارہ' سے کیا مراد ہے؟", options: ["کسی چیز کو اس کی اصل صفات کے ساتھ بیان کرنا", "کسی لفظ کو اس کے حقیقی معنی کے بجائے مجازی معنی میں استعمال کرنا اور اس سے ایک نیا تعلق قائم کرنا", "کسی چیز کو بڑھا چڑھا کر پیش کرنا", "کسی چیز کے بارے میں سوال کرنا"], correctOptionIndex: 1, explanation: "استعارہ میں کسی چیز کو بعینہٖ دوسری چیز قرار دیا جاتا ہے (صفحہ 1152)." },
-                { question: "درج ذیل میں سے کون سا جملہ 'استعارہ' کی مثال ہے؟", options: ["وہ ایک اچھا لڑکا ہے۔", "اسلم شیر ہے۔", "میرا گھر بہت بڑا ہے۔", "تم ستارے کی طرح چمکتے ہو۔"], correctOptionIndex: 1, explanation: "'اسلم شیر ہے' میں اسلم کو بہادری کی وجہ سے براہ راست شیر کہا گیا ہے (صفحہ 1153)." },
-                { question: "اردو میں 'کنایہ' کا کیا مطلب ہے؟", options: ["مباشرۃً کوئی بات کہنا", "ایسا کلام جو اپنے حقیقی معنی کے بجائے مجازی معنی میں استعمال ہو اور اس میں قرینہ نہ ہو", "سیدھی بات کرنا", "کوئی راز چھپانا"], correctOptionIndex: 1, explanation: "کنایہ میں بات کو اشارتاً کہا جاتا ہے (صفحہ 1154)." },
-                { question: "درج ذیل میں سے کون سا جملہ 'کنایہ' کی مثال ہے؟", options: ["وہ بہت بہادر ہے۔", "لڑکا پڑھ رہا ہے۔", "موٹی عقل والا شخص۔", "سورج گرم ہے۔"], correctOptionIndex: 2, explanation: "'موٹی عقل والا شخص' کنایہ ہے بیوقوف شخص کے لیے (صفحہ 1155)." },
-                { question: "اردو میں 'تضاد' سے کیا مراد ہے؟", options: ["ہم معنی الفاظ کا استعمال", "دو متضاد (الٹ) الفاظ کا ایک جملے میں استعمال", "ایک ہی طرح کے الفاظ کا استعمال", "کسی چیز کی وضاحت کرنا"], correctOptionIndex: 1, explanation: "تضاد میں دو مخالف معنی والے الفاظ ایک ساتھ آتے ہیں (صفحہ 1156)." },
-                { question: "درج ذیل میں سے کون سا جملہ 'تضاد' کی مثال ہے؟", options: ["اسلم دن رات محنت کرتا ہے۔", "وہ بہت خوش ہے۔", "میں کھانا کھاتا ہوں۔", "یہ میرا دوست ہے۔"], correctOptionIndex: 0, explanation: "'دن رات' ایک دوسرے کے متضاد ہیں (صفحہ 1157)." },
-                { question: "اردو میں 'تلمیح' کا کیا مطلب ہے؟", options: ["کسی تاریخی واقعے یا قرآنی آیت کی طرف اشارہ کرنا", "صرف افسانے لکھنا", "سیدھی بات کرنا", "طویل کہانی بیان کرنا"], correctOptionIndex: 0, explanation: "تلمیح میں کسی مشہور واقعے، آیت یا حدیث کی طرف اشارہ ہوتا ہے (صفحہ 1158)." },
-                { question: "درج ذیل میں سے کون سا جملہ 'تلمیح' کی مثال ہے؟", options: ["علی نے شیر کا شکار کیا۔", "ابلیس نے آدم کو سجدہ نہ کیا۔", "وہ کتاب پڑھ رہا ہے۔", "یہ ایک خوبصورت منظر ہے۔"], correctOptionIndex: 1, explanation: "یہ جملہ حضرت آدمؑ اور ابلیس کے واقعے کی طرف تلمیح کر رہا ہے (صفحہ 1159)." }
-            ];
-            quizQuestions.push(...urduMCQs);
-
-            // Islamiat (10 MCQs from Pages 1309-1323)
-            const islamiatMCQs = [
-                { question: "قرآن مجید میں کتنی سورتیں ہیں؟", options: ["110", "112", "114", "116"], correctOptionIndex: 2, explanation: "قرآن مجید میں 114 سورتیں ہیں (صفحہ 1309)." },
-                { question: "قرآن مجید کی سب سے بڑی سورت کون سی ہے؟", options: ["سورۃ الفاتحہ", "سورۃ البقرہ", "سورۃ آل عمران", "سورۃ یٰسین"], correctOptionIndex: 1, explanation: "سورۃ البقرہ قرآن مجید کی سب سے بڑی سورت ہے (صفحہ 1310)." },
-                { question: "قرآن مجید کی سب سے چھوٹی سورت کون سی ہے؟", options: ["سورۃ الاخلاص", "سورۃ الکوثر", "سورۃ العصر", "سورۃ الفلق"], correctOptionIndex: 1, explanation: "سورۃ الکوثر قرآن مجید کی سب سے چھوٹی سورت ہے (صفحہ 1311)." },
-                { question: "قرآن مجید کو مکمل نازل ہونے میں کتنا عرصہ لگا؟", options: ["13 سال", "23 سال", "25 سال", "30 سال"], correctOptionIndex: 1, explanation: "قرآن مجید 22 سال 5 ماہ اور 14 دن (تقریباً 23 سال) کے عرصے میں نازل ہوا (صفحہ 1312)." },
-                { question: "قرآن مجید میں کل کتنے پارے ہیں؟", options: ["20", "25", "30", "35"], correctOptionIndex: 2, explanation: "قرآن مجید میں 30 پارے ہیں (صفحہ 1313)." },
-                { question: "قرآن مجید میں کتنے سجدے ہیں؟", options: ["10", "12", "14", "15"], correctOptionIndex: 3, explanation: "قرآن مجید میں 15 سجدے ہیں (صفحہ 1314)." },
-                { question: "قرآن مجید میں 'بسم اللہ الرحمن الرحیم' کتنی مرتبہ آئی ہے؟", options: ["113", "114", "115", "116"], correctOptionIndex: 2, explanation: "سورۃ التوبہ کے علاوہ ہر سورت کے آغاز میں اور سورۃ النمل میں دو بار، یوں کل 114+1=115 بار (صفحہ 1315)." },
-                { question: "کس سورت میں دو مرتبہ 'بسم اللہ الرحمن الرحیم' آئی ہے؟", options: ["سورۃ الفاتحہ", "سورۃ البقرہ", "سورۃ النمل", "سورۃ الاخلاص"], correctOptionIndex: 2, explanation: "سورۃ النمل میں آغاز میں اور آیت نمبر 30 میں بھی 'بسم اللہ الرحمن الرحیم' موجود ہے (صفحہ 1316)." },
-                { question: "پہلی اسلامی ہجرت کہاں کی گئی؟", options: ["مدینہ", "حبشہ", "طائف", "شام"], correctOptionIndex: 1, explanation: "مسلمانوں نے پہلی ہجرت حبشہ کی طرف کی تھی (صفحہ 1317)." },
-                { question: "مدینہ ہجرت کب ہوئی؟", options: ["1 ہجری", "2 ہجری", "3 ہجری", "4 ہجری"], correctOptionIndex: 0, explanation: "مدینہ کی طرف ہجرت 1 ہجری کو ہوئی (صفحہ 1318)." }
-            ];
-            quizQuestions.push(...islamiatMCQs);
-
-            // Arabic (5 MCQs from Pages 1420-1425)
-            const arabicMCQs = [
-                { question: "عربی میں 'جَمَلٌ' کا کیا مطلب ہے؟", options: ["گھوڑا", "اونٹ", "ہاتھی", "شیر"], correctOptionIndex: 1, explanation: "جَمَلٌ کا مطلب اونٹ ہے (صفحہ 1420)." },
-                { question: "عربی میں 'حِصَانٌ' کا کیا مطلب ہے؟", options: ["اونٹ", "گھوڑا", "گدھا", "بیل"], correctOptionIndex: 1, explanation: "حِصَانٌ کا مطلب گھوڑا ہے (صفحہ 1421)." },
-                { question: "عربی میں 'ثَوْرٌ' کا کیا مطلب ہے؟", options: ["گھوڑا", "بیل", "بکری", "بھیڑ"], correctOptionIndex: 1, explanation: "ثَوْرٌ کا مطلب بیل ہے (صفحہ 1422)." },
-                { question: "عربی میں 'غَنَمٌ' کا کیا مطلب ہے؟", options: ["بیل", "بھیڑ بکری", "اونٹ", "گھوڑا"], correctOptionIndex: 1, explanation: "غَنَمٌ کا مطلب بھیڑ بکری ہے (صفحہ 1423)." },
-                { question: "عربی میں 'دَجَاجَةٌ' کا کیا مطلب ہے؟", options: ["بندر", "گائے", "مرغی", "بطخ"], correctOptionIndex: 2, explanation: "دَجَاجَةٌ کا مطلب مرغی ہے (صفحہ 1424)." }
-            ];
-            quizQuestions.push(...arabicMCQs);
-
-            // Tajweed (3 MCQs from Pages 1468-1470)
-            const tajweedMCQs = [
-                { question: "حروفِ قلقلہ کی ادائیگی میں کون سا وصف پایا جاتا ہے؟", options: ["نرم آواز", "جھٹکا", "لمبا کرنا", "غنہ"], correctOptionIndex: 1, explanation: "حروفِ قلقلہ کی ادائیگی میں جھٹکے کی آواز پیدا ہوتی ہے (صفحہ 1468)." },
-                { question: "حروفِ قلقلہ کتنے ہیں؟", options: ["چار", "پانچ", "چھ", "سات"], correctOptionIndex: 1, explanation: "حروفِ قلقلہ پانچ ہیں: ق، ط، ب، ج، د (قطب جد) (صفحہ 1469)." },
-                { question: "میم ساکن کے کتنے قاعدے ہیں؟", options: ["ایک", "دو", "تین", "چار"], correctOptionIndex: 2, explanation: "میم ساکن کے تین قاعدے ہیں: اخفاءِ شفوی، ادغامِ شفوی، اظہارِ شفوی (صفحہ 1470)." }
-            ];
-            quizQuestions.push(...tajweedMCQs);
 
             // Randomly select one special question from the entire set
             specialQuestionIndex = Math.floor(Math.random() * quizQuestions.length);
@@ -860,6 +787,8 @@
 
         // Initialize the quiz when the script loads
         initializeQuiz();
+        // Explicitly show the login page after initialization to prevent any display issues
+        showPage('loginPage');
     </script>
 </body>
 </html>
