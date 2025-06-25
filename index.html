@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 6 Quiz - EDUCATION DEPARTMENT SCREENING TEST PREPARATION – June 24, 2025</title>
+    <title>Day 7 Quiz - EDUCATION DEPARTMENT SCREENING TEST PREPARATION – June 25, 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -290,7 +290,7 @@
     </div>
 
     <main class="flex-grow flex items-center justify-center p-4">
-        <!-- Added 'hidden' class to all sections initially -->
+        <!-- All page sections are initially hidden to prevent flicker -->
         <div id="loginPage" class="card hidden">
             <h2 class="text-xl font-bold mb-4 text-center">Login</h2>
             <div class="mb-4">
@@ -343,13 +343,13 @@
 
     <script>
         // Set the current date for display and logic
-        const CURRENT_DATE_STR = "June 24, 2025";
+        const CURRENT_DATE_STR = "June 25, 2025";
         const CURRENT_DATE = new Date(CURRENT_DATE_STR);
 
         // Update header dates
         document.getElementById('liveDate').textContent = CURRENT_DATE_STR;
         document.getElementById('updatedDate').textContent = CURRENT_DATE_STR;
-        document.getElementById('quizTitle').textContent = `Day 6 Quiz - EDUCATION DEPARTMENT SCREENING TEST PREPARATION – ${CURRENT_DATE_STR}`;
+        document.getElementById('quizTitle').textContent = `Day 7 Quiz - EDUCATION DEPARTMENT SCREENING TEST PREPARATION – ${CURRENT_DATE_STR}`;
 
         // Quiz Data Structure
         const quizQuestions = [];
@@ -612,7 +612,7 @@
             formData.append('Correct Answers', correctCount);
             formData.append('Incorrect Answers', incorrectCount);
             formData.append('Time Taken', formatTime(timeTakenSeconds));
-            formData.append('Quiz ID', "day6"); // Specific ID for Day 6 quiz
+            formData.append('Quiz ID', "day7"); // Specific ID for Day 7 quiz
 
             fetch('https://formspree.io/f/xwpojgab', {
                 method: 'POST',
@@ -638,8 +638,8 @@
             const password = document.getElementById('loginPassword').value;
             const loginError = document.getElementById('loginError');
 
-            // Specific credentials for Day 6
-            if (id === 'day6' && password === '6666') {
+            // Specific credentials for Day 7
+            if (id === 'day7' && password === '7777') {
                 loginError.classList.add('hidden');
                 showPage('candidateNamePage');
             } else {
@@ -687,86 +687,86 @@
             // Clear previous questions
             quizQuestions.length = 0;
 
-            // Pedagogy (10 MCQs from Pages 21-24)
+            // Pedagogy (10 MCQs from Pages 25-28)
             const pedagogyMCQs = [
-                { question: "The word 'pedagogy' means:", options: ["To guide the child", "To lead the child", "To educate the child", "To evaluate the students"], correctOptionIndex: 1, explanation: "Pedagogy is derived from Greek words 'paidos' (child) and 'agogos' (leader), meaning 'to lead the child' (Page 21)." },
-                { question: "Pedagogy is the study of:", options: ["Learning process", "Education", "Teaching method", "Books"], correctOptionIndex: 2, explanation: "Pedagogy focuses on the theory and practice of teaching (Page 21)." },
-                { question: "Which type of learning is predominantly teacher centered?", options: ["Andragogy", "Pedagogy", "Heutagogy", "Cybergogy"], correctOptionIndex: 1, explanation: "Pedagogy implies a teacher-led approach, suitable for children (Page 21)." },
-                { question: "Who is considered as father of research in teaching?", options: ["Edward Lee Thorndike", "Lewis Medison", "Joseph Mayer Rice", "None of these"], correctOptionIndex: 2, explanation: "Joseph Mayer Rice was a pioneer in educational research (Page 21)." },
-                { question: "What does andragogy mean?", options: ["Teaching of kids", "Teaching of adults", "Teaching right from the book", "Teaching"], correctOptionIndex: 1, explanation: "Andragogy refers to the methods and principles used in adult education (Page 21)." },
-                { question: "An adult in training 'needs to know' which means:", options: ["they are goal-oriented and expect it to be relevant", "they bring knowledge they want to share", "they need to be motivated", "they know their own needs"], correctOptionIndex: 0, explanation: "Adult learners are typically purpose-driven and seek relevance in their learning (Page 21)." },
-                { question: "The primary task of the teacher is:", options: ["to teach the prescribed curriculum", "to stimulate and guide student learning", "to promote habits of conformity to adult's demands and expectation", "to provide diagnostic and remedial aid wherever indicated"], correctOptionIndex: 1, explanation: "A teacher's role is to facilitate and support student learning (Page 21)." },
-                { question: "The first learning center of a child is:", options: ["School", "Society", "Home", "All"], correctOptionIndex: 2, explanation: "The home environment is the primary and initial learning space for a child (Page 22)." },
-                { question: "A scoring guide used to evaluate the quality of students is called:", options: ["List card", "Rubrics", "Rating scale", "None of these"], correctOptionIndex: 1, explanation: "Rubrics provide clear criteria for evaluating student work (Page 22)." },
-                { question: "Education according to John Dewey is:", options: ["Prepare for future life", "Shaping", "Learning to do by doing", "Struggling"], correctOptionIndex: 2, explanation: "John Dewey advocated for experiential learning and active participation (Page 22)." }
+                { question: "What is the purpose of 'educational psychology'?", options: ["To study abnormal behavior in students.", "To understand how students learn and develop, and to apply psychological principles to improve teaching.", "To classify students into groups.", "To design school buildings."], correctOptionIndex: 1, explanation: "Educational psychology helps educators create effective learning environments (Page 25)." },
+                { question: "Who is known for the theory of 'cognitive development'?", options: ["B.F. Skinner", "Sigmund Freud", "Jean Piaget", "Ivan Pavlov"], correctOptionIndex: 2, explanation: "Jean Piaget's stages of cognitive development describe how children construct knowledge (Page 26)." },
+                { question: "What is 'Vygotsky's Zone of Proximal Development (ZPD)'?", options: ["The area where a child cannot learn independently.", "The difference between what a learner can do without help and what they can achieve with guidance and support from a more knowledgeable other.", "A fixed set of skills a child possesses.", "The limit of a child's intelligence."], correctOptionIndex: 1, explanation: "ZPD emphasizes the importance of social interaction in learning (Page 26)." },
+                { question: "What is 'Erik Erikson's theory' known for?", options: ["Cognitive stages", "Moral development", "Psychosocial stages of development", "Behavioral conditioning"], correctOptionIndex: 2, explanation: "Erik Erikson's theory describes personality development across the lifespan through a series of psychosocial crises (Page 27)." },
+                { question: "What is 'motivation' in the context of learning?", options: ["The act of teaching.", "The process that initiates, guides, and maintains goal-oriented behaviors.", "The process of assessment.", "The study of human behavior."], correctOptionIndex: 1, explanation: "Motivation drives learners to achieve their goals (Page 27)." },
+                { question: "Which type of motivation comes from within an individual?", options: ["Extrinsic motivation", "Intrinsic motivation", "External motivation", "Reward-based motivation"], correctOptionIndex: 1, explanation: "Intrinsic motivation is driven by internal rewards, such as enjoyment or satisfaction (Page 27)." },
+                { question: "Which type of motivation comes from outside an individual, such as rewards or praise?", options: ["Intrinsic motivation", "Autonomy", "Extrinsic motivation", "Mastery"], correctOptionIndex: 2, explanation: "Extrinsic motivation involves external factors like grades, praise, or punishment (Page 27)." },
+                { question: "What is 'memory' in educational psychology?", options: ["The ability to forget information.", "The capacity to encode, store, retain, and retrieve information.", "The process of problem-solving.", "The ability to learn new things."], correctOptionIndex: 1, explanation: "Memory is crucial for learning and knowledge retention (Page 28)." },
+                { question: "What is 'short-term memory'?", options: ["Memory that lasts a lifetime.", "Memory that holds a small amount of information for a short period (around 20-30 seconds) without rehearsal.", "Memory for skills and habits.", "Memory for facts and events."], correctOptionIndex: 1, explanation: "Short-term memory is temporary and has limited capacity (Page 28)." },
+                { question: "What is 'long-term memory'?", options: ["Memory that is easily forgotten.", "Memory that holds information for extended periods, from days to decades.", "Memory for immediate tasks.", "Memory that is only active during sleep."], correctOptionIndex: 1, explanation: "Long-term memory has a vast capacity and relatively permanent duration (Page 28)." }
             ];
             quizQuestions.push(...pedagogyMCQs);
 
-            // General Science (15 MCQs from Pages 171-188)
+            // General Science (15 MCQs from Pages 189-206)
             const generalScienceMCQs = [
-                { question: "What is the primary function of the 'skeletal system'?", options: ["Pumping blood", "Support and protection of internal organs", "Digesting food", "Producing hormones"], correctOptionIndex: 1, explanation: "The skeletal system provides the framework for the body and protects vital organs (Page 171)." },
-                { question: "Which of the following is a bone?", options: ["Muscle", "Tendon", "Femur", "Ligament"], correctOptionIndex: 2, explanation: "The femur is the thigh bone, the longest bone in the human body (Page 172)." },
-                { question: "What connects bone to bone?", options: ["Tendon", "Muscle", "Ligament", "Cartilage"], correctOptionIndex: 2, explanation: "Ligaments are strong, fibrous tissues that connect bones at joints (Page 173)." },
-                { question: "What connects muscle to bone?", options: ["Ligament", "Cartilage", "Tendon", "Joint"], correctOptionIndex: 2, explanation: "Tendons are tough bands of fibrous connective tissue that connect muscles to bones (Page 174)." },
-                { question: "What is the function of 'red blood cells'?", options: ["Fighting infection", "Clotting blood", "Carrying oxygen", "Producing antibodies"], correctOptionIndex: 2, explanation: "Red blood cells, containing hemoglobin, transport oxygen from the lungs to the body's tissues (Page 175)." },
-                { question: "Which organ is part of the 'circulatory system'?", options: ["Stomach", "Lungs", "Heart", "Kidney"], correctOptionIndex: 2, explanation: "The heart pumps blood throughout the body (Page 176)." },
-                { question: "What is the largest organ in the human body?", options: ["Brain", "Heart", "Liver", "Skin"], correctOptionIndex: 3, explanation: "The skin is the body's largest organ, forming a protective barrier (Page 177)." },
-                { question: "What is the main function of the 'nervous system'?", options: ["Digestion", "Circulation", "Control and coordination of bodily functions", "Respiration"], correctOptionIndex: 2, explanation: "The nervous system transmits signals between different parts of the body (Page 178)." },
-                { question: "Which part of the brain is responsible for thinking, memory, and language?", options: ["Cerebellum", "Brainstem", "Cerebrum", "Spinal cord"], correctOptionIndex: 2, explanation: "The cerebrum is the largest part of the brain and is involved in higher-level functions (Page 179)." },
-                { question: "What is the function of the 'digestive system'?", options: ["Breathing", "Pumping blood", "Breaking down food for nutrient absorption", "Filtering waste from blood"], correctOptionIndex: 2, explanation: "The digestive system converts food into energy and absorbs nutrients (Page 180)." },
-                { question: "Which organ is primarily responsible for filtering waste products from the blood to produce urine?", options: ["Liver", "Stomach", "Kidney", "Lungs"], correctOptionIndex: 2, explanation: "The kidneys play a vital role in maintaining fluid and electrolyte balance (Page 181)." },
-                { question: "What is the process by which plants convert light energy into chemical energy?", options: ["Respiration", "Transpiration", "Photosynthesis", "Germination"], correctOptionIndex: 2, explanation: "Photosynthesis uses sunlight, water, and carbon dioxide to create glucose and oxygen (Page 182)." },
-                { question: "Which gas do plants absorb from the atmosphere for photosynthesis?", options: ["Oxygen", "Nitrogen", "Carbon dioxide", "Hydrogen"], correctOptionIndex: 2, explanation: "Carbon dioxide is a key reactant in photosynthesis (Page 183)." },
-                { question: "What are the tiny pores on the surface of leaves that allow for gas exchange?", options: ["Chloroplasts", "Stomata", "Mitochondria", "Xylem"], correctOptionIndex: 1, explanation: "Stomata regulate the exchange of gases and water vapor (Page 184)." },
-                { question: "What is the male reproductive part of a flower?", options: ["Pistil", "Ovary", "Stamen", "Petal"], correctOptionIndex: 2, explanation: "The stamen consists of the anther and filament, producing pollen (Page 185)." }
+                { question: "What is the function of the 'root system' in plants?", options: ["Photosynthesis", "Anchoring the plant and absorbing water and nutrients", "Producing flowers", "Transpiration"], correctOptionIndex: 1, explanation: "Roots are essential for plant stability and nutrient uptake (Page 189)." },
+                { question: "What are the tiny structures in plant cells that contain chlorophyll and are the sites of photosynthesis?", options: ["Mitochondria", "Vacuoles", "Chloroplasts", "Nucleus"], correctOptionIndex: 2, explanation: "Chloroplasts are specialized organelles unique to plant cells (Page 190)." },
+                { question: "Which part of the plant is responsible for transporting water and minerals from the roots to the leaves?", options: ["Phloem", "Stomata", "Xylem", "Pistil"], correctOptionIndex: 2, explanation: "Xylem forms a vascular network throughout the plant (Page 191)." },
+                { question: "Which part of the plant is responsible for transporting sugars (food) produced during photosynthesis from the leaves to other parts of the plant?", options: ["Xylem", "Stomata", "Phloem", "Root hair"], correctOptionIndex: 2, explanation: "Phloem moves nutrients to where they are needed for growth and storage (Page 192)." },
+                { question: "What is 'transpiration'?", options: ["Absorption of water by roots.", "The process of water movement through a plant and its evaporation from aerial parts, such as leaves, stems and flowers.", "Food production in leaves.", "Root growth."], correctOptionIndex: 1, explanation: "Transpiration is like a plant's sweating, crucial for water circulation (Page 193)." },
+                { question: "What is 'pollination'?", options: ["Seed dispersal.", "The transfer of pollen from the anther to the stigma of a flower.", "Fruit formation.", "Plant respiration."], correctOptionIndex: 1, explanation: "Pollination is a key step in plant reproduction, often aided by wind, water, or animals (Page 194)." },
+                { question: "Which type of reproduction involves only one parent and produces offspring genetically identical to the parent?", options: ["Sexual reproduction", "Asexual reproduction", "Cross-pollination", "Fertilization"], correctOptionIndex: 1, explanation: "Asexual reproduction methods include budding, fragmentation, and vegetative propagation (Page 195)." },
+                { question: "What is 'fertilization' in plants?", options: ["Pollen transfer.", "The fusion of male gametes with female gametes to form a zygote.", "Seed germination.", "Fruit ripening."], correctOptionIndex: 1, explanation: "Fertilization leads to the development of the embryo within the seed (Page 196)." },
+                { question: "What are 'seeds'?", options: ["Plant leaves.", "Reproductive units of flowering plants, typically containing an embryo and stored food, enclosed within a protective outer covering.", "Plant roots.", "Plant stems."], correctOptionIndex: 1, explanation: "Seeds are crucial for the dispersal and survival of plant species (Page 197)." },
+                { question: "What is 'germination'?", options: ["Flower production.", "The process by which an organism grows from a seed or spore.", "Fruit development.", "Leaf shedding."], correctOptionIndex: 1, explanation: "Germination requires specific conditions like water, warmth, and oxygen (Page 198)." },
+                { question: "What are 'vertebrates'?", options: ["Animals without backbones.", "Animals with a backbone or spinal column.", "Animals that live in water.", "Animals that lay eggs."], correctOptionIndex: 1, explanation: "Vertebrates include fish, amphibians, reptiles, birds, and mammals (Page 199)." },
+                { question: "Which of the following is an example of an 'invertebrate'?", options: ["Fish", "Bird", "Spider", "Dog"], correctOptionIndex: 2, explanation: "Invertebrates are diverse and make up the vast majority of animal species (Page 200)." },
+                { question: "What are 'mammals'?", options: ["Animals that lay eggs and have scales.", "Warm-blooded vertebrates that have hair or fur, and in females, mammary glands that produce milk to feed their young.", "Cold-blooded animals.", "Animals that live only in water."], correctOptionIndex: 1, explanation: "Mammals are characterized by their hair/fur and milk production (Page 201)." },
+                { question: "Which class of vertebrates lays eggs, has feathers, and is warm-blooded?", options: ["Fish", "Reptiles", "Amphibians", "Birds"], correctOptionIndex: 3, explanation: "Birds are unique among vertebrates for their feathers and ability to fly (Page 202)." },
+                { question: "What are 'amphibians'?", options: ["Animals that live only on land.", "Cold-blooded vertebrates that live both on land and in water, typically undergoing metamorphosis from an aquatic larval stage to a terrestrial adult form.", "Animals with scales.", "Animals with gills throughout their life."], correctOptionIndex: 1, explanation: "Amphibians include frogs, toads, and salamanders (Page 203)." }
             ];
             quizQuestions.push(...generalScienceMCQs);
 
-            // Social Studies (10 MCQs from Pages 525-542)
+            // Social Studies (10 MCQs from Pages 543-560 - Geography: Population & Migration)
             const socialStudiesMCQs = [
-                { question: "What is 'population distribution'?", options: ["The number of people in a country.", "The pattern of where people live.", "The growth rate of a population.", "The movement of people."], correctOptionIndex: 1, explanation: "Population distribution describes how people are spread across a geographical area (Page 525)." },
-                { question: "Which factor primarily influences population distribution?", options: ["Government type", "Availability of resources and climate", "Historical events", "Religious beliefs"], correctOptionIndex: 1, explanation: "Access to water, fertile land, and suitable climate are major determinants of where people settle (Page 526)." },
-                { question: "What is 'population density'?", options: ["Total population of a region.", "The number of people living per unit of area.", "The birth rate of a country.", "The average age of a population."], correctOptionIndex: 1, explanation: "Population density measures how crowded a place is (Page 527)." },
-                { question: "Which continent has the highest population density?", options: ["Africa", "North America", "Asia", "Europe"], correctOptionIndex: 2, explanation: "Asia, particularly South and East Asia, has very high population densities (Page 528)." },
-                { question: "What is 'birth rate'?", options: ["Number of deaths per 1000 people.", "Number of live births per 1000 people in a year.", "Total population increase.", "Average number of children per woman."], correctOptionIndex: 1, explanation: "Birth rate is a key demographic indicator (Page 529)." },
-                { question: "What is 'death rate'?", options: ["Number of live births per 1000 people.", "Number of deaths per 1000 people in a year.", "Total population decrease.", "Average lifespan of a population."], correctOptionIndex: 1, explanation: "Death rate indicates the number of deaths relative to the population (Page 530)." },
-                { question: "What is 'natural increase' in population?", options: ["Immigration minus emigration.", "Birth rate minus death rate.", "Total population growth.", "Economic growth."], correctOptionIndex: 1, explanation: "Natural increase refers to population change due to births and deaths (Page 531)." },
-                { question: "What is 'migration'?", options: ["Movement of goods.", "Movement of people from one place to another with the intention of settling permanently or temporarily in a new location.", "Seasonal travel.", "Daily commuting."], correctOptionIndex: 1, explanation: "Migration is a significant factor in population change (Page 532)." },
-                { question: "What are 'push factors' in migration?", options: ["Conditions that attract people to a new location.", "Reasons that force people to leave their current location.", "Positive aspects of a destination.", "Opportunities in a new country."], correctOptionIndex: 1, explanation: "Push factors include conflict, poverty, and lack of opportunities (Page 533)." },
-                { question: "What is a 'demographic transition model'?", options: ["A model showing economic development.", "A model that describes population change over time as a country develops economically.", "A model for predicting climate change.", "A model for urban growth."], correctOptionIndex: 1, explanation: "The demographic transition model explains how birth and death rates change over time, affecting population growth (Page 534)." }
+                { question: "What is the 'push factor' in migration?", options: ["Attractive job opportunities", "Better education facilities", "Poverty and lack of safety", "Cultural similarities"], correctOptionIndex: 2, explanation: "Push factors are negative conditions that compel people to leave their homes (Page 543)." },
+                { question: "Which of these is a 'pull factor' for migration?", options: ["War and conflict", "High crime rates", "Better healthcare and social services", "Natural disasters"], correctOptionIndex: 2, explanation: "Pull factors are positive attractions that draw migrants to a new place (Page 544)." },
+                { question: "What is 'internal migration'?", options: ["Movement between countries.", "Movement of people within a country's borders.", "Movement of people between continents.", "Temporary movement for tourism."], correctOptionIndex: 1, explanation: "Internal migration involves changing residence within the same country (Page 545)." },
+                { question: "What is 'international migration'?", options: ["Movement between cities within a country.", "Movement across national borders.", "Daily commute for work.", "Seasonal movement for farming."], correctOptionIndex: 1, explanation: "International migration involves crossing political boundaries of countries (Page 546)." },
+                { question: "What does 'emigration' refer to?", options: ["Entering a new country.", "Leaving one's own country to settle permanently in another.", "Temporary travel abroad.", "Returning to one's home country."], correctOptionIndex: 1, explanation: "Emigration is the act of exiting a country (Page 547)." },
+                { question: "What does 'immigration' refer to?", options: ["Leaving one's own country.", "Coming to live permanently in a foreign country.", "Traveling for a short vacation.", "Moving to a different city in the same country."], correctOptionIndex: 1, explanation: "Immigration is the act of entering a new country (Page 548)." },
+                { question: "What is 'urban growth'?", options: ["Decrease in rural population.", "The increase in the area and population of cities.", "Development of new agricultural lands.", "Conservation of natural resources."], correctOptionIndex: 1, explanation: "Urban growth is a global phenomenon driven by migration and natural increase (Page 549)." },
+                { question: "Which of the following is a challenge associated with rapid urban growth?", options: ["Increased agricultural output.", "Improved public transport.", "Strain on infrastructure and services like housing, sanitation, and water supply.", "Reduced pollution."], correctOptionIndex: 2, explanation: "Rapid urbanization often outpaces infrastructure development, leading to problems (Page 550)." },
+                { question: "What is a 'slum'?", options: ["A well-planned residential area.", "A squalid and overcrowded urban area inhabited by very poor people.", "A historical city center.", "A business district."], correctOptionIndex: 1, explanation: "Slums are characterized by poor living conditions and lack of basic services (Page 551)." },
+                { question: "What is 'sustainable development'?", options: ["Development that meets the needs of the present without compromising the ability of future generations to meet their own needs.", "Rapid economic growth at any cost.", "Development focused only on technological advancements.", "Development that ignores environmental impacts."], correctOptionIndex: 0, explanation: "Sustainable development balances economic, social, and environmental considerations (Page 552)." }
             ];
             quizQuestions.push(...socialStudiesMCQs);
 
-            // English (10 MCQs from Pages 831-838 - Tenses & Voice)
+            // English (10 MCQs from Pages 839-846 - Direct & Indirect Narration)
             const englishMCQs = [
-                { question: "Which tense describes an action completed in the past?", options: ["Present Simple", "Past Simple", "Future Simple", "Present Continuous"], correctOptionIndex: 1, explanation: "The Past Simple tense is used for actions that happened at a specific time in the past (Page 831)." },
-                { question: "Identify the tense: 'She is singing a song.'", options: ["Present Simple", "Present Continuous", "Past Simple", "Future Continuous"], correctOptionIndex: 1, explanation: "This sentence uses 'is' + verb-ing, which indicates the Present Continuous tense (Page 832)." },
-                { question: "Which tense is used to describe a habit or a general truth?", options: ["Past Continuous", "Present Perfect", "Present Simple", "Future Simple"], correctOptionIndex: 2, explanation: "The Present Simple tense is used for repeated actions, habits, and facts (Page 833)." },
-                { question: "Form the Past Perfect tense: 'They ______ (finish) their homework before the game.'", options: ["have finished", "had finished", "will finish", "were finishing"], correctOptionIndex: 1, explanation: "The Past Perfect tense ('had' + past participle) describes an action completed before another past action (Page 834)." },
-                { question: "What is the Passive Voice of 'The boy broke the window'?", options: ["The window broke the boy.", "The window was broken by the boy.", "The boy was broken by the window.", "The window breaks the boy."], correctOptionIndex: 1, explanation: "In Passive Voice, the object of the active sentence becomes the subject (Page 837)." },
-                { question: "Identify the voice: 'The letter was written by her.'", options: ["Active Voice", "Passive Voice", "Direct Speech", "Indirect Speech"], correctOptionIndex: 1, explanation: "The structure 'was' + past participle + 'by' indicates Passive Voice (Page 837)." },
-                { question: "Change to Active Voice: 'The cake was eaten by him.'", options: ["He ate the cake.", "The cake ate him.", "He was eating the cake.", "The cake is eaten by him."], correctOptionIndex: 0, explanation: "To change to Active Voice, the agent ('him') becomes the subject (Page 838)." },
-                { question: "Which voice focuses on the performer of the action?", options: ["Passive Voice", "Active Voice", "Indirect Voice", "Reported Voice"], correctOptionIndex: 1, explanation: "Active Voice emphasizes the subject doing the action (Page 837)." },
-                { question: "Which tense describes an action that started in the past and continues up to the present?", options: ["Past Simple", "Present Perfect", "Present Continuous", "Future Simple"], correctOptionIndex: 1, explanation: "The Present Perfect tense is used for actions that began in the past and have relevance to the present (Page 835)." },
-                { question: "Fill in the blank with the correct form of the verb: 'They ______ (play) football tomorrow.'", options: ["played", "are playing", "will played", "play"], correctOptionIndex: 1, explanation: "For a planned future action, Present Continuous is often used, or 'will play' could also be an option depending on context, but 'are playing' implies a definite arrangement. The page refers to future tenses, allowing for this (Page 836)." }
+                { question: "Convert to Indirect Speech: 'He said, \"I am going to the market.\"'", options: ["He said that I was going to the market.", "He said that he is going to the market.", "He said that he was going to the market.", "He said that he had gone to the market."], correctOptionIndex: 2, explanation: "In Indirect Speech, present continuous becomes past continuous, and the pronoun changes from 'I' to 'he' (Page 839)." },
+                { question: "Convert to Indirect Speech: 'She said, \"I finished my work.\"'", options: ["She said that she finished her work.", "She said that she has finished her work.", "She said that she had finished her work.", "She said that I finished my work."], correctOptionIndex: 2, explanation: "Past simple in Direct Speech becomes past perfect in Indirect Speech (Page 840)." },
+                { question: "Convert to Indirect Speech: 'They said, \"We will go to the party.\"'", options: ["They said that we would go to the party.", "They said that they will go to the party.", "They said that they would go to the party.", "They said that they had gone to the party."], correctOptionIndex: 2, explanation: "'Will' changes to 'would' and 'we' changes to 'they' (Page 841)." },
+                { question: "Convert to Direct Speech: 'He asked me if I was hungry.'", options: ["He asked me, \"Are you hungry?\"", "He said, \"Am I hungry?\"", "He asked, \"Was I hungry?\"", "He said, \"You are hungry.\""], correctOptionIndex: 0, explanation: "Indirect question with 'if' usually comes from a 'Yes/No' question in Direct Speech (Page 842)." },
+                { question: "Convert to Indirect Speech: 'The teacher said, \"The Earth revolves around the Sun.\"'", options: ["The teacher said that the Earth revolved around the Sun.", "The teacher said that the Earth revolves around the Sun.", "The teacher said that the Earth will revolve around the Sun.", "The teacher said the Earth had revolved around the Sun."], correctOptionIndex: 1, explanation: "Universal truths do not change tense in Indirect Speech (Page 843)." },
+                { question: "Convert to Indirect Speech: 'He said to me, \"Please help me.\"'", options: ["He told me to help him.", "He requested me to help him.", "He asked me if I would help him.", "He ordered me to help him."], correctOptionIndex: 1, explanation: "Commands and requests often use 'to' + infinitive in Indirect Speech, with verbs like 'requested', 'ordered', 'advised' (Page 844)." },
+                { question: "Convert to Direct Speech: 'She ordered me to open the door.'", options: ["She said, \"Open the door.\"", "She said, \"Please open the door.\"", "She asked, \"Did you open the door?\"", "She ordered, \"I will open the door.\""], correctOptionIndex: 0, explanation: "An order in Indirect Speech comes from an imperative sentence in Direct Speech (Page 845)." },
+                { question: "Convert to Indirect Speech: 'My mother said, \"May God bless you!\"'", options: ["My mother prayed that God might bless me.", "My mother said that God bless me.", "My mother wished God blesses you.", "My mother said that God blessed you."], correctOptionIndex: 0, explanation: "Optative sentences (wishes/prayers) in Direct Speech change 'may' to 'might' and use 'prayed'/'wished' in Indirect Speech (Page 846)." },
+                { question: "Convert to Indirect Speech: 'He exclaimed, \"How beautiful the flower is!\"'", options: ["He exclaimed that the flower was beautiful.", "He exclaimed that the flower is beautiful.", "He asked how beautiful the flower was.", "He said that the flower is very beautiful."], correctOptionIndex: 0, explanation: "Exclamatory sentences become declarative sentences in Indirect Speech, often using 'exclaimed' (Page 846)." },
+                { question: "Which reporting verb is typically used for a question in Indirect Speech?", options: ["Said", "Told", "Asked", "Exclaimed"], correctOptionIndex: 2, explanation: "The verb 'asked' is used for reporting questions (Page 842)." }
             ];
             quizQuestions.push(...englishMCQs);
 
-            // Mathematics (10 MCQs from Pages 982-988 - Fractions, Decimals, Percentages)
+            // Mathematics (10 MCQs from Pages 989-995 - Geometry Basics)
             const mathematicsMCQs = [
-                { question: "Convert the fraction $3/4$ to a decimal.", options: ["0.3", "0.4", "0.75", "1.25"], correctOptionIndex: 2, explanation: "To convert a fraction to a decimal, divide the numerator by the denominator: $3 \\div 4 = 0.75$ (Page 982)." },
-                { question: "Convert the decimal $0.2$ to a fraction in simplest form.", options: ["1/2", "1/5", "2/10", "2/5"], correctOptionIndex: 1, explanation: "$0.2 = 2/10$, which simplifies to $1/5$ (Page 983)." },
-                { question: "What is $25\%$ as a fraction in simplest form?", options: ["1/4", "1/2", "1/3", "1/5"], correctOptionIndex: 0, explanation: "$25\% = 25/100$, which simplifies to $1/4$ (Page 984)." },
-                { question: "Convert $0.6$ to a percentage.", options: ["6%", "0.6%", "60%", "600%"], correctOptionIndex: 2, explanation: "To convert a decimal to a percentage, multiply by 100: $0.6 \\times 100 = 60\%$ (Page 985)." },
-                { question: "Calculate $10\%$ of $150$.", options: ["10", "15", "20", "25"], correctOptionIndex: 1, explanation: "$10\%$ of $150 = 0.10 \\times 150 = 15$ (Page 986)." },
-                { question: "If a shirt costs $400 and is on sale for $20\%$ off, what is the discount amount?", options: ["$20", "$40", "$80", "$100"], correctOptionIndex: 2, explanation: "Discount = $20\%$ of $400 = 0.20 \\times 400 = 80$ (Page 987)." },
-                { question: "What is the decimal equivalent of $1/8$?", options: ["0.125", "0.25", "0.5", "0.8"], correctOptionIndex: 0, explanation: "$1 \\div 8 = 0.125$ (Page 982)." },
-                { question: "If an item is priced at $50 and has a $6\%$ sales tax, what is the sales tax amount?", options: ["$3", "$6", "$12", "$30"], correctOptionIndex: 0, explanation: "Sales tax = $6\%$ of $50 = 0.06 \\times 50 = 3$ (Page 986)." },
-                { question: "Express $75/100$ as a percentage.", options: ["7.5%", "75%", "0.75%", "750%"], correctOptionIndex: 1, explanation: "$75/100$ is equivalent to $75\%$ (Page 984)." },
-                { question: "Arrange the following from smallest to largest: $0.5$, $1/4$, $70\%$.", options: ["$1/4, 0.5, 70\%$", "$0.5, 1/4, 70\%$", "$70\%, 0.5, 1/4$", "$1/4, 70\%, 0.5$"], correctOptionIndex: 0, explanation: "Convert all to decimals: $1/4 = 0.25$, $0.5 = 0.5$, $70\% = 0.7$. So, $0.25, 0.5, 0.7$ (Page 988)." }
+                { question: "What is a 'point' in geometry?", options: ["A line segment.", "A location in space that has no size or shape.", "A two-dimensional figure.", "A three-dimensional object."], correctOptionIndex: 1, explanation: "A point is the most basic building block of geometry (Page 989)." },
+                { question: "What is a 'line' in geometry?", options: ["A measurable segment.", "A straight path that extends infinitely in two opposite directions.", "A two-dimensional shape.", "A three-dimensional object."], correctOptionIndex: 1, explanation: "A line has no thickness and extends indefinitely (Page 989)." },
+                { question: "What is a 'line segment'?", options: ["A line that extends infinitely.", "A part of a line that has two endpoints.", "A curved path.", "A line with one endpoint."], correctOptionIndex: 1, explanation: "A line segment has a definite length (Page 989)." },
+                { question: "What is a 'ray' in geometry?", options: ["A line with no endpoints.", "A line that extends infinitely in only one direction from a single endpoint.", "A curved line.", "A line segment."], correctOptionIndex: 1, explanation: "A ray has a starting point but no end point (Page 989)." },
+                { question: "What are 'parallel lines'?", options: ["Lines that intersect at a right angle.", "Lines that meet at a single point.", "Lines that are always the same distance apart and never intersect.", "Lines that form a curve."], correctOptionIndex: 2, explanation: "Parallel lines maintain a constant distance between them (Page 990)." },
+                { question: "What are 'perpendicular lines'?", options: ["Lines that never intersect.", "Lines that intersect to form a right angle (90°).", "Lines that cross each other at any angle.", "Lines that are parallel."], correctOptionIndex: 1, explanation: "Perpendicular lines form a 90-degree angle at their intersection (Page 990)." },
+                { question: "What is an 'angle'?", options: ["A straight line.", "A figure formed by two rays sharing a common endpoint, called the vertex.", "A closed shape.", "A point in space."], correctOptionIndex: 1, explanation: "Angles are measured in degrees (Page 991)." },
+                { question: "An angle that measures exactly 90° is called a(n) _________ angle.", options: ["Acute", "Obtuse", "Right", "Straight"], correctOptionIndex: 2, explanation: "A right angle is commonly found in squares and rectangles (Page 992)." },
+                { question: "An angle that measures less than 90° is called a(n) _________ angle.", options: ["Right", "Obtuse", "Acute", "Straight"], correctOptionIndex: 2, explanation: "Acute angles are 'sharp' angles (Page 992)." },
+                { question: "An angle that measures greater than 90° but less than 180° is called a(n) _________ angle.", options: ["Acute", "Right", "Obtuse", "Straight"], correctOptionIndex: 2, explanation: "Obtuse angles are 'blunt' angles (Page 992)." }
             ];
             quizQuestions.push(...mathematicsMCQs);
-
+            
             // Randomly select one special question from the entire set
             specialQuestionIndex = Math.floor(Math.random() * quizQuestions.length);
             quizQuestions[specialQuestionIndex].special = true;
