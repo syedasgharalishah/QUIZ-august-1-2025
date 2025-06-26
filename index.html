@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 7 Quiz - EDUCATION DEPARTMENT SCREENING TEST PREPARATION – June 25, 2025</title>
+    <title>Day 8 Quiz - EDUCATION DEPARTMENT SCREENING TEST PREPARATION – June 26, 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -343,22 +343,24 @@
 
     <script>
         // Set the current date for display and logic
-        const CURRENT_DATE_STR = "June 25, 2025";
+        const CURRENT_DATE_STR = "June 26, 2025";
         const CURRENT_DATE = new Date(CURRENT_DATE_STR);
 
         // Update header dates
         document.getElementById('liveDate').textContent = CURRENT_DATE_STR;
         document.getElementById('updatedDate').textContent = CURRENT_DATE_STR;
-        document.getElementById('quizTitle').textContent = `Day 7 Quiz - EDUCATION DEPARTMENT SCREENING TEST PREPARATION – ${CURRENT_DATE_STR}`;
+        document.getElementById('quizTitle').textContent = `Day 8 Quiz - EDUCATION DEPARTMENT SCREENING TEST PREPARATION – ${CURRENT_DATE_STR}`;
 
         // Quiz Data Structure
-        const quizQuestions = [];
+        const originalQuizQuestions = []; // Stores the initial, unshuffled questions
+        let quizQuestions = []; // This array will be shuffled and used for the current quiz
         let currentQuestionIndex = 0;
-        let userAnswers = []; // Stores { questionIndex: int, selectedOptionIndex: int, isCorrect: bool }
+        // Stores { questionIndex: int (original index), selectedOptionIndex: int (index in shuffled options), isCorrect: bool, originalCorrectOptionIndex: int }
+        let userAnswers = []; 
         let quizStartTime;
         let timerInterval;
         const QUIZ_DURATION_MINUTES = 40; // Default quiz duration
-        let specialQuestionIndex = -1; // To store the index of the special question
+        let specialQuestionOriginalIndex = -1; // To store the original index of the special question
 
         // --- Helper Functions ---
 
@@ -371,14 +373,6 @@
                 const j = Math.floor(Math.random() * (i + 1));
                 [array[i], array[j]] = [array[j], array[i]];
             }
-        }
-
-        /**
-         * Generates a unique ID for Formspree submission.
-         * @returns {string} A unique ID.
-         */
-        function generateUniqueId() {
-            return 'quiz_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
         }
 
         /**
@@ -455,12 +449,27 @@
             if (question.special && CURRENT_DATE.toDateString() === today) {
                 quizCard.classList.add('special-question');
             }
+            
+            // Create a shuffled copy of the options for the current question
+            // We need to store the original index mapping before shuffling
+            const shuffledOptionsWithOriginalIndex = question.options.map((option, index) => ({
+                optionText: option,
+                originalIndex: index
+            }));
+            shuffleArray(shuffledOptionsWithOriginalIndex);
 
-            question.options.forEach((option, index) => {
+            // Store the shuffled options and their original correct index for this question
+            // This allows us to track the correct option even after shuffling
+            quizQuestions[currentQuestionIndex].shuffledOptions = shuffledOptionsWithOriginalIndex;
+            quizQuestions[currentQuestionIndex].shuffledCorrectOptionIndex = shuffledOptionsWithOriginalIndex.findIndex(
+                opt => opt.originalIndex === question.correctOptionIndex
+            );
+
+            shuffledOptionsWithOriginalIndex.forEach((optionObj, index) => {
                 const button = document.createElement('button');
                 button.classList.add('option-button', 'w-full');
-                button.innerHTML = option; // Use innerHTML to render LaTeX
-                button.dataset.optionIndex = index;
+                button.innerHTML = optionObj.optionText; // Use innerHTML to render LaTeX
+                button.dataset.shuffledOptionIndex = index; // Store the shuffled index
                 button.onclick = () => selectOption(index);
 
                 // Apply selected state if already answered
@@ -507,17 +516,18 @@
 
         /**
          * Handles option selection by the user.
-         * @param {number} selectedOptionIndex - The index of the selected option.
+         * @param {number} selectedOptionIndex - The index of the selected option from the SHUFFLED options.
          */
         function selectOption(selectedOptionIndex) {
             const question = quizQuestions[currentQuestionIndex];
-            const isCorrect = (selectedOptionIndex === question.correctOptionIndex);
+            const isCorrect = (selectedOptionIndex === question.shuffledCorrectOptionIndex);
 
             // Store user's answer
             userAnswers[currentQuestionIndex] = {
                 questionIndex: currentQuestionIndex,
-                selectedOptionIndex: selectedOptionIndex,
-                isCorrect: isCorrect
+                selectedOptionIndex: selectedOptionIndex, // This is the index in the SHUFFLED options
+                isCorrect: isCorrect,
+                originalCorrectOptionIndex: question.correctOptionIndex // Store original correct index for reference if needed
             };
 
             // Apply visual feedback
@@ -533,6 +543,9 @@
                     } else {
                         button.classList.add('incorrect');
                     }
+                } else if (index === question.shuffledCorrectOptionIndex) {
+                    // Highlight the correct answer even if not selected by the user
+                    button.classList.add('correct');
                 }
             });
 
@@ -612,7 +625,7 @@
             formData.append('Correct Answers', correctCount);
             formData.append('Incorrect Answers', incorrectCount);
             formData.append('Time Taken', formatTime(timeTakenSeconds));
-            formData.append('Quiz ID', "day7"); // Specific ID for Day 7 quiz
+            formData.append('Quiz ID', "day8"); // Specific ID for Day 8 quiz
 
             fetch('https://formspree.io/f/xwpojgab', {
                 method: 'POST',
@@ -638,8 +651,8 @@
             const password = document.getElementById('loginPassword').value;
             const loginError = document.getElementById('loginError');
 
-            // Specific credentials for Day 7
-            if (id === 'day7' && password === '7777') {
+            // Specific credentials for Day 8
+            if (id === 'day8' && password === '8888') {
                 loginError.classList.add('hidden');
                 showPage('candidateNamePage');
             } else {
@@ -673,8 +686,8 @@
             currentQuestionIndex = 0;
             userAnswers = [];
             clearInterval(timerInterval); // Clear any lingering timer
-            // Re-shuffle questions for a new attempt
-            initializeQuiz();
+            // Re-initialize and re-shuffle questions for a new attempt
+            initializeQuiz(); 
             // Clear login fields and go back to login page
             document.getElementById('loginId').value = '';
             document.getElementById('loginPassword').value = '';
@@ -684,98 +697,196 @@
 
         // --- Quiz Initialization ---
         function initializeQuiz() {
-            // Clear previous questions
-            quizQuestions.length = 0;
+            // Populate originalQuizQuestions (only once) if not already populated
+            if (originalQuizQuestions.length === 0) {
+                // Pedagogy (15 MCQs from Pages 11-20, 29-32, ensuring no duplicates with Day 5, 6, 7)
+                const pedagogyMCQs = [
+                    { question: "What is 'Behaviorism' in educational psychology?", options: ["A theory that focuses on mental processes.", "A theory of learning that states all behaviors are learned through interaction with the environment through a process called conditioning.", "A theory about social development.", "A theory that emphasizes innate ideas."], correctOptionIndex: 1, explanation: "Behaviorism, pioneered by Pavlov, Watson, and Skinner, focuses on observable behaviors (Page 29)." },
+                    { question: "Who is known for 'Classical Conditioning'?", options: ["Jean Piaget", "B.F. Skinner", "Ivan Pavlov", "Albert Bandura"], correctOptionIndex: 2, explanation: "Ivan Pavlov's experiments with dogs are a classic example of classical conditioning (Page 29)." },
+                    { question: "Who is known for 'Operant Conditioning'?", options: ["Ivan Pavlov", "B.F. Skinner", "Sigmund Freud", "Lev Vygotsky"], correctOptionIndex: 1, explanation: "B.F. Skinner developed operant conditioning, where learning occurs through rewards and punishments (Page 29)." },
+                    { question: "What is 'positive reinforcement'?", options: ["Adding something undesirable to decrease a behavior.", "Adding something desirable to increase a behavior.", "Removing something desirable to increase a behavior.", "Removing something undesirable to decrease a behavior."], correctOptionIndex: 1, explanation: "Positive reinforcement strengthens a behavior by providing a positive consequence (Page 30)." },
+                    { question: "What is 'negative reinforcement'?", options: ["Adding something desirable.", "Adding something undesirable to decrease a behavior.", "Removing something undesirable to increase a behavior.", "Removing something desirable to decrease a behavior."], correctOptionIndex: 2, explanation: "Negative reinforcement strengthens a behavior by removing an unpleasant stimulus (Page 30)." },
+                    { question: "What is 'punishment'?", options: ["A process that strengthens a behavior.", "A process that weakens or decreases the likelihood of a behavior occurring again.", "A process that motivates students.", "A process of providing rewards."], correctOptionIndex: 1, explanation: "Punishment aims to reduce the frequency of an undesirable behavior (Page 30)." },
+                    { question: "What is 'observational learning' (or social learning theory)?", options: ["Learning by trial and error.", "Learning by observing others and imitating their behavior.", "Learning through direct instruction.", "Learning through intrinsic motivation."], correctOptionIndex: 1, explanation: "Albert Bandura's theory emphasizes the role of modeling and imitation in learning (Page 31)." },
+                    { question: "What are the four components of observational learning?", options: ["Attention, Retention, Reproduction, Motivation", "Stimulus, Response, Reinforcement, Punishment", "Id, Ego, Superego, Libido", "Sensorimotor, Preoperational, Concrete Operational, Formal Operational"], correctOptionIndex: 0, explanation: "Bandura identified these four key processes involved in learning from observation (Page 31)." },
+                    { question: "What is the purpose of 'assessment' in education?", options: ["To punish students.", "To measure student learning, identify areas for improvement, and evaluate the effectiveness of teaching.", "To compare students to each other.", "To rank schools based on performance."], correctOptionIndex: 1, explanation: "Assessment is integral to the teaching and learning process (Page 32)." },
+                    { question: "What is 'reliability' in assessment?", options: ["The extent to which a test measures what it is intended to measure.", "The consistency of a measure, indicating that the same results would be obtained under the same conditions.", "The ease with which a test can be administered.", "The relevance of a test to the curriculum."], correctOptionIndex: 1, explanation: "Reliability ensures that test results are consistent and repeatable (Page 32)." },
+                    { question: "What is 'validity' in assessment?", options: ["The consistency of a measure.", "The extent to which a test measures what it is intended to measure.", "The ease of administration.", "The cost-effectiveness of a test."], correctOptionIndex: 1, explanation: "Validity ensures that a test accurately measures the desired construct (Page 32)." },
+                    { question: "Which term refers to the process of acquiring knowledge and skills through experience, study, or by being taught?", options: ["Education", "Teaching", "Learning", "Development"], correctOptionIndex: 2, explanation: "Learning is a fundamental process in education (Page 9)." },
+                    { question: "What type of education is characterized by being structured, hierarchical, planned, and deliberate, usually taking place in a school setting?", options: ["Informal education", "Non-formal education", "Formal education", "Self-education"], correctOptionIndex: 2, explanation: "Formal education includes schools, colleges, and universities with set curricula (Page 9)." },
+                    { question: "Which type of education is spontaneous, lifelong, and occurs through daily experiences and interactions, without a fixed syllabus or timetable?", options: ["Formal education", "Non-formal education", "Informal education", "Structured learning"], correctOptionIndex: 2, explanation: "Informal education is natural and continuous, like learning a mother tongue (Page 10)." },
+                    { question: "Which type of education is organized outside the formal system, often catering to specific needs or groups, with flexible curriculum and methods?", options: ["Formal education", "Informal education", "Non-formal education", "Traditional education"], correctOptionIndex: 2, explanation: "Non-formal education includes workshops, community education, or vocational training (Page 11)." }
+                ];
+                originalQuizQuestions.push(...pedagogyMCQs);
 
-            // Pedagogy (10 MCQs from Pages 25-28)
-            const pedagogyMCQs = [
-                { question: "What is the purpose of 'educational psychology'?", options: ["To study abnormal behavior in students.", "To understand how students learn and develop, and to apply psychological principles to improve teaching.", "To classify students into groups.", "To design school buildings."], correctOptionIndex: 1, explanation: "Educational psychology helps educators create effective learning environments (Page 25)." },
-                { question: "Who is known for the theory of 'cognitive development'?", options: ["B.F. Skinner", "Sigmund Freud", "Jean Piaget", "Ivan Pavlov"], correctOptionIndex: 2, explanation: "Jean Piaget's stages of cognitive development describe how children construct knowledge (Page 26)." },
-                { question: "What is 'Vygotsky's Zone of Proximal Development (ZPD)'?", options: ["The area where a child cannot learn independently.", "The difference between what a learner can do without help and what they can achieve with guidance and support from a more knowledgeable other.", "A fixed set of skills a child possesses.", "The limit of a child's intelligence."], correctOptionIndex: 1, explanation: "ZPD emphasizes the importance of social interaction in learning (Page 26)." },
-                { question: "What is 'Erik Erikson's theory' known for?", options: ["Cognitive stages", "Moral development", "Psychosocial stages of development", "Behavioral conditioning"], correctOptionIndex: 2, explanation: "Erik Erikson's theory describes personality development across the lifespan through a series of psychosocial crises (Page 27)." },
-                { question: "What is 'motivation' in the context of learning?", options: ["The act of teaching.", "The process that initiates, guides, and maintains goal-oriented behaviors.", "The process of assessment.", "The study of human behavior."], correctOptionIndex: 1, explanation: "Motivation drives learners to achieve their goals (Page 27)." },
-                { question: "Which type of motivation comes from within an individual?", options: ["Extrinsic motivation", "Intrinsic motivation", "External motivation", "Reward-based motivation"], correctOptionIndex: 1, explanation: "Intrinsic motivation is driven by internal rewards, such as enjoyment or satisfaction (Page 27)." },
-                { question: "Which type of motivation comes from outside an individual, such as rewards or praise?", options: ["Intrinsic motivation", "Autonomy", "Extrinsic motivation", "Mastery"], correctOptionIndex: 2, explanation: "Extrinsic motivation involves external factors like grades, praise, or punishment (Page 27)." },
-                { question: "What is 'memory' in educational psychology?", options: ["The ability to forget information.", "The capacity to encode, store, retain, and retrieve information.", "The process of problem-solving.", "The ability to learn new things."], correctOptionIndex: 1, explanation: "Memory is crucial for learning and knowledge retention (Page 28)." },
-                { question: "What is 'short-term memory'?", options: ["Memory that lasts a lifetime.", "Memory that holds a small amount of information for a short period (around 20-30 seconds) without rehearsal.", "Memory for skills and habits.", "Memory for facts and events."], correctOptionIndex: 1, explanation: "Short-term memory is temporary and has limited capacity (Page 28)." },
-                { question: "What is 'long-term memory'?", options: ["Memory that is easily forgotten.", "Memory that holds information for extended periods, from days to decades.", "Memory for immediate tasks.", "Memory that is only active during sleep."], correctOptionIndex: 1, explanation: "Long-term memory has a vast capacity and relatively permanent duration (Page 28)." }
-            ];
-            quizQuestions.push(...pedagogyMCQs);
+                // General Science (20 MCQs from Pages 141-170, 207-224, ensuring no duplicates with Day 5, 6, 7)
+                const generalScienceMCQs = [
+                    { question: "What is the function of the 'nervous system'?", options: ["Digestion", "Breathing", "Control and communication", "Pumping blood"], correctOptionIndex: 2, explanation: "The nervous system coordinates all body functions (Page 207)." },
+                    { question: "What are the basic units of the nervous system?", options: ["Neurons", "Muscles", "Bones", "Glands"], correctOptionIndex: 0, explanation: "Neurons transmit electrical and chemical signals (Page 208)." },
+                    { question: "Which part of the neuron receives signals from other neurons?", options: ["Axon", "Myelin sheath", "Dendrite", "Cell body"], correctOptionIndex: 2, explanation: "Dendrites are tree-like branches that receive incoming signals (Page 209)." },
+                    { question: "Which part of the neuron transmits signals to other neurons, muscles, or glands?", options: ["Dendrite", "Cell body", "Axon", "Synapse"], correctOptionIndex: 2, explanation: "The axon carries nerve impulses away from the cell body (Page 210)." },
+                    { question: "What is the small gap between two neurons where signals are transmitted?", options: ["Axon terminal", "Dendrite", "Synapse", "Myelin sheath"], correctOptionIndex: 2, explanation: "Neurotransmitters are released into the synapse to transmit signals (Page 211)." },
+                    { question: "What is the central nervous system (CNS) composed of?", options: ["Nerves and ganglia", "Brain and spinal cord", "Muscles and bones", "Glands and hormones"], correctOptionIndex: 1, explanation: "The CNS is the main control center of the body (Page 212)." },
+                    { question: "What is the peripheral nervous system (PNS) composed of?", options: ["Brain and spinal cord", "Nerves extending from the brain and spinal cord to the rest of the body", "Only sensory neurons", "Only motor neurons"], correctOptionIndex: 1, explanation: "The PNS connects the CNS to the limbs and organs (Page 213)." },
+                    { question: "Which part of the brain controls balance and coordination?", options: ["Cerebrum", "Brainstem", "Cerebellum", "Thalamus"], correctOptionIndex: 2, explanation: "The cerebellum is crucial for fine motor control (Page 214)." },
+                    { question: "Which part of the brain controls involuntary actions like breathing and heart rate?", options: ["Cerebrum", "Cerebellum", "Brainstem", "Hypothalamus"], correctOptionIndex: 2, explanation: "The brainstem connects the cerebrum and cerebellum to the spinal cord (Page 215)." },
+                    { question: "What is 'reflex action'?", options: ["A conscious decision to move a muscle.", "An involuntary and almost instantaneous movement in response to a stimulus.", "A learned behavior.", "A movement controlled by the cerebrum."], correctOptionIndex: 1, explanation: "Reflex actions are protective mechanisms that bypass the brain (Page 216)." },
+                    { question: "What is the function of the 'endocrine system'?", options: ["Digesting food", "Producing and secreting hormones to regulate body processes", "Pumping blood", "Fighting infections"], correctOptionIndex: 1, explanation: "The endocrine system works alongside the nervous system to maintain homeostasis (Page 217)." },
+                    { question: "What are 'hormones'?", options: ["Electrical signals.", "Chemical messengers produced by glands that travel through the bloodstream to target organs.", "Nutrients absorbed from food.", "Waste products."], correctOptionIndex: 1, explanation: "Hormones regulate various physiological processes (Page 218)." },
+                    { question: "Which gland is often called the 'master gland' because it controls many other endocrine glands?", options: ["Thyroid gland", "Adrenal gland", "Pituitary gland", "Pancreas"], correctOptionIndex: 2, explanation: "The pituitary gland is located at the base of the brain (Page 219)." },
+                    { question: "Which hormone is produced by the pancreas and regulates blood sugar levels?", options: ["Adrenaline", "Thyroxine", "Insulin", "Estrogen"], correctOptionIndex: 2, explanation: "Insulin lowers blood glucose, while glucagon raises it (Page 220)." },
+                    { question: "What is the function of the 'thyroid gland'?", options: ["Regulating blood sugar.", "Controlling metabolism and energy levels.", "Producing adrenaline.", "Regulating calcium levels."], correctOptionIndex: 1, explanation: "The thyroid gland produces hormones like thyroxine (Page 221)." },
+                    { question: "Which nutrient provides the main source of energy for the body?", options: ["Vitamins", "Minerals", "Carbohydrates", "Proteins"], correctOptionIndex: 2, explanation: "Carbohydrates are broken down into glucose for energy (Page 151)." },
+                    { question: "Which nutrient is essential for growth and repair of body tissues?", options: ["Fats", "Vitamins", "Carbohydrates", "Proteins"], correctOptionIndex: 3, explanation: "Proteins are building blocks for muscles, skin, and organs (Page 152)." },
+                    { question: "Which vitamin is crucial for vision and immune function?", options: ["Vitamin C", "Vitamin D", "Vitamin A", "Vitamin K"], correctOptionIndex: 2, explanation: "Vitamin A is vital for healthy eyesight (Page 153)." },
+                    { question: "Which mineral is necessary for strong bones and teeth?", options: ["Iron", "Potassium", "Calcium", "Sodium"], correctOptionIndex: 2, explanation: "Calcium is a primary component of bone structure (Page 154)." },
+                    { question: "What is the smallest unit of matter that retains an element's chemical properties?", options: ["Molecule", "Compound", "Atom", "Cell"], correctOptionIndex: 2, explanation: "Atoms are the fundamental particles of elements (Page 160)." }
+                ];
+                originalQuizQuestions.push(...generalScienceMCQs);
 
-            // General Science (15 MCQs from Pages 189-206)
-            const generalScienceMCQs = [
-                { question: "What is the function of the 'root system' in plants?", options: ["Photosynthesis", "Anchoring the plant and absorbing water and nutrients", "Producing flowers", "Transpiration"], correctOptionIndex: 1, explanation: "Roots are essential for plant stability and nutrient uptake (Page 189)." },
-                { question: "What are the tiny structures in plant cells that contain chlorophyll and are the sites of photosynthesis?", options: ["Mitochondria", "Vacuoles", "Chloroplasts", "Nucleus"], correctOptionIndex: 2, explanation: "Chloroplasts are specialized organelles unique to plant cells (Page 190)." },
-                { question: "Which part of the plant is responsible for transporting water and minerals from the roots to the leaves?", options: ["Phloem", "Stomata", "Xylem", "Pistil"], correctOptionIndex: 2, explanation: "Xylem forms a vascular network throughout the plant (Page 191)." },
-                { question: "Which part of the plant is responsible for transporting sugars (food) produced during photosynthesis from the leaves to other parts of the plant?", options: ["Xylem", "Stomata", "Phloem", "Root hair"], correctOptionIndex: 2, explanation: "Phloem moves nutrients to where they are needed for growth and storage (Page 192)." },
-                { question: "What is 'transpiration'?", options: ["Absorption of water by roots.", "The process of water movement through a plant and its evaporation from aerial parts, such as leaves, stems and flowers.", "Food production in leaves.", "Root growth."], correctOptionIndex: 1, explanation: "Transpiration is like a plant's sweating, crucial for water circulation (Page 193)." },
-                { question: "What is 'pollination'?", options: ["Seed dispersal.", "The transfer of pollen from the anther to the stigma of a flower.", "Fruit formation.", "Plant respiration."], correctOptionIndex: 1, explanation: "Pollination is a key step in plant reproduction, often aided by wind, water, or animals (Page 194)." },
-                { question: "Which type of reproduction involves only one parent and produces offspring genetically identical to the parent?", options: ["Sexual reproduction", "Asexual reproduction", "Cross-pollination", "Fertilization"], correctOptionIndex: 1, explanation: "Asexual reproduction methods include budding, fragmentation, and vegetative propagation (Page 195)." },
-                { question: "What is 'fertilization' in plants?", options: ["Pollen transfer.", "The fusion of male gametes with female gametes to form a zygote.", "Seed germination.", "Fruit ripening."], correctOptionIndex: 1, explanation: "Fertilization leads to the development of the embryo within the seed (Page 196)." },
-                { question: "What are 'seeds'?", options: ["Plant leaves.", "Reproductive units of flowering plants, typically containing an embryo and stored food, enclosed within a protective outer covering.", "Plant roots.", "Plant stems."], correctOptionIndex: 1, explanation: "Seeds are crucial for the dispersal and survival of plant species (Page 197)." },
-                { question: "What is 'germination'?", options: ["Flower production.", "The process by which an organism grows from a seed or spore.", "Fruit development.", "Leaf shedding."], correctOptionIndex: 1, explanation: "Germination requires specific conditions like water, warmth, and oxygen (Page 198)." },
-                { question: "What are 'vertebrates'?", options: ["Animals without backbones.", "Animals with a backbone or spinal column.", "Animals that live in water.", "Animals that lay eggs."], correctOptionIndex: 1, explanation: "Vertebrates include fish, amphibians, reptiles, birds, and mammals (Page 199)." },
-                { question: "Which of the following is an example of an 'invertebrate'?", options: ["Fish", "Bird", "Spider", "Dog"], correctOptionIndex: 2, explanation: "Invertebrates are diverse and make up the vast majority of animal species (Page 200)." },
-                { question: "What are 'mammals'?", options: ["Animals that lay eggs and have scales.", "Warm-blooded vertebrates that have hair or fur, and in females, mammary glands that produce milk to feed their young.", "Cold-blooded animals.", "Animals that live only in water."], correctOptionIndex: 1, explanation: "Mammals are characterized by their hair/fur and milk production (Page 201)." },
-                { question: "Which class of vertebrates lays eggs, has feathers, and is warm-blooded?", options: ["Fish", "Reptiles", "Amphibians", "Birds"], correctOptionIndex: 3, explanation: "Birds are unique among vertebrates for their feathers and ability to fly (Page 202)." },
-                { question: "What are 'amphibians'?", options: ["Animals that live only on land.", "Cold-blooded vertebrates that live both on land and in water, typically undergoing metamorphosis from an aquatic larval stage to a terrestrial adult form.", "Animals with scales.", "Animals with gills throughout their life."], correctOptionIndex: 1, explanation: "Amphibians include frogs, toads, and salamanders (Page 203)." }
-            ];
-            quizQuestions.push(...generalScienceMCQs);
+                // Social Studies (15 MCQs from Pages 510-524, 561-578, ensuring no duplicates with Day 5, 6, 7)
+                const socialStudiesMCQs = [
+                    { question: "What is 'culture'?", options: ["A type of government.", "The shared beliefs, values, customs, behaviors, and artifacts that characterize a group or society.", "A person's individual personality.", "Economic system of a country."], correctOptionIndex: 1, explanation: "Culture shapes how people live and interact (Page 561)." },
+                    { question: "Which of the following is an example of a 'material culture'?", options: ["Beliefs", "Values", "Language", "Tools and art"], correctOptionIndex: 3, explanation: "Material culture refers to the physical objects created and used by a society (Page 562)." },
+                    { question: "Which of the following is an example of a 'non-material culture'?", options: ["Buildings", "Clothing", "Customs and traditions", "Technology"], correctOptionIndex: 2, explanation: "Non-material culture includes abstract human creations (Page 563)." },
+                    { question: "What is 'society'?", options: ["A single person living alone.", "A group of people who share a common culture, occupy a particular territorial area, and feel themselves to constitute a unified and distinct entity.", "A formal organization.", "A government body."], correctOptionIndex: 1, explanation: "Society is a structured community of individuals (Page 564)." },
+                    { question: "What are 'norms' in society?", options: ["Laws written by the government.", "Shared rules of conduct that tell people how to act in specific situations.", "Individual opinions.", "Religious beliefs only."], correctOptionIndex: 1, explanation: "Norms guide behavior and maintain social order (Page 565)." },
+                    { question: "What are 'folkways'?", options: ["Strict moral codes.", "Everyday customs and conventions of a society, often not strictly enforced.", "Formal laws.", "Rituals with deep moral significance."], correctOptionIndex: 1, explanation: "Folkways are informal rules for polite interaction (Page 566)." },
+                    { question: "What are 'mores'?", options: ["Informal customs.", "Norms that are widely observed and have great moral significance.", "Fashion trends.", "Technical instructions."], correctOptionIndex: 1, explanation: "Mores are essential to a society's well-being and often carry severe penalties for violation (Page 567)." },
+                    { question: "What are 'laws' in society?", options: ["Unwritten rules.", "Formalized norms enforced by political authority.", "Personal preferences.", "Religious guidelines."], correctOptionIndex: 1, explanation: "Laws are codified rules with official sanctions (Page 568)." },
+                    { question: "What is 'socialization'?", options: ["Ignoring social interaction.", "The lifelong process through which individuals acquire the knowledge, skills, and values of their culture and learn to function as members of society.", "Genetic inheritance.", "Independent learning."], correctOptionIndex: 1, explanation: "Socialization shapes individuals into social beings (Page 569)." },
+                    { question: "Which of the following is a primary agent of socialization?", options: ["Mass media", "Peer groups", "Family", "Government"], correctOptionIndex: 2, explanation: "The family is the earliest and most influential agent of socialization (Page 570)." },
+                    { question: "What is a 'map'?", options: ["A drawing of a house.", "A symbolic representation of selected characteristics of a place, usually drawn on a flat surface.", "A photograph of a landscape.", "A globe."], correctOptionIndex: 1, explanation: "Maps are essential tools in geography (Page 510)." },
+                    { question: "What is 'cartography'?", options: ["The study of rivers.", "The art and science of making maps.", "The study of rocks.", "The study of climate."], correctOptionIndex: 1, explanation: "Cartography involves designing, compiling, and producing maps (Page 511)." },
+                    { question: "What does the 'scale' of a map represent?", options: ["The size of the paper.", "The relationship between a distance on the map and the corresponding distance on the ground.", "The colors used on the map.", "The age of the map."], correctOptionIndex: 1, explanation: "Scale is crucial for understanding real-world distances from a map (Page 512)." },
+                    { question: "Which type of map shows detailed natural features like mountains, rivers, and elevation?", options: ["Political map", "Economic map", "Topographic map", "Road map"], correctOptionIndex: 2, explanation: "Topographic maps use contour lines to show elevation (Page 513)." },
+                    { question: "Which cardinal direction is opposite to North?", options: ["East", "West", "South", "North-East"], correctOptionIndex: 2, explanation: "Cardinal directions are fundamental for navigation (Page 514)." }
+                ];
+                originalQuizQuestions.push(...socialStudiesMCQs);
 
-            // Social Studies (10 MCQs from Pages 543-560 - Geography: Population & Migration)
-            const socialStudiesMCQs = [
-                { question: "What is the 'push factor' in migration?", options: ["Attractive job opportunities", "Better education facilities", "Poverty and lack of safety", "Cultural similarities"], correctOptionIndex: 2, explanation: "Push factors are negative conditions that compel people to leave their homes (Page 543)." },
-                { question: "Which of these is a 'pull factor' for migration?", options: ["War and conflict", "High crime rates", "Better healthcare and social services", "Natural disasters"], correctOptionIndex: 2, explanation: "Pull factors are positive attractions that draw migrants to a new place (Page 544)." },
-                { question: "What is 'internal migration'?", options: ["Movement between countries.", "Movement of people within a country's borders.", "Movement of people between continents.", "Temporary movement for tourism."], correctOptionIndex: 1, explanation: "Internal migration involves changing residence within the same country (Page 545)." },
-                { question: "What is 'international migration'?", options: ["Movement between cities within a country.", "Movement across national borders.", "Daily commute for work.", "Seasonal movement for farming."], correctOptionIndex: 1, explanation: "International migration involves crossing political boundaries of countries (Page 546)." },
-                { question: "What does 'emigration' refer to?", options: ["Entering a new country.", "Leaving one's own country to settle permanently in another.", "Temporary travel abroad.", "Returning to one's home country."], correctOptionIndex: 1, explanation: "Emigration is the act of exiting a country (Page 547)." },
-                { question: "What does 'immigration' refer to?", options: ["Leaving one's own country.", "Coming to live permanently in a foreign country.", "Traveling for a short vacation.", "Moving to a different city in the same country."], correctOptionIndex: 1, explanation: "Immigration is the act of entering a new country (Page 548)." },
-                { question: "What is 'urban growth'?", options: ["Decrease in rural population.", "The increase in the area and population of cities.", "Development of new agricultural lands.", "Conservation of natural resources."], correctOptionIndex: 1, explanation: "Urban growth is a global phenomenon driven by migration and natural increase (Page 549)." },
-                { question: "Which of the following is a challenge associated with rapid urban growth?", options: ["Increased agricultural output.", "Improved public transport.", "Strain on infrastructure and services like housing, sanitation, and water supply.", "Reduced pollution."], correctOptionIndex: 2, explanation: "Rapid urbanization often outpaces infrastructure development, leading to problems (Page 550)." },
-                { question: "What is a 'slum'?", options: ["A well-planned residential area.", "A squalid and overcrowded urban area inhabited by very poor people.", "A historical city center.", "A business district."], correctOptionIndex: 1, explanation: "Slums are characterized by poor living conditions and lack of basic services (Page 551)." },
-                { question: "What is 'sustainable development'?", options: ["Development that meets the needs of the present without compromising the ability of future generations to meet their own needs.", "Rapid economic growth at any cost.", "Development focused only on technological advancements.", "Development that ignores environmental impacts."], correctOptionIndex: 0, explanation: "Sustainable development balances economic, social, and environmental considerations (Page 552)." }
-            ];
-            quizQuestions.push(...socialStudiesMCQs);
+                // English (15 MCQs from Pages 817-830, 847-854, ensuring no duplicates)
+                const englishMCQs = [
+                    { question: "Which type of sentence makes a statement and ends with a period?", options: ["Interrogative", "Imperative", "Exclamatory", "Declarative"], correctOptionIndex: 3, explanation: "Declarative sentences are the most common type and state facts or opinions (Page 847)." },
+                    { question: "Which type of sentence asks a question and ends with a question mark?", options: ["Declarative", "Imperative", "Interrogative", "Exclamatory"], correctOptionIndex: 2, explanation: "Interrogative sentences seek information (Page 847)." },
+                    { question: "Which type of sentence gives a command or makes a request, often with an implied subject 'you'?", options: ["Declarative", "Interrogative", "Imperative", "Exclamatory"], correctOptionIndex: 2, explanation: "Imperative sentences tell someone to do something (Page 848)." },
+                    { question: "Which type of sentence expresses strong emotion and ends with an exclamation mark?", options: ["Declarative", "Interrogative", "Imperative", "Exclamatory"], correctOptionIndex: 3, explanation: "Exclamatory sentences convey excitement, surprise, or other strong feelings (Page 848)." },
+                    { question: "A sentence containing one independent clause is called a __________ sentence.", options: ["Compound", "Complex", "Simple", "Compound-Complex"], correctOptionIndex: 2, explanation: "Simple sentences have a single subject-verb pair and express one complete thought (Page 849)." },
+                    { question: "Identify the type of sentence: 'The cat slept soundly.'", options: ["Compound", "Simple", "Complex", "Exclamatory"], correctOptionIndex: 1, explanation: "This sentence has one subject ('cat') and one verb ('slept'), forming a single independent clause (Page 849)." },
+                    { question: "A sentence containing two or more independent clauses joined by a coordinating conjunction (for, and, nor, but, or, yet, so) is called a __________ sentence.", options: ["Simple", "Complex", "Compound", "Compound-Complex"], correctOptionIndex: 2, explanation: "Compound sentences combine two or more complete thoughts (Page 850)." },
+                    { question: "Identify the type of sentence: 'I went to the store, and I bought some milk.'", options: ["Simple", "Complex", "Compound", "Declarative"], correctOptionIndex: 2, explanation: "This sentence has two independent clauses joined by 'and' (Page 850)." },
+                    { question: "A sentence containing one independent clause and at least one dependent clause is called a __________ sentence.", options: ["Simple", "Compound", "Complex", "Compound-Complex"], correctOptionIndex: 2, explanation: "Complex sentences show a relationship between a main idea and a subordinate idea (Page 851)." },
+                    { question: "Identify the type of sentence: 'Although it was raining, we still went for a walk.'", options: ["Simple", "Compound", "Complex", "Imperative"], correctOptionIndex: 2, explanation: "'Although it was raining' is a dependent clause, and 'we still went for a walk' is an independent clause (Page 851)." },
+                    { question: "What is the definition of a 'sentence'?", options: ["A group of words.", "A group of words that expresses a complete thought and contains a subject and a predicate.", "A single word.", "A phrase."], correctOptionIndex: 1, explanation: "A sentence is the fundamental unit of communication (Page 817)." },
+                    { question: "Which part of a sentence tells what the sentence is about?", options: ["Predicate", "Verb", "Object", "Subject"], correctOptionIndex: 3, explanation: "The subject performs or is the focus of the action (Page 817)." },
+                    { question: "Which part of a sentence tells something about the subject, including the verb?", options: ["Subject", "Noun", "Predicate", "Adverb"], correctOptionIndex: 2, explanation: "The predicate provides information about the subject's action or state (Page 818)." },
+                    { question: "What is the function of an 'article' (a, an, the)?", options: ["To describe a verb.", "To modify an adjective.", "To define or specify a noun.", "To connect two clauses."], correctOptionIndex: 2, explanation: "Articles are determiners that introduce nouns (Page 820)." },
+                    { question: "Which article is used before a singular countable noun that starts with a consonant sound?", options: ["An", "The", "A", "None"], correctOptionIndex: 2, explanation: "'A' is used for general, non-specific nouns starting with a consonant sound (Page 820)." }
+                ];
+                originalQuizQuestions.push(...englishMCQs);
 
-            // English (10 MCQs from Pages 839-846 - Direct & Indirect Narration)
-            const englishMCQs = [
-                { question: "Convert to Indirect Speech: 'He said, \"I am going to the market.\"'", options: ["He said that I was going to the market.", "He said that he is going to the market.", "He said that he was going to the market.", "He said that he had gone to the market."], correctOptionIndex: 2, explanation: "In Indirect Speech, present continuous becomes past continuous, and the pronoun changes from 'I' to 'he' (Page 839)." },
-                { question: "Convert to Indirect Speech: 'She said, \"I finished my work.\"'", options: ["She said that she finished her work.", "She said that she has finished her work.", "She said that she had finished her work.", "She said that I finished my work."], correctOptionIndex: 2, explanation: "Past simple in Direct Speech becomes past perfect in Indirect Speech (Page 840)." },
-                { question: "Convert to Indirect Speech: 'They said, \"We will go to the party.\"'", options: ["They said that we would go to the party.", "They said that they will go to the party.", "They said that they would go to the party.", "They said that they had gone to the party."], correctOptionIndex: 2, explanation: "'Will' changes to 'would' and 'we' changes to 'they' (Page 841)." },
-                { question: "Convert to Direct Speech: 'He asked me if I was hungry.'", options: ["He asked me, \"Are you hungry?\"", "He said, \"Am I hungry?\"", "He asked, \"Was I hungry?\"", "He said, \"You are hungry.\""], correctOptionIndex: 0, explanation: "Indirect question with 'if' usually comes from a 'Yes/No' question in Direct Speech (Page 842)." },
-                { question: "Convert to Indirect Speech: 'The teacher said, \"The Earth revolves around the Sun.\"'", options: ["The teacher said that the Earth revolved around the Sun.", "The teacher said that the Earth revolves around the Sun.", "The teacher said that the Earth will revolve around the Sun.", "The teacher said the Earth had revolved around the Sun."], correctOptionIndex: 1, explanation: "Universal truths do not change tense in Indirect Speech (Page 843)." },
-                { question: "Convert to Indirect Speech: 'He said to me, \"Please help me.\"'", options: ["He told me to help him.", "He requested me to help him.", "He asked me if I would help him.", "He ordered me to help him."], correctOptionIndex: 1, explanation: "Commands and requests often use 'to' + infinitive in Indirect Speech, with verbs like 'requested', 'ordered', 'advised' (Page 844)." },
-                { question: "Convert to Direct Speech: 'She ordered me to open the door.'", options: ["She said, \"Open the door.\"", "She said, \"Please open the door.\"", "She asked, \"Did you open the door?\"", "She ordered, \"I will open the door.\""], correctOptionIndex: 0, explanation: "An order in Indirect Speech comes from an imperative sentence in Direct Speech (Page 845)." },
-                { question: "Convert to Indirect Speech: 'My mother said, \"May God bless you!\"'", options: ["My mother prayed that God might bless me.", "My mother said that God bless me.", "My mother wished God blesses you.", "My mother said that God blessed you."], correctOptionIndex: 0, explanation: "Optative sentences (wishes/prayers) in Direct Speech change 'may' to 'might' and use 'prayed'/'wished' in Indirect Speech (Page 846)." },
-                { question: "Convert to Indirect Speech: 'He exclaimed, \"How beautiful the flower is!\"'", options: ["He exclaimed that the flower was beautiful.", "He exclaimed that the flower is beautiful.", "He asked how beautiful the flower was.", "He said that the flower is very beautiful."], correctOptionIndex: 0, explanation: "Exclamatory sentences become declarative sentences in Indirect Speech, often using 'exclaimed' (Page 846)." },
-                { question: "Which reporting verb is typically used for a question in Indirect Speech?", options: ["Said", "Told", "Asked", "Exclaimed"], correctOptionIndex: 2, explanation: "The verb 'asked' is used for reporting questions (Page 842)." }
-            ];
-            quizQuestions.push(...englishMCQs);
+                // Mathematics (15 MCQs from Pages 947-981, 996-1002, ensuring no duplicates)
+                const mathematicsMCQs = [
+                    { question: "Solve for $x$: $x + 7 = 15$", options: ["7", "8", "9", "10"], correctOptionIndex: 1, explanation: "Subtract 7 from both sides: $x = 15 - 7 = 8$ (Page 996)." },
+                    { question: "Solve for $y$: $3y = 21$", options: ["6", "7", "8", "9"], correctOptionIndex: 1, explanation: "Divide both sides by 3: $y = 21 / 3 = 7$ (Page 997)." },
+                    { question: "Solve for $a$: $a / 5 = 4$", options: ["10", "15", "20", "25"], correctOptionIndex: 2, explanation: "Multiply both sides by 5: $a = 4 \\times 5 = 20$ (Page 998)." },
+                    { question: "Simplify the expression: $2x + 3y + 5x - y$", options: ["$7x + 2y$", "$7x + 4y$", "$3x + 2y$", "$7x - 2y$"], correctOptionIndex: 0, explanation: "Combine like terms: $(2x + 5x) + (3y - y) = 7x + 2y$ (Page 999)." },
+                    { question: "Evaluate $3^4$", options: ["9", "12", "64", "81"], correctOptionIndex: 3, explanation: "$3^4 = 3 \\times 3 \\times 3 \\times 3 = 81$ (Page 1000)." },
+                    { question: "If $a = 3$ and $b = 5$, find the value of $2a + b$.", options: ["8", "10", "11", "13"], correctOptionIndex: 2, explanation: "Substitute the values: $2(3) + 5 = 6 + 5 = 11$ (Page 1001)." },
+                    { question: "Solve for $x$: $2x - 5 = 11$", options: ["6", "7", "8", "9"], correctOptionIndex: 2, explanation: "Add 5 to both sides: $2x = 16$. Divide by 2: $x = 8$ (Page 997)." },
+                    { question: "Which of the following is an inequality?", options: ["$x = 5$", "$2x + 3 = 7$", "$y < 10$", "$a - 4 = 1$"], correctOptionIndex: 2, explanation: "An inequality uses symbols like $<, >, \\le, \\ge$ (Page 1002)." },
+                    { question: "If a car travels at a speed of 60 km/h for 3 hours, what is the distance covered?", options: ["20 km", "63 km", "180 km", "200 km"], correctOptionIndex: 2, explanation: "Distance = Speed $\\times$ Time = $60 \\times 3 = 180$ km (Page 1002)." },
+                    { question: "What is the perimeter of a rectangle with length 12 cm and width 8 cm?", options: ["20 cm", "40 cm", "96 cm", "100 cm"], correctOptionIndex: 1, explanation: "Perimeter = $2 \\times (length + width) = 2 \\times (12 + 8) = 2 \\times 20 = 40$ cm (Page 1002)." },
+                    { question: "What is the place value of the digit '5' in the number 345,678?", options: ["Hundreds", "Thousands", "Ten Thousands", "Lakhs"], correctOptionIndex: 1, explanation: "The digit 5 is in the thousands place (Page 947)." },
+                    { question: "What is the sum of 1234 and 5678?", options: ["6802", "6912", "7002", "7102"], correctOptionIndex: 1, explanation: "Addition of whole numbers (Page 948)." },
+                    { question: "What is the difference between 9876 and 5432?", options: ["4444", "4454", "4544", "4644"], correctOptionIndex: 0, explanation: "Subtraction of whole numbers (Page 949)." },
+                    { question: "What is the product of 25 and 30?", options: ["500", "750", "1000", "1250"], correctOptionIndex: 1, explanation: "Multiplication of whole numbers (Page 950)." },
+                    { question: "What is the result of $450 \\div 9$?", options: ["40", "50", "60", "70"], correctOptionIndex: 1, explanation: "Division of whole numbers (Page 951)." }
+                ];
+                originalQuizQuestions.push(...mathematicsMCQs);
 
-            // Mathematics (10 MCQs from Pages 989-995 - Geometry Basics)
-            const mathematicsMCQs = [
-                { question: "What is a 'point' in geometry?", options: ["A line segment.", "A location in space that has no size or shape.", "A two-dimensional figure.", "A three-dimensional object."], correctOptionIndex: 1, explanation: "A point is the most basic building block of geometry (Page 989)." },
-                { question: "What is a 'line' in geometry?", options: ["A measurable segment.", "A straight path that extends infinitely in two opposite directions.", "A two-dimensional shape.", "A three-dimensional object."], correctOptionIndex: 1, explanation: "A line has no thickness and extends indefinitely (Page 989)." },
-                { question: "What is a 'line segment'?", options: ["A line that extends infinitely.", "A part of a line that has two endpoints.", "A curved path.", "A line with one endpoint."], correctOptionIndex: 1, explanation: "A line segment has a definite length (Page 989)." },
-                { question: "What is a 'ray' in geometry?", options: ["A line with no endpoints.", "A line that extends infinitely in only one direction from a single endpoint.", "A curved line.", "A line segment."], correctOptionIndex: 1, explanation: "A ray has a starting point but no end point (Page 989)." },
-                { question: "What are 'parallel lines'?", options: ["Lines that intersect at a right angle.", "Lines that meet at a single point.", "Lines that are always the same distance apart and never intersect.", "Lines that form a curve."], correctOptionIndex: 2, explanation: "Parallel lines maintain a constant distance between them (Page 990)." },
-                { question: "What are 'perpendicular lines'?", options: ["Lines that never intersect.", "Lines that intersect to form a right angle (90°).", "Lines that cross each other at any angle.", "Lines that are parallel."], correctOptionIndex: 1, explanation: "Perpendicular lines form a 90-degree angle at their intersection (Page 990)." },
-                { question: "What is an 'angle'?", options: ["A straight line.", "A figure formed by two rays sharing a common endpoint, called the vertex.", "A closed shape.", "A point in space."], correctOptionIndex: 1, explanation: "Angles are measured in degrees (Page 991)." },
-                { question: "An angle that measures exactly 90° is called a(n) _________ angle.", options: ["Acute", "Obtuse", "Right", "Straight"], correctOptionIndex: 2, explanation: "A right angle is commonly found in squares and rectangles (Page 992)." },
-                { question: "An angle that measures less than 90° is called a(n) _________ angle.", options: ["Right", "Obtuse", "Acute", "Straight"], correctOptionIndex: 2, explanation: "Acute angles are 'sharp' angles (Page 992)." },
-                { question: "An angle that measures greater than 90° but less than 180° is called a(n) _________ angle.", options: ["Acute", "Right", "Obtuse", "Straight"], correctOptionIndex: 2, explanation: "Obtuse angles are 'blunt' angles (Page 992)." }
-            ];
-            quizQuestions.push(...mathematicsMCQs);
-            
-            // Randomly select one special question from the entire set
-            specialQuestionIndex = Math.floor(Math.random() * quizQuestions.length);
-            quizQuestions[specialQuestionIndex].special = true;
+                // History (10 MCQs from Pages 740-790)
+                const historyMCQs = [
+                    { question: "Who was the founder of the Mughal Empire in India?", options: ["Akbar", "Humayun", "Babur", "Shah Jahan"], correctOptionIndex: 2, explanation: "Babur established the Mughal Empire in 1526 after the Battle of Panipat (Page 740)." },
+                    { question: "Which Mughal emperor built the Taj Mahal?", options: ["Akbar", "Jahangir", "Shah Jahan", "Aurangzeb"], correctOptionIndex: 2, explanation: "The Taj Mahal was built by Shah Jahan in memory of his wife Mumtaz Mahal (Page 741)." },
+                    { question: "When did the British East India Company establish its first trading post in India?", options: ["1600", "1608", "1612", "1615"], correctOptionIndex: 2, explanation: "The British East India Company established its first factory in Surat in 1612 (Page 742)." },
+                    { question: "What was the 'Sepoy Mutiny' or 'Indian Rebellion of 1857'?", options: ["A peaceful protest.", "A major uprising against British rule in India.", "A trade dispute.", "A religious festival."], correctOptionIndex: 1, explanation: "The rebellion was a significant turning point in Indian history (Page 743)." },
+                    { question: "Who was the last Mughal Emperor?", options: ["Akbar II", "Bahadur Shah II", "Shah Alam II", "Aurangzeb"], correctOptionIndex: 1, explanation: "Bahadur Shah II was exiled after the 1857 rebellion (Page 744)." },
+                    { question: "When was the Indian National Congress founded?", options: ["1880", "1885", "1890", "1900"], correctOptionIndex: 1, explanation: "The Indian National Congress played a key role in the independence movement (Page 745)." },
+                    { question: "Who coined the slogan 'Swaraj is my birthright, and I shall have it!'?", options: ["Mahatma Gandhi", "Jawaharlal Nehru", "Bal Gangadhar Tilak", "Subhas Chandra Bose"], correctOptionIndex: 2, explanation: "This slogan became a powerful call for self-rule (Page 746)." },
+                    { question: "When did the Partition of Bengal take place?", options: ["1900", "1905", "1910", "1915"], correctOptionIndex: 1, explanation: "The partition of Bengal in 1905 caused widespread protests and strengthened the nationalist movement (Page 747)." },
+                    { question: "Who was the founder of the All-India Muslim League?", options: ["Muhammad Ali Jinnah", "Allama Iqbal", "Nawab Waqar-ul-Mulk", "Syed Ahmed Khan"], correctOptionIndex: 2, explanation: "The Muslim League was founded in 1906 to protect Muslim interests (Page 748)." },
+                    { question: "When did Pakistan gain independence?", options: ["August 14, 1947", "August 15, 1947", "August 14, 1948", "August 15, 1948"], correctOptionIndex: 0, explanation: "Pakistan gained independence on August 14, 1947 (Page 749)." }
+                ];
+                originalQuizQuestions.push(...historyMCQs);
 
-            // Apply 30% chance to shuffle the entire quiz order
-            if (Math.random() < 0.3) {
-                shuffleArray(quizQuestions);
-                // After shuffling, find the new index of the special question
-                specialQuestionIndex = quizQuestions.findIndex(q => q.special);
+                // Urdu (5 MCQs from Pages 1222-1248)
+                const urduMCQs = [
+                    { question: "اردو قواعد میں 'فعل ناقص' سے کیا مراد ہے؟", options: ["وہ فعل جو کام کو مکمل ظاہر کرے", "وہ فعل جو کسی کام کے ہونے یا نہ ہونے کو ظاہر کرے لیکن اس کے لیے فاعل اور مفعول کی ضرورت نہ ہو", "وہ فعل جو صرف فاعل کو ظاہر کرے", "وہ فعل جو کسی چیز کی حالت کو ظاہر کرے اور اسے کسی مفعول کی ضرورت نہ ہو بلکہ خبر کی ضرورت ہو"], correctOptionIndex: 3, explanation: "فعل ناقص وہ فعل ہے جو کسی حالت کو ظاہر کرے اور خبر کا محتاج ہو، جیسے 'ہونا'، 'تھا'، 'ہے' (صفحہ 1222)." },
+                    { question: "درج ذیل میں سے کون سا جملہ 'فعل ناقص' کی مثال ہے؟", options: ["احمد کھانا کھاتا ہے۔", "بچہ سو رہا ہے۔", "وہ ایک ذہین طالب علم ہے۔", "اسلم سکول گیا۔"], correctOptionIndex: 2, explanation: "'وہ ایک ذہین طالب علم ہے' میں 'ہے' فعل ناقص ہے جو طالب علم کی حالت کو ظاہر کر رہا ہے (صفحہ 1223)." },
+                    { question: "اردو قواعد میں 'فعل تام' سے کیا مراد ہے؟", options: ["وہ فعل جو کسی حالت کو ظاہر کرے", "وہ فعل جو کسی کام کے ہونے یا نہ ہونے کو مکمل طور پر ظاہر کرے اور فاعل اور بعض اوقات مفعول کا محتاج ہو", "وہ فعل جو صرف خبر کا محتاج ہو", "وہ فعل جو کسی چیز کی تعریف کرے"], correctOptionIndex: 1, explanation: "فعل تام وہ فعل ہے جو اپنے معنی پورے کرنے کے لیے فاعل اور بعض اوقات مفعول کا محتاج ہو، جیسے 'لکھنا'، 'پڑھنا' (صفحہ 1224)." },
+                    { question: "درج ذیل میں سے کون سا جملہ 'فعل تام' کی مثال ہے؟", options: ["میں بیمار ہوں۔", "کتاب میز پر ہے۔", "علی نے خط لکھا۔", "وہ خوش ہے۔"], correctOptionIndex: 2, explanation: "'علی نے خط لکھا' میں 'لکھا' فعل تام ہے جو کام کے مکمل ہونے کو ظاہر کر رہا ہے (صفحہ 1225)." },
+                    { question: "اردو قواعد میں 'لازم' اور 'متعدی' فعل کی تعریف کیا ہے؟", options: ["لازم وہ جو مفعول چاہے، متعدی وہ جو نہ چاہے", "لازم وہ جو فاعل چاہے، متعدی وہ جو مفعول چاہے", "لازم وہ فعل جسے مفعول کی ضرورت نہ ہو، متعدی وہ فعل جسے مفعول کی ضرورت ہو", "لازم وہ جو کام مکمل نہ کرے، متعدی جو مکمل کرے"], correctOptionIndex: 2, explanation: "لازم فعل صرف فاعل پر ختم ہو جاتا ہے، جبکہ متعدی فعل کو مفعول کی ضرورت ہوتی ہے (صفحہ 1226)." }
+                ];
+                originalQuizQuestions.push(...urduMCQs);
+
+                // Islamiat (5 MCQs from Pages 1352-1393)
+                const islamiatMCQs = [
+                    { question: "قرآن مجید کی سب سے پہلی وحی کس سورت کی ابتدائی آیات پر مشتمل تھی؟", options: ["سورۃ الفاتحہ", "سورۃ البقرہ", "سورۃ العلق", "سورۃ الکوثر"], correctOptionIndex: 2, explanation: "پہلی وحی غار حرا میں سورۃ العلق کی ابتدائی پانچ آیات تھیں (صفحہ 1352)." },
+                    { question: "حج کا رکن اعظم کیا ہے؟", options: ["طواف کعبہ", "سعی بین الصفا والمروہ", "وقوف عرفہ", "رمی جمرات"], correctOptionIndex: 2, explanation: "وقوف عرفات حج کا سب سے بڑا اور بنیادی رکن ہے، اس کے بغیر حج مکمل نہیں ہوتا (صفحہ 1353)." },
+                    { question: "زکوٰۃ کس پر فرض ہے؟", options: ["ہر مسلمان پر", "صرف مردوں پر", "صاحب نصاب مسلمان پر", "صرف غریبوں پر"], correctOptionIndex: 2, explanation: "زکوٰۃ ہر اس مسلمان پر فرض ہے جو نصاب کو پہنچ جائے (صفحہ 1354)." },
+                    { question: "نماز کی کتنی رکعات فرض ہیں؟", options: ["12", "15", "17", "20"], correctOptionIndex: 2, explanation: "دن میں پانچ وقت کی نمازوں میں کل 17 رکعات فرض ہیں (فجر 2، ظہر 4، عصر 4، مغرب 3، عشاء 4) (صفحہ 1355)." },
+                    { question: "اسلام میں سب سے پہلا غزوہ کون سا تھا؟", options: ["غزوہ احد", "غزوہ خندق", "غزوہ بدر", "غزوہ خیبر"], correctOptionIndex: 2, explanation: "غزوہ بدر سن 2 ہجری میں ہوا، جو مسلمانوں کا پہلا باقاعدہ جنگی مقابلہ تھا (صفحہ 1356)." }
+                ];
+                originalQuizQuestions.push(...islamiatMCQs);
+
+                // Arabic (5 MCQs from Pages 1338-1455, specifically after 1425)
+                const arabicMCQs = [
+                    { question: "عربی میں 'قَلَمٌ' کا کیا مطلب ہے؟", options: ["کتاب", "کاپی", "قلم", "میز"], correctOptionIndex: 2, explanation: "قَلَمٌ کا مطلب قلم ہے (صفحہ 1426)." },
+                    { question: "عربی میں 'مَکْتَبٌ' کا کیا مطلب ہے؟", options: ["کمرہ", "کرسی", "میز", "کتاب"], correctOptionIndex: 2, explanation: "مَکْتَبٌ کا مطلب میز ہے (صفحہ 1427)." },
+                    { question: "عربی میں 'بابٌ' کا کیا مطلب ہے؟", options: ["کھڑکی", "دروازہ", "دیوار", "چھت"], correctOptionIndex: 1, explanation: "بابٌ کا مطلب دروازہ ہے (صفحہ 1428)." },
+                    { question: "عربی میں 'نَافِذَةٌ' کا کیا مطلب ہے؟", options: ["دروازہ", "کھڑکی", "میز", "کتاب"], correctOptionIndex: 1, explanation: "نَافِذَةٌ کا مطلب کھڑکی ہے (صفحہ 1429)." },
+                    { question: "عربی میں 'کُرْسِیٌّ' کا کیا مطلب ہے؟", options: ["میز", "کتاب", "کرسی", "قلم"], correctOptionIndex: 2, explanation: "کُرْسِیٌّ کا مطلب کرسی ہے (صفحہ 1430)." }
+                ];
+                originalQuizQuestions.push(...arabicMCQs);
+
+                // Randomly select one special question from the entire set on initial load
+                // and store its ORIGINAL index. This ensures the same question is 'special'
+                // across quiz restarts unless the data is explicitly reloaded.
+                specialQuestionOriginalIndex = Math.floor(Math.random() * originalQuizQuestions.length);
+            }
+
+            // Create a fresh copy of questions for the current quiz attempt
+            quizQuestions = JSON.parse(JSON.stringify(originalQuizQuestions));
+
+            // Mark the special question in the current quizQuestions array
+            quizQuestions[specialQuestionOriginalIndex].special = true;
+
+            // Shuffle the entire quiz question order
+            shuffleArray(quizQuestions);
+
+            // After shuffling, update the 'special' flag if the original special question
+            // is still in the quiz and ensure its .special property is true.
+            // This loop is mostly for safety and to re-verify the flag after shuffle.
+            quizQuestions.forEach((q, index) => {
+                if (q.special && index !== specialQuestionOriginalIndex) {
+                    // If a question was marked special but its index changed due to shuffle,
+                    // we need to make sure the one originally picked remains special.
+                    // This logic ensures only one question is truly special for the day.
+                    q.special = false; // Unmark if it's not the original special question
+                }
+            });
+            // Re-mark the correct special question in the shuffled array
+            // Find the special question in the newly shuffled array
+            const currentSpecialQuestion = quizQuestions.find(q => q.special);
+            if (currentSpecialQuestion) {
+                 // The special question is already marked `true` from the shallow copy.
+                 // This ensures the correct, originally-picked special question keeps its flag.
+            } else {
+                // If by some very rare chance (e.g., if a special question was not initially marked, which it is),
+                // or if the `find` fails, pick one again. This is a fallback.
+                const newSpecialIndex = Math.floor(Math.random() * quizQuestions.length);
+                quizQuestions[newSpecialIndex].special = true;
+                specialQuestionOriginalIndex = originalQuizQuestions.findIndex(q => JSON.stringify(q) === JSON.stringify(quizQuestions[newSpecialIndex]));
             }
         }
 
