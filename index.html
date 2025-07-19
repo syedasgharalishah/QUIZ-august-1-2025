@@ -312,7 +312,7 @@
         const adminEmailInput = document.getElementById('adminEmail');
         const adminPasswordInput = document.getElementById('adminPassword');
         const adminLoginBtn = document.getElementById('adminLoginBtn');
-        const adminLogoutBtn = document.getElementById('adminLogoutBtn'); // Corrected this line
+        const adminLogoutBtn = document.getElementById('adminLogoutBtn'); 
         const loginError = document.getElementById('loginError');
         const resultsTableBody = document.getElementById('resultsTableBody');
         const totalResultsCount = document.getElementById('totalResultsCount');
@@ -490,13 +490,18 @@
 
             let currentRank = 1;
             let previousScore = null;
+            let tiedCount = 0; // Track how many people are tied at the current rank
 
             filteredResults.forEach((data, index) => {
-                // Standard competition ranking:
-                // If current score is different from previous, update rank based on index.
-                // If scores are the same, they share the same rank.
-                if (index > 0 && data.score !== previousScore) {
-                    currentRank = index + 1;
+                if (index > 0) {
+                    if (data.score === previousScore) {
+                        // If current score is same as previous, they share the same rank
+                        tiedCount++;
+                    } else {
+                        // If score is different, update rank based on the number of people before this one
+                        currentRank += tiedCount + 1;
+                        tiedCount = 0; // Reset tied count
+                    }
                 }
                 previousScore = data.score;
 
@@ -525,22 +530,29 @@
             if (!toppersListDiv || !noToppersMessage) return;
 
             toppersListDiv.innerHTML = ''; // Clear existing toppers
-            const topPerformers = [];
+            const topPerformersWithRanks = [];
             
-            // Calculate ranks for all results to ensure accurate top 3
             let currentRank = 1;
             let previousScore = null;
+            let tiedCount = 0;
+
             results.forEach((data, index) => {
-                if (index > 0 && data.score !== previousScore) {
-                    currentRank = index + 1;
+                if (index > 0) {
+                    if (data.score === previousScore) {
+                        tiedCount++;
+                    } else {
+                        currentRank += tiedCount + 1;
+                        tiedCount = 0;
+                    }
                 }
                 previousScore = data.score;
-                topPerformers.push({ ...data, rank: currentRank });
+                topPerformersWithRanks.push({ ...data, rank: currentRank });
             });
 
-            const top3ToDisplay = topPerformers.slice(0, 3); // Get top 3 based on calculated ranks
+            // Filter to include ALL 1st, 2nd, and 3rd position holders
+            const topPositionsToDisplay = topPerformersWithRanks.filter(p => p.rank <= 3);
 
-            if (top3ToDisplay.length === 0) {
+            if (topPositionsToDisplay.length === 0) {
                 noToppersMessage.classList.remove('hidden');
                 toppersListDiv.appendChild(noToppersMessage); // Re-append if it was removed
                 return;
@@ -548,7 +560,7 @@
                 noToppersMessage.classList.add('hidden');
             }
 
-            top3ToDisplay.forEach((data) => {
+            topPositionsToDisplay.forEach((data) => {
                 let positionText = '';
                 let positionClass = '';
                 if (data.rank === 1) {
@@ -561,10 +573,9 @@
                     positionText = '3rd Position';
                     positionClass = 'position-3';
                 } else {
-                    // Fallback for cases where ties might push a 4th element into top3ToDisplay
-                    // but it's not truly 1st, 2nd, or 3rd rank.
+                    // This else block should ideally not be hit if filter is rank <= 3
                     positionText = `${data.rank}th Position`;
-                    positionClass = 'bg-gray-500'; // Default styling for others
+                    positionClass = 'bg-gray-500'; 
                 }
 
                 const topperCard = document.createElement('div');
