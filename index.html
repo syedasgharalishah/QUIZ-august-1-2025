@@ -312,7 +312,7 @@
         const adminEmailInput = document.getElementById('adminEmail');
         const adminPasswordInput = document.getElementById('adminPassword');
         const adminLoginBtn = document.getElementById('adminLoginBtn');
-        const adminLogoutBtn = document.getElementById('adminLogoutBtn');
+        const adminLogoutBtn = document.getElementById('adminLogoutBtn'); // Corrected this line
         const loginError = document.getElementById('loginError');
         const resultsTableBody = document.getElementById('resultsTableBody');
         const totalResultsCount = document.getElementById('totalResultsCount');
@@ -489,25 +489,19 @@
             }
 
             let currentRank = 1;
-            let prevScore = null;
-            let rankIncrement = 1;
+            let previousScore = null;
 
             filteredResults.forEach((data, index) => {
-                // Determine rank with ties
-                if (index > 0) {
-                    if (data.score === prevScore) {
-                        // Same score as previous, keep same rank
-                        rankIncrement++;
-                    } else {
-                        // Different score, increment rank by accumulated increment
-                        currentRank += rankIncrement;
-                        rankIncrement = 1; // Reset increment
-                    }
+                // Standard competition ranking:
+                // If current score is different from previous, update rank based on index.
+                // If scores are the same, they share the same rank.
+                if (index > 0 && data.score !== previousScore) {
+                    currentRank = index + 1;
                 }
-                prevScore = data.score;
+                previousScore = data.score;
 
                 const row = resultsTableBody.insertRow();
-                row.insertCell().textContent = currentRank;
+                row.insertCell().textContent = currentRank; // Use the calculated rank
                 row.insertCell().textContent = data.candidateName || 'N/A';
                 row.insertCell().textContent = data.quizDate || 'N/A';
                 row.insertCell().textContent = data.score !== undefined ? data.score : 'N/A';
@@ -531,9 +525,22 @@
             if (!toppersListDiv || !noToppersMessage) return;
 
             toppersListDiv.innerHTML = ''; // Clear existing toppers
-            const top3 = results.slice(0, 3); // Get top 3 based on sorted results
+            const topPerformers = [];
+            
+            // Calculate ranks for all results to ensure accurate top 3
+            let currentRank = 1;
+            let previousScore = null;
+            results.forEach((data, index) => {
+                if (index > 0 && data.score !== previousScore) {
+                    currentRank = index + 1;
+                }
+                previousScore = data.score;
+                topPerformers.push({ ...data, rank: currentRank });
+            });
 
-            if (top3.length === 0) {
+            const top3ToDisplay = topPerformers.slice(0, 3); // Get top 3 based on calculated ranks
+
+            if (top3ToDisplay.length === 0) {
                 noToppersMessage.classList.remove('hidden');
                 toppersListDiv.appendChild(noToppersMessage); // Re-append if it was removed
                 return;
@@ -541,36 +548,22 @@
                 noToppersMessage.classList.add('hidden');
             }
 
-            let currentRank = 1;
-            let prevScore = null;
-            let rankIncrement = 1;
-
-            top3.forEach((data, index) => {
-                if (index > 0) {
-                    if (data.score === prevScore) {
-                        rankIncrement++;
-                    } else {
-                        currentRank += rankIncrement;
-                        rankIncrement = 1;
-                    }
-                }
-                prevScore = data.score;
-
+            top3ToDisplay.forEach((data) => {
                 let positionText = '';
                 let positionClass = '';
-                if (currentRank === 1) {
+                if (data.rank === 1) {
                     positionText = '1st Position';
                     positionClass = 'position-1';
-                } else if (currentRank === 2) {
+                } else if (data.rank === 2) {
                     positionText = '2nd Position';
                     positionClass = 'position-2';
-                } else if (currentRank === 3) {
+                } else if (data.rank === 3) {
                     positionText = '3rd Position';
                     positionClass = 'position-3';
                 } else {
-                    // For any ranks beyond 3rd that might appear if top3 is less than 3
-                    // or if there are many ties for 1st, 2nd, etc.
-                    positionText = `${currentRank}th Position`;
+                    // Fallback for cases where ties might push a 4th element into top3ToDisplay
+                    // but it's not truly 1st, 2nd, or 3rd rank.
+                    positionText = `${data.rank}th Position`;
                     positionClass = 'bg-gray-500'; // Default styling for others
                 }
 
