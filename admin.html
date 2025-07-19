@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDF5E6; /* Old Lace */
+            color: #8B4513; /* SaddleBrown */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background-color: #FAF0E6; /* Linen */
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #8B4513;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+        }
+        th, td {
+            border: 1px solid #D2B48C; /* Tan */
+            padding: 0.75rem;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+        th {
+            background-color: #CD853F; /* Peru */
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #FFF8DC; /* Cornsilk */
+        }
+        .button-gradient {
+            background-image: linear-gradient(to right, #F4A460, #D2B48C); /* SandyBrown to Tan */
+            color: #4B2E2E;
+            font-weight: bold;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            border: none;
+        }
+        .button-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .message-box {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align: center;
+            display: none; /* Hidden by default */
+        }
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #CD853F;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+            display: none;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Quiz Results Admin Panel</h1>
+
+        <div id="authSection" class="mb-4">
+            <h2 class="text-xl font-bold mb-4 text-center">Admin Login</h2>
+            <div class="mb-4">
+                <label for="adminEmail" class="block text-sm font-medium text-gray-700 mb-1">Email:</label>
+                <input type="email" id="adminEmail" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-700" placeholder="asgharshah095@gmail.com">
+            </div>
+            <div class="mb-6">
+                <label for="adminPassword" class="block text-sm font-medium text-gray-700 mb-1">Password:</label>
+                <input type="password" id="adminPassword" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-700" placeholder="password">
+            </div>
+            <p id="authError" class="text-red-500 text-sm mb-4 hidden">Invalid credentials</p>
+            <button id="loginAdminBtn" class="button-gradient w-full mb-2">Login as Admin</button>
+        </div>
+
+        <div id="resultsSection" class="hidden">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold">All Quiz Submissions</h2>
+                <button id="logoutAdminBtn" class="button-gradient">Logout</button>
+            </div>
+            <div id="messageBox" class="message-box"></div>
+            <div class="loading-spinner" id="loadingSpinner"></div>
+            <div class="overflow-x-auto">
+                <table id="resultsTable">
+                    <thead>
+                        <tr>
+                            <th>Candidate Name</th>
+                            <th>Quiz Date</th>
+                            <th>Score</th>
+                            <th>Correct</th>
+                            <th>Incorrect</th>
+                            <th>Attempted</th>
+                            <th>Time Taken</th>
+                            <th>Submitted At</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultsTableBody">
+                        <!-- Results will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, query, onSnapshot, orderBy } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // --- Firebase Configuration ---
+        // Use your actual Firebase config here, same as in index.html
+        const firebaseConfig = typeof __firebase_config !== 'undefined' 
+            ? JSON.parse(__firebase_config) 
+            : {
+                apiKey: "AIzaSyALjJrKf6acGhdEYlsKO-gCpBJHw6UbKTs", // Your actual API Key
+                authDomain: "css-quiz-results.firebaseapp.com", // Your actual Auth Domain
+                projectId: "css-quiz-results", // Your actual Project ID
+                storageBucket: "css-quiz-results.firebasestorage.app", // Your actual Storage Bucket
+                messagingSenderId: "1077285247585", // Your actual Sender ID
+                appId: "1:1077285247585:web:47e010dd8fa288b9fa2820" // Your actual App ID
+            };
+        
+        let app, auth, db;
+        let isAdmin = false;
+
+        // Initialize Firebase
+        try {
+            app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+            console.log("Firebase initialized for admin panel.");
+        } catch (e) {
+            console.error("Error initializing Firebase:", e);
+            document.body.innerHTML = '<div class="text-red-500 text-center p-8">Error initializing the application. Please check the console for details. This might be due to missing Firebase configuration.</div>';
+        }
+
+        const authSection = document.getElementById('authSection');
+        const resultsSection = document.getElementById('resultsSection');
+        const loginAdminBtn = document.getElementById('loginAdminBtn');
+        const logoutAdminBtn = document.getElementById('logoutAdminBtn');
+        const adminEmailInput = document.getElementById('adminEmail');
+        const adminPasswordInput = document.getElementById('adminPassword');
+        const authError = document.getElementById('authError');
+        const resultsTableBody = document.getElementById('resultsTableBody');
+        const messageBox = document.getElementById('messageBox');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+
+        // Function to display messages
+        function showMessage(message, type = 'info') {
+            messageBox.textContent = message;
+            messageBox.className = `message-box ${type === 'error' ? 'bg-red-100 border-red-400 text-red-700' : 'bg-yellow-100 border-yellow-400 text-yellow-700'}`;
+            messageBox.style.display = 'block';
+            setTimeout(() => {
+                messageBox.style.display = 'none';
+            }, 5000);
+        }
+
+        // Function to show/hide loading spinner
+        function showLoading(show) {
+            loadingSpinner.style.display = show ? 'block' : 'none';
+        }
+
+        // --- Authentication Logic ---
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // Check if the user is the designated admin
+                // IMPORTANT: In a real app, you'd use Firebase Admin SDK to set custom claims
+                // or check a specific 'admins' collection. For simplicity, we're hardcoding
+                // an email here, but this is NOT secure for production.
+                if (user.email === 'asgharshah095@gmail.com') { // <--- REPLACE WITH YOUR ADMIN EMAIL
+                    isAdmin = true;
+                    authSection.classList.add('hidden');
+                    resultsSection.classList.remove('hidden');
+                    loadQuizResults();
+                } else {
+                    isAdmin = false;
+                    signOut(auth); // Sign out non-admin users if they somehow get authenticated
+                    authSection.classList.remove('hidden');
+                    resultsSection.classList.add('hidden');
+                    authError.textContent = 'You are not authorized to access this panel.';
+                    authError.classList.remove('hidden');
+                }
+            } else {
+                isAdmin = false;
+                authSection.classList.remove('hidden');
+                resultsSection.classList.add('hidden');
+                resultsTableBody.innerHTML = ''; // Clear results if logged out
+            }
+        });
+
+        loginAdminBtn.addEventListener('click', async () => {
+            const email = adminEmailInput.value;
+            const password = adminPasswordInput.value;
+            if (!email || !password) {
+                authError.textContent = 'Please enter both email and password.';
+                authError.classList.remove('hidden');
+                return;
+            }
+            authError.classList.add('hidden');
+            showLoading(true);
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                // onAuthStateChanged will handle UI update
+            } catch (error) {
+                console.error("Login error:", error.message);
+                authError.textContent = 'Invalid email or password.';
+                authError.classList.remove('hidden');
+            } finally {
+                showLoading(false);
+            }
+        });
+
+        logoutAdminBtn.addEventListener('click', async () => {
+            try {
+                await signOut(auth);
+                console.log("Admin logged out.");
+                adminEmailInput.value = '';
+                adminPasswordInput.value = '';
+                authError.classList.add('hidden');
+                showMessage('Logged out successfully.', 'info');
+            } catch (error) {
+                console.error("Logout error:", error.message);
+                showMessage('Error logging out.', 'error');
+            }
+        });
+
+        // --- Load Quiz Results from Firestore ---
+        function loadQuizResults() {
+            if (!db || !isAdmin) {
+                console.warn("Firestore not initialized or not admin. Cannot load results.");
+                return;
+            }
+
+            showLoading(true);
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-quiz-app';
+            const resultsCollectionRef = collection(db, `/artifacts/${appId}/public/data/quiz_results`);
+            
+            // Use onSnapshot for real-time updates
+            onSnapshot(resultsCollectionRef, (snapshot) => {
+                resultsTableBody.innerHTML = ''; // Clear existing results
+                if (snapshot.empty) {
+                    resultsTableBody.innerHTML = '<tr><td colspan="8" class="text-center py-4">No quiz results found yet.</td></tr>';
+                    showLoading(false);
+                    return;
+                }
+
+                snapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const row = resultsTableBody.insertRow();
+                    row.insertCell().textContent = data.candidateName || 'N/A';
+                    row.insertCell().textContent = data.quizDate || 'N/A';
+                    row.insertCell().textContent = data.score !== undefined ? data.score : 'N/A';
+                    row.insertCell().textContent = data.correctCount !== undefined ? data.correctCount : 'N/A';
+                    row.insertCell().textContent = data.incorrectCount !== undefined ? data.incorrectCount : 'N/A';
+                    row.insertCell().textContent = data.attemptedCount !== undefined ? data.attemptedCount : 'N/A';
+                    row.insertCell().textContent = data.timeTaken || 'N/A';
+                    row.insertCell().textContent = data.submittedAt ? new Date(data.submittedAt).toLocaleString() : 'N/A';
+                });
+                showLoading(false);
+            }, (error) => {
+                console.error("Error fetching quiz results:", error);
+                resultsTableBody.innerHTML = '<tr><td colspan="8" class="text-center py-4 text-red-500">Error loading results. Please check console.</td></tr>';
+                showLoading(false);
+                showMessage('Error loading results. Check console.', 'error');
+            });
+        }
+
+        // Initial setup on DOM load
+        document.addEventListener('DOMContentLoaded', () => {
+            // No need to call loadQuizResults here, onAuthStateChanged will trigger it
+            // if an admin user is already logged in.
+        });
+    </script>
+</body>
+</html>
