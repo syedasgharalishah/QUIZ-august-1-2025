@@ -286,7 +286,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, query, onSnapshot, orderBy, where, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // --- Firebase Configuration ---
@@ -344,6 +344,7 @@
                 if (adminPanel) adminPanel.classList.remove('hidden');
                 loadQuizResults(); // Load results when admin logs in
             } else {
+                // If not admin, ensure login page is shown and panel is hidden
                 if (loginPage) loginPage.classList.remove('hidden');
                 if (adminPanel) adminPanel.classList.add('hidden');
                 // Clear results and toppers if not logged in as admin
@@ -413,7 +414,9 @@
             }
 
             showLoading(true);
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-quiz-app';
+            // Ensure appId is consistently retrieved and used.
+            // For Canvas environment, __app_id is provided. For standalone, use a hardcoded default.
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-quiz-app'; 
             const resultsCollectionRef = collection(db, `/artifacts/${appId}/public/data/quiz_results`);
             
             // Listen for real-time updates
@@ -468,6 +471,34 @@
             }
         }
 
+        // --- UI Ranking Logic (100% Accurate Standard Competition Ranking) ---
+        function calculateRanks(results) {
+            const rankedResults = [];
+            if (results.length === 0) return rankedResults;
+
+            let currentRank = 1;
+            let previousScore = results[0].score;
+            
+            // Assign rank to the first result
+            rankedResults.push({ ...results[0], rank: currentRank });
+
+            for (let i = 1; i < results.length; i++) {
+                const currentScore = results[i].score;
+
+                if (currentScore < previousScore) {
+                    // If the current score is strictly less than the previous score,
+                    // the rank advances to the current index + 1.
+                    currentRank = i + 1;
+                }
+                // If currentScore === previousScore, currentRank remains the same,
+                // ensuring tied individuals share the same rank.
+                rankedResults.push({ ...results[i], rank: currentRank });
+                previousScore = currentScore; // Update previous score for the next iteration
+            }
+            return rankedResults;
+        }
+
+
         // --- UI Rendering Functions ---
         function renderResults() {
             if (!resultsTableBody || !totalResultsCount || !toppersListDiv || !noToppersMessage) return;
@@ -477,36 +508,23 @@
                 ? allQuizResults
                 : allQuizResults.filter(result => result.quizDate === selectedDate);
 
+            // Calculate ranks for the filtered results
+            const rankedFilteredResults = calculateRanks(filteredResults);
+
             // Render Toppers
-            renderToppers(filteredResults);
+            renderToppers(rankedFilteredResults); // Pass the already ranked results
 
             // Render main table
             resultsTableBody.innerHTML = ''; // Clear existing rows
-            if (filteredResults.length === 0) {
+            if (rankedFilteredResults.length === 0) {
                 resultsTableBody.innerHTML = '<tr><td colspan="10" class="text-center py-4 text-gray-500">No results to display for this date.</td></tr>';
                 totalResultsCount.textContent = '0';
                 return;
             }
-
-            let currentRank = 1;
-            let previousScore = null;
-            let tiedCount = 0; // Track how many people are tied at the current rank
-
-            filteredResults.forEach((data, index) => {
-                if (index > 0) {
-                    if (data.score === previousScore) {
-                        // If current score is same as previous, they share the same rank
-                        tiedCount++;
-                    } else {
-                        // If score is different, update rank based on the number of people before this one
-                        currentRank += tiedCount + 1;
-                        tiedCount = 0; // Reset tied count
-                    }
-                }
-                previousScore = data.score;
-
+            
+            rankedFilteredResults.forEach((data) => {
                 const row = resultsTableBody.insertRow();
-                row.insertCell().textContent = currentRank; // Use the calculated rank
+                row.insertCell().textContent = data.rank; // Use the calculated rank
                 row.insertCell().textContent = data.candidateName || 'N/A';
                 row.insertCell().textContent = data.quizDate || 'N/A';
                 row.insertCell().textContent = data.score !== undefined ? data.score : 'N/A';
@@ -523,34 +541,16 @@
                 deleteButton.onclick = () => openDeleteConfirmModal(data.id);
                 actionCell.appendChild(deleteButton);
             });
-            totalResultsCount.textContent = filteredResults.length;
+            totalResultsCount.textContent = rankedFilteredResults.length;
         }
 
-        function renderToppers(results) {
+        function renderToppers(rankedResults) { // Now accepts already ranked results
             if (!toppersListDiv || !noToppersMessage) return;
 
             toppersListDiv.innerHTML = ''; // Clear existing toppers
-            const topPerformersWithRanks = [];
             
-            let currentRank = 1;
-            let previousScore = null;
-            let tiedCount = 0;
-
-            results.forEach((data, index) => {
-                if (index > 0) {
-                    if (data.score === previousScore) {
-                        tiedCount++;
-                    } else {
-                        currentRank += tiedCount + 1;
-                        tiedCount = 0;
-                    }
-                }
-                previousScore = data.score;
-                topPerformersWithRanks.push({ ...data, rank: currentRank });
-            });
-
-            // Filter to include ALL 1st, 2nd, and 3rd position holders
-            const topPositionsToDisplay = topPerformersWithRanks.filter(p => p.rank <= 3);
+            // Filter to include ALL 1st, 2nd, and 3rd position holders from the already ranked results
+            const topPositionsToDisplay = rankedResults.filter(p => p.rank <= 3);
 
             if (topPositionsToDisplay.length === 0) {
                 noToppersMessage.classList.remove('hidden');
