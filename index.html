@@ -297,7 +297,7 @@
                 apiKey: "AIzaSyALjJrKf6acGhdEYlsKO-gCpBJHw6UbKTs",
                 authDomain: "css-quiz-results.firebaseapp.com",
                 projectId: "css-quiz-results",
-                storageBucket: "css-quiz-results.firebasestorage.app",
+                storageBucket: "css-quiz-results.appspot.com", // Keeping this consistent with index.html
                 messagingSenderId: "1077285247585",
                 appId: "1:1077285247585:web:47e010dd8fa288b9fa2820"
             };
@@ -466,7 +466,10 @@
                 // onSnapshot listener will automatically re-render the table
             } catch (error) {
                 console.error("Error removing document: ", error);
-                alert("Failed to delete result. Please try again."); // Using alert for critical user feedback
+                // Using a simple message box instead of alert()
+                const messageBox = document.createElement('div');
+                messageBox.innerHTML = '<div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 10000; text-align: center;">Failed to delete result. Please try again.<br><button onclick="this.parentNode.parentNode.remove()" style="margin-top: 10px; padding: 8px 16px; background-color: #CD853F; color: white; border: none; border-radius: 4px; cursor: pointer;">OK</button></div>';
+                document.body.appendChild(messageBox);
             } finally {
                 showLoading(false);
             }
