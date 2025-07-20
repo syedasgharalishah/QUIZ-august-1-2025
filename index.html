@@ -472,26 +472,25 @@
             }
         }
 
-        // --- UI Ranking Logic (100% Accurate Standard Competition Ranking) ---
+        // --- UI Ranking Logic (Dense Ranking as per your request) ---
         function calculateRanks(results) {
             const rankedResults = [];
             if (results.length === 0) return rankedResults;
 
             let currentRank = 1;
-            let previousScore = null; // Initialize to null to handle the first element correctly
+            let previousScore = null;
 
             for (let i = 0; i < results.length; i++) {
                 const currentScore = results[i].score;
 
                 if (i > 0 && currentScore < previousScore) {
-                    // If current score is strictly less than previous, rank advances
-                    currentRank = i + 1;
+                    currentRank++; // Dense rank: always increment by 1
                 }
-                // If currentScore === previousScore, currentRank remains the same (tied rank)
-                // If it's the first element (i=0), currentRank is already 1.
+
                 rankedResults.push({ ...results[i], rank: currentRank });
-                previousScore = currentScore; // Update previous score for the next iteration
+                previousScore = currentScore;
             }
+
             return rankedResults;
         }
 
@@ -505,7 +504,7 @@
                 ? allQuizResults
                 : allQuizResults.filter(result => result.quizDate === selectedDate);
 
-            // Calculate ranks for the filtered results
+            // Calculate ranks for the filtered results using the new dense ranking logic
             const rankedFilteredResults = calculateRanks(filteredResults);
 
             // Render Toppers
