@@ -477,21 +477,17 @@
             if (results.length === 0) return rankedResults;
 
             let currentRank = 1;
-            let previousScore = results[0].score;
-            
-            // Assign rank to the first result
-            rankedResults.push({ ...results[0], rank: currentRank });
+            let previousScore = null; // Initialize to null to handle the first element correctly
 
-            for (let i = 1; i < results.length; i++) {
+            for (let i = 0; i < results.length; i++) {
                 const currentScore = results[i].score;
 
-                if (currentScore < previousScore) {
-                    // If the current score is strictly less than the previous score,
-                    // the rank advances to the current index + 1.
+                if (i > 0 && currentScore < previousScore) {
+                    // If current score is strictly less than previous, rank advances
                     currentRank = i + 1;
                 }
-                // If currentScore === previousScore, currentRank remains the same,
-                // ensuring tied individuals share the same rank.
+                // If currentScore === previousScore, currentRank remains the same (tied rank)
+                // If it's the first element (i=0), currentRank is already 1.
                 rankedResults.push({ ...results[i], rank: currentRank });
                 previousScore = currentScore; // Update previous score for the next iteration
             }
