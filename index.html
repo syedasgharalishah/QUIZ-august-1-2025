@@ -297,7 +297,7 @@
                 apiKey: "AIzaSyALjJrKf6acGhdEYlsKO-gCpBJHw6UbKTs",
                 authDomain: "css-quiz-results.firebaseapp.com",
                 projectId: "css-quiz-results",
-                storageBucket: "css-quiz-results.appspot.com", // Keeping this consistent with index.html
+                storageBucket: "css-quiz-results.appspot.com", // Consistent with index.html for this project
                 messagingSenderId: "1077285247585",
                 appId: "1:1077285247585:web:47e010dd8fa288b9fa2820"
             };
@@ -415,10 +415,8 @@
             }
 
             showLoading(true);
-            // Ensure appId is consistently retrieved and used.
-            // For Canvas environment, __app_id is provided. For standalone, use a hardcoded default.
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-quiz-app'; 
-            const resultsCollectionRef = collection(db, `/artifacts/${appId}/public/data/quiz_results`);
+            // Changed collection path to 'quizResults' to match the provided security rules
+            const resultsCollectionRef = collection(db, "quizResults");
             
             // Listen for real-time updates
             unsubscribeFromFirestore = onSnapshot(resultsCollectionRef, (snapshot) => {
@@ -458,8 +456,8 @@
                 return;
             }
             showLoading(true);
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-quiz-app';
-            const docRef = doc(db, `/artifacts/${appId}/public/data/quiz_results`, docId);
+            // Changed collection path to 'quizResults' to match the provided security rules
+            const docRef = doc(db, "quizResults", docId);
             try {
                 await deleteDoc(docRef);
                 console.log("Document successfully deleted!");
