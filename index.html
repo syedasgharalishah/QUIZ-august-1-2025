@@ -3,81 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Admin Panel</title>
+    <title>CSS MPT Daily Quiz - 1 August</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* Custom CSS for animations and specific styles not easily covered by Tailwind */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #FDF5E6; /* Old Lace */
-            color: #8B4513; /* SaddleBrown */
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            overflow-x: hidden;
+            background-color: #F8F9FA; /* Background color */
+            color: #2C3E50; /* Default text color */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
         }
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 1.5rem;
-            background-color: #FAF0E6; /* Linen */
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            flex-grow: 1;
+
+        .text-primary {
+            color: #2C3E50;
         }
-        .header-section {
-            background-color: #ffffff;
-            padding: 1.5rem 1rem;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            margin-bottom: 1rem;
-            border-radius: 12px;
+
+        .date-color {
+            color: #6D6875;
         }
-        .quiz-title {
-            font-family: 'Roboto', sans-serif;
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #8B4513; /* SaddleBrown */
-            margin-bottom: 1rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+
+        .gradient-button {
+            background-image: linear-gradient(to right, #E6E6FA, #FFDAB9);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         }
-        .banner-logo {
-            max-width: 150px;
-            height: auto;
-            border-radius: 8px;
-            margin-top: 1rem;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+        .gradient-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
-        .button-gradient {
-            background-image: linear-gradient(to right, #F4A460, #D2B48C); /* SandyBrown to Tan */
-            color: #4B2E2E;
-            font-weight: bold;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            cursor: pointer;
-            border: none;
+
+        .option-card {
+            transition: transform 0.2s ease-in-out, background-color 0.3s ease-in-out;
         }
-        .button-gradient:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+
+        .option-card:hover {
+            transform: scale(1.05);
         }
-        .delete-button {
-            background-color: #EF4444; /* Red 500 */
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            transition: background-color 0.2s ease;
-            border: none;
-            cursor: pointer;
+
+        /* Pulse animation for correct answer */
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(144, 238, 144, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(144, 238, 144, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(144, 238, 144, 0); }
         }
-        .delete-button:hover {
-            background-color: #DC2626; /* Red 600 */
+
+        .pulse-green {
+            animation: pulse-green 0.6s ease-out;
+            background-color: #90EE90; /* Light Green */
         }
+
+        /* Shake animation for wrong answer */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        .shake-red {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+            background-color: #FF6B6B; /* Red */
+        }
+
+        /* Progress bar animation */
+        .progress-bar-inner {
+            background-image: linear-gradient(to right, #20B2AA, #3EB489);
+            transition: width 0.5s ease-in-out;
+        }
+
+        /* Sticky date positioning for desktop */
+        .sticky-date {
+            position: sticky;
+            top: 1rem;
+            z-index: 10;
+        }
+
+        /* Responsive adjustments for sticky date */
+        @media (min-width: 768px) {
+            .sticky-date {
+                right: 1rem;
+                left: auto;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .sticky-date {
+                left: 1rem;
+                right: auto;
+            }
+        }
+
+        /* Hide elements for security */
+        .no-select {
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Safari */
+            -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Old versions of Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+        }
+
+        /* Modal styling */
         .modal {
             display: none; /* Hidden by default */
             position: fixed; /* Stay in place */
@@ -91,481 +119,612 @@
             justify-content: center;
             align-items: center;
         }
+
         .modal-content {
-            background-color: #FAF0E6;
+            background-color: #fefefe;
             margin: auto;
             padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            border: 1px solid #888;
             width: 80%;
-            max-width: 400px;
-            text-align: center;
-            color: #8B4513;
-        }
-        .modal-buttons {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
-        }
-        .leaderboard-card {
-            background-color: #FFF8DC; /* Cornsilk */
+            max-width: 500px;
             border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-        .position-badge {
-            font-size: 1.2rem;
-            font-weight: bold;
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            color: white;
-            display: inline-block;
-            margin-right: 0.75rem;
-            min-width: 100px; /* Ensure consistent width for badges */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             text-align: center;
         }
-        .position-1 {
-            background-image: linear-gradient(to right, #FFD700, #DAA520); /* Gold */
-            box-shadow: 0 2px 8px rgba(255,215,0,0.4);
-        }
-        .position-2 {
-            background-image: linear-gradient(to right, #C0C0C0, #A9A9A9); /* Silver */
-            box-shadow: 0 2px 8px rgba(192,192,192,0.4);
-        }
-        .position-3 {
-            background-image: linear-gradient(to right, #CD7F32, #8B4513); /* Bronze */
-            box-shadow: 0 2px 8px rgba(205,127,50,0.4);
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1.5rem;
-        }
-        th, td {
-            padding: 0.75rem;
-            border: 1px solid #E0C7A8; /* Light Tan border */
-            text-align: left;
-        }
-        th {
-            background-color: #D2B48C; /* Tan */
-            color: #4B2E2E;
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-        }
-        tr:nth-child(even) {
-            background-color: #F8F0E3; /* Lighter Linen */
-        }
-        tr:hover {
-            background-color: #EBD8B8; /* Even lighter tan on hover */
-        }
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1002;
-            flex-direction: column;
-            color: #8B4513;
-            font-size: 1.2rem;
+
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
             font-weight: bold;
         }
-        .spinner {
-            border: 8px solid #f3f3f3;
-            border-top: 8px solid #CD853F; /* Peru */
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin 1s linear infinite;
-            margin-bottom: 1rem;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
         }
     </style>
 </head>
-<body>
-    <div id="loadingOverlay" class="loading-overlay hidden">
-        <div class="spinner"></div>
-        Loading...
-    </div>
+<body class="no-select" oncontextmenu="return false;">
 
-    <div id="deleteConfirmModal" class="modal">
-        <div class="modal-content">
-            <p class="text-xl font-bold mb-4">Confirm Deletion</p>
-            <p>Are you sure you want to delete this quiz result? This action cannot be undone.</p>
-            <div class="modal-buttons">
-                <button id="confirmDeleteBtn" class="button-gradient delete-button px-6 py-2">Delete</button>
-                <button id="cancelDeleteBtn" class="button-gradient px-6 py-2">Cancel</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="loginPage" class="container">
-        <div class="header-section">
-            <img src="https://i.ibb.co/tMYHtj6n/480709804-2211254089269599-2819007219717277160-n.jpg" alt="Banner Logo" class="banner-logo mx-auto">
-            <h1 class="quiz-title mt-4">Admin Panel Login</h1>
-            <p class="text-gray-600">Access and manage quiz results.</p>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-md mt-6">
-            <h2 class="text-xl font-bold mb-4 text-center">Admin Login</h2>
+    <div id="login-page" class="min-h-screen flex items-center justify-center bg-[#F8F9FA] p-4">
+        <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md border border-[#FFF5EE]">
+            <h2 class="text-3xl font-bold text-center text-primary mb-6">Quiz Login</h2>
             <div class="mb-4">
-                <label for="adminEmail" class="block text-sm font-medium text-gray-700 mb-1">Email:</label>
-                <input type="email" id="adminEmail" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-700" value="asgharshah095@gmail.com">
+                <label for="username" class="block text-primary text-sm font-bold mb-2">Username:</label>
+                <input type="text" id="username" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-primary leading-tight focus:outline-none focus:shadow-outline bg-gray-100" placeholder="Enter username">
             </div>
             <div class="mb-6">
-                <label for="adminPassword" class="block text-sm font-medium text-gray-700 mb-1">Password:</label>
-                <input type="password" id="adminPassword" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-700">
+                <label for="password" class="block text-primary text-sm font-bold mb-2">Password:</label>
+                <input type="password" id="password" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-primary leading-tight focus:outline-none focus:shadow-outline bg-gray-100" placeholder="Enter password">
             </div>
-            <p id="loginError" class="text-red-500 text-sm mb-4 hidden">Invalid Email or Password</p>
-            <button id="adminLoginBtn" class="button-gradient w-full">Login</button>
+            <button id="login-button" class="gradient-button text-primary font-bold py-3 px-6 rounded-lg w-full focus:outline-none focus:shadow-outline">Login</button>
+            <p id="login-error" class="text-red-500 text-center mt-4 hidden">Invalid username or password.</p>
         </div>
     </div>
 
-    <div id="adminPanel" class="container hidden">
-        <div class="header-section">
-            <img src="https://i.ibb.co/tMYHtj6n/480709804-2211254089269599-2819007219717277160-n.jpg" alt="Banner Logo" class="banner-logo mx-auto">
-            <h1 class="quiz-title mt-4">CSS MPT Daily Quiz Admin Panel</h1>
-            <p class="text-gray-600 text-lg font-semibold">"Empowering Insights: Your Hub for Quiz Performance"</p>
-            <button id="adminLogoutBtn" class="button-gradient mt-4 px-4 py-2 text-sm">Logout</button>
-        </div>
-
-        <div class="bg-white p-6 rounded-lg shadow-md mt-6">
-            <h2 class="text-2xl font-bold mb-4 text-center">Today's Top Performers</h2>
-            <p class="text-center text-gray-700 mb-4">Celebrating excellence in today's quiz!</p>
-            <div id="toppersList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div class="text-center py-4 text-gray-500" id="noToppersMessage">No toppers for the selected date yet.</div>
+    <div id="candidate-info-page" class="min-h-screen flex items-center justify-center bg-[#F8F9FA] p-4 hidden">
+        <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md border border-[#FFF5EE]">
+            <h2 class="text-3xl font-bold text-center text-primary mb-6">Candidate Information</h2>
+            <div class="mb-6">
+                <label for="full-name" class="block text-primary text-sm font-bold mb-2">Full Name:</label>
+                <input type="text" id="full-name" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-primary leading-tight focus:outline-none focus:shadow-outline bg-gray-100" placeholder="Enter your full name">
             </div>
+            <button id="start-quiz-button" class="gradient-button text-primary font-bold py-3 px-6 rounded-lg w-full focus:outline-none focus:shadow-outline">Start Quiz</button>
+            <p id="name-error" class="text-red-500 text-center mt-4 hidden">Please enter your full name.</p>
         </div>
+    </div>
 
-        <div class="bg-white p-6 rounded-lg shadow-md mt-6">
-            <h2 class="text-2xl font-bold mb-4 text-center">All Quiz Results</h2>
-            <div class="flex flex-col md:flex-row justify-between items-center mb-4 gap-4">
-                <div class="w-full md:w-1/3">
-                    <label for="dateFilter" class="block text-sm font-medium text-gray-700 mb-1">Filter by Date:</label>
-                    <select id="dateFilter" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-700">
-                        <option value="all">All Dates</option>
-                    </select>
-                </div>
-                <div class="w-full md:w-2/3 text-right">
-                    <p class="text-sm text-gray-600">Total Results: <span id="totalResultsCount">0</span></p>
+    <div id="quiz-page" class="min-h-screen bg-[#F8F9FA] p-4 md:p-8 hidden">
+        <div class="relative mb-6">
+            <div id="live-date" class="sticky-date text-sm font-semibold date-color p-2 rounded-lg bg-white shadow-md flex items-center justify-end md:justify-start">
+                <i class="far fa-calendar-alt mr-2"></i>
+                <span></span>
+            </div>
+            <h1 class="text-4xl font-bold text-center text-primary mt-4 mb-4">CSS MPT Daily Quiz – <span id="quiz-date-title"></span></h1>
+
+            <div class="w-full bg-gray-200 rounded-full h-4 mb-4 overflow-hidden shadow-inner">
+                <div id="progress-bar" class="progress-bar-inner h-full rounded-full text-xs text-white flex items-center justify-center" style="width: 0%;">
+                    <span id="progress-text">0%</span>
                 </div>
             </div>
-            <div class="overflow-x-auto">
-                <table class="min-w-full">
-                    <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Candidate Name</th>
-                            <th>Quiz Date</th>
-                            <th>Score</th>
-                            <th>Correct</th>
-                            <th>Incorrect</th>
-                            <th>Attempted</th>
-                            <th>Time Taken</th>
-                            <th>Submitted At</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="resultsTableBody">
-                        <tr><td colspan="10" class="text-center py-4 text-gray-500">No results to display.</td></tr>
-                    </tbody>
-                </table>
+
+            <div class="w-full rounded-xl overflow-hidden shadow-lg mb-4">
+                <img src="https://i.ibb.co/tMYHtj6n/480709804-2211254089269599-2819007219717277160-n.jpg" alt="Quiz Banner" class="w-full h-auto object-cover rounded-xl">
             </div>
+
+            <div class="text-center text-primary text-sm md:text-base font-bold mb-6">
+                <p>DAWNDIGEST</p>
+                <p>PREPARED BY: SYED ASGHAR ALI SHAH Contact: 03265762698</p>
+                <p>Updated on: <span id="updated-date"></span></p>
+            </div>
+
+            <div class="text-center text-lg font-bold text-primary mb-6">
+                Time Remaining: <span id="timer">40:00</span>
+            </div>
+        </div>
+
+        <div id="quiz-container" class="grid grid-cols-1 md:grid-cols-1 gap-6">
+            <div id="question-card" class="bg-white p-6 rounded-xl shadow-lg border border-[#FFF5EE]">
+                <p class="text-lg font-semibold mb-4 text-primary"><span id="question-number"></span>. <span id="question-text"></span></p>
+                <div id="options-container" class="grid grid-cols-1 gap-3">
+                    </div>
+                <div id="explanation-container" class="mt-4 p-3 rounded-lg bg-gray-100 text-sm italic text-primary hidden">
+                    <p id="explanation-text"></p>
+                </div>
+            </div>
+
+            <div class="flex justify-around mt-6">
+                <button id="prev-button" class="gradient-button text-primary font-bold py-3 px-6 rounded-lg opacity-50 cursor-not-allowed" disabled>Previous</button>
+                <button id="submit-now-button" class="gradient-button text-primary font-bold py-3 px-6 rounded-lg">Submit</button>
+                <button id="next-button" class="gradient-button text-primary font-bold py-3 px-6 rounded-lg">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="results-page" class="min-h-screen flex items-center justify-center bg-[#F8F9FA] p-4 hidden">
+        <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md border border-[#FFF5EE] text-primary">
+            <h2 class="text-3xl font-bold text-center mb-6">Quiz Results</h2>
+            <p class="text-lg mb-2"><strong>Candidate Name:</strong> <span id="result-name"></span></p>
+            <p class="text-lg mb-2"><strong>Total Score:</strong> <span id="result-score"></span> / 100</p>
+            <p class="text-lg mb-2"><strong>Time Taken:</strong> <span id="result-time"></span></p>
+            <p class="text-lg mb-4"><strong>Questions Attempted:</strong> <span id="result-attempted"></span></p>
+            <button id="retake-quiz-button" class="gradient-button text-primary font-bold py-3 px-6 rounded-lg w-full focus:outline-none focus:shadow-outline">Retake Quiz</button>
+        </div>
+    </div>
+
+    <div id="custom-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <p id="modal-message" class="text-lg text-primary"></p>
+            <button id="modal-ok-button" class="gradient-button text-primary font-bold py-2 px-4 rounded-lg mt-4 hidden">OK</button>
+            <button id="modal-cancel-button" class="gradient-button text-primary font-bold py-2 px-4 rounded-lg mt-4 ml-2 hidden">Cancel</button>
         </div>
     </div>
 
     <script type="module">
+        // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, onSnapshot, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        // --- Firebase Configuration ---
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        
+        // Your web app's Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyALjJrKf6acGhdEYlsKO-gCpBJHw6UbKTs",
             authDomain: "css-quiz-results.firebaseapp.com",
             projectId: "css-quiz-results",
             storageBucket: "css-quiz-results.appspot.com",
             messagingSenderId: "1077285247585",
-            appId: "1:1077285247585:web:47e010dd8fa288b9fa2820"
+            appId: "1:1077285247585:web:47e010dd8fa288b9fa2820",
+            measurementId: "G-X4DZ2PC9P8"
         };
 
-        let app, auth, db;
-        let allQuizResults = []; 
-        let unsubscribeFromFirestore = null;
-
-        // --- DOM Elements ---
-        const loginPage = document.getElementById('loginPage');
-        const adminPanel = document.getElementById('adminPanel');
-        const adminEmailInput = document.getElementById('adminEmail');
-        const adminPasswordInput = document.getElementById('adminPassword');
-        const adminLoginBtn = document.getElementById('adminLoginBtn');
-        const adminLogoutBtn = document.getElementById('adminLogoutBtn'); 
-        const loginError = document.getElementById('loginError');
-        const resultsTableBody = document.getElementById('resultsTableBody');
-        const totalResultsCount = document.getElementById('totalResultsCount');
-        const dateFilter = document.getElementById('dateFilter');
-        const toppersListDiv = document.getElementById('toppersList');
-        const noToppersMessage = document.getElementById('noToppersMessage');
-        const loadingOverlay = document.getElementById('loadingOverlay');
-        const deleteConfirmModal = document.getElementById('deleteConfirmModal');
-        const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-        const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
-        let docToDeleteId = null; 
-
-        // --- Initialization ---
+        // Initialize Firebase
+        let app, db;
         try {
             app = initializeApp(firebaseConfig);
-            auth = getAuth(app);
             db = getFirestore(app);
-            console.log("Firebase initialized for admin panel.");
-        } catch (e) {
-            console.error("Error initializing Firebase:", e);
-            if (adminPanel) adminPanel.innerHTML = '<div class="text-red-500 text-center p-8">Error initializing the application. Please check the console for details.</div>';
+            console.log("Firebase Initialized Successfully.");
+        } catch(e) {
+            console.error("Firebase initialization failed:", e);
         }
 
-        // --- Auth State Listener ---
-        onAuthStateChanged(auth, (user) => {
-            if (user && user.email === 'asgharshah095@gmail.com') { // Admin check
-                if (loginPage) loginPage.classList.add('hidden');
-                if (adminPanel) adminPanel.classList.remove('hidden');
-                loadQuizResults(); 
-            } else {
-                if (loginPage) loginPage.classList.remove('hidden');
-                if (adminPanel) adminPanel.classList.add('hidden');
-                if (resultsTableBody) resultsTableBody.innerHTML = '<tr><td colspan="10" class="text-center py-4 text-gray-500">Please log in as admin to view results.</td></tr>';
-                if (toppersListDiv) toppersListDiv.innerHTML = '<div class="text-center py-4 text-gray-500" id="noToppersMessage">No toppers for the selected date yet.</div>';
-                if (totalResultsCount) totalResultsCount.textContent = '0';
-                if (dateFilter) dateFilter.innerHTML = '<option value="all">All Dates</option>'; 
-                if (unsubscribeFromFirestore) {
-                    unsubscribeFromFirestore(); 
-                    unsubscribeFromFirestore = null;
-                }
+        // Disable right-click, copy/paste, and developer tools
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('keydown', event => {
+            if (event.key === 'F12' ||
+                (event.ctrlKey && event.shiftKey && event.key === 'I') ||
+                (event.ctrlKey && event.key === 'u') ||
+                (event.ctrlKey && event.key === 'U') ||
+                (event.ctrlKey && event.key === 'c') ||
+                (event.ctrlKey && event.key === 'C') ||
+                (event.ctrlKey && event.key === 'v') ||
+                (event.ctrlKey && event.key === 'V')
+            ) {
+                event.preventDefault();
             }
         });
 
-        // --- Firebase Functions ---
-        async function adminLogin() {
-            const email = adminEmailInput ? adminEmailInput.value : '';
-            const password = adminPasswordInput ? adminPasswordInput.value : '';
+        // Custom Modal Functions
+        function showModal(message, type = 'alert', onConfirm = null) {
+            const modal = document.getElementById('custom-modal');
+            const modalMessage = document.getElementById('modal-message');
+            const okButton = document.getElementById('modal-ok-button');
+            const cancelButton = document.getElementById('modal-cancel-button');
+            const closeButton = document.querySelector('#custom-modal .close-button');
 
-            if (!email || !password) {
-                if (loginError) loginError.textContent = 'Please enter both email and password.';
-                if (loginError) loginError.classList.remove('hidden');
-                return;
-            }
-
-            showLoading(true, "Logging in...");
-            try {
-                await signInWithEmailAndPassword(auth, email, password);
-                if (loginError) loginError.classList.add('hidden');
-            } catch (error) {
-                console.error("Login error:", error);
-                if (loginError) {
-                    loginError.textContent = 'Invalid email or password.';
-                    loginError.classList.remove('hidden');
+            modalMessage.textContent = message;
+            okButton.onclick = () => {
+                modal.style.display = 'none';
+                if (type === 'confirm' && onConfirm) {
+                    onConfirm(true);
+                } else if (type === 'alert' && onConfirm) {
+                    onConfirm();
                 }
-            } finally {
-                showLoading(false);
+            };
+            cancelButton.onclick = () => {
+                modal.style.display = 'none';
+                if (type === 'confirm' && onConfirm) {
+                    onConfirm(false);
+                }
+            };
+            closeButton.onclick = () => modal.style.display = 'none';
+
+            if (type === 'alert') {
+                okButton.style.display = 'inline-block';
+                cancelButton.style.display = 'none';
+            } else if (type === 'confirm') {
+                okButton.style.display = 'inline-block';
+                cancelButton.style.display = 'inline-block';
             }
+            modal.style.display = 'flex'; // Use flex to center
         }
 
-        async function adminLogout() {
-            showLoading(true, "Logging out...");
-            try {
-                await signOut(auth);
-                console.log("Admin logged out.");
-            } catch (error) {
-                console.error("Logout error:", error);
-            } finally {
-                showLoading(false);
-            }
-        }
 
-        function loadQuizResults() {
-            if (!db) return;
-            if (unsubscribeFromFirestore) unsubscribeFromFirestore();
+        // Quiz Data and State
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let questionsAttempted = 0;
+        let timerInterval;
+        const quizDuration = 40 * 60; // 40 minutes in seconds
+        let timeElapsed = 0;
+        let userName = '';
+        let quizStartTime;
+        let quizCompleted = false;
 
-            showLoading(true, "Loading results...");
-            const resultsCollectionRef = collection(db, "quizResults");
+        // Store answers
+        const userAnswers = {}; // { questionIndex: selectedOptionIndex }
+
+        // Curated MCQs for August 1st Syllabus
+        const allQuizQuestions = [
+            // General Knowledge: World Geography (Part 4, Pages 30-32)
+            { question: "Which river is also known as the 'Yellow River'?", options: ["Yangtze", "Mekong", "Huang He", "Pearl"], answer: 2, explanation: "The Huang He (Yellow River) is the second-longest river in China, after the Yangtze River, and the sixth-longest river system in the world." },
+            { question: "The Amazon River flows through which continent?", options: ["Africa", "Asia", "North America", "South America"], answer: 3, explanation: "The Amazon River in South America is the largest river by discharge volume of water in the world." },
+            { question: "Which is the longest river in Europe?", options: ["Danube", "Volga", "Rhine", "Thames"], answer: 1, explanation: "The Volga is the longest river in Europe, flowing through central Russia and into the Caspian Sea." },
+            { question: "The River Nile flows into which sea?", options: ["Red Sea", "Arabian Sea", "Mediterranean Sea", "Black Sea"], answer: 2, explanation: "The Nile River flows north through northeastern Africa to drain into the Mediterranean Sea." },
+            { question: "The Mekong River flows through several countries in which region?", options: ["Southeast Asia", "East Africa", "South America", "Central Europe"], answer: 0, explanation: "The Mekong River is a trans-boundary river in East Asia and Southeast Asia." },
+            { question: "Which river forms part of the border between the United States and Mexico?", options: ["Mississippi River", "Colorado River", "Rio Grande", "Missouri River"], answer: 2, explanation: "The Rio Grande forms a significant part of the border between Mexico and the United States." },
+            { question: "The Danube River flows through which major European city?", options: ["Paris", "Rome", "Vienna", "London"], answer: 2, explanation: "The Danube flows through numerous major cities, including Vienna, Budapest, Belgrade, and Bratislava." },
+            { question: "The world's largest glacier is the Lambert-Fisher Glacier, located in:", options: ["Greenland", "Antarctica", "The Himalayas", "The Andes"], answer: 1, explanation: "The Lambert Glacier in Antarctica is the world's largest glacier." },
+            { question: "Mount Fuji, an active volcano, is located in which country?", options: ["China", "South Korea", "Japan", "Philippines"], answer: 2, explanation: "Mount Fuji is an active stratovolcano located on the Japanese island of Honshu." },
+            { question: "Mount Kilimanjaro, a dormant volcano, is the highest peak in which continent?", options: ["Asia", "South America", "Africa", "North America"], answer: 2, explanation: "Mount Kilimanjaro is the highest mountain in Africa and the highest single free-standing mountain in the world." },
+            { question: "The 'Ring of Fire' is an area with a high concentration of volcanoes and earthquakes surrounding which ocean?", options: ["Atlantic Ocean", "Indian Ocean", "Pacific Ocean", "Arctic Ocean"], answer: 2, explanation: "The Ring of Fire is a major area in the basin of the Pacific Ocean where a large number of earthquakes and volcanic eruptions occur." },
+            { question: "Mauna Loa, one of the world's largest active volcanoes, is located on which island?", options: ["Sicily, Italy", "Big Island of Hawaii, USA", "Java, Indonesia", "Luzon, Philippines"], answer: 1, explanation: "Mauna Loa is one of five volcanoes that form the Island of Hawaii in the U.S. state of Hawaiʻi in the Pacific Ocean." },
+            { question: "The Dead Sea is the lowest point on land. It is a salt lake bordering which two countries?", options: ["Israel and Jordan", "Egypt and Sudan", "Saudi Arabia and Yemen", "Iran and Iraq"], answer: 0, explanation: "The Dead Sea is a salt lake bordered by Jordan to the east and Israel and the West Bank to the west." },
+            { question: "What is the highest point in North America?", options: ["Mount Logan", "Denali (Mount McKinley)", "Pico de Orizaba", "Mount Whitney"], answer: 1, explanation: "Denali, formerly known as Mount McKinley, is the highest mountain peak in North America." },
+            { question: "The lowest point in Africa is Lake Assal, located in which country?", options: ["Ethiopia", "Kenya", "Tanzania", "Djibouti"], answer: 3, explanation: "Lake Assal is a crater lake in central-western Djibouti." },
+            { question: "Which is the highest mountain in the world?", options: ["K2", "Kangchenjunga", "Mount Everest", "Lhotse"], answer: 2, explanation: "Mount Everest is Earth's highest mountain above sea level, located in the Mahalangur Himal sub-range of the Himalayas." },
+            { question: "The world's largest ice sheet is located in:", options: ["Greenland", "The Arctic", "Antarctica", "Siberia"], answer: 2, explanation: "The Antarctic ice sheet is the largest single mass of ice on Earth." },
+            { question: "Vatnajökull is the largest and most voluminous ice cap in which country?", options: ["Norway", "Greenland", "Iceland", "Canada"], answer: 2, explanation: "Vatnajökull, also known as the Vatna Glacier, is the largest and most voluminous ice cap in Iceland." },
+            { question: "Mount Etna, one of the most active volcanoes in the world, is located on which island?", options: ["Sardinia", "Corsica", "Sicily", "Crete"], answer: 2, explanation: "Mount Etna is an active stratovolcano on the east coast of Sicily, Italy." },
+            { question: "The Caspian Depression is a low-lying flatland region encompassing the northern part of which sea?", options: ["Black Sea", "Aral Sea", "Caspian Sea", "Red Sea"], answer: 2, explanation: "The Caspian Depression is a low-lying flatland region encompassing the northern part of the Caspian Sea." },
             
-            unsubscribeFromFirestore = onSnapshot(resultsCollectionRef, (snapshot) => {
-                allQuizResults = [];
-                const uniqueDates = new Set();
-                snapshot.forEach((doc) => {
-                    const data = { id: doc.id, ...doc.data() };
-                    allQuizResults.push(data);
-                    if (data.quizDate) uniqueDates.add(data.quizDate);
+            // English: Punctuation (Pages 436-445)
+            { question: "Which punctuation mark is used to end a declarative sentence?", options: [".", "?", "!", ","], answer: 0, explanation: "A period (or full stop) is used to mark the end of a sentence that is a statement." },
+            { question: "Which punctuation mark is used to indicate a question?", options: [".", "?", "!", ":"], answer: 1, explanation: "A question mark is used at the end of an interrogative sentence." },
+            { question: "To show strong emotion or emphasis, which punctuation mark should be used?", options: [".", "?", "!", ";"], answer: 2, explanation: "An exclamation mark is used to indicate strong feelings or a high volume." },
+            { question: "Which punctuation mark is used to separate items in a series?", options: [";", ":", ",", "."], answer: 2, explanation: "Commas are used to separate three or more words, phrases, or clauses in a series." },
+            { question: "A colon (:) is used to introduce which of the following?", options: ["A question", "A list or explanation", "A strong pause", "A contraction"], answer: 1, explanation: "A colon is used before a list of items, a quotation, or an explanation that is preceded by a clause that can stand by itself." },
+            { question: "What is the primary function of a semicolon (;)?", options: ["To end a sentence", "To connect two closely related independent clauses", "To show possession", "To indicate a pause"], answer: 1, explanation: "A semicolon can join two closely related independent clauses that are not joined by a coordinating conjunction." },
+            { question: "Which punctuation mark is used to form possessives of nouns ('s)?", options: ["Apostrophe", "Quotation Mark", "Hyphen", "Comma"], answer: 0, explanation: "An apostrophe is used to show that a thing or person belongs or relates to someone or something." },
+            { question: "What are quotation marks ('' '') used for?", options: ["To show possession", "To enclose direct quotations", "To separate items in a list", "To end a sentence"], answer: 1, explanation: "Quotation marks are used to set off exact language, spoken or written, from someone else." },
+            { question: "A hyphen (-) is used for what purpose?", options: ["To connect two sentences", "To join words or separate syllables", "To indicate a long pause", "To introduce a list"], answer: 1, explanation: "A hyphen is used to join words to indicate that they have a combined meaning or to show that a word has been split at the end of a line." },
+            { question: "What does an ellipsis (...) indicate?", options: ["A mistake in the text", "An omission of words from a quoted passage", "A strong emotional outburst", "The end of a question"], answer: 1, explanation: "An ellipsis is used to indicate that some words have been left out of a quotation." },
+            { question: "Parentheses () are used to enclose what kind of information?", options: ["Essential information", "Direct quotations", "Words that are not part of the main sentence", "The main subject of the sentence"], answer: 2, explanation: "Parentheses are used to enclose words or figures that clarify or are used as an aside." },
+            { question: "Which punctuation is used to separate a city from its state?", options: ["Semicolon", "Colon", "Comma", "Period"], answer: 2, explanation: "A comma is used to separate the city from the state, for example, 'Paris, Texas'." },
+            { question: "In the sentence 'She is a well-known author,' what is the purpose of the hyphen?", options: ["To show a pause", "To connect two independent clauses", "To create a compound adjective before a noun", "To indicate a question"], answer: 2, explanation: "A hyphen is used to join two or more words serving as a single adjective before a noun." },
+            { question: "Which sentence is correctly punctuated?", options: ["I am going to the store.", "i am going to the store?", "I am going to the store!", "I am going to the store,"], answer: 0, explanation: "A simple declarative sentence should end with a period." },
+            { question: "What is the function of the apostrophe in 'it's'?", options: ["To show possession", "To indicate a contraction of 'it is'", "To make the word plural", "It is a typo"], answer: 1, explanation: "The apostrophe in 'it's' indicates that it is a contraction of 'it is' or 'it has'." },
+            { question: "When should you use a comma before 'and' in a list?", options: ["Always", "Never", "When there are three or more items (Oxford comma)", "Only with two items"], answer: 2, explanation: "The serial or Oxford comma is used before the coordinating conjunction in a series of three or more terms." },
+            { question: "Which punctuation mark would you use to set off a non-essential clause?", options: ["Commas", "Semicolons", "Colons", "Hyphens"], answer: 0, explanation: "Commas are used to set off clauses, phrases, and words that are not essential to the meaning of the sentence." },
+            { question: "What is the punctuation mark used to indicate a range of numbers, like in 'pages 5–10'?", options: ["Hyphen", "En dash", "Em dash", "Slash"], answer: 1, explanation: "An en dash (–) is used to represent a span or range of numbers, dates, or time." },
+            { question: "Which of these is NOT a primary use of a colon?", options: ["To introduce a list", "To introduce a quote", "To separate two independent clauses", "To show a sudden break in thought"], answer: 3, explanation: "A dash (em dash) is typically used to show a sudden break in thought, not a colon." },
+            { question: "In which case would you use single quotation marks (' ')?", options: ["For any direct quote", "For a quote within another quote", "To emphasize a word", "To show possession"], answer: 1, explanation: "Single quotation marks are used to enclose a quotation within a quotation." },
+            
+            // Mathematics: Problems on Ages (Pages 519-520)
+            { question: "The sum of the ages of a father and son is 45 years. Five years ago, the product of their ages was 34. What are their current ages?", options: ["Father 39, Son 6", "Father 36, Son 9", "Father 40, Son 5", "Father 42, Son 3"], answer: 0, explanation: "Let F and S be the current ages. F+S=45. Five years ago, (F-5)(S-5)=34. Solving these equations gives F=39 and S=6." },
+            { question: "The ratio of the present ages of two brothers is 1:2 and 5 years back, the ratio was 1:3. What will be the ratio of their ages after 5 years?", options: ["1:4", "2:3", "3:5", "5:6"], answer: 2, explanation: "Let their present ages be x and 2x. 5 years ago, (x-5)/(2x-5) = 1/3. Solving this gives x=10. Their present ages are 10 and 20. After 5 years, their ages will be 15 and 25, and the ratio will be 15:25 or 3:5." },
+            { question: "A man is 24 years older than his son. In two years, his age will be twice the age of his son. What is the present age of his son?", options: ["14 years", "18 years", "20 years", "22 years"], answer: 3, explanation: "Let the son's age be S and the man's age be M. M = S + 24. In two years, M+2 = 2(S+2). Substituting the first equation into the second gives (S+24)+2 = 2S+4, which simplifies to S=22." },
+            { question: "The present ages of three persons are in proportions 4:7:9. Eight years ago, the sum of their ages was 56. Find their present ages.", options: ["16, 28, 36", "20, 35, 45", "12, 21, 27", "24, 42, 54"], answer: 0, explanation: "Let their present ages be 4x, 7x, and 9x. Eight years ago, their ages were 4x-8, 7x-8, and 9x-8. Their sum was (4x-8)+(7x-8)+(9x-8) = 56. This simplifies to 20x - 24 = 56, so 20x = 80, and x=4. Their present ages are 16, 28, and 36." },
+            { question: "The age of a father 10 years ago was thrice the age of his son. Ten years hence, the father's age will be twice that of his son. What is the ratio of their present ages?", options: ["5:2", "7:3", "9:2", "13:4"], answer: 1, explanation: "Let the present ages be F and S. 10 years ago, F-10 = 3(S-10). 10 years hence, F+10 = 2(S+10). Solving these two linear equations gives F=70 and S=30. The ratio is 70:30 or 7:3." },
+            { question: "If the total ages of Iqbal and his brother is 12 years and the total ages of Iqbal and his sister is 14 years, and the sister is 6 years old, how old is the brother?", options: ["2 years", "4 years", "6 years", "8 years"], answer: 1, explanation: "If Iqbal (I) and his sister (S) are 14, and S=6, then I=14-6=8. If Iqbal (I) and his brother (B) are 12, and I=8, then B=12-8=4. The brother is 4 years old." },
+            { question: "The sum of the ages of 5 children born at the intervals of 3 years each is 50 years. What is the age of the youngest child?", options: ["4 years", "8 years", "10 years", "None of these"], answer: 0, explanation: "Let the age of the youngest child be x. The ages of the children are x, x+3, x+6, x+9, and x+12. Their sum is 5x + 30 = 50. This gives 5x = 20, so x=4." },
+            { question: "A father is twice as old as his son. 20 years ago, the age of the father was 12 times the age of the son. What is the present age of the father?", options: ["32 years", "34 years", "44 years", "48 years"], answer: 2, explanation: "Let F and S be the present ages. F = 2S. 20 years ago, F-20 = 12(S-20). Substituting the first equation into the second gives 2S-20 = 12S-240. This simplifies to 10S = 220, so S=22. The father's age is F=2*22=44." },
+            { question: "The ratio of A's age to B's age is 4:3. A will be 26 years old after 6 years. How old is B now?", options: ["15 years", "20 years", "21 years", "24 years"], answer: 0, explanation: "If A will be 26 in 6 years, A's current age is 20. The ratio A:B is 4:3, so 20/B = 4/3. This gives 4B = 60, so B=15." },
+            { question: "Sachin is younger than Rahul by 7 years. If their ages are in the respective ratio of 7:9, how old is Sachin?", options: ["16 years", "18 years", "24.5 years", "28 years"], answer: 2, explanation: "Let Sachin's age be S and Rahul's be R. S = R-7. Also, S/R = 7/9. Substituting the first into the second gives (R-7)/R = 7/9. This gives 9R - 63 = 7R, so 2R = 63, and R=31.5. Sachin's age is S = 31.5 - 7 = 24.5 years." },
+            { question: "The ages of two persons differ by 16 years. If 6 years ago, the elder one was 3 times as old as the younger one, find their present ages.", options: ["14, 30", "12, 28", "10, 26", "15, 31"], answer: 0, explanation: "Let the ages be E and Y. E - Y = 16. 6 years ago, E-6 = 3(Y-6). From the first equation, E = Y+16. Substituting this into the second gives (Y+16)-6 = 3Y-18. This simplifies to Y+10 = 3Y-18, so 2Y=28, and Y=14. The elder's age is E=14+16=30." },
+            { question: "A person's present age is two-fifths of the age of his mother. After 8 years, he will be one-half of the age of his mother. How old is the mother at present?", options: ["32 years", "36 years", "40 years", "48 years"], answer: 2, explanation: "Let the person's age be P and mother's age be M. P = (2/5)M. After 8 years, P+8 = (1/2)(M+8). Substituting the first into the second gives (2/5)M + 8 = M/2 + 4. Multiplying by 10 gives 4M + 80 = 5M + 40, so M=40." },
+            { question: "The ratio between the present ages of P and Q is 6:7. If Q is 4 years older than P, what will be the ratio of the ages of P and Q after 4 years?", options: ["3:4", "4:5", "5:6", "7:8"], answer: 3, explanation: "Let ages be 6x and 7x. The difference is x. So x=4. Their present ages are 24 and 28. After 4 years, their ages will be 28 and 32. The ratio is 28:32, which simplifies to 7:8." },
+            { question: "The sum of the present ages of a father and his son is 60 years. Six years ago, father's age was five times the age of the son. After 6 years, what will be the son's age?", options: ["12 years", "14 years", "18 years", "20 years"], answer: 3, explanation: "Let F+S=60. Six years ago, F-6 = 5(S-6). From the first, F=60-S. Substituting gives (60-S)-6 = 5S-30. This simplifies to 54-S = 5S-30, so 6S=84, and S=14. The son's present age is 14. In 6 years, he will be 20." },
+            { question: "At present, the ratio between the ages of Arun and Deepak is 4:3. After 6 years, Arun's age will be 26 years. What is the age of Deepak at present?", options: ["12 years", "15 years", "19 and half", "21 years"], answer: 1, explanation: "If Arun's age after 6 years is 26, his present age is 20. Let their ages be 4x and 3x. 4x=20, so x=5. Deepak's present age is 3x = 3*5 = 15 years." },
+            { question: "The age of a man is 4 times that of his son. Five years ago, the man was 9 times as old as his son was at that time. What is the present age of the man?", options: ["28 years", "32 years", "40 years", "44 years"], answer: 1, explanation: "Let M = 4S. Five years ago, M-5 = 9(S-5). Substituting gives 4S-5 = 9S-45. This simplifies to 5S=40, so S=8. The man's age is M=4*8=32." },
+            { question: "Six years ago, the ratio of the ages of Kunal and Sagar was 6:5. Four years hence, the ratio of their ages will be 11:10. What is Sagar's age at present?", options: ["16 years", "18 years", "20 years", "Cannot be determined"], answer: 0, explanation: "Let their ages 6 years ago be 6x and 5x. Their present ages are 6x+6 and 5x+6. Four years hence, their ages will be 6x+10 and 5x+10. The ratio (6x+10)/(5x+10) = 11/10. Solving gives 60x+100 = 55x+110, so 5x=10, and x=2. Sagar's present age is 5x+6 = 5*2+6 = 16 years." },
+            { question: "The sum of the ages of a son and father is 56 years. After 4 years, the age of the father will be three times that of the son. What is the age of the son?", options: ["12 years", "16 years", "18 years", "20 years"], answer: 0, explanation: "Let S+F=56. After 4 years, F+4 = 3(S+4). From the first, F=56-S. Substituting gives (56-S)+4 = 3S+12. This simplifies to 60-S = 3S+12, so 4S=48, and S=12." },
+            { question: "The ages of A and B are in the ratio 3:1. Fifteen years hence, the ratio will be 2:1. Their present ages are:", options: ["30, 10", "45, 15", "21, 7", "60, 20"], answer: 1, explanation: "Let ages be 3x and x. In 15 years, (3x+15)/(x+15) = 2/1. This gives 3x+15 = 2x+30, so x=15. Their present ages are 3*15=45 and 15." },
+            { question: "A is two years older than B who is twice as old as C. If the total of the ages of A, B and C be 27, then how old is B?", options: ["7", "8", "9", "10"], answer: 3, explanation: "Let C's age be x. Then B's age is 2x, and A's age is 2x+2. The sum is x + 2x + (2x+2) = 27. This simplifies to 5x+2=27, so 5x=25, and x=5. B's age is 2x = 2*5 = 10." }
+        ];
+
+        // Shuffle questions
+        let quizQuestions = [];
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function initializeQuizQuestions() {
+            quizQuestions = shuffleArray([...allQuizQuestions]).slice(0, 100);
+        }
+
+
+        // DOM Elements
+        const loginPage = document.getElementById('login-page');
+        const candidateInfoPage = document.getElementById('candidate-info-page');
+        const quizPage = document.getElementById('quiz-page');
+        const resultsPage = document.getElementById('results-page');
+
+        const loginButton = document.getElementById('login-button');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const loginError = document.getElementById('login-error');
+
+        const fullNameInput = document.getElementById('full-name');
+        const startQuizButton = document.getElementById('start-quiz-button');
+        const nameError = document.getElementById('name-error');
+
+        const liveDateSpan = document.querySelector('#live-date span');
+        const quizDateTitleSpan = document.getElementById('quiz-date-title');
+        const updatedDateSpan = document.getElementById('updated-date');
+        const timerSpan = document.getElementById('timer');
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+
+        const questionNumberSpan = document.getElementById('question-number');
+        const questionTextSpan = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanationContainer = document.getElementById('explanation-container');
+        const explanationText = document.getElementById('explanation-text');
+
+        const prevButton = document.getElementById('prev-button');
+        const nextButton = document.getElementById('next-button');
+        const submitNowButton = document.getElementById('submit-now-button');
+
+
+        const resultNameSpan = document.getElementById('result-name');
+        const resultScoreSpan = document.getElementById('result-score');
+        const resultTimeSpan = document.getElementById('result-time');
+        const resultAttemptedSpan = document.getElementById('result-attempted');
+        const retakeQuizButton = document.getElementById('retake-quiz-button');
+
+        // Functions
+        function updateLiveDate() {
+            const quizDate = new Date('2025-08-01T00:00:00');
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = quizDate.toLocaleDateString('en-US', options);
+            liveDateSpan.textContent = formattedDate;
+            quizDateTitleSpan.textContent = formattedDate;
+            updatedDateSpan.textContent = formattedDate;
+        }
+
+        function startTimer() {
+            quizStartTime = Date.now();
+            timerInterval = setInterval(() => {
+                timeElapsed++;
+                const remainingSeconds = quizDuration - timeElapsed;
+
+                if (remainingSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    timerSpan.textContent = "00:00";
+                    if (!quizCompleted) {
+                        showModal("Time's up! Your quiz will be submitted.", "alert", submitQuiz);
+                    }
+                } else {
+                    const minutes = Math.floor(remainingSeconds / 60);
+                    const seconds = remainingSeconds % 60;
+                    timerSpan.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                }
+            }, 1000);
+        }
+
+        function updateProgressBar() {
+            const progress = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
+            progressBar.style.width = `${progress}%`;
+            progressText.textContent = `${Math.round(progress)}%`;
+        }
+        
+        function loadQuestion(index) {
+            if (index >= 0 && index < quizQuestions.length) {
+                currentQuestionIndex = index;
+                const question = quizQuestions[currentQuestionIndex];
+
+                questionNumberSpan.textContent = currentQuestionIndex + 1;
+                questionTextSpan.textContent = question.question;
+                optionsContainer.innerHTML = ''; // Clear previous options
+                explanationContainer.classList.add('hidden');
+                explanationText.textContent = '';
+
+                const optionsWithOriginalIndex = question.options.map((option, originalIndex) => ({ option, originalIndex }));
+                const shuffledOptions = shuffleArray(optionsWithOriginalIndex);
+
+                shuffledOptions.forEach(({ option, originalIndex }) => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = 'option-card p-3 rounded-lg shadow-md cursor-pointer bg-white hover:bg-gray-50 text-primary font-medium border border-gray-200';
+                    optionDiv.textContent = option;
+                    optionDiv.dataset.originalIndex = originalIndex;
+                    optionDiv.addEventListener('click', () => selectOption(optionDiv));
+                    optionsContainer.appendChild(optionDiv);
                 });
-
-                allQuizResults.sort((a, b) => (new Date(b.submittedAt) - new Date(a.submittedAt)));
-
-                populateDateFilter(Array.from(uniqueDates).sort().reverse());
-                renderResults(); 
-                showLoading(false);
-            }, (error) => {
-                console.error("Error fetching quiz results:", error);
-                if (resultsTableBody) resultsTableBody.innerHTML = '<tr><td colspan="10" class="text-center py-4 text-red-500">Error loading results.</td></tr>';
-                showLoading(false);
-            });
-        }
-
-        async function deleteQuizResult(docId) {
-            if (!db) return;
-            showLoading(true, "Deleting...");
-            const docRef = doc(db, "quizResults", docId);
-            try {
-                await deleteDoc(docRef);
-                console.log("Document successfully deleted!");
-            } catch (error) {
-                console.error("Error removing document: ", error);
-                showModal("Failed to delete result. Please try again.", "alert");
-            } finally {
-                showLoading(false);
-            }
-        }
-
-        // --- UI Ranking Logic (Dense Ranking) ---
-        function calculateRanks(results) {
-            const sorted = [...results].sort((a, b) => {
-                if (b.score !== a.score) return b.score - a.score;
-                return a.timeTakenSeconds - b.timeTakenSeconds;
-            });
-
-            if (sorted.length === 0) return [];
-
-            let rank = 1;
-            for (let i = 0; i < sorted.length; i++) {
-                if (i > 0 && (sorted[i].score < sorted[i-1].score || (sorted[i].score === sorted[i-1].score && sorted[i].timeTakenSeconds > sorted[i-1].timeTakenSeconds))) {
-                    rank = i + 1;
+                
+                if (userAnswers[currentQuestionIndex] !== undefined) {
+                    showPreviousAnswer();
                 }
-                sorted[i].rank = rank;
-            }
-            return sorted;
-        }
 
-        // --- UI Rendering Functions ---
-        function renderResults() {
-            const selectedDate = dateFilter ? dateFilter.value : 'all';
-            const filteredResults = selectedDate === 'all'
-                ? allQuizResults
-                : allQuizResults.filter(result => result.quizDate === selectedDate);
-
-            const rankedFilteredResults = calculateRanks(filteredResults);
-
-            renderToppers(rankedFilteredResults); 
-
-            resultsTableBody.innerHTML = ''; 
-            if (rankedFilteredResults.length === 0) {
-                resultsTableBody.innerHTML = '<tr><td colspan="10" class="text-center py-4 text-gray-500">No results to display for this date.</td></tr>';
-                totalResultsCount.textContent = '0';
-                return;
-            }
-            
-            rankedFilteredResults.forEach((data) => {
-                const row = resultsTableBody.insertRow();
-                row.innerHTML = `
-                    <td>${data.rank}</td>
-                    <td>${data.candidateName || 'N/A'}</td>
-                    <td>${data.quizDate || 'N/A'}</td>
-                    <td>${data.score !== undefined ? data.score : 'N/A'}</td>
-                    <td>${data.correctCount !== undefined ? data.correctCount : 'N/A'}</td>
-                    <td>${data.incorrectCount !== undefined ? data.incorrectCount : 'N/A'}</td>
-                    <td>${data.attemptedCount !== undefined ? data.attemptedCount : 'N/A'}</td>
-                    <td>${data.timeTaken || 'N/A'}</td>
-                    <td>${data.submittedAt ? new Date(data.submittedAt).toLocaleString() : 'N/A'}</td>
-                    <td><button class="delete-button" data-id="${data.id}">Delete</button></td>
-                `;
-            });
-            totalResultsCount.textContent = rankedFilteredResults.length;
-        }
-
-        function renderToppers(rankedResults) {
-            if (!toppersListDiv || !noToppersMessage) return;
-            toppersListDiv.innerHTML = '';
-            
-            const topPerformers = rankedResults.filter(p => p.rank <= 3);
-
-            if (topPerformers.length === 0) {
-                noToppersMessage.classList.remove('hidden');
-                return;
-            } 
-            noToppersMessage.classList.add('hidden');
-
-            topPerformers.forEach((data) => {
-                const positionText = data.rank === 1 ? '1st Position' : (data.rank === 2 ? '2nd Position' : '3rd Position');
-                const positionClass = `position-${data.rank}`;
-
-                const topperCard = document.createElement('div');
-                topperCard.className = 'leaderboard-card flex flex-col items-center justify-center p-4';
-                topperCard.innerHTML = `
-                    <div class="position-badge ${positionClass} mb-2">${positionText}</div>
-                    <p class="text-xl font-bold text-gray-800">${data.candidateName || 'N/A'}</p>
-                    <p class="text-lg text-gray-700">Score: <span class="font-semibold">${data.score !== undefined ? data.score : 'N/A'}</span></p>
-                    <p class="text-sm text-gray-600">Time: ${data.timeTaken || 'N/A'}</p>
-                `;
-                toppersListDiv.appendChild(topperCard);
-            });
-        }
-
-        function populateDateFilter(dates) {
-            if (!dateFilter) return;
-            const currentSelectedDate = dateFilter.value;
-            dateFilter.innerHTML = '<option value="all">All Dates</option>';
-            dates.forEach(date => {
-                const option = document.createElement('option');
-                option.value = date;
-                option.textContent = date;
-                dateFilter.appendChild(option);
-            });
-            if (currentSelectedDate && dates.includes(currentSelectedDate)) {
-                dateFilter.value = currentSelectedDate;
+                updateNavigationButtons();
+                updateProgressBar();
             }
         }
 
-        function showLoading(show, message = "Loading...") {
-            if (loadingOverlay) {
-                loadingOverlay.querySelector('div + *').textContent = message;
-                loadingOverlay.classList.toggle('hidden', !show);
+        function selectOption(selectedDiv) {
+            if (userAnswers[currentQuestionIndex] !== undefined) return;
+
+            const selectedOptionIndex = parseInt(selectedDiv.dataset.originalIndex);
+            const question = quizQuestions[currentQuestionIndex];
+            const correctAnswerIndex = question.answer;
+
+            userAnswers[currentQuestionIndex] = selectedOptionIndex;
+            questionsAttempted++;
+
+            if (selectedOptionIndex === correctAnswerIndex) {
+                score++;
+                selectedDiv.classList.add('pulse-green', 'border-green-500');
+            } else {
+                selectedDiv.classList.add('shake-red', 'border-red-500');
+                Array.from(optionsContainer.children).forEach(child => {
+                    if (parseInt(child.dataset.originalIndex) === correctAnswerIndex) {
+                        child.classList.add('pulse-green', 'border-green-500');
+                    }
+                });
             }
-        }
 
-        // --- Modal Functions ---
-        function openDeleteConfirmModal(id) {
-            docToDeleteId = id;
-            if (deleteConfirmModal) deleteConfirmModal.style.display = 'flex';
-        }
+            explanationText.textContent = `Explanation: ${question.explanation}`;
+            explanationContainer.classList.remove('hidden');
 
-        function closeDeleteConfirmModal() {
-            docToDeleteId = null;
-            if (deleteConfirmModal) deleteConfirmModal.style.display = 'none';
-        }
-
-        // --- Event Listeners ---
-        document.addEventListener('DOMContentLoaded', () => {
-            if (adminLoginBtn) adminLoginBtn.addEventListener('click', adminLogin);
-            if (adminLogoutBtn) adminLogoutBtn.addEventListener('click', adminLogout);
-            if (dateFilter) dateFilter.addEventListener('change', renderResults);
-
-            if (confirmDeleteBtn) confirmDeleteBtn.addEventListener('click', () => {
-                if (docToDeleteId) deleteQuizResult(docToDeleteId);
-                closeDeleteConfirmModal();
+            Array.from(optionsContainer.children).forEach(child => {
+                child.style.pointerEvents = 'none';
             });
-            if (cancelDeleteBtn) cancelDeleteBtn.addEventListener('click', closeDeleteConfirmModal);
+        }
 
-            if (resultsTableBody) resultsTableBody.addEventListener('click', (e) => {
-                if (e.target.classList.contains('delete-button')) {
-                    openDeleteConfirmModal(e.target.dataset.id);
+        function showPreviousAnswer() {
+            const question = quizQuestions[currentQuestionIndex];
+            const previouslySelected = userAnswers[currentQuestionIndex];
+            const correctAnswerIndex = question.answer;
+
+            Array.from(optionsContainer.children).forEach(child => {
+                const childIndex = parseInt(child.dataset.originalIndex);
+                child.style.pointerEvents = 'none'; 
+
+                if (childIndex === correctAnswerIndex) {
+                    child.classList.add('pulse-green', 'border-green-500');
+                }
+                if (childIndex === previouslySelected && previouslySelected !== correctAnswerIndex) {
+                    child.classList.add('shake-red', 'border-red-500');
                 }
             });
+
+            explanationText.textContent = `Explanation: ${question.explanation}`;
+            explanationContainer.classList.remove('hidden');
+        }
+
+
+        function updateNavigationButtons() {
+            prevButton.disabled = currentQuestionIndex === 0;
+            prevButton.classList.toggle('opacity-50', currentQuestionIndex === 0);
+            prevButton.classList.toggle('cursor-not-allowed', currentQuestionIndex === 0);
+
+            if (currentQuestionIndex === quizQuestions.length - 1) {
+                nextButton.style.visibility = 'hidden';
+            } else {
+                nextButton.style.visibility = 'visible';
+            }
+        }
+
+        function navigateQuestions(direction) {
+            if (direction === 'next' && currentQuestionIndex < quizQuestions.length - 1) {
+                loadQuestion(currentQuestionIndex + 1);
+            } else if (direction === 'prev' && currentQuestionIndex > 0) {
+                loadQuestion(currentQuestionIndex - 1);
+            }
+        }
+
+        async function submitQuiz() {
+            if (quizCompleted) return;
+            quizCompleted = true;
+            clearInterval(timerInterval);
+
+            const finalTimeSeconds = timeElapsed;
+            const finalMinutes = Math.floor(finalTimeSeconds / 60);
+            const finalSeconds = finalTimeSeconds % 60;
+            const formattedFinalTime = `${finalMinutes.toString().padStart(2, '0')}:${finalSeconds.toString().padStart(2, '0')}`;
+            const incorrectCount = questionsAttempted - score;
+            const quizDate = new Date('2025-08-01T00:00:00').toLocaleDateString('en-CA');
+
+            const resultData = {
+                candidateName: userName,
+                score: score,
+                correctCount: score,
+                incorrectCount: incorrectCount,
+                attemptedCount: questionsAttempted,
+                timeTaken: formattedFinalTime,
+                timeTakenSeconds: finalTimeSeconds,
+                quizDate: quizDate,
+                submittedAt: new Date().toISOString()
+            };
+
+            if (db) {
+                try {
+                    await addDoc(collection(db, "quizResults"), resultData);
+                } catch (e) {
+                    console.error("Error adding document: ", e);
+                }
+            }
+
+            resultNameSpan.textContent = userName;
+            resultScoreSpan.textContent = score;
+            resultTimeSpan.textContent = formattedFinalTime;
+            resultAttemptedSpan.textContent = questionsAttempted;
+
+            quizPage.classList.add('hidden');
+            resultsPage.classList.remove('hidden');
+        }
+
+        function resetQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            questionsAttempted = 0;
+            timeElapsed = 0;
+            userName = '';
+            quizCompleted = false;
+            Object.keys(userAnswers).forEach(key => delete userAnswers[key]);
+            clearInterval(timerInterval);
+            timerSpan.textContent = "40:00";
+            progressBar.style.width = '0%';
+            progressText.textContent = '0%';
+            loginPage.classList.remove('hidden');
+            resultsPage.classList.add('hidden');
+            candidateInfoPage.classList.add('hidden');
+            quizPage.classList.add('hidden');
+            usernameInput.value = '';
+            passwordInput.value = '';
+            fullNameInput.value = '';
+            loginError.classList.add('hidden');
+            nameError.classList.add('hidden');
+            initializeQuizQuestions();
+        }
+
+        // Event Listeners
+        loginButton.addEventListener('click', () => {
+            const username = usernameInput.value.toUpperCase();
+            const password = passwordInput.value;
+
+            if (username === '1AUGUST' && password === 'free') {
+                loginPage.classList.add('hidden');
+                candidateInfoPage.classList.remove('hidden');
+                loginError.classList.add('hidden');
+            } else {
+                loginError.classList.remove('hidden');
+            }
         });
+
+        startQuizButton.addEventListener('click', () => {
+            const enteredName = fullNameInput.value.trim();
+            if (enteredName) {
+                userName = enteredName;
+                candidateInfoPage.classList.add('hidden');
+                quizPage.classList.remove('hidden');
+                nameError.classList.add('hidden');
+                startTimer();
+                loadQuestion(currentQuestionIndex);
+            } else {
+                nameError.classList.add('hidden');
+            }
+        });
+
+        nextButton.addEventListener('click', () => navigateQuestions('next'));
+        prevButton.addEventListener('click', () => navigateQuestions('prev'));
+        
+        submitNowButton.addEventListener('click', () => {
+            if (!quizCompleted) {
+                showModal("Are you sure you want to submit the quiz?", "confirm", (confirmed) => {
+                    if (confirmed) {
+                        submitQuiz();
+                    }
+                });
+            }
+        });
+
+        retakeQuizButton.addEventListener('click', resetQuiz);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateLiveDate();
+            initializeQuizQuestions();
+        });
+
+        window.addEventListener('resize', () => {
+            const liveDateElement = document.getElementById('live-date');
+            if (window.innerWidth < 768) {
+                liveDateElement.classList.remove('justify-end');
+                liveDateElement.classList.add('justify-start');
+            } else {
+                liveDateElement.classList.remove('justify-start');
+                liveDateElement.classList.add('justify-end');
+            }
+        });
+        window.dispatchEvent(new Event('resize'));
+
     </script>
 </body>
 </html>
